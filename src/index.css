@@ -198,12 +198,3 @@ p {
 .section-body .img-section img {
   margin: auto 0;
 }
-
-.books-carrousel {
-  white-space: nowrap;
-  overflow-x: hidden;
-  user-select: none;
-  cursor: pointer;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}

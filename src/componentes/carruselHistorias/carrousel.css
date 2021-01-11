@@ -1,0 +1,27 @@
+.books-carrousel-container {
+    position: relative;
+
+}
+
+.books-carrousel {
+    white-space: nowrap;
+    overflow-x: hidden;
+    user-select: none;
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.carrousel-arrow {
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    padding: .5rem;
+    border-radius: 50px;
+    background-color: red;
+}
+
+.carrousel-arrow p {
+    margin: 0;
+    padding: 0;
+}

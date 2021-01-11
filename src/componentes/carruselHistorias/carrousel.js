@@ -14,8 +14,10 @@ const Carrousel = () => {
     const [scrolledLeft, setScrolledLeft] = useState(0);
 
     const pressMouse = (ev) => {
-        console.log(ev)
-        setStartX(ev.pageX);
+
+        const startX = ev.pageX || ev.touches[0].pageX;
+
+        setStartX(startX);
         setScrolledLeft(refCarrusel.current.scrollLeft);
         setPressed(true);
     }
@@ -25,7 +27,9 @@ const Carrousel = () => {
     }
 
     const drag = (ev) => {
-        const walk = (ev.pageX - startX) * 3;
+        const currentX = ev.pageX || ev.touches[0].pageX;
+
+        const walk = (currentX - startX) * 3;
         refCarrusel.current.scrollLeft = scrolledLeft - walk;
     }
 
@@ -36,26 +40,31 @@ const Carrousel = () => {
     }
 
     return (
-        <div
-            ref={refCarrusel}
-            onTouchMove={drag}
-            onTouchStart={pressMouse}
-            onMouseDown={pressMouse}
-            onMouseUp={releaseMouse}
-            onMouseLeave={releaseMouse}
-            onMouseMove={moveMouse}
-            className='books-carrousel'>
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='El mundo de Paté de Fuá' vistas={5} />
-            <StoryCard titulo='¿Y dónde está el perro?' vistas={18} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='Corazón de melón' vistas={4} />
+        <div className='books-carrousel-container'>
+            <div
+                ref={refCarrusel}
+                onTouchMove={drag}
+                onTouchStart={pressMouse}
+                onMouseDown={pressMouse}
+                onMouseUp={releaseMouse}
+                onMouseLeave={releaseMouse}
+                onMouseMove={moveMouse}
+                className='books-carrousel'>
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='El mundo de Paté de Fuá' vistas={5} />
+                <StoryCard titulo='¿Y dónde está el perro?' vistas={18} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+                <StoryCard titulo='Corazón de melón' vistas={4} />
+            </div>
+            <div className='carrousel-arrow'>
+                <p>{'>'}</p>
+            </div>
         </div>
     )
 }
