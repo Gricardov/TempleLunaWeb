@@ -12,7 +12,7 @@ export const Panorama = () => {
             <div className='container-xl container-header'>
                 <div className='container-controls-header'>
                     <h1>La red social de lectores y escritores más genial del mundo</h1>
-                    <a target='_blank' href='https://www.facebook.com/groups/1004324056570387' className='button button-green'>
+                    <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green'>
                         Únete al grupo
                         {' '}                        
                         <FontAwesomeIcon icon={faAngleRight} size='lg'/>

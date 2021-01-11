@@ -13,7 +13,7 @@ const Footer = () => {
                 <p>
                     Sigue el lanzamiento 2021 y promociona tu obra en nuestro grupo oficial.
                 </p>
-                <a target='_blank' href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
+                <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
                     Únete
                     {' '}
                     <FontAwesomeIcon icon={faAngleRight} size='lg' />
