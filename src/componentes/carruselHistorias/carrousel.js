@@ -46,7 +46,7 @@ const Carrousel = () => {
             onMouseMove={moveMouse}
             className='books-carrousel'>
             <StoryCard titulo='Corazón de melón' vistas={4} />
-            <StoryCard titulo='El mundo de Alyah' vistas={5} />
+            <StoryCard titulo='El mundo de Paté de Fuá' vistas={5} />
             <StoryCard titulo='¿Y dónde está el perro?' vistas={18} />
             <StoryCard titulo='Corazón de melón' vistas={4} />
             <StoryCard titulo='Corazón de melón' vistas={4} />
