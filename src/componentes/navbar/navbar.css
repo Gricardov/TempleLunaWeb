@@ -1,0 +1,33 @@
+.main-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    z-index: 100;
+    transition: all 500ms ease-in-out;
+}
+
+.navbar-scrolled {
+    background-color: #8B81EC;
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+@media (min-width: 768px) {
+    .main-navbar {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+        text-align: left;
+    }
+}
+
+.main-navbar .logo-header {
+    width: 150px;
+}
+
+@media (min-width: 768px) {
+    .main-navbar .logo-header {
+        width: 200px;
+    }
+}

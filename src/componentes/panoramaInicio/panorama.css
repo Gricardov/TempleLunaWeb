@@ -1,0 +1,82 @@
+.panorama {
+    padding-top: 7.5rem;
+    padding-bottom: 25rem;
+    background: transparent radial-gradient(closest-side at -9% 325%, #000000 0%, #8B81EC 100%) 0% 0% no-repeat padding-box;
+    border: 1px solid #707070;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .panorama {
+        padding-top: 10.5rem;
+        padding-bottom: 10.5rem;
+    }
+}
+
+.container-header .img-container {
+    position: absolute;
+    width: 350px;
+    bottom: 30px;
+    right: -25px;
+    z-index: 1;
+}
+
+@media (min-width: 576px) {
+    .container-header .img-container {
+        width: 450px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-header .img-container {
+        bottom: 150px;
+        right: -10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-header .img-container {
+        bottom: 80px;
+        right: -20px;
+        width: 550px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-header .img-container {
+        width: 650px;
+        bottom: 50px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container-header .img-container {        
+        right: 80px;
+        bottom: 10px;
+    }
+}
+
+.container-controls-header {
+    position: relative;
+    color: white;
+    font-family: 'SegoeUI-Bold';
+    z-index: 5;
+}
+
+@media (min-width: 576px) {
+    .container-controls-header {
+        width: 90%;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-controls-header {
+        width: 50%;
+    }
+    .container-controls-header h1 {
+        font-size: 4rem;
+    }
+}
