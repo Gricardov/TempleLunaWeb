@@ -4,18 +4,29 @@
 }
 
 @font-face {
-  font-family: 'SegoeUI';
-  src: local('SegoeUI'), url(./fuentes/SegoeUI-BoldItalic.ttf) format('opentype');
+  font-family: 'SegoeUI-BoldItalic';
+  src: local('SegoeUI-BoldItalic'), url(./fuentes/SegoeUI-BoldItalic.ttf) format('opentype');
 }
 
 @font-face {
-  font-family: 'SegoeUI';
-  src: local('SegoeUI'), url(./fuentes/SegoeUI-Italic.ttf) format('opentype');
+  font-family: 'SegoeUI-Italic';
+  src: local('SegoeUI-Italic'), url(./fuentes/SegoeUI-Italic.ttf) format('opentype');
 }
 
 @font-face {
   font-family: 'SegoeUI';
   src: local('SegoeUI'), url(./fuentes/SegoeUI.ttf) format('opentype');
+}
+
+
+@font-face {
+  font-family: 'SegoeUI';
+  src: local('SegoeUI'), url(./fuentes/SegoeUI.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'LilitaOne';
+  src: local('LilitaOne'), url(./fuentes/LilitaOne.ttf) format('opentype');
 }
 
 html {
