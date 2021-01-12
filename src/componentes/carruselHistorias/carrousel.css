@@ -1,6 +1,5 @@
 .books-carrousel-container {
     position: relative;
-
 }
 
 .books-carrousel {
@@ -10,18 +9,47 @@
     cursor: pointer;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    scroll-behavior: smooth;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .carrousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 50%;
-    right: -10px;
-    padding: .5rem;
-    border-radius: 50px;
-    background-color: red;
+    transform: translateY(-50%);
+    padding: 10px 18px;
+    border-radius: 50%;
+    background-color: rgb(252, 252, 252);
+    box-shadow: 0px 0px 5px -3px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    user-select: none;
 }
 
-.carrousel-arrow p {
-    margin: 0;
-    padding: 0;
+.carrousel-arrow:hover {
+    box-shadow: none;
+}
+
+.carrousel-arrow-left {
+    left: -12px;
+}
+
+@media (min-width: 768px) {
+    .carrousel-arrow-left {
+        left: -15px;
+    }
+}
+
+.carrousel-arrow-right {
+    right: -12px;
+}
+
+@media (min-width: 768px) {
+    .carrousel-arrow-right {
+        right: -15px;
+    }
 }

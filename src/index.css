@@ -144,7 +144,7 @@ p {
 /*Inicio*/
 
 .section {
-  margin-top: 4rem;
+  margin-top: 5rem;
 }
 
 @media (min-width: 768px) {
@@ -188,6 +188,14 @@ p {
 
 .section-body .text-section {
   flex-basis: calc(60% - 5rem);
+}
+
+@media (min-width: 768px) {
+  .section-body .text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .section-body .img-section {
