@@ -40,7 +40,7 @@ function App() {
           <section className='container-xl section section-body'>
             <div className='text-section'>
               <h2>Solicita diseños y críticas constructivas</h2>
-              <p>Reunimos a todos aquellos artistas que aman hacer portadas y críticas para lograr que tu obra destaque.</p>
+              <p>Reunimos a todos aquellos artistas que aman hacer portadas y críticas para lograr que tu obra destaque. Todos en un mismo lugar.</p>
             </div>
             <div className='img-section'>
               <img src={Img3} className='img-colaboration' alt='img-colaboracion' />

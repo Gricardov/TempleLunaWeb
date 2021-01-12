@@ -9,9 +9,9 @@ const Footer = () => {
     return (
         <footer className='main-footer'>
             <div className='container-sm text-align-center main-container-footer'>
-                <h2>¿Quieres ser de los primeros?</h2>
+                <h2>Sé el primero en probar la app</h2>
                 <p>
-                    Sigue el lanzamiento 2021 y promociona tu obra en nuestro grupo oficial.
+                    Únete al grupo, promociona tus obras y prepárate para el lanzamiento este 2021
                 </p>
                 <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
                     Únete
