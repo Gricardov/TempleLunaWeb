@@ -1,8 +1,9 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faHeart } from '@fortawesome/free-solid-svg-icons';
+import Zoom from 'react-reveal/Zoom';
 import ImgFooter1 from '../../img/img-footer-1.svg';
 import ImgFooter2 from '../../img/img-footer-2.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faHeart } from '@fortawesome/free-solid-svg-icons';
 import './footer.css'
 
 const Footer = () => {
@@ -13,11 +14,13 @@ const Footer = () => {
                 <p>
                     Únete al grupo, promociona tus obras y prepárate para el lanzamiento este 2021
                 </p>
-                <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
-                    Únete
+                <Zoom>
+                    <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
+                        Únete
                     {' '}
-                    <FontAwesomeIcon icon={faAngleRight} size='lg' />
-                </a>
+                        <FontAwesomeIcon icon={faAngleRight} size='lg' />
+                    </a>
+                </Zoom>
             </div>
             <img src={ImgFooter1} className='img-footer-1' alt='img-footer-1' />
             <img src={ImgFooter2} className='img-footer-2' alt='img-footer-2' />

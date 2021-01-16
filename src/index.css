@@ -101,6 +101,10 @@ p {
   margin-bottom: 5rem !important;
 }
 
+.align-flex-start {
+  align-self: flex-start;
+}
+
 .container-xl {
   max-width: 144rem !important;
   width: 90%;
