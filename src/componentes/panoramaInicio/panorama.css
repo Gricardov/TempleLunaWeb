@@ -1,7 +1,7 @@
 .panorama {
     padding-top: 7.5rem;
     padding-bottom: 25rem;
-    background: transparent radial-gradient(closest-side at -9% 325%, #000000 0%, #8B81EC 100%) 0% 0% no-repeat padding-box;
+    background: radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139,129,236,1) 50%);
     border: 1px solid #707070;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -11,8 +11,8 @@
 
 @media (min-width: 768px) {
     .panorama {
-        padding-top: 10.5rem;
-        padding-bottom: 10.5rem;
+        padding-top: 15rem;
+        padding-bottom: 15.5rem;
     }
 }
 
