@@ -9,10 +9,12 @@ import './panorama.css'
 export const Panorama = () => {
     return (
         <div className='panorama'>
-            <Navbar />
+            <Navbar startTransparent={true} />
             <div className='container-xl container-header'>
                 <div className='container-controls-header'>
-                    <h1>La red social de lectores y escritores más genial del mundo</h1>
+                    <Fade left>
+                        <h1>Somos la gran editorial que ama ver tu obra triunfar</h1>
+                    </Fade>
                     <Fade left>
                         <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green'>
                             Únete al grupo

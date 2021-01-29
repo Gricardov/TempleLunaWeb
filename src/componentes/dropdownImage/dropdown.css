@@ -1,0 +1,38 @@
+.container-select-image {
+    position: relative;
+}
+
+.select-image {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 8px #2C273829;
+    border: 1px solid #DBE2EA;
+    border-radius: 5px 0 0 5px;
+    width: 8rem;
+    height: 100%;
+    cursor: pointer;
+}
+
+.selectable-list {
+    position: absolute;
+    border: 1px solid black;
+    width: 8rem;
+    top: 100%;
+    animation: all 200ms ease-in-out;
+    border: 1px solid #DBE2EA;
+    transition: all 2000ms ease-in-out;
+}
+
+.selectable-list-item {
+    background: white;
+    opacity: 1;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 500ms ease-in-out;
+    cursor: pointer;
+}
+
+.selectable-list-item:hover {
+    background: #F3F1FF;
+}

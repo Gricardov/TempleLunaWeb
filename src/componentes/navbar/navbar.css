@@ -1,17 +1,52 @@
-.main-navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding-top: 1.5rem;
-    padding-bottom: 1rem;
+.container-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .container-navbar {
+        justify-content: space-between;
+    }
+}
+
+.container-navbar .navbar-nav {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .container-navbar .navbar-nav {
+        display: flex;
+    }
+}
+
+.navbar-nav .btn-nav {
+    display: block;
     text-align: center;
-    z-index: 100;
-    transition: all 500ms ease-in-out;
+    padding: 1.5rem 0 1.5rem 0;
+    color: white;
+    font-size: 2rem;
+    margin-right: 5rem;
+}
+
+.navbar-nav .btn-nav:last-of-type {
+    margin-right: 0;
 }
 
 .navbar-scrolled {
     background-color: #8B81EC;
     box-shadow: 0px 3px 6px #00000029;
+}
+
+.main-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    z-index: 10;
+    transition: all 200ms ease-in-out;
 }
 
 @media (min-width: 768px) {
@@ -24,10 +59,22 @@
 
 .main-navbar .logo-header {
     width: 150px;
+    margin-left: auto;
 }
 
 @media (min-width: 768px) {
     .main-navbar .logo-header {
         width: 200px;
+        margin-left: 0;
+    }
+}
+
+.main-navbar .img-sanguchito {
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .main-navbar .img-sanguchito {
+        display: none;
     }
 }

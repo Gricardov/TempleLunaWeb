@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react'
-import Logo from '../../img/logo.png';
+import React, { useContext, useEffect } from 'react'
+import { Link } from "react-router-dom"
+import { DrawerContext } from '../../context/DrawerContext'
+import Logo from '../../img/logo.png'
+import Sanguchito from '../../img/sanguchito.svg'
 import './navbar.css'
 
-const Navbar = () => {
+const Navbar = ({ startTransparent }) => {
+
+    const { abrir } = useContext(DrawerContext);
 
     const [scrolled, setScrolled] = React.useState(false);
 
@@ -21,14 +26,28 @@ const Navbar = () => {
     }, [scrolled])
 
     let clasesNav = 'main-navbar';
-    if (scrolled) {
+    if (!startTransparent || scrolled) {
         clasesNav += ' navbar-scrolled';
     }
 
     return (
         <nav className={clasesNav}>
-            <div className='container-xl'>
-                <img alt='logo' src={Logo} className='logo-header' />
+            <div className='container-xl container-navbar'>
+                <Link to='/' className='logo-header'>
+                    <img alt='logo' src={Logo} />
+                </Link>
+                <img alt='sanguchito' onClick={abrir} src={Sanguchito} className='img-sanguchito' />
+                <div className='navbar-nav'>
+                    <Link to='/sol_critica' className='btn-nav'>
+                        Críticas
+                    </Link>
+                    <Link to='/sol_diseno' className='btn-nav'>
+                        Diseños
+                    </Link>
+                    <Link to='/sol_diseno' className='btn-nav'>
+                        Login
+                    </Link>
+                </div>
             </div>
         </nav>
     )

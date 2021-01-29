@@ -1,0 +1,48 @@
+.drawer-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 15;
+    transition: all 500ms ease-in-out;    
+}
+
+.drawer-overlay.abierto {
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: unset;
+}
+
+.drawer-overlay.cerrado {
+    background: none;
+    pointer-events: none;
+}
+
+.drawer {
+    position: fixed;
+    width: 80%;
+    height: 100%;
+    background: #8B81EC;
+    z-index: 16;
+    padding: 1rem 0;
+    -webkit-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    transition: all 500ms ease-in-out;
+}
+
+.drawer.abierto {
+    right: 0%;
+}
+
+.drawer.cerrado {
+    right: -120%;
+}
+
+.btn-drawer {
+    display: block;
+    text-align: center;
+    padding: 1.5rem 0 1.5rem 0;
+    color: white;
+    font-size: 2rem;
+}
