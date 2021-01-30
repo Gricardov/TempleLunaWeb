@@ -15,7 +15,7 @@ const Footer = () => {
                     Únete al grupo, promociona tus obras y prepárate para el lanzamiento este 2021
                 </p>
                 <Zoom>
-                    <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green btn-footer'>
+                    <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green button-thin btn-footer'>
                         Únete
                     {' '}
                         <FontAwesomeIcon icon={faAngleRight} size='lg' />

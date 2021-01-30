@@ -21,7 +21,6 @@
 
 .main-footer .btn-footer {
     display: block;
-    padding: .6rem 3rem;
     text-align: center;
     font-weight: bold;
 }
@@ -29,7 +28,6 @@
 @media (min-width: 768px) {
     .main-footer .btn-footer {
         display: inline-block;
-        padding: .6rem 9rem;
         margin: 0 auto;
     }
 }

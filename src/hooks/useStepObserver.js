@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export const useStepObserver = (currentIndex, numberOfSteps) => {
 
     const [canGoBackwards, setCanGoBackwards] = useState(false);
-    const [canGoForward, setCanGoForward] = useState(false);
+    const [isLast, setIsLast] = useState(false);
 
     useEffect(() => {
 
@@ -14,16 +14,16 @@ export const useStepObserver = (currentIndex, numberOfSteps) => {
         }
 
         if (currentIndex < numberOfSteps - 1) {
-            setCanGoForward(true);
+            setIsLast(false);
         } else {
-            setCanGoForward(false);
+            setIsLast(true);
         }
 
     }, [currentIndex, numberOfSteps]);
 
     return {
         canGoBackwards,
-        canGoForward
+        isLast
     }
 
 }

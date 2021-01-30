@@ -42,6 +42,7 @@ html {
   font-size: 62.5%;
   /*Reset para REMS = 10px de 16px*/
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *, *:before, *:after {
@@ -127,6 +128,14 @@ p {
   margin-bottom: 0 !important;
 }
 
+.ml-1 {
+  margin-left: 1rem !important;
+}
+
+.mr-1 {
+  margin-right: 1rem !important;
+}
+
 .d-none {
   display: none;
 }
@@ -148,6 +157,18 @@ p {
   .d-md-inline {
     display: inline !important;
   }
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-between{
+  justify-content: space-between;
+}
+
+.stretch {
+  width: 100%;
 }
 
 .justify-self-right {
@@ -188,6 +209,16 @@ p {
   background: #F3F1FF;
 }
 
+.clamp-1 {
+  -webkit-line-clamp: 1;
+}
+
+.clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .button {
   border: none;
   outline: none;
@@ -216,6 +247,10 @@ p {
   background-color: #3DE58D;
 }
 
+.button-light-purple {
+  background-color: #b6b0f1;
+}
+
 .button-group-left {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -224,6 +259,16 @@ p {
 .button-group-right {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.button-thin {
+  padding: .6rem 3rem;
+}
+
+@media (min-width: 768px) {
+  .button-thin {
+    padding: .6rem 9rem;
+  }
 }
 
 .order-1 {
@@ -393,6 +438,7 @@ p {
   border-radius: 2.4rem;
   box-shadow: 0px 5px 20px #2C273829;
   z-index: 5;
+  transition: all 500ms ease;
 }
 
 .floating-form .form-group {
@@ -406,11 +452,12 @@ p {
   display: block;
 }
 
-.floating-form input[type=text], .floating-form input[type=number], .floating-form input[type=email] {
+.floating-form input[type=text], .floating-form input[type=number], .floating-form input[type=email], .floating-form textarea {
   border: 1px solid #DBE2EA;
   border-radius: 5px;
   padding: 1rem 1.5rem;
   width: 100%;
+  resize: none;
 }
 
 .cbo-text {

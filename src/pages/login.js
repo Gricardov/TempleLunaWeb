@@ -13,7 +13,7 @@ import ImgPincel from '../img/pincel.svg';
 const Inicio = () => {
     return (
         <div>
-            Poto
+            Login
             <Footer />
         </div>
     );
