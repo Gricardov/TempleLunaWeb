@@ -3,20 +3,32 @@ import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdownImage';
 import ImgLeyendo from '../img/sitting-reading.svg';
-import { useStepObserver } from '../hooks/useStepObserver';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck } from '@fortawesome/free-solid-svg-icons';
+import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
+import Fade from 'react-reveal/Fade';
+import { Link } from 'react-router-dom';
+import { getGeneratedId, uploadImage, saveRequest } from '../api';
+import { useStepObserver } from '../hooks/useStepObserver';
+import { css } from "@emotion/core";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faCircle, faHome, faUpload } from '@fortawesome/free-solid-svg-icons';
+
 
 const steps = ['Contacto', 'Tipo', 'Trasfondo'];
 const maxFileSize = 5242880;
+
+const overrideSpinnerInline = css`
+  display: inline-block;
+`;
 
 const Inicio = () => {
 
     const refBoceto = useRef(null);
 
     const [activeIndex, setActiveIndex] = useState(0);
+    const [loading, setLoading] = useState(false); // Determina si se está enviando el form
+    const [success, setSuccess] = useState(true); // Determina si se envío el form sin errores
     const { canGoBackwards, isLast } = useStepObserver(activeIndex, steps.length);
 
     const [name, setName] = useState('');
@@ -80,11 +92,11 @@ const Inicio = () => {
         e.preventDefault();
         const archivo = e.target.files[0];
         if (archivo) {
-            if (archivo.size <= maxFileSize){
+            if (archivo.size <= maxFileSize) {
                 setImgSample(archivo);
             } else {
                 alert('La imagen debe ser menor a 5MB')
-            }            
+            }
         }
     }
 
@@ -107,8 +119,46 @@ const Inicio = () => {
     const send = (e) => {
         e.preventDefault();
         if (!checkErrors()) {
-            alert('Enviando')
+            const generatedId = getGeneratedId('solicitudes');
+            setLoading(true);
+            if (imgSample) {
+                uploadImage('solicitud-diseno', generatedId, imgSample)
+                    .then(url => {
+                        saveChanges(url, generatedId);
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        setSuccess(false);
+                        alert('Error al subir la imagen. Reintente');
+                        console.log(error);
+                    })
+            } else {
+                saveChanges('', generatedId);
+            }
         }
+    }
+
+    const saveChanges = (urlImg, generatedId) => {
+        const data = {
+            name: name.trim(),
+            age: parseInt(age),
+            phone: phone.trim(),
+            messengerType,
+            email: email.trim(),
+            designType,
+            link: link.trim(),
+            title: title.trim(),
+            author: author.trim(),
+            intention: intention.trim(),
+            urlImg: urlImg.trim(),
+            type: 'DISENO'
+        };
+
+        saveRequest(generatedId, { ...data, active: 1 }).then(() => {
+            window.scrollTo(0, 0);
+            setLoading(false);
+            setSuccess(true);
+        })
     }
 
     const checkErrors = () => {
@@ -186,7 +236,7 @@ const Inicio = () => {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0)
+        setSuccess(false);
     }, [activeIndex])
 
     return (
@@ -199,123 +249,156 @@ const Inicio = () => {
                 </section>
                 <section className='container-xl mt-5 position-relative'>
                     <img src={ImgLeyendo} alt='img-fondo' className='img-fondo-formulario' />
-                    <div className='floating-form'>
-                        <Steps
-                            activeIndex={activeIndex}
-                            navigateTo={navigateTo}
-                            steps={steps} />
-                        <div className='form-container'>
-                            <form>
-                                <StepManager currentIndex={activeIndex}>
-                                    <div className='step-1'>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtNombres">¿Cómo te llamas?</label>
-                                            <input minLength="1" maxLength="50" type="text" value={name} onChange={updName} id="txtNombres" placeholder="Ingresa tus nombres" />
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtEdad">¿Qué edad tienes?</label>
-                                            <input type="number" min={10} max={99} value={age} onChange={updAge} id="txtEdad" placeholder="Ingresa tu edad" />
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
-                                            <div className='cbo-text'>
-                                                <DropdownImage
-                                                    list={[{ type: 'WSP', icon: 'fab fa-whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram' }]}
-                                                    select={updMessengerType} />
-                                                <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
-                                            </div>
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtCorreo">Bríndanos un correo para enviarte el trabajo</label>
-                                            <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
-                                        </div>
-                                    </div>
-                                    <div className='step-2'>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtLink">Tipo de diseño</label>
-                                            <DropdownImage
-                                                stretch
-                                                list={[{ type: 'POR', icon: 'fas fa-book', text: 'Portada' }, { type: 'BAN', icon: 'far fa-image', text: 'Banner' }]}
-                                                select={updDesignType} />
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtLink">Link de tu obra (Opcional)</label>
-                                            <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />
-                                        </div>
-                                    </div>
-                                    <div className='step-3'>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtTitulo">Título o frase principal</label>
-                                            <input minLength="1" maxLength="100" type="text" value={title} onChange={updTitle} id="txtTitulo" placeholder="Ejemplo: El amor todo lo puede" />
 
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtPseudonimo">¿Cuál es tu pseudónimo?</label>
-                                            <input minLength="1" maxLength="100" type="text" value={author} onChange={updAuthor} id="txtPseudonimo" placeholder="Ejemplo: Alyah" />
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="txtIntencion">¿Qué quieres transmitir con tu diseño?</label>
-                                            <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ingresa tu intención"></textarea>
-                                        </div>
-                                        <div className='form-group'>
-                                            <label htmlFor="flBoceto">¿Tiene algún boceto en imagen? (Opcional)</label>
-                                            {
-                                                imgSample
-                                                    ?
-                                                    <button onClick={startSelectSample} className={`d-flex justify-content-between button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
-                                                        <span className='clamp clamp-1'>
-                                                            {imgSample.name}
-                                                        </span>
-                                                        <span onClick={deleteSample} className='fa fa-times' style={{ color: 'white' }}></span>
-                                                    </button>
-                                                    :
-                                                    <button onClick={startSelectSample} className={`button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
-                                                        <span className='clamp clamp-1'>
-                                                            Subir imagen
-                                                        </span>
-                                                    </button>
-                                            }
-                                            <input type="file" onChange={selectSample} accept="image/*" ref={refBoceto} className='d-none' id="flBoceto" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                    </div>
-                                </StepManager>
-                                <div className='form-buttons-container'>
-                                    {
-                                        canGoBackwards
-                                        &&
-                                        <button onClick={previous} className='button button-green'>
-                                            <FontAwesomeIcon icon={faAngleLeft} size='xl' />
+                    <div className='floating-form'>
+                        {
+                            success
+                                ?
+                                <div className='form-container text-align-center'>
+                                    <Fade bottom>
+                                        <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
+                                        <h3 className='mt-1 mb-1'>Listo</h3>
+                                    </Fade>
+                                    <p className='txt-responsive-form m0-auto'>En menos de 3 días te contactaremos</p>
+                                    <div className='form-buttons-container mt-3'>
+                                        <Link to={'inicio'} className='button button-green m0-auto'>
+                                            <FontAwesomeIcon icon={faHome} size='xl' />
                                             {' '}
                                             <span className='d-none d-md-inline'>
-                                                Anterior
-                                        </span>
-                                        </button>
-                                    }
-                                    {
-                                        isLast
-                                            ?
-                                            <button onClick={send} className='button button-green justify-self-right'>
-                                                <span className='d-none d-md-inline'>
-                                                    Enviar
-                                                </span>
-                                                {' '}
-                                                <FontAwesomeIcon icon={faCheck} size='xl' />
-                                            </button>
-                                            :
-                                            <button onClick={next} className='button button-green justify-self-right'>
-                                                <span className='d-none d-md-inline'>
-                                                    Siguiente
-                                        </span>
-                                                {' '}
-                                                <FontAwesomeIcon icon={faAngleRight} size='xl' />
-                                            </button>
-                                    }
+                                                Regresar
+                                            </span>
+                                        </Link>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                                :
+                                <>
+                                    <Steps
+                                        activeIndex={activeIndex}
+                                        navigateTo={navigateTo}
+                                        steps={steps} />
+                                    <div className='form-container'>
+                                        <form>
+                                            <StepManager currentIndex={activeIndex}>
+                                                <div className='step-1'>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtNombres">¿Cómo te llamas?</label>
+                                                        <input minLength="1" maxLength="50" type="text" value={name} onChange={updName} id="txtNombres" placeholder="Ingresa tus nombres" />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtEdad">¿Qué edad tienes?</label>
+                                                        <input type="number" min={10} max={99} value={age} onChange={updAge} id="txtEdad" placeholder="Ingresa tu edad" />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
+                                                        <div className='cbo-text'>
+                                                            <DropdownImage
+                                                                list={[{ type: 'WSP', icon: 'fab fa-whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram' }]}
+                                                                select={updMessengerType} />
+                                                            <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
+                                                        </div>
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtCorreo">Bríndanos un correo para enviarte el trabajo</label>
+                                                        <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
+                                                    </div>
+                                                </div>
+                                                <div className='step-2'>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtLink">Tipo de diseño</label>
+                                                        <DropdownImage
+                                                            stretch
+                                                            list={[{ type: 'POR', icon: 'fas fa-book', text: 'Portada' }, { type: 'BAN', icon: 'far fa-image', text: 'Banner' }]}
+                                                            select={updDesignType} />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtLink">Link de tu obra (Opcional)</label>
+                                                        <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />
+                                                    </div>
+                                                </div>
+                                                <div className='step-3'>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtTitulo">Título o frase principal</label>
+                                                        <input minLength="1" maxLength="100" type="text" value={title} onChange={updTitle} id="txtTitulo" placeholder="Ejemplo: El amor todo lo puede" />
+
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtPseudonimo">¿Cuál es tu pseudónimo?</label>
+                                                        <input minLength="1" maxLength="100" type="text" value={author} onChange={updAuthor} id="txtPseudonimo" placeholder="Ejemplo: Atenas" />
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="txtIntencion">¿Qué quieres transmitir con tu diseño?</label>
+                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ingresa tu intención"></textarea>
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="flBoceto">¿Tiene algún boceto en imagen? (Opcional)</label>
+                                                        {
+                                                            imgSample
+                                                                ?
+                                                                <button onClick={startSelectSample} className={`d-flex justify-content-between button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
+                                                                    <span className='clamp clamp-1'>
+                                                                        {imgSample.name}
+                                                                    </span>
+                                                                    <span onClick={deleteSample} className='fa fa-times' style={{ color: 'white' }}></span>
+                                                                </button>
+                                                                :
+                                                                <button onClick={startSelectSample} className={`button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
+                                                                    <span>
+                                                                        Subir imagen
+                                                        </span>
+                                                                </button>
+                                                        }
+                                                        <input type="file" onChange={selectSample} accept="image/*" ref={refBoceto} className='d-none' id="flBoceto" />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </StepManager>
+                                            <div className='form-buttons-container'>
+                                                {
+                                                    canGoBackwards && !loading
+                                                    &&
+                                                    <button onClick={previous} className='button button-green'>
+                                                        <FontAwesomeIcon icon={faAngleLeft} size='xl' />
+                                                        {' '}
+                                                        <span className='d-none d-md-inline'>
+                                                            Anterior
+                                                    </span>
+                                                    </button>
+                                                }
+                                                {
+                                                    loading
+                                                        ?
+                                                        <span className='button button-green justify-self-right'>
+                                                            Enviando
+                                                            {' '}
+                                                            <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
+                                                        </span>
+                                                        :
+                                                        isLast
+                                                            ?
+                                                            <button onClick={send} className='button button-green justify-self-right'>
+                                                                <span className='d-none d-md-inline'>
+                                                                    Enviar
+                                                    </span>
+                                                                {' '}
+                                                                <FontAwesomeIcon icon={faCheck} size='xl' />
+                                                            </button>
+                                                            :
+                                                            <button onClick={next} className='button button-green justify-self-right'>
+                                                                <span className='d-none d-md-inline'>
+                                                                    Siguiente
+                                                    </span>
+                                                                {' '}
+                                                                <FontAwesomeIcon icon={faAngleRight} size='xl' />
+                                                            </button>
+                                                }
+                                            </div>
+                                        </form>
+                                    </div>
+                                </>
+                        }
                     </div>
+
                 </section>
             </main>
             <Footer />
