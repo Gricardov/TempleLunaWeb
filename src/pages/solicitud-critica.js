@@ -84,7 +84,7 @@ const Inicio = () => {
             if (archivo.size <= maxFileSize) {
                 setImgSample(archivo);
             } else {
-                alert('La imagen debe ser menor a 5MB')
+                alert('La imagen debe ser menor a 5MB');
             }
         }
     }
