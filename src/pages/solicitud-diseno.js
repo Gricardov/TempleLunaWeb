@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdownImage';
-import ImgLeyendo from '../img/sitting-reading.svg';
+import ImgBailando from '../img/dancing.svg';
 import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
@@ -22,7 +22,7 @@ const overrideSpinnerInline = css`
   display: inline-block;
 `;
 
-const Inicio = () => {
+const Solicitud = () => {
 
     const refBoceto = useRef(null);
 
@@ -207,24 +207,16 @@ const Inicio = () => {
             alert('Tu título debe tener de 1 a 100 caracteres');
             return true;
         }
-        else if (!(/^[a-zA-Z\sáéíóúñÑ]*$/.test(title))) {
-            alert('Tu título no puede tener caracteres especiales');
-            return true;
-        }
 
         // Author
         if (!(/^(?!\s*$).{1,100}/.test(author))) {
             alert('Tu pseudónimo debe tener de 1 a 100 caracteres');
             return true;
         }
-        else if (!(/^[a-zA-Z\sáéíóúñÑ]*$/.test(author))) {
-            alert('Tu pseudónimo no puede tener caracteres especiales');
-            return true;
-        }
 
         // Intention
         if (!(/^(?!\s*$).{1,1000}/.test(intention))) {
-            alert('Lo que quieres transmitir debe tener de 1 a 100 caracteres');
+            alert('Lo que quieres transmitir debe tener de 1 a 1000 caracteres');
             return true;
         }
 
@@ -236,6 +228,7 @@ const Inicio = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setSuccess(false);
     }, [activeIndex])
 
@@ -248,7 +241,7 @@ const Inicio = () => {
                     <p className='txt-responsive-form'>Y uno de nuestros artistas te contactará a la brevedad</p>
                 </section>
                 <section className='container-xl mt-5 position-relative'>
-                    <img src={ImgLeyendo} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgBailando} alt='img-fondo' className='img-fondo-formulario' />
 
                     <div className='floating-form'>
                         {
@@ -326,8 +319,8 @@ const Inicio = () => {
                                                         <input minLength="1" maxLength="100" type="text" value={author} onChange={updAuthor} id="txtPseudonimo" placeholder="Ejemplo: Atenas" />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtIntencion">¿Qué quieres transmitir con tu diseño?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ingresa tu intención"></textarea>
+                                                        <label htmlFor="txtIntencion">¿Qué deseas transmitir con tu diseño?</label>
+                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Quiero transmitir la idea de un mundo inestable e idealizado por una típica adolescente..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
                                                         <label htmlFor="flBoceto">¿Tiene algún boceto en imagen? (Opcional)</label>
@@ -344,13 +337,14 @@ const Inicio = () => {
                                                                 <button onClick={startSelectSample} className={`button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
                                                                     <span>
                                                                         Subir imagen
-                                                        </span>
+                                                                    </span>
                                                                 </button>
                                                         }
                                                         <input type="file" onChange={selectSample} accept="image/*" ref={refBoceto} className='d-none' id="flBoceto" />
                                                     </div>
-                                                </div>
-                                                <div>
+                                                    <div className='form-group'>
+                                                        <label htmlFor="chkPortafolio">El artista podrá usar el diseño final para promocionar su propio portafolio</label>
+                                                    </div>
                                                 </div>
                                             </StepManager>
                                             <div className='form-buttons-container'>
@@ -406,4 +400,4 @@ const Inicio = () => {
     );
 }
 
-export default Inicio;
+export default Solicitud;

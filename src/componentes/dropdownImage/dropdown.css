@@ -30,10 +30,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 500ms ease-in-out;
+    transition: all 200ms ease-in-out;
     cursor: pointer;
 }
 
 .selectable-list-item:hover {
-    background: #F3F1FF;
+    background: #ded9ff;
 }
