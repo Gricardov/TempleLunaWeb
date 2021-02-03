@@ -1,22 +1,92 @@
-import React from 'react'
-import Carrousel from '../componentes/carruselHistorias/carrousel';
-import Tag from '../componentes/tag';
+import React, { useState, useEffect } from 'react'
+import Navbar from '../componentes/navbar';
 import Footer from '../componentes/footer/footer';
-import Fade from 'react-reveal/Fade';
-import { Panorama } from '../componentes/panoramaInicio/panorama';
-import Img1 from '../img/img-seccion-1.PNG';
-import Img2 from '../img/img-seccion-2.PNG';
-import Img3 from '../img/img-seccion-3.PNG';
-import ImgLentes from '../img/lentes.svg';
-import ImgPincel from '../img/pincel.svg';
+import ImgColumpio from '../img/swinging.svg';
+import { useHistory } from "react-router-dom";
+import { login } from '../api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
-const Inicio = () => {
+const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    let history = useHistory();
+
+    const updEmail = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const updPassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const loginUser = (e) => {
+        e.preventDefault();
+        if (!checkErrors()) {
+            login(email, password)
+                .then(({ user, error }) => {
+                    if (user) {
+                        history.push('/admin');
+                    } else {
+                        alert(error);
+                    }
+                })
+        }
+    }
+
+    const checkErrors = () => {
+        if (!(/^(?!\s*$).{1,50}/.test(email))) {
+            alert('Tu correo debe tener de 1 a 50 caracteres');
+            return true;
+        }
+        else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
+            alert('Introduce un correo válido');
+            return true;
+        }
+
+        if (!(/^(?!\s*$).{1,50}/.test(password))) {
+            alert('Tu contraseña debe tener de 1 a 50 caracteres');
+            return true;
+        }
+
+        return false;
+    }
+
     return (
         <div>
-            Login
+            <Navbar />
+            <main className='main-body below-navbar colored-background'>
+                <section className='container-xl mt-5'>
+                    <div className='login-container position-relative'>
+                        <img src={ImgColumpio} alt='img-fondo' className='img-fondo-login d-none d-md-block' />
+                        <div className='floating-form'>
+                            <h2 className='m-0'>Ingresa a Temple Luna</h2>
+                            <p className='mb-3'>Si quieres pertenecer a nosotros, escríbenos por el grupo</p>
+                            <form>
+                                <div className='form-group'>
+                                    <label htmlFor="txtUsuario">Correo</label>
+                                    <input minLength="1" maxLength="50" type="email" value={email} onChange={updEmail} id="txtUsuario" placeholder="Ingresa tu correo" />
+                                </div>
+                                <div className='form-group'>
+                                    <label htmlFor="txtContrasena">Contraseña</label>
+                                    <input minLength="1" maxLength="50" type="password" value={password} onChange={updPassword} id="txtContrasena" placeholder="****************" />
+                                </div>
+                                <button onClick={loginUser} className='button button-green stretch'>
+                                    <span className='d-inline'>
+                                        Entrar
+                                    </span>
+                                    {' '}
+                                    <FontAwesomeIcon icon={faSignInAlt} size='xl' />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
             <Footer />
         </div>
     );
 }
 
-export default Inicio;
+export default Login;

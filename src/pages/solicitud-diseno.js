@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdownImage';
@@ -12,7 +12,7 @@ import { getGeneratedId, uploadImage, saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faCircle, faHome, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome } from '@fortawesome/free-solid-svg-icons';
 
 
 const steps = ['Contacto', 'Tipo', 'Trasfondo'];

@@ -3,36 +3,36 @@ import React, { createContext, useState, useEffect } from 'react';
 export const DrawerContext = createContext();
 
 export const DrawerProvider = ({ children }) => {
-    const [abierto, estAbierto] = useState(false);
-    const [ancho, estAncho] = useState(0);
+    const [isOpen, setOpen] = useState(false);
+    const [width, setWidth] = useState(0);
 
-    const abrir = () => {
-        estAbierto(true);
+    const open = () => {
+        setOpen(true);
     }
 
-    const cerrar = () => {
-        estAbierto(false);
+    const close = () => {
+        setOpen(false);
     }
 
-    const actAncho = () => {
-        estAncho(window.innerWidth);
+    const updWidth = () => {
+        setWidth(window.innerWidth);
     }
 
     useEffect(() => {
-        if (ancho === 0) {
-            estAncho(window.innerWidth);
+        if (width === 0) {
+            setWidth(window.innerWidth);
         }
 
-        if (ancho >= 768) {
-            cerrar();
+        if (width >= 768) {
+            close();
         }
 
-        window.addEventListener('resize', actAncho);
-        return () => window.removeEventListener('resize', actAncho);
-    }, [ancho]);
+        window.addEventListener('resize', updWidth);
+        return () => window.removeEventListener('resize', updWidth);
+    }, [width]);
 
     return (
-        <DrawerContext.Provider value={{ abierto, abrir, cerrar }}>
+        <DrawerContext.Provider value={{ isOpen, open, close }}>
             {children}
         </DrawerContext.Provider>
     )

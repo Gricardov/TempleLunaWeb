@@ -1,22 +1,38 @@
 import React, { useEffect, useContext } from 'react'
 import { DrawerContext } from '../../context/DrawerContext'
+import { AuthContext } from '../../context/AuthContext'
+import { useHistory } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { logout } from '../../api'
 import './drawer.css'
 
 const Drawer = () => {
 
-    const { abierto, cerrar } = useContext(DrawerContext);
+    const { logged } = useContext(AuthContext);
+    const { isOpen, close } = useContext(DrawerContext);
+    let history = useHistory();
+
+    const logoutUser = (e) => {
+        e.preventDefault();
+        logout()
+            .then(res => {
+                if (res) {
+                    close();
+                    history.push('/login');
+                }
+            })
+    }
 
     useEffect(() => {
-        if (abierto) {
+        if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
         }
-    }, [abierto])
+    }, [isOpen])
 
     let estilos = '';
-    if (abierto) {
+    if (isOpen) {
         estilos = 'abierto';
     } else {
         estilos = 'cerrado';
@@ -24,19 +40,28 @@ const Drawer = () => {
 
     return (
         <>
-            <div className={'drawer-overlay ' + estilos} onClick={cerrar}>
+            <div className={'drawer-overlay ' + estilos} onClick={close}>
             </div>
-            <div className={'drawer ' + estilos} >
-                <Link to='/sol_critica' onClick={cerrar} className='btn-drawer'>
-                    Pide tu crítica
-                </Link>
-                <Link to='/sol_diseno' onClick={cerrar} className='btn-drawer'>
-                    Pide tu diseño
-                </Link>
-                <Link to='/login' onClick={cerrar} className='btn-drawer'>
-                    Login de creativos
-                </Link>
-
+            <div className={'drawer ' + estilos}>
+                {
+                    logged
+                        ?
+                        <a onClick={logoutUser} className='btn-drawer'>
+                            Salir
+                        </a>
+                        :
+                        <>
+                            <Link to='/sol_critica' onClick={close} className='btn-drawer'>
+                                Pide tu crítica
+                            </Link>
+                            <Link to='/sol_diseno' onClick={close} className='btn-drawer'>
+                                Pide tu diseño
+                            </Link>
+                            <Link to='/login' onClick={close} className='btn-drawer'>
+                                Login de creativos
+                            </Link>
+                        </>
+                }
             </div>
         </>
     )

@@ -41,8 +41,7 @@
 
 .btn-drawer {
     display: block;
-    text-align: center;
-    padding: 1.5rem 0 1.5rem 0;
+    padding: 1.5rem 0 1.5rem 2.5rem;
     color: white;
     font-size: 2rem;
 }

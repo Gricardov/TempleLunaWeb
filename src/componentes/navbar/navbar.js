@@ -1,13 +1,18 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from "react-router-dom"
-import { DrawerContext } from '../../context/DrawerContext'
 import Logo from '../../img/logo.png'
 import Sanguchito from '../../img/sanguchito.svg'
+import { useHistory } from "react-router-dom"
+import { logout } from '../../api'
+import { Link } from "react-router-dom"
+import { DrawerContext } from '../../context/DrawerContext'
+import { AuthContext } from '../../context/AuthContext'
 import './navbar.css'
 
 const Navbar = ({ startTransparent }) => {
 
-    const { abrir } = useContext(DrawerContext);
+    const { open, close } = useContext(DrawerContext);
+    const { logged } = useContext(AuthContext);
+    let history = useHistory();
 
     const [scrolled, setScrolled] = React.useState(false);
 
@@ -18,6 +23,17 @@ const Navbar = ({ startTransparent }) => {
         } else {
             setScrolled(false)
         }
+    }
+
+    const logoutUser = (e) => {
+        e.preventDefault();
+        logout()
+            .then(res => {
+                if (res) {
+                    close();
+                    history.push('/login');
+                }
+            })
     }
 
     useEffect(() => {
@@ -36,17 +52,27 @@ const Navbar = ({ startTransparent }) => {
                 <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />
                 </Link>
-                <img alt='sanguchito' onClick={abrir} src={Sanguchito} className='img-sanguchito' />
+                <img alt='sanguchito' onClick={open} src={Sanguchito} className='img-sanguchito' />
                 <div className='navbar-nav'>
-                    <Link to='/sol_critica' className='btn-nav'>
-                        Críticas
-                    </Link>
-                    <Link to='/sol_diseno' className='btn-nav'>
-                        Diseños
-                    </Link>
-                    <Link to='/sol_diseno' className='btn-nav'>
-                        Login
-                    </Link>
+                    {
+                        logged
+                            ?
+                            <a onClick={logoutUser} className='btn-nav'>
+                                Salir
+                            </a>
+                            :
+                            <>
+                                <Link to='/sol_critica' className='btn-nav'>
+                                    Críticas
+                                </Link>
+                                <Link to='/sol_diseno' className='btn-nav'>
+                                    Diseños
+                                </Link>
+                                <Link to='/login' className='btn-nav'>
+                                    Login
+                                </Link>
+                            </>
+                    }
                 </div>
             </div>
         </nav>

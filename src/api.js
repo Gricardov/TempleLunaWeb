@@ -11,6 +11,42 @@ export const saveRequest = async (id, object) => {
         object, { merge: true });
 }
 
+// Sesión
+export const login = async (email, password) => {
+    return auth.signInWithEmailAndPassword(email, password)
+        .then((user) => {
+            return { user };
+        })
+        .catch(error => {
+            let errMessage;
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    errMessage = 'El usuario es inválido';
+                    break;
+                case 'auth/user-disabled':
+                    errMessage = 'El usuario ha sido deshabilitado';
+                    break;
+                case 'auth/user-not-found':
+                    errMessage = 'El usuario no ha sido encontrado';
+                    break;
+                case 'auth/wrong-password':
+                    errMessage = 'El usuario es inválido';
+                    break;
+                default:
+                    errMessage='Ha ocurrido un error con el servicio de autenticación';
+            }
+            return { error: errMessage };
+        });
+}
+
+export const logout = async () => {
+    return auth.signOut().then(function () {
+        return true;
+    }).catch(function (error) {
+        console.log(error.message);
+    });
+}
+
 // Archivos
 export const uploadImage = async (ruta, id, archivo) => {
     return new Promise((resolve, reject) => {
