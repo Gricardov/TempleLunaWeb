@@ -117,7 +117,8 @@ const Solicitud = () => {
             about: about.trim(),
             intention: intention.trim(),
             points,
-            type: 'CRITICA'
+            type: 'CRITICA',
+            status: 'DISPONIBLE'
         };
 
         saveRequest(generatedId, { ...data, active: 1 }).then(() => {

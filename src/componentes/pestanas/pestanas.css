@@ -12,7 +12,8 @@
     flex: 1;
     display: inline-block;
     text-decoration: none;
-    padding: 2.2rem;
+    padding-top: 1.8rem;
+    padding-bottom: 1.8rem;
     text-transform: uppercase;
     font-size: 1.6rem;
     font-weight: 600;
@@ -22,12 +23,19 @@
     transition: all 200ms ease-in-out;
 }
 
+@media (min-width: 768px) {
+    .material-tabs>a {
+        font-size: 1.6rem;
+        padding-top: 2.2rem;
+        padding-bottom: 2.2rem;
+    }
+}
+
 .material-tabs>a:hover {
     background-color: #ded9ff;
 }
 
 .material-tabs>a.active {
-    font-weight: 700;
     outline: none;
     text-decoration: none;
 }

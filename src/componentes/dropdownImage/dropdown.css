@@ -20,6 +20,7 @@
     top: 100%;
     animation: all 200ms ease-in-out;
     border: 1px solid #DBE2EA;
+    z-index: 50;
     transition: all 2000ms ease-in-out;
 }
 

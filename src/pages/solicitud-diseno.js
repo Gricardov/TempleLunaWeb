@@ -151,7 +151,8 @@ const Solicitud = () => {
             author: author.trim(),
             intention: intention.trim(),
             urlImg: urlImg.trim(),
-            type: 'DISENO'
+            type: 'DISENO',
+            status: 'DISPONIBLE'
         };
 
         saveRequest(generatedId, { ...data, active: 1 }).then(() => {
@@ -323,11 +324,11 @@ const Solicitud = () => {
                                                         <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Quiero transmitir la idea de un mundo inestable e idealizado por una típica adolescente..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="flBoceto">¿Tiene algún boceto en imagen? (Opcional)</label>
+                                                        <label htmlFor="flBoceto">¿Tienes algún boceto en imagen? (Opcional)</label>
                                                         {
                                                             imgSample
                                                                 ?
-                                                                <button onClick={startSelectSample} className={`d-flex justify-content-between button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
+                                                                <button onClick={startSelectSample} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
                                                                     <span className='clamp clamp-1'>
                                                                         {imgSample.name}
                                                                     </span>

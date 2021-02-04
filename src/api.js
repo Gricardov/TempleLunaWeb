@@ -8,7 +8,33 @@ const storage = firebase.storage();
 // Solicitudes
 export const saveRequest = async (id, object) => {
     return firestore.collection('solicitudes').doc(id).set(
-        object, { merge: true });
+        { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+}
+
+export const getRequests = async (type, status, limit = 10) => {
+    return firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc').limit(limit).get()
+        .then(qsn => {
+            let list = [];
+            qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
+            return list;
+        })
+        .catch(error => {
+            console.log(error);
+            return [];
+        });;
+}
+
+export const getRequestsByWorker = async (workerId, type, status, limit = 10) => {
+    return firestore.collection('solicitudes').where('takenBy', workerId).where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc').limit(limit).get()
+        .then(qsn => {
+            let list = [];
+            qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
+            return list;
+        })
+        .catch(error => {
+            console.log(error);
+            return [];
+        });;;
 }
 
 // Sesión
@@ -33,7 +59,7 @@ export const login = async (email, password) => {
                     errMessage = 'El usuario es inválido';
                     break;
                 default:
-                    errMessage='Ha ocurrido un error con el servicio de autenticación';
+                    errMessage = 'Ha ocurrido un error con el servicio de autenticación';
             }
             return { error: errMessage };
         });

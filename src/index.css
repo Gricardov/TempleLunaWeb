@@ -199,6 +199,10 @@ p {
   justify-content: space-between;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
 .stretch {
   width: 100%;
 }
@@ -582,5 +586,31 @@ p {
     margin-left: auto;
     padding-top: 5rem;
     padding-bottom: 5rem;
+  }
+}
+
+/*Admin*/
+
+.title-admin-container {}
+
+@media (min-width: 768px) {
+  .title-admin-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title-admin-container>h2 {
+    flex-basis: 75%;
+  }
+}
+
+.title-admin-container>.dropdown-container {
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .title-admin-container>.dropdown-container {
+    margin-top: 0;
+    flex-basis: 25%;
   }
 }
