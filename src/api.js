@@ -11,8 +11,12 @@ export const saveRequest = async (id, object) => {
         { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
 }
 
-export const getRequests = async (type, status, limit = 10) => {
-    return firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc').limit(limit).get()
+export const getRequests = async (workerId, type, status, limit = 10) => {
+    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
+    if (workerId) {
+        request.where('takenBy', workerId);
+    }
+    return request.limit(limit).get()
         .then(qsn => {
             let list = [];
             qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
@@ -24,17 +28,16 @@ export const getRequests = async (type, status, limit = 10) => {
         });;
 }
 
-export const getRequestsByWorker = async (workerId, type, status, limit = 10) => {
-    return firestore.collection('solicitudes').where('takenBy', workerId).where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc').limit(limit).get()
-        .then(qsn => {
-            let list = [];
-            qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
-            return list;
-        })
-        .catch(error => {
-            console.log(error);
-            return [];
-        });;;
+export const listenRequests = (workerId, type, status, limit = 10, callback) => {
+    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
+    if (workerId) {
+        request.where('takenBy', workerId);
+    }
+    return request.limit(limit).onSnapshot(qsn => {
+        let list = [];
+        qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
+        callback(list);
+    });
 }
 
 // Sesión

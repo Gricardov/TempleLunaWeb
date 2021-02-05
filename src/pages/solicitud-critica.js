@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
-import DropdownImage from '../componentes/dropdownImage';
+import DropdownImage from '../componentes/dropdown-image';
 import ImgLeyendo from '../img/sitting-reading.svg';
 import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';

@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [logged, setLogged] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         return auth.onAuthStateChanged(function (user) {
@@ -14,11 +15,12 @@ export const AuthProvider = ({ children }) => {
             } else {
                 setLogged(false);
             }
+            setLoading(false);
         });
     }, []);
 
     return (
-        <AuthContext.Provider value={{ logged }}>
+        <AuthContext.Provider value={{ logged, loading }}>
             {children}
         </AuthContext.Provider>
     )

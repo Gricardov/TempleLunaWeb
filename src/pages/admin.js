@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import DropdownImage from '../componentes/dropdownImage';
+import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
+import RequestCard from '../componentes/request-card';
 import Pestanas from '../componentes/pestanas';
 import Footer from '../componentes/footer/footer';
-import { getRequests } from '../api';
+import { listenRequests } from '../api';
 
 const requestTypeList = [{ type: 'DISENO', icon: 'fas fa-paint-brush', text: 'Diseños' }, { type: 'CRITICA', icon: 'fas fa-glasses', text: 'Críticas' }];
-const tabList = ['Nuevos', 'En proceso', 'Listos'];
+const tabList = [{ id: 'DISPONIBLE', name: 'Nuevos (1)' }, { id: 'TOMADO', name: 'En proceso (2)' }, { id: 'TERMINADO', name: 'Listos (9)' }];
 
 const Admin = () => {
 
@@ -15,10 +16,8 @@ const Admin = () => {
     const [requestList, setRequestList] = useState([]);
 
     useEffect(() => {
-        getRequests(requestType, 'DISPONIBLE').then(data => {
-            setRequestList(data);
-        })
-    }, [requestType]);
+        listenRequests(undefined, requestType, tabList[activeTabIndex].id, undefined, data => setRequestList(data));
+    }, [activeTabIndex, requestType]);
 
     const updRequestType = (val) => {
         setRequestType(val);
@@ -40,15 +39,11 @@ const Admin = () => {
                     </div>
                 </section>
                 <section className='container-xl section'>
-                    <Pestanas cargando={false} indice={activeTabIndex} seleccionar={setActiveTabIndex} data={tabList}>
-                        <div>
+                    <Pestanas cargando={false} indice={activeTabIndex} seleccionar={setActiveTabIndex} data={tabList.map(e => e.name)}>
+                        <div className='tab-content'>
                             {
-                                requestList.map(r => (
-                                    <div key={r.id}>
-                                        {
-                                            r.email
-                                        }
-                                    </div>
+                                requestList.map(request => (
+                                    <RequestCard key={request.id} data={request} />
                                 ))
                             }
                         </div>

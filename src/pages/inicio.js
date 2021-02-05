@@ -1,9 +1,9 @@
 import React from 'react'
-import Carrousel from '../componentes/carruselHistorias/carrousel';
+import Carrousel from '../componentes/stories-carrousel/carrousel';
 import Tag from '../componentes/tag';
 import Footer from '../componentes/footer/footer';
 import Fade from 'react-reveal/Fade';
-import { Panorama } from '../componentes/panoramaInicio/panorama';
+import { Panorama } from '../componentes/home-panorama/panorama';
 import { Link } from "react-router-dom"
 import Img1 from '../img/img-seccion-1.PNG';
 import Img2 from '../img/img-seccion-2.PNG';

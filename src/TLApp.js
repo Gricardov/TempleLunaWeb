@@ -7,7 +7,7 @@ import SolicitudDiseno from './pages/solicitud-diseno'
 import Drawer from './componentes/drawer'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './componentes/customRouter/privateRoute'
-import { PublicRoute } from './componentes/customRouter/publicRouter'
+import { PublicRoute } from './componentes/customRouter/publicRoute'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
 const App = () => {
@@ -16,7 +16,6 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Drawer />
-
         <Switch>
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />

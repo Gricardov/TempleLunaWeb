@@ -1,0 +1,93 @@
+.request-card-container {
+    padding: 2.2rem;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 3px 6px #00000029;
+    margin-top: 2.5rem;
+}
+
+.request-card-container .header-container h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.request-card-container .header-container p {
+    margin: 0;
+    font-size: 1.4rem;
+    font-family: 'SegoeUI';
+    font-weight: 600;
+    color: #AEAEAE;
+    margin-top: .5rem;
+}
+
+.request-card-container .header-container {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .request-card-container .header-container {
+        display: flex;
+        text-align: left;
+    }
+}
+
+.request-card-container .header-container .title-container {
+    flex: 1;
+}
+
+.request-card-container .header-container .request-avatar {
+    display: block;
+    margin: 0 auto;
+    width: 6rem;
+    height: 6rem;
+}
+
+@media (min-width: 768px) {
+    .request-card-container .header-container .request-avatar {
+        width: 6rem;
+        height: 6rem;
+        margin-right: .6rem;
+    }
+}
+
+.request-card-container .description-container p {
+    margin: 0;
+    color: #646D7B;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .request-card-container .description-container p {
+        min-height: 4.4rem;
+        margin-top: .8rem;
+        margin-bottom: 1.6rem;
+    }
+}
+
+.request-card-container .footer-container {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .request-card-container .footer-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.request-card-container .footer-container .button-option-request {
+    font-size: 1.8rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .request-card-container .footer-container .button-option-request {
+        padding: .4rem 3rem;
+    }
+}
+
+.request-card-container .footer-container .button-option-request .eye-icon {
+    margin-right: .6rem;
+}

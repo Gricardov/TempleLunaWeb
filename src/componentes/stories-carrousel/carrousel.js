@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import StoryCard from '../../componentes/story_card';
+import StoryCard from '../story-card';
 import ImgPortada1 from '../../img/portada1.jpg'
 import ImgPortada2 from '../../img/portada2.jpg'
 import ImgPortada3 from '../../img/portada3.jpg'

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
-import Logo from '../../img/logo.png'
-import Sanguchito from '../../img/sanguchito.svg'
 import { useHistory } from "react-router-dom"
 import { logout } from '../../api'
 import { Link } from "react-router-dom"
 import { DrawerContext } from '../../context/DrawerContext'
 import { AuthContext } from '../../context/AuthContext'
+import Logo from '../../img/logo.png'
+import Sanguchito from '../../img/sanguchito.svg'
 import './navbar.css'
 
 const Navbar = ({ startTransparent }) => {
