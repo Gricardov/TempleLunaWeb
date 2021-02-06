@@ -57,10 +57,17 @@ const Modal = ({ isOpen, data, close }) => {
                                 <ul>
                                     {
                                         data?.points?.map(point => (
-                                            <li>Mila</li>
+                                            <li>{point}</li>
                                         ))
                                     }
                                 </ul>
+                                {
+                                    (!data?.points || data?.points?.length < 1)
+                                    &&
+                                    <p>No se han especificado puntos</p>
+                                }
+                                <h4>Contacto del solicitante</h4>
+                                <p>Disponible al aceptar el pedido</p>
                             </div>
                         </div>
 
