@@ -8,15 +8,16 @@ import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
+import { critiquePoints } from '../data/data';
 import { getGeneratedId, saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
-
+import { contactTypes } from '../data/data';
 
 const steps = ['Contacto', 'Obra', 'Contenido'];
-const chkPoints = [{ id: 'INTENCION', name: 'Transmisión de la intención' }, { id: 'ENGANCHE', name: 'Enganche de mi obra' }, { id: 'ORTOGRAFIA', name: 'Ortografía' }];
+const chkPoints = critiquePoints;
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -254,7 +255,7 @@ const Solicitud = () => {
                                                         <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
-                                                                list={[{ type: 'WSP', icon: 'fab fa-whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram' }]}
+                                                                list={contactTypes}
                                                                 select={updMessengerType} />
                                                             <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
                                                         </div>

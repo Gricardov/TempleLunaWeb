@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
+import DesignDetailModal from '../componentes/modal/designDetail';
 import RequestCard from '../componentes/request-card';
 import Pestanas from '../componentes/pestanas';
 import Footer from '../componentes/footer/footer';
+import { requestStatuses, requestTypes } from '../data/data';
 import { listenRequests } from '../api';
 
-const requestTypeList = [{ type: 'DISENO', icon: 'fas fa-paint-brush', text: 'Diseños' }, { type: 'CRITICA', icon: 'fas fa-glasses', text: 'Críticas' }];
-const tabList = [{ id: 'DISPONIBLE', name: 'Nuevos (1)' }, { id: 'TOMADO', name: 'En proceso (2)' }, { id: 'TERMINADO', name: 'Listos (9)' }];
+const requestTypeList = requestTypes;
+const tabList = requestStatuses;
 
 const Admin = () => {
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [requestType, setRequestType] = useState('DISENO');
     const [requestList, setRequestList] = useState([]);
+    const [isOpenDesignModal, setOpenDesignModal] = useState(false);
+    const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
+    const [registry, setRegistry] = useState(null);
+
+    const openDesignModal = (request) => {
+        setRegistry(request);
+        setOpenDesignModal(true);
+    }
 
     useEffect(() => {
         listenRequests(undefined, requestType, tabList[activeTabIndex].id, undefined, data => setRequestList(data));
@@ -26,6 +36,7 @@ const Admin = () => {
     return (
         <div>
             <Navbar />
+            <DesignDetailModal data={registry} isOpen={isOpenDesignModal} close={() => setOpenDesignModal(false)} />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
@@ -43,7 +54,7 @@ const Admin = () => {
                         <div className='tab-content'>
                             {
                                 requestList.map(request => (
-                                    <RequestCard key={request.id} data={request} />
+                                    <RequestCard key={request.id} data={request} select={openDesignModal} />
                                 ))
                             }
                         </div>

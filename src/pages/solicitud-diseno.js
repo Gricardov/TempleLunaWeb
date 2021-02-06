@@ -13,7 +13,7 @@ import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome } from '@fortawesome/free-solid-svg-icons';
-
+import { designTypes, contactTypes } from '../data/data';
 
 const steps = ['Contacto', 'Tipo', 'Trasfondo'];
 const maxFileSize = 5242880;
@@ -286,7 +286,7 @@ const Solicitud = () => {
                                                         <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
-                                                                list={[{ type: 'WSP', icon: 'fab fa-whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram' }]}
+                                                                list={contactTypes}
                                                                 select={updMessengerType} />
                                                             <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
                                                         </div>
@@ -301,7 +301,7 @@ const Solicitud = () => {
                                                         <label htmlFor="txtLink">Tipo de diseño</label>
                                                         <DropdownImage
                                                             stretch
-                                                            list={[{ type: 'POR', icon: 'fas fa-book', text: 'Portada' }, { type: 'BAN', icon: 'far fa-image', text: 'Banner' }]}
+                                                            list={designTypes}
                                                             select={updDesignType} />
                                                     </div>
                                                     <div className='form-group'>

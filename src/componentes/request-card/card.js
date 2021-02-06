@@ -1,10 +1,10 @@
 import React from 'react'
 import Avatar from '../avatar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faEye, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import './card.css'
 
-const Card = ({ data }) => {
+const Card = ({ data, select }) => {
     return (
         <div className='request-card-container'>
             <div className='header-container'>
@@ -21,7 +21,7 @@ const Card = ({ data }) => {
             </div>
             <div className='footer-container'>
                 <div className='button-container'>
-                    <button className='button button-green button-option-request'>
+                    <button onClick={() => select(data)} className='button button-green button-option-request'>
                         <FontAwesomeIcon color={'#fff'} icon={faEye} className='eye-icon' />
                         Ver
                     </button>

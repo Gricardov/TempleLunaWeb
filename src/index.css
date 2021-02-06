@@ -323,6 +323,26 @@ p {
   text-align: center;
 }
 
+.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 15;
+    transition: all 500ms ease-in-out;
+}
+
+.overlay.open {
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: unset;
+}
+
+.overlay.close {
+  background: none;
+  pointer-events: none;
+}
+
 /*Inicio*/
 
 .section {

@@ -29,20 +29,20 @@ const Drawer = () => {
         } else {
             document.body.style.overflow = 'unset';
         }
-    }, [isOpen])
+    }, [isOpen]);
 
-    let estilos = '';
+    let styles = '';
     if (isOpen) {
-        estilos = 'abierto';
+        styles = 'open';
     } else {
-        estilos = 'cerrado';
+        styles = 'close';
     }
 
     return (
         <>
-            <div className={'drawer-overlay ' + estilos} onClick={close}>
+            <div className={'overlay ' + styles} onClick={close}>
             </div>
-            <div className={'drawer ' + estilos}>
+            <div className={'drawer ' + styles}>
                 {
                     logged
                         ?

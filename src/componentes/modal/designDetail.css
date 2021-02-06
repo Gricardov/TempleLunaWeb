@@ -1,0 +1,150 @@
+.modal {
+    position: fixed;
+    border-radius: 10px;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 3rem auto;
+    height: 100%;
+    background: #fff;
+    z-index: 16;
+    padding: 2.5rem;
+    -webkit-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
+    transition: all 500ms ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: 80%;
+        padding: 3.5rem 5rem;
+    }
+}
+
+.drawer.open {}
+
+.drawer.close {}
+
+.request-modal-container {}
+
+.request-modal-container h3 {
+    font-size: 2rem;
+}
+
+.request-modal-container h4 {
+    font-size: 1.8rem;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container h4 {
+        font-size: 2rem;
+    }
+}
+
+.request-modal-container .header-container .close-icon {
+    position: absolute;
+    color: #646D7B;
+    top: 0;
+    right: 0;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.request-modal-container .header-container h3 {
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container .header-container h3 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+}
+
+.request-modal-container .header-container p {
+    margin: 0;
+    font-size: 1.4rem;
+    font-family: 'SegoeUI';
+    color: #AEAEAE;
+    margin-top: .5rem;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container .header-container p {
+        font-size: 1.5rem;
+    }
+}
+
+.request-modal-container .header-container {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container .header-container {
+        display: flex;
+        text-align: left;
+    }
+}
+
+.request-modal-container .header-container .title-container {
+    flex: 1;
+}
+
+.request-modal-container .header-container .request-avatar {
+    display: block;
+    margin: 0 auto;
+    width: 6rem;
+    height: 6rem;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container .header-container .request-avatar {
+        width: 6rem;
+        height: 6rem;
+    }
+}
+
+.request-modal-avatar {
+    display: block;
+    margin: 0 auto;
+    width: 6rem;
+    height: 6rem;
+}
+
+@media (min-width: 768px) {
+    .request-modal-avatar {
+        width: 7.5rem;
+        height: 7.5rem;
+        margin-right: 1rem;
+    }
+}
+
+.request-modal-container p, .request-modal-container a, .request-modal-container ul li {
+    margin: 0;
+    color: #646D7B;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.request-modal-container a {
+    color: #6392DC;
+}
+.request-modal-container ul li {
+    margin: 0;
+    min-height: unset;
+}
+
+@media (min-width: 768px) {
+    .request-modal-container p, .request-modal-container a, .request-modal-container ul li {
+        min-height: 4.4rem;
+        margin-top: .8rem;
+        font-size: 2rem;
+        margin-bottom: 1.6rem;
+    }
+    .request-modal-container ul li {
+        margin: 0;
+        min-height: unset;
+    }
+}
