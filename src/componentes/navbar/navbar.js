@@ -39,7 +39,7 @@ const Navbar = ({ startTransparent }) => {
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-    }, [scrolled])
+    }, [scrolled]);
 
     let clasesNav = 'main-navbar';
     if (!startTransparent || scrolled) {

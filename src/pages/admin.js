@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DesignDetailModal from '../componentes/modal/designDetail';
@@ -12,6 +12,7 @@ const requestTypeList = requestTypes;
 const tabList = requestStatuses;
 
 const Admin = () => {
+    const lastRef = useRef();
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [requestType, setRequestType] = useState('DISENO');
@@ -25,13 +26,39 @@ const Admin = () => {
         setOpenDesignModal(true);
     }
 
+    const updRequestType = (val) => {
+        setRequestType(val);
+    }
+
     useEffect(() => {
         listenRequests(undefined, requestType, tabList[activeTabIndex].id, undefined, data => setRequestList(data));
     }, [activeTabIndex, requestType]);
 
-    const updRequestType = (val) => {
-        setRequestType(val);
+    const handleScroll = () => {
+        if (lastRef.current) {
+            const { top } = lastRef.current?.getBoundingClientRect();
+            const vpHeight = window.innerHeight; // Viewport height
+            if (top < vpHeight) {
+                console.log('apareció el tacuazin');
+            }
+        }
+        /*const body = document.body;
+         const html = document.documentElement;
+         const offsetY = window.scrollY; // Scrolled height
+         const vpHeight = window.innerHeight; // Viewport height
+ 
+         const totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
+             html.clientHeight, html.scrollHeight, html.offsetHeight);
+ 
+         if ((totalHeight - (offsetY + vpHeight)) <= 20) {
+             //console.log('aki')
+         }*/
     }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, []);
 
     return (
         <div>
@@ -51,10 +78,10 @@ const Admin = () => {
                 </section>
                 <section className='container-xl section'>
                     <Pestanas cargando={false} indice={activeTabIndex} seleccionar={setActiveTabIndex} data={tabList.map(e => e.name)}>
-                        <div className='tab-content'>
+                        <div classes='tab-content'>
                             {
                                 requestList.map(request => (
-                                    <RequestCard key={request.id} data={request} select={openDesignModal} />
+                                    <RequestCard ref={lastRef} key={request.id} data={request} select={openDesignModal} />
                                 ))
                             }
                         </div>
