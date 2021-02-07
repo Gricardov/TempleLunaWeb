@@ -11,10 +11,15 @@ export const saveRequest = async (id, object) => {
         { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
 }
 
-export const getRequests = async (workerId, type, status, limit = 10) => {
+export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
+
+    if (startAfter) {
+        request = request.startAfter(startAfter);
+    }
+
     if (workerId) {
-        request.where('takenBy', workerId);
+        request = request.where('takenBy', workerId);
     }
     return request.limit(limit).get()
         .then(qsn => {
@@ -28,7 +33,7 @@ export const getRequests = async (workerId, type, status, limit = 10) => {
         });;
 }
 
-export const listenRequests = (workerId, type, status, limit = 10, callback) => {
+/*export const listenRequests = (workerId, type, status, limit = 10, callback) => {
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
     if (workerId) {
         request.where('takenBy', workerId);
@@ -38,7 +43,7 @@ export const listenRequests = (workerId, type, status, limit = 10, callback) => 
         qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
         callback(list);
     });
-}
+}*/
 
 // Sesión
 export const login = async (email, password) => {
