@@ -291,6 +291,14 @@ p {
   background-color: #3DE58D;
 }
 
+.button-red {
+  background-color: #E53D54;
+}
+
+.button-blue {
+  background-color: #3d88e5;
+}
+
 .button-light-purple {
   background-color: #b6b0f1;
 }
@@ -651,4 +659,64 @@ p {
 
 .tab-content {
   padding: .5rem;
+}
+
+.sample-design-detail {
+  display: block;
+  max-height: 350px;
+  border-radius: 10px;
+  margin: 0 auto;
+  transition: all 200ms ease-in-out;
+}
+
+.sample-design-detail:hover {
+  transform: scale(1.1);
+}
+
+/*Footer container for cards and modals*/
+
+.footer-card-container {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .footer-card-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.footer-card-container .button-option-request {
+  font-size: 1.8rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .footer-card-container .button-option-request {
+    padding: .6rem 3rem;
+    width: auto;
+  }
+}
+
+.footer-card-container .button-option-request .icon {
+  margin-right: .6rem;
+}
+
+.footer-card-container {
+  margin-top: auto;
+}
+
+@media (min-width: 768px) {
+  .footer-card-container .button-container {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer-card-container .button-container .button {
+    margin-right: 2rem;
+  }
+  .footer-card-container .button-container .button:last-of-type {
+    margin-right: 0;
+  }
 }

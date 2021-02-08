@@ -344,7 +344,7 @@ const Solicitud = () => {
                                                         <input type="file" onChange={selectSample} accept="image/*" ref={refBoceto} className='d-none' id="flBoceto" />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="chkPortafolio">El artista podrá usar el diseño final para promocionar su propio portafolio</label>
+                                                        <label htmlFor="chkPortafolio">El artista podrá usar el diseño final en su propio portafolio.</label>
                                                     </div>
                                                 </div>
                                             </StepManager>

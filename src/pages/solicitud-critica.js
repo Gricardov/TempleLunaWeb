@@ -280,8 +280,8 @@ const Solicitud = () => {
                                                         <label htmlFor="txtAcerca">En general ¿De qué trata tu obra?</label>
                                                         <textarea minLength="1" maxLength="1000" rows="4" value={about} onChange={updAbout} id="txtAcerca" placeholder="Ejemplo: Mi obra trata sobre las ocurrencias vividas con mi primer amor y el dolor causado por su posterior traición..."></textarea>                                                    </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtIntencion">¿Qué deseas transmitir al lector?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Deseo transmitir misterio, por medio de una historia ambientada en una época medieval..."></textarea>
+                                                        <label htmlFor="txtIntencion">¿Qué intención deseas transmitir?</label>
+                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Deseo transmitir miedo e incertidumbre, por medio de una historia ambientada en una pandemia mundial..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
                                                         <label htmlFor="txtLink">¿Qué puntos tocamos en la crítica?</label>
@@ -305,7 +305,7 @@ const Solicitud = () => {
                                                         }
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="chkPortafolio">El crítico podrá usar el trabajo final para promocionar su propio portafolio</label>
+                                                        <label htmlFor="chkPortafolio">Si tu obra es muy larga, el crítico acordará contigo hasta donde llegará. El artista podrá usar la crítica en su propio portafolio.</label>
                                                     </div>
                                                 </div>
                                             </StepManager>

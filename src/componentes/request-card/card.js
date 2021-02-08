@@ -18,12 +18,12 @@ const Card = React.forwardRef(({ data, select }, ref) => (
                 {data.intention}
             </p>
         </div>
-        <div className='footer-container'>
+        <div className='footer-card-container'>
             <div className='button-container'>
                 <button onClick={() => select(data)} className='button button-green button-option-request'>
-                    <FontAwesomeIcon color={'#fff'} icon={faEye} className='eye-icon' />
+                    <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
                         Ver
-                    </button>
+                </button>
             </div>
         </div>
     </div>

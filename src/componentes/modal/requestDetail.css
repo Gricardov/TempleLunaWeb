@@ -2,7 +2,8 @@
     position: fixed;
     border-radius: 10px;
     width: 90%;
-    height: 100%;
+    min-height: 200px;
+    height: calc(100vh - 6rem);
     overflow-y: auto;
     left: 0;
     right: 0;
@@ -23,11 +24,15 @@
     }
 }
 
-.drawer.open {}
+.modal .footer-modal {
+    margin-top: auto;
+}
 
-.drawer.close {}
-
-.request-modal-container {}
+.request-modal-container {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
 
 .request-modal-container h3 {
     font-size: 2rem;
@@ -131,7 +136,9 @@
 
 .request-modal-container a {
     color: #6392DC;
+    word-break: break-all;
 }
+
 .request-modal-container ul li {
     margin: 0;
     min-height: unset;
@@ -149,3 +156,4 @@
         min-height: unset;
     }
 }
+

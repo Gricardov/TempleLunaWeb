@@ -21,15 +21,17 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
     if (workerId) {
         request = request.where('takenBy', workerId);
     }
-    return request.limit(limit).get()
+    return request.limit(limit + 1).get()
         .then(qsn => {
             let list = [];
             qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
-            return list;
+            const isLast = list.length < limit + 1;
+            if (!isLast) list.pop();
+            return { list, isLast };
         })
         .catch(error => {
             console.log(error);
-            return [];
+            return { list: [] };
         });;
 }
 
