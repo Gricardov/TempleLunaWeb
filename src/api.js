@@ -6,6 +6,15 @@ const auth = firebase.auth();
 const storage = firebase.storage();
 
 // Solicitudes
+
+export const takeRequest = (collection, workerId, requestId) => {
+    let requestRef = firestore.collection(collection).doc(requestId);
+    return requestRef.update({
+        takenBy: workerId,
+        status: 'TAKEN'
+    });
+}
+
 export const saveRequest = async (id, object) => {
     return firestore.collection('solicitudes').doc(id).set(
         { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });

@@ -4,4 +4,3 @@ export const contactTypes = [{ type: 'WSP', icon: 'fab fa-whatsapp' }, { type: '
 
 export const requestTypes = [{ type: 'DISENO', icon: 'fas fa-paint-brush', text: 'Diseños' }, { type: 'CRITICA', icon: 'fas fa-glasses', text: 'Críticas' }];
 export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos' }, { id: 'TOMADO', name: 'En proceso' }, { id: 'TERMINADO', name: 'Listos' }];
-
