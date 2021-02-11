@@ -5,12 +5,12 @@ import Zoom from 'react-reveal/Zoom';
 import { designTypes } from '../../data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faHandPaper, faTimes } from '@fortawesome/free-solid-svg-icons';
-import './requestDetail.css';
+import './modals.css';
 
 const iconSize = 20;
 const color = '#756F86';
 
-const Modal = ({ isOpen, data, close }) => {
+const Modal = ({ isOpen, data, takeRequest, close }) => {
 
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
@@ -44,18 +44,27 @@ const Modal = ({ isOpen, data, close }) => {
         }
         return {};
     }
-    const { icon, text } = getDesignType(data?.designType)
-    return (
-        <div>
+    const { icon, text } = getDesignType(data?.designType);
 
+    const confirm = () => {
+        takeRequest('sdfsdf', data?.id);
+    }
+
+    return (
+        <>
+            <ConfirmationModal
+                isOpen={openConfirmationModal}
+                title='Casi listo'
+                message='Al aceptar, tienes tres días para entregar la crítica o acordar una fecha con la persona interesada. ¿Continuar?'
+                confirm={confirm}
+                close={() => setOpenConfirmationModal(false)} />
             <div className={'overlay overlay-modal ' + styles} onClick={close}>
             </div>
-
             <Zoom bottom collapse when={isOpen}>
                 <div className={'modal ' + styles}>
-                    <div className='request-modal-container'>
+                    <div className='modal-container'>
                         <div className='header-container position-relative'>
-                            <Avatar clases='request-modal-avatar' />
+                            <Avatar clases='modal-avatar' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-1'>{data?.title}</h3>
                                 <p>Ayer a las 5:35 - Expira en 3 días</p>
@@ -106,7 +115,7 @@ const Modal = ({ isOpen, data, close }) => {
                     </div>
                 </div>
             </Zoom>
-        </div>
+        </>
     )
 }
 

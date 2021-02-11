@@ -4,7 +4,7 @@ import Zoom from 'react-reveal/Zoom';
 import { critiquePoints } from '../../data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faHandPaper, faTimes } from '@fortawesome/free-solid-svg-icons';
-import './requestDetail.css';
+import './modals.css';
 
 const Modal = ({ isOpen, data, close }) => {
 
@@ -45,9 +45,9 @@ const Modal = ({ isOpen, data, close }) => {
             </div>
             <Zoom bottom collapse when={isOpen}>
                 <div className={'modal ' + styles}>
-                    <div className='request-modal-container'>
+                    <div className='modal-container'>
                         <div className='header-container position-relative'>
-                            <Avatar clases='request-modal-avatar' />
+                            <Avatar clases='modal-avatar' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-1'>{data?.title}</h3>
                                 <p>Ayer a las 5:35 - Expira en 3 días</p>

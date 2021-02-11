@@ -9,7 +9,7 @@ import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
-import { getRequests } from '../api';
+import { getRequests, takeRequest } from '../api';
 
 const override = css`
   display: block;
@@ -83,6 +83,13 @@ const Admin = () => {
         }
     }
 
+    const confirmRequest = (workerId, requestId) => {
+        takeRequest('solicitudes', workerId, requestId)
+            .then(data => {
+                alert('Listo')
+            })
+    }
+
     useEffect(() => {
         requestData(true);
     }, [activeTabIndex, requestType]);
@@ -90,7 +97,11 @@ const Admin = () => {
     return (
         <div>
             <Navbar />
-            <DesignDetailModal data={registry} isOpen={isOpenDesignModal} close={() => setOpenDesignModal(false)} />
+            <DesignDetailModal
+                data={registry}
+                isOpen={isOpenDesignModal}
+                close={() => setOpenDesignModal(false)}
+                takeRequest={confirmRequest} />
             <CritiqueDetailModal data={registry} isOpen={isOpenCritiqueModal} close={() => setOpenCritiqueModal(false)} />
 
             <main className='main-body below-navbar colored-background'>

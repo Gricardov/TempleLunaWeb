@@ -20,6 +20,20 @@ export const saveRequest = async (id, object) => {
         { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
 }
 
+export const getRequest = async (requestId) => {
+    return firestore.collection('solicitudes').doc(requestId).get()
+        .then(doc => {
+            if (doc.exists) {
+                return { data: doc.data() }
+            } else {
+                return { error: 'No existe una solicitud con ese id' }
+            }
+        })
+        .catch(error => {
+            return { error }
+        })
+}
+
 export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
 

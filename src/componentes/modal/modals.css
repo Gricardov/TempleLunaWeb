@@ -28,27 +28,27 @@
     margin-top: auto;
 }
 
-.request-modal-container {
+.modal-container {
     display: flex;
     min-height: 100%;
     flex-direction: column;
 }
 
-.request-modal-container h3 {
+.modal-container h3 {
     font-size: 2rem;
 }
 
-.request-modal-container h4 {
+.modal-container h4 {
     font-size: 1.8rem;
 }
 
 @media (min-width: 768px) {
-    .request-modal-container h4 {
+    .modal-container h4 {
         font-size: 2rem;
     }
 }
 
-.request-modal-container .header-container .close-icon {
+.modal-container .header-container .close-icon {
     position: absolute;
     color: #646D7B;
     top: 0;
@@ -57,18 +57,18 @@
     cursor: pointer;
 }
 
-.request-modal-container .header-container h3 {
+.modal-container .header-container h3 {
     margin: 0;
 }
 
 @media (min-width: 768px) {
-    .request-modal-container .header-container h3 {
+    .modal-container .header-container h3 {
         margin: 0;
         font-size: 2.5rem;
     }
 }
 
-.request-modal-container .header-container p {
+.modal-container .header-container p {
     margin: 0;
     font-size: 1.4rem;
     font-family: 'SegoeUI';
@@ -77,27 +77,27 @@
 }
 
 @media (min-width: 768px) {
-    .request-modal-container .header-container p {
+    .modal-container .header-container p {
         font-size: 1.5rem;
     }
 }
 
-.request-modal-container .header-container {
+.modal-container .header-container {
     text-align: center;
 }
 
 @media (min-width: 768px) {
-    .request-modal-container .header-container {
+    .modal-container .header-container {
         display: flex;
         text-align: left;
     }
 }
 
-.request-modal-container .header-container .title-container {
+.modal-container .header-container .title-container {
     flex: 1;
 }
 
-.request-modal-container .header-container .request-avatar {
+.modal-container .header-container .request-avatar {
     display: block;
     margin: 0 auto;
     width: 6rem;
@@ -105,13 +105,13 @@
 }
 
 @media (min-width: 768px) {
-    .request-modal-container .header-container .request-avatar {
+    .modal-container .header-container .request-avatar {
         width: 6rem;
         height: 6rem;
     }
 }
 
-.request-modal-avatar {
+.modal-avatar {
     display: block;
     margin: 0 auto;
     width: 6rem;
@@ -119,14 +119,14 @@
 }
 
 @media (min-width: 768px) {
-    .request-modal-avatar {
+    .modal-avatar {
         width: 7.5rem;
         height: 7.5rem;
         margin-right: 1rem;
     }
 }
 
-.request-modal-container p, .request-modal-container a, .request-modal-container ul li {
+.modal-container p, .modal-container a, .modal-container ul li {
     margin: 0;
     color: #646D7B;
     font-size: 1.6rem;
@@ -134,26 +134,42 @@
     margin-bottom: 1.5rem;
 }
 
-.request-modal-container a {
+.modal-container a {
     color: #6392DC;
     word-break: break-all;
 }
 
-.request-modal-container ul li {
+.modal-container ul li {
     margin: 0;
     min-height: unset;
 }
 
 @media (min-width: 768px) {
-    .request-modal-container p, .request-modal-container a, .request-modal-container ul li {
+    .modal-container p, .modal-container a, .modal-container ul li {
         min-height: 4.4rem;
         margin-top: .8rem;
         font-size: 2rem;
         margin-bottom: 1.6rem;
     }
-    .request-modal-container ul li {
+    .modal-container ul li {
         margin: 0;
         min-height: unset;
     }
 }
 
+/*Confirmation modal*/
+
+.modal-fit {
+    height: auto;
+}
+
+.modal-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.confirmation-modal-container {
+    z-index: 50;
+    position: relative
+}
