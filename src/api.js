@@ -11,7 +11,8 @@ export const takeRequest = (collection, workerId, requestId) => {
     let requestRef = firestore.collection(collection).doc(requestId);
     return requestRef.update({
         takenBy: workerId,
-        status: 'TAKEN'
+        status: 'TAKEN',
+        takenAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 }
 
