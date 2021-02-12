@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import './tabs.css'
 
@@ -26,7 +26,7 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
             {
                 loading
                     ?
-                    'Cargando...'
+                    loader
                     :
                     <InfiniteScroll
                         className="tab-content"

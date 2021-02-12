@@ -108,6 +108,10 @@ p {
   }
 }
 
+.mt-0 {
+  margin-top: 0rem !important;
+}
+
 .mt-1 {
   margin-top: 1rem !important;
 }
@@ -195,6 +199,12 @@ p {
   display: flex !important;
 }
 
+.flex-all-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
@@ -271,7 +281,7 @@ p {
   border-radius: 30px;
   padding: .7rem 3rem;
   color: white;
-  margin-top: .8rem;
+  /*margin-top: .8rem;*/
   box-shadow: 0px 3px 6px #00000029;
   transition: all 100ms ease-in-out;
 }
@@ -282,10 +292,14 @@ p {
 
 @media (min-width: 768px) {
   .button {
-    padding: 1.2rem 3rem;
+    /*padding: 1.2rem 3rem;*/
     font-size: 2rem;
   }
 }
+
+/*.button span {
+  vertical-align: middle;
+}*/
 
 .button-green {
   background-color: #3DE58D;
@@ -343,7 +357,7 @@ p {
 
 /*Trick for React reveal*/
 
-.overlay-modal~div {
+.overlay-modal+div {
   position: absolute;
 }
 
@@ -354,6 +368,10 @@ p {
 
 .overlay.close {
   background: none;
+  pointer-events: none;
+}
+
+.modal.close, .overlay-modal.close {
   pointer-events: none;
 }
 
@@ -661,6 +679,11 @@ p {
   padding: .5rem;
 }
 
+.text-empty {
+  font-family: LilitaOne;
+  font-weight: 100;
+}
+
 .sample-design-detail {
   display: block;
   max-height: 350px;
@@ -686,19 +709,25 @@ p {
   }
 }
 
-.footer-card-container .button-option-request {
+.button-option-request {
+  margin-bottom: 1rem;
   font-size: 1.8rem;
   width: 100%;
 }
 
+.button-option-request:last-of-type {
+  margin-bottom: 0;
+}
+
 @media (min-width: 768px) {
-  .footer-card-container .button-option-request {
+  .button-option-request {
+    margin: 0;
     padding: .6rem 3rem;
     width: auto;
   }
 }
 
-.footer-card-container .button-option-request .icon {
+.button-option-request .icon {
   margin-right: .6rem;
 }
 
@@ -718,5 +747,18 @@ p {
   }
   .footer-card-container .button-container .button:last-of-type {
     margin-right: 0;
+  }
+}
+
+.img-vacio {
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .img-vacio {
+    height: 300px;
   }
 }

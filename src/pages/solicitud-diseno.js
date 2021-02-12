@@ -20,6 +20,7 @@ const maxFileSize = 5242880;
 
 const overrideSpinnerInline = css`
   display: inline-block;
+  vertical-align: middle;
 `;
 
 const Solicitud = () => {
@@ -116,10 +117,10 @@ const Solicitud = () => {
         navigateTo(activeIndex + 1);
     }
 
-    const send = (e) => {
+    const send = async (e) => {
         e.preventDefault();
         if (!checkErrors()) {
-            const generatedId = getGeneratedId('solicitudes');
+            const generatedId = await getGeneratedId('solicitudes');
             setLoading(true);
             if (imgSample) {
                 uploadImage('solicitud-diseno', generatedId, imgSample)
@@ -159,7 +160,7 @@ const Solicitud = () => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);
-        })
+        });
     }
 
     const checkErrors = () => {

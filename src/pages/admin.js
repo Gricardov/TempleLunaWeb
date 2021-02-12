@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DesignDetailModal from '../componentes/modal/designDetail';
@@ -7,9 +7,11 @@ import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
+import ImgVacio from "../img/reading-sitting.svg";
+import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
-import { getRequests, takeRequest } from '../api';
+import { getRequests, getRequest, takeRequest } from '../api';
 
 const override = css`
   display: block;
@@ -31,8 +33,16 @@ const Admin = () => {
     const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
     const [registry, setRegistry] = useState(null);
 
+    const [takingRequest, setTakingRequest] = useState(false);
+    const [succesfulRequestTake, setSuccesfulRequestTake] = useState(false);
+
+    const { logged } = useContext(AuthContext);
+
     const openModal = (request) => {
         setRegistry(request);
+        setTakingRequest(false);
+        setSuccesfulRequestTake(false);
+
         switch (request.type) {
             case 'CRITICA':
                 setOpenCritiqueModal(true);
@@ -83,11 +93,29 @@ const Admin = () => {
         }
     }
 
-    const confirmRequest = (workerId, requestId) => {
-        takeRequest('solicitudes', workerId, requestId)
-            .then(data => {
-                alert('Listo')
-            })
+    const confirmRequest = (requestId) => {
+        if (logged && logged.uid) {
+            setTakingRequest(true);
+            takeRequest('solicitudes', logged.uid, requestId)
+                .then(_ => {
+                    getRequest(requestId).then(({ data, error }) => {
+                        setTakingRequest(false);
+                        if (!error) {
+                            setRegistry(data); // Establezco el nuevo registro actualizado
+                            setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
+                            setSuccesfulRequestTake(true);
+                        } else {
+                            setSuccesfulRequestTake(false);
+                            alert('Hubo un error al actualizar la solicitud. Recargue e intente otra vez');
+                        }
+                    })
+                })
+                .catch(error => {
+                    alert('Hubo un error al tomar esta solicitud. Intenta otra vez');
+                    setTakingRequest(false);
+                    setSuccesfulRequestTake(true);
+                })
+        }
     }
 
     useEffect(() => {
@@ -101,13 +129,21 @@ const Admin = () => {
                 data={registry}
                 isOpen={isOpenDesignModal}
                 close={() => setOpenDesignModal(false)}
+                takingRequest={takingRequest}
+                succesfulRequestTake={succesfulRequestTake}
                 takeRequest={confirmRequest} />
-            <CritiqueDetailModal data={registry} isOpen={isOpenCritiqueModal} close={() => setOpenCritiqueModal(false)} />
+            <CritiqueDetailModal
+                data={registry}
+                isOpen={isOpenCritiqueModal}
+                close={() => setOpenCritiqueModal(false)}
+                takingRequest={takingRequest}
+                succesfulRequestTake={succesfulRequestTake}
+                takeRequest={confirmRequest} />
 
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
-                        <h2 className='m-0'>¿Cuál tomamos hoy?</h2>
+                        <h2 className='m-0'>¿Qué eliges para hoy?</h2>
                         <div className='dropdown-container'>
                             <DropdownImage
                                 stretch
@@ -118,7 +154,7 @@ const Admin = () => {
                 </section>
                 <section className='container-xl section'>
                     <Tabs
-                        loading={false}
+                        loading={loadingRequestList}
                         requestList={requestList}
                         requestMoreData={requestMoreData}
                         hasMore={!isLast}
@@ -127,9 +163,18 @@ const Admin = () => {
                         select={setActiveTabIndex}
                         tabs={tabList.map(e => e.name)}>
                         <div>
-                            {requestList.map(request => (
-                                <RequestCard key={request.id} data={request} select={openModal} />
-                            ))}
+                            {
+                                requestList && requestList.length > 0
+                                    ?
+                                    requestList.map(request => (
+                                        <RequestCard key={request.id} data={request} select={openModal} />
+                                    ))
+                                    :
+                                    <div>
+                                        <img src={ImgVacio} className="img-vacio" alt="img-vacio" />
+                                        <h2 className="text-align-center m-0 text-empty">Oops! aún nada por aquí</h2>
+                                    </div>
+                            }
                         </div>
                     </Tabs>
                 </section>

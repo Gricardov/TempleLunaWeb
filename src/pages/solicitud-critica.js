@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdown-image';
-import ImgLeyendo from '../img/sitting-reading.svg';
 import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
+import ImgLeyendo from '../img/sitting-reading.svg';
 import { Link } from 'react-router-dom';
 import { critiquePoints } from '../data/data';
 import { getGeneratedId, saveRequest } from '../api';
@@ -21,6 +21,7 @@ const chkPoints = critiquePoints;
 
 const overrideSpinnerInline = css`
   display: inline-block;
+  vertical-align: middle;
 `;
 
 const Solicitud = () => {
@@ -97,10 +98,10 @@ const Solicitud = () => {
         navigateTo(activeIndex + 1);
     }
 
-    const send = (e) => {
+    const send = async (e) => {
         e.preventDefault();
         if (!checkErrors()) {
-            const generatedId = getGeneratedId('solicitudes');
+            const generatedId = await getGeneratedId('solicitudes');
             setLoading(true);
             saveChanges(generatedId);
         }
@@ -126,7 +127,7 @@ const Solicitud = () => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);
-        })
+        });
     }
 
     const checkErrors = () => {

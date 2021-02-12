@@ -7,11 +7,11 @@ const storage = firebase.storage();
 
 // Solicitudes
 
-export const takeRequest = (collection, workerId, requestId) => {
+export const takeRequest = async (collection, workerId, requestId) => {
     let requestRef = firestore.collection(collection).doc(requestId);
     return requestRef.update({
         takenBy: workerId,
-        status: 'TAKEN',
+        status: 'TOMADO',
         takenAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 }
@@ -25,7 +25,7 @@ export const getRequest = async (requestId) => {
     return firestore.collection('solicitudes').doc(requestId).get()
         .then(doc => {
             if (doc.exists) {
-                return { data: doc.data() }
+                return { data: { ...doc.data(), id: doc.id } }
             } else {
                 return { error: 'No existe una solicitud con ese id' }
             }
@@ -136,6 +136,6 @@ export const uploadImage = async (ruta, id, archivo) => {
 }
 
 // Funciones firestore
-export const getGeneratedId = (collection) => {
+export const getGeneratedId = async (collection) => {
     return firestore.collection(collection).doc().id;
 }

@@ -1,16 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ConfirmationModal from './confirmationModal';
+import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
 import { designTypes } from '../../data/data';
+import { AuthContext } from '../../context/AuthContext';
+import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faHandPaper, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faHandPaper, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './modals.css';
 
 const iconSize = 20;
 const color = '#756F86';
 
-const Modal = ({ isOpen, data, takeRequest, close }) => {
+const overrideSpinnerInline = css`
+  display: inline-block;
+  margin-left: .6rem;
+  vertical-align: middle;
+`;
+
+const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake, close }) => {
+
+    const { logged } = useContext(AuthContext);
 
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
 
@@ -47,7 +58,8 @@ const Modal = ({ isOpen, data, takeRequest, close }) => {
     const { icon, text } = getDesignType(data?.designType);
 
     const confirm = () => {
-        takeRequest('sdfsdf', data?.id);
+        setOpenConfirmationModal(false);
+        takeRequest(data?.id);
     }
 
     return (
@@ -102,14 +114,41 @@ const Modal = ({ isOpen, data, takeRequest, close }) => {
                         </div>
                         <div className="footer-card-container">
                             <div className='button-container'>
-                                <button onClick={() => setOpenConfirmationModal(true)} className='button button-blue button-option-request'>
-                                    <FontAwesomeIcon color={'#fff'} icon={faHandPaper} className='icon' />
-                                    Tomar pedido
-                                </button>
-                                <button onClick={close} className='button button-red button-option-request'>
-                                    <FontAwesomeIcon color={'#fff'} icon={faTimes} className='icon' />
-                                    Cerrar
-                                </button>
+                                {
+                                    takingRequest
+                                        ?
+                                        <button onClick={() => { }} className='button button-blue button-option-request'>
+                                            Cargando
+                                                {' '}
+                                            <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
+                                        </button>
+                                        :
+                                        <>
+                                            <>
+                                                {
+                                                    data?.status == 'DISPONIBLE'
+                                                        ?
+                                                        <button onClick={() => setOpenConfirmationModal(true)} className='button button-blue button-option-request'>
+                                                            <FontAwesomeIcon color={'#fff'} icon={faHandPaper} className='icon' />
+                                                            Tomar pedido
+                                                        </button>
+                                                        :
+                                                        data?.status == 'TOMADO' && data?.takenBy == logged.uid
+                                                            ?
+                                                            <button onClick={() => { }} className='button button-green button-option-request'>
+                                                                <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
+                                                            Iniciar diseño
+                                                        </button>
+                                                            :
+                                                            null
+                                                }
+                                            </>
+                                            <button onClick={close} className='button button-red button-option-request'>
+                                                <FontAwesomeIcon color={'#fff'} icon={faTimes} className='icon' />
+                                                Cerrar
+                                            </button>
+                                        </>
+                                }
                             </div>
                         </div>
                     </div>
