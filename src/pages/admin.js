@@ -64,7 +64,7 @@ const Admin = () => {
     const requestMoreData = () => {
         if (!loadingRequestList) {
             setLoadingRequestList(true);
-            getRequests(undefined, requestType, tabList[activeTabIndex].id, getLastElement('updatedAt'), limit)
+            getRequests(logged.uid, requestType, tabList[activeTabIndex].id, getLastElement('updatedAt'), limit)
                 .then(data => {
                     setLoadingRequestList(false);
                     setIsLast(data.isLast);
@@ -80,7 +80,7 @@ const Admin = () => {
     const requestData = () => {
         if (!loadingRequestList) {
             setLoadingRequestList(true);
-            getRequests(undefined, requestType, tabList[activeTabIndex].id, undefined, limit)
+            getRequests(logged.uid, requestType, tabList[activeTabIndex].id, undefined, limit)
                 .then(data => {
                     setLoadingRequestList(false);
                     setIsLast(data.isLast);

@@ -43,7 +43,7 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
     }
 
     if (workerId) {
-        request = request.where('takenBy', workerId);
+        request = request.where('takenBy', '==', workerId);
     }
     return request.limit(limit + 1).get()
         .then(qsn => {
