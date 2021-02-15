@@ -7,7 +7,6 @@ import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
-import ImgVacio from "../img/reading-sitting.svg";
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
@@ -28,7 +27,8 @@ const Admin = () => {
     const [requestType, setRequestType] = useState('DISENO');
     const [requestList, setRequestList] = useState([]);
     const [isLast, setIsLast] = useState(false);
-    const [loadingRequestList, setLoadingRequestList] = useState(false);
+    const [initialLoading, setInitialLoading] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false);
     const [isOpenDesignModal, setOpenDesignModal] = useState(false);
     const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
     const [registry, setRegistry] = useState(null);
@@ -61,36 +61,46 @@ const Admin = () => {
         return requestList[requestList.length - 1] ? requestList[requestList.length - 1][field] : undefined;
     }
 
+    const getUidBasedOnRequestStatus = (reqStatus) => { // Las solicitudes marcadas como disponibles no necesitan filtro de id usuario
+        if (reqStatus == 'DISPONIBLE') {
+            return undefined;
+        } else {
+            return logged.uid;
+        }
+    }
+
     const requestMoreData = () => {
-        if (!loadingRequestList) {
-            setLoadingRequestList(true);
-            getRequests(logged.uid, requestType, tabList[activeTabIndex].id, getLastElement('updatedAt'), limit)
+        if (!initialLoading && !loadingMore) {
+            setLoadingMore(true);
+            const requestStatus = tabList[activeTabIndex].id;
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, getLastElement('updatedAt'), limit)
                 .then(data => {
-                    setLoadingRequestList(false);
+                    setLoadingMore(false);
                     setIsLast(data.isLast);
                     setRequestList((state) => ([...state, ...data.list]));
                 })
                 .catch(error => {
-                    setLoadingRequestList(false);
+                    setLoadingMore(false);
                     alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
                 });
         }
     }
 
     const requestData = () => {
-        if (!loadingRequestList) {
-            setLoadingRequestList(true);
-            getRequests(logged.uid, requestType, tabList[activeTabIndex].id, undefined, limit)
+        //if (!initialLoading && !loadingMore) {
+            setInitialLoading(true);
+            const requestStatus = tabList[activeTabIndex].id;
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, undefined, limit)
                 .then(data => {
-                    setLoadingRequestList(false);
+                    setInitialLoading(false);
                     setIsLast(data.isLast);
                     setRequestList(data.list);
                 })
                 .catch(error => {
-                    setLoadingRequestList(false);
+                    setInitialLoading(false);
                     alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
                 });
-        }
+        //}
     }
 
     const confirmRequest = (requestId) => {
@@ -119,7 +129,7 @@ const Admin = () => {
     }
 
     useEffect(() => {
-        requestData(true);
+        requestData();
     }, [activeTabIndex, requestType]);
 
     return (
@@ -154,26 +164,20 @@ const Admin = () => {
                 </section>
                 <section className='container-xl section'>
                     <Tabs
-                        loading={loadingRequestList}
+                        initialLoading={initialLoading}
+                        loadingMore={loadingMore}
                         requestList={requestList}
                         requestMoreData={requestMoreData}
                         hasMore={!isLast}
-                        loader={<PuffLoader color={'#8B81EC'} loading={loadingRequestList} css={override} size={100} />}
+                        loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
                         select={setActiveTabIndex}
                         tabs={tabList.map(e => e.name)}>
                         <div>
                             {
-                                requestList && requestList.length > 0
-                                    ?
-                                    requestList.map(request => (
-                                        <RequestCard key={request.id} data={request} select={openModal} />
-                                    ))
-                                    :
-                                    <div>
-                                        <img src={ImgVacio} className="img-vacio" alt="img-vacio" />
-                                        <h2 className="text-align-center m-0 text-empty">Oops! aún nada por aquí</h2>
-                                    </div>
+                                requestList.map(request => (
+                                    <RequestCard key={request.id} data={request} select={openModal} />
+                                ))
                             }
                         </div>
                     </Tabs>

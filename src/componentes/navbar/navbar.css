@@ -17,6 +17,7 @@
 @media (min-width: 768px) {
     .container-navbar .navbar-nav {
         display: flex;
+        align-items: center;
     }
 }
 
@@ -26,12 +27,17 @@
     padding: 1.5rem 0 1.5rem 0;
     color: white;
     font-size: 2rem;
-    margin-right: 5rem;
+    margin-left: 4rem;
 }
 
-.navbar-nav .btn-nav:last-of-type {
-    margin-right: 0;
+.navbar-nav .btn-nav:hover {
+    color: #ded9ff;
+    cursor: pointer;
 }
+
+/*.navbar-nav .btn-nav:last-of-type {
+    margin-right: 0;
+}*/
 
 .navbar-scrolled {
     background-color: #8B81EC;
@@ -77,4 +83,49 @@
     .main-navbar .img-sanguchito {
         display: none;
     }
+}
+
+.main-navbar .img-profile-navbar {
+    width: 50px;
+    height: 50px;
+    margin-left: 1rem;
+}
+
+.main-navbar .container-submenu-navbar {
+    position: absolute;
+    top: 80%;
+    right: 13%;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    background: #fff;
+    box-shadow: 0px 3px 6px #00000029;
+    width: 150px;
+    text-align: right;
+}
+
+.main-navbar .container-submenu-navbar.close {
+    display: none;
+}
+
+.main-navbar .container-submenu-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-navbar .container-submenu-navbar ul li {
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.main-navbar .container-submenu-navbar ul li:hover {
+    background-color: #ded9ff;
+    color: white;
+}
+
+.main-navbar .container-submenu-navbar ul li:last-of-type {
+    margin-bottom: 0;
 }

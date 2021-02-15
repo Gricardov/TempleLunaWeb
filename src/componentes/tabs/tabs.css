@@ -60,3 +60,16 @@
     transition: left .2s ease;
     -webkit-transition: left .2s ease;
 }
+
+.img-vacio {
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .img-vacio {
+      height: 300px;
+    }
+  }

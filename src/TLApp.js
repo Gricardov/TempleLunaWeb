@@ -4,6 +4,8 @@ import Login from './pages/login'
 import Admin from './pages/admin'
 import SolicitudCritica from './pages/solicitud-critica'
 import SolicitudDiseno from './pages/solicitud-diseno'
+import PreparacionCritica from './pages/prep_critica'
+import PreparacionDiseno from './pages/prep_diseno'
 import Drawer from './componentes/drawer'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './componentes/customRouter/privateRoute'
@@ -22,6 +24,8 @@ const App = () => {
           <PublicRoute exact path="/sol_diseno" component={SolicitudDiseno} />
           <PublicRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/admin" component={Admin} />
+          <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
+          <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />
           <Redirect to="/" />
         </Switch>
       </Router>

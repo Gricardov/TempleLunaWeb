@@ -91,10 +91,10 @@ const Solicitud = () => {
 
     const selectSample = (e) => {
         e.preventDefault();
-        const archivo = e.target.files[0];
-        if (archivo) {
-            if (archivo.size <= maxFileSize) {
-                setImgSample(archivo);
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size <= maxFileSize) {
+                setImgSample(file);
             } else {
                 alert('La imagen debe ser menor a 5MB')
             }
@@ -120,8 +120,8 @@ const Solicitud = () => {
     const send = async (e) => {
         e.preventDefault();
         if (!checkErrors()) {
-            const generatedId = await getGeneratedId('solicitudes');
             setLoading(true);
+            const generatedId = await getGeneratedId('solicitudes');
             if (imgSample) {
                 uploadImage('solicitud-diseno', generatedId, imgSample)
                     .then(url => {
@@ -375,7 +375,7 @@ const Solicitud = () => {
                                                             <button onClick={send} className='button button-green justify-self-right'>
                                                                 <span className='d-none d-md-inline'>
                                                                     Enviar
-                                                    </span>
+                                                                </span>
                                                                 {' '}
                                                                 <FontAwesomeIcon icon={faCheck} size='xl' />
                                                             </button>
@@ -383,7 +383,7 @@ const Solicitud = () => {
                                                             <button onClick={next} className='button button-green justify-self-right'>
                                                                 <span className='d-none d-md-inline'>
                                                                     Siguiente
-                                                    </span>
+                                                                </span>
                                                                 {' '}
                                                                 <FontAwesomeIcon icon={faAngleRight} size='xl' />
                                                             </button>

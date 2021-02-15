@@ -10,11 +10,11 @@ export const useOutsideListener = (ref) => {
 
     useEffect(() => {
         /**
-         * Alert if clicked on outside of element
-         */
+       * Alert if clicked on outside of element
+       */
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                outsideListener.current.next();
+                outsideListener.current.next(event);
             }
         }
 

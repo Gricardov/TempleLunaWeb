@@ -3,6 +3,8 @@ import ConfirmationModal from './confirmationModal';
 import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
+import { contactTypes } from '../../data/data';
+import { useHistory } from 'react-router-dom';
 import { designTypes } from '../../data/data';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
@@ -24,6 +26,16 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
     const { logged } = useContext(AuthContext);
 
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+
+    const history = useHistory();
+
+    const getMessengerTypeName = (type) => {
+        const messengerType = contactTypes.find(c => c.type == type);
+        if (messengerType) {
+            return messengerType.name;
+        }
+        return '';
+    }
 
     useEffect(() => {
         if (isOpen) {
@@ -61,6 +73,8 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
         setOpenConfirmationModal(false);
         takeRequest(data?.id);
     }
+
+    const isTakenByMe = data?.status == 'TOMADO' && data?.takenBy == logged.uid;
 
     return (
         <>
@@ -111,6 +125,16 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                             }
                             <h4>Pseudónimo del autor</h4>
                             <p>{data?.author || 'Sin nombre'}</p>
+                            {
+                                isTakenByMe
+                                &&
+                                <>
+                                    <h4>Datos de contacto</h4>
+                                    <p className="m-0"><b>Nombre:</b> {data?.name}</p>
+                                    <p className="m-0"><b>Contacto:</b> {data?.phone} ({getMessengerTypeName(data?.messengerType)})</p>
+                                    <p className="m-0 mb-2"><b>Correo:</b> {data?.email}</p>
+                                </>
+                            }
                         </div>
                         <div className="footer-card-container">
                             <div className='button-container'>
@@ -133,12 +157,12 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                                                             Tomar pedido
                                                         </button>
                                                         :
-                                                        data?.status == 'TOMADO' && data?.takenBy == logged.uid
+                                                        isTakenByMe
                                                             ?
-                                                            <button onClick={() => { }} className='button button-green button-option-request'>
+                                                            <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
                                                                 <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
                                                             Iniciar diseño
-                                                        </button>
+                                                            </button>
                                                             :
                                                             null
                                                 }

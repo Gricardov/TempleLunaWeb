@@ -10,6 +10,7 @@ const Drawer = () => {
 
     const { logged } = useContext(AuthContext);
     const { isOpen, close } = useContext(DrawerContext);
+
     let history = useHistory();
 
     const logoutUser = (e) => {

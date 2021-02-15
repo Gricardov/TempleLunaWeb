@@ -205,6 +205,11 @@ p {
   justify-content: center;
 }
 
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
 .justify-content-between {
   justify-content: space-between;
 }
@@ -375,6 +380,32 @@ p {
   pointer-events: none;
 }
 
+/*formularios*/
+
+.form-group {
+  margin-bottom: 3.5rem;
+}
+
+.form-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  font-size: 16px;
+  color: #756F86;
+  margin-bottom: .8rem;
+  display: block;
+}
+
+input[type=text], input[type=number], input[type=email], input[type=password], textarea {
+  border: 1px solid #DBE2EA;
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  resize: none;
+}
+
 /*Inicio*/
 
 .section {
@@ -433,7 +464,7 @@ p {
 }
 
 .main-body {
-  min-height: 60vh;
+  min-height: 95vh;
   padding-bottom: 5rem;
   overflow: hidden;
 }
@@ -537,36 +568,12 @@ p {
   transition: all 500ms ease;
 }
 
-.floating-form .form-group {
-  margin-bottom: 3.5rem;
-}
-
-.floating-form label {
-  font-size: 16px;
-  color: #756F86;
-  margin-bottom: .8rem;
-  display: block;
-}
-
-.floating-form input[type=text], .floating-form input[type=number], .floating-form input[type=email], .floating-form input[type=password], .floating-form textarea {
-  border: 1px solid #DBE2EA;
-  border-radius: 5px;
-  padding: 1rem 1.5rem;
-  width: 100%;
-  resize: none;
-}
-
 .cbo-text {
   display: flex;
 }
 
 .cbo-text input[type=text] {
   border-radius: 0 5px 5px 0;
-}
-
-.floating-form .form-buttons-container {
-  display: flex;
-  justify-content: space-between;
 }
 
 .img-fondo-formulario {
@@ -750,15 +757,49 @@ p {
   }
 }
 
-.img-vacio {
-  height: 200px;
-  display: block;
-  margin: 0 auto;
-  margin-top: 2rem;
+/*Preparación solicitud*/
+
+.prep-req-container svg {
+  cursor: pointer;
+}
+
+.prep-req-container h4 {
+  font-size: 1.8rem;
 }
 
 @media (min-width: 768px) {
-  .img-vacio {
-    height: 300px;
+  .prep-req-container h4 {
+    font-size: 2rem;
+  }
+}
+
+.prep-req-container p, .prep-req-container a, .prep-req-container ul li {
+  margin: 0;
+  color: #646D7B;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.prep-req-container a {
+  color: #6392DC;
+  word-break: break-all;
+}
+
+.prep-req-container ul li {
+  margin: 0;
+  min-height: unset;
+}
+
+@media (min-width: 768px) {
+  .prep-req-container p, .prep-req-container a, .prep-req-container ul li {
+    min-height: 4.4rem;
+    margin-top: .8rem;
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
+  }
+  .prep-req-container ul li {
+    margin: 0;
+    min-height: unset;
   }
 }

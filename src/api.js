@@ -1,5 +1,6 @@
 //import 'babel-polyfill';
 import firebase from './firebase';
+import { setProfileStorage } from './helpers/userStorage';
 
 const firestore = firebase.firestore();
 const auth = firebase.auth();
@@ -72,10 +73,33 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
 }*/
 
 // Sesión
+
+export const getProfile = async (uid) => {
+    return firestore.collection('perfiles').doc(uid).get()
+        .then(doc => {
+            if (doc.exists) {
+                return { profile: { ...doc.data() } }
+            } else {
+                return { error: 'No existe un usuario con ese id' }
+            }
+        })
+        .catch(error => {
+            return { error }
+        })
+}
+
 export const login = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password)
-        .then((user) => {
-            return { user };
+        .then(user => {
+            return getProfile(user.user.uid).then(({ profile, error }) => {
+                if (!error) {
+                    setProfileStorage(profile);
+                    return { user };
+                } else {
+                    logout();
+                    return { error: 'No se pudo obtener el perfil' };
+                }
+            })
         })
         .catch(error => {
             let errMessage;
@@ -101,6 +125,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
     return auth.signOut().then(function () {
+        setProfileStorage(null);
         return true;
     }).catch(function (error) {
         console.log(error.message);

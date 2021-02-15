@@ -101,8 +101,8 @@ const Solicitud = () => {
     const send = async (e) => {
         e.preventDefault();
         if (!checkErrors()) {
-            const generatedId = await getGeneratedId('solicitudes');
             setLoading(true);
+            const generatedId = await getGeneratedId('solicitudes');
             saveChanges(generatedId);
         }
     }
@@ -213,7 +213,6 @@ const Solicitud = () => {
                 </section>
                 <section className='container-xl mt-5 position-relative'>
                     <img src={ImgLeyendo} alt='img-fondo' className='img-fondo-formulario' />
-
                     <div className='floating-form'>
                         {
                             success
@@ -279,7 +278,8 @@ const Solicitud = () => {
                                                 <div className='step-3'>
                                                     <div className='form-group'>
                                                         <label htmlFor="txtAcerca">En general ¿De qué trata tu obra?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={about} onChange={updAbout} id="txtAcerca" placeholder="Ejemplo: Mi obra trata sobre las ocurrencias vividas con mi primer amor y el dolor causado por su posterior traición..."></textarea>                                                    </div>
+                                                        <textarea minLength="1" maxLength="1000" rows="4" value={about} onChange={updAbout} id="txtAcerca" placeholder="Ejemplo: Mi obra trata sobre las ocurrencias vividas con mi primer amor y el dolor causado por su posterior traición..."></textarea>
+                                                    </div>
                                                     <div className='form-group'>
                                                         <label htmlFor="txtIntencion">¿Qué intención deseas transmitir?</label>
                                                         <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Deseo transmitir miedo e incertidumbre, por medio de una historia ambientada en una pandemia mundial..."></textarea>

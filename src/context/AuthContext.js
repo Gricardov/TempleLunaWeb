@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import firebase from '../firebase';
+import { setProfileStorage } from '../helpers/userStorage';
+
 const auth = firebase.auth();
 
 export const AuthContext = createContext();
@@ -13,6 +15,7 @@ export const AuthProvider = ({ children }) => {
             if (user) {
                 setLogged(user);
             } else {
+                setProfileStorage(null);
                 setLogged(null);
             }
             setLoading(false);
