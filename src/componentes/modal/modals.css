@@ -57,6 +57,10 @@
     cursor: pointer;
 }
 
+.modal-container .header-container .close-icon:hover {
+    color: #959595;
+}
+
 .modal-container .header-container h3 {
     margin: 0;
 }

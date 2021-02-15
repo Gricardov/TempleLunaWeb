@@ -160,6 +160,14 @@ p {
   margin-left: 1rem !important;
 }
 
+.pl-1 {
+  padding-left: 1rem !important;
+}
+
+.pr-1 {
+  padding-right: 1rem !important;
+}
+
 .mr-1 {
   margin-right: 1rem !important;
 }
@@ -288,7 +296,7 @@ p {
   color: white;
   /*margin-top: .8rem;*/
   box-shadow: 0px 3px 6px #00000029;
-  transition: all 100ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .button:active {
@@ -310,16 +318,32 @@ p {
   background-color: #3DE58D;
 }
 
+.button-green:hover {
+  background-color: #82e9b4;
+}
+
 .button-red {
   background-color: #E53D54;
+}
+
+.button-red:hover {
+  background-color: #e06e7d;
 }
 
 .button-blue {
   background-color: #3d88e5;
 }
 
+.button-blue:hover {
+  background-color: #70aaf0;
+}
+
 .button-light-purple {
   background-color: #b6b0f1;
+}
+
+.button-light-purple:hover {
+  background-color: #cecceb;
 }
 
 .button-group-left {
@@ -761,6 +785,10 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .prep-req-container svg {
   cursor: pointer;
+}
+
+.prep-req-container svg:hover {
+  color: #959595;
 }
 
 .prep-req-container h4 {

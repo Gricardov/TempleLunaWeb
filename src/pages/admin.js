@@ -10,7 +10,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
-import { getRequests, getRequest, takeRequest } from '../api';
+import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
 
 const override = css`
   display: block;
@@ -18,7 +18,6 @@ const override = css`
 `;
 
 const requestTypeList = requestTypes;
-const tabList = requestStatuses;
 const limit = 3;
 
 const Admin = () => {
@@ -32,6 +31,7 @@ const Admin = () => {
     const [isOpenDesignModal, setOpenDesignModal] = useState(false);
     const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
     const [registry, setRegistry] = useState(null);
+    const [tabList, setTabList] = useState(requestStatuses);
 
     const [takingRequest, setTakingRequest] = useState(false);
     const [succesfulRequestTake, setSuccesfulRequestTake] = useState(false);
@@ -69,6 +69,17 @@ const Admin = () => {
         }
     }
 
+    const updateStatistics = () => {
+        getStatistics([requestType, logged.uid + '-' + requestType])
+            .then(data => {
+                setTabList([
+                    !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
+                    !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
+                    !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2],
+                ])
+            })
+    }
+
     const requestMoreData = () => {
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
@@ -88,29 +99,30 @@ const Admin = () => {
 
     const requestData = () => {
         //if (!initialLoading && !loadingMore) {
-            setInitialLoading(true);
-            const requestStatus = tabList[activeTabIndex].id;
-            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, undefined, limit)
-                .then(data => {
-                    setInitialLoading(false);
-                    setIsLast(data.isLast);
-                    setRequestList(data.list);
-                })
-                .catch(error => {
-                    setInitialLoading(false);
-                    alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
-                });
+        setInitialLoading(true);
+        const requestStatus = tabList[activeTabIndex].id;
+        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, undefined, limit)
+            .then(data => {
+                setInitialLoading(false);
+                setIsLast(data.isLast);
+                setRequestList(data.list);
+            })
+            .catch(error => {
+                setInitialLoading(false);
+                alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
+            });
         //}
     }
 
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
-            takeRequest('solicitudes', logged.uid, requestId)
+            takeRequest(logged.uid, requestId, requestType, 3)
                 .then(_ => {
                     getRequest(requestId).then(({ data, error }) => {
                         setTakingRequest(false);
                         if (!error) {
+                            updateStatistics(); // Actualizo las estadísticas
                             setRegistry(data); // Establezco el nuevo registro actualizado
                             setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
                             setSuccesfulRequestTake(true);
@@ -131,6 +143,10 @@ const Admin = () => {
     useEffect(() => {
         requestData();
     }, [activeTabIndex, requestType]);
+
+    useEffect(() => {
+        updateStatistics();
+    }, [requestType]);
 
     return (
         <div>
@@ -172,7 +188,7 @@ const Admin = () => {
                         loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
                         select={setActiveTabIndex}
-                        tabs={tabList.map(e => e.name)}>
+                        tabs={tabList.map(e => e.name + ' (' + e.statistics + ')')}>
                         <div>
                             {
                                 requestList.map(request => (

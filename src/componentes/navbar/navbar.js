@@ -118,7 +118,7 @@ const Navbar = ({ startTransparent }) => {
                                     Hola, {fName}
                                 </span>
                                 <Avatar clases='img-profile-navbar' />
-                                <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav ml-1'>
+                                <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav m-0 pl-1 pr-1'>
                                     <FontAwesomeIcon icon={faAngleDown} size='1x' />
                                 </span>
                             </>

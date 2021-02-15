@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Avatar from '../avatar';
+import { getDateText } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,8 +17,8 @@ const Card = React.forwardRef(({ data, select }, ref) => {
             <div className='header-container'>
                 <Avatar clases='request-avatar' />
                 <div className='title-container'>
-                    <h3 className='clamp clamp-1'>{data.title}</h3>
-                    <p>Ayer a las 5:35</p>
+                    <h3 className='clamp clamp-1'>{data?.title}</h3>
+                    <p>{getDateText(data?.updatedAt.seconds * 1000)}</p>
                 </div>
             </div>
             <div className='description-container'>

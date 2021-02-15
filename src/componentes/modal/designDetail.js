@@ -4,6 +4,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
 import { contactTypes } from '../../data/data';
+import { getDateText, getExpDateText } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { designTypes } from '../../data/data';
 import { AuthContext } from '../../context/AuthContext';
@@ -75,7 +76,9 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
     }
 
     const isTakenByMe = data?.status == 'TOMADO' && data?.takenBy == logged.uid;
-
+    if (isTakenByMe){
+        getExpDateText(data?.updatedAt.seconds*1000,3)
+    }
     return (
         <>
             <ConfirmationModal
@@ -93,7 +96,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                             <Avatar clases='modal-avatar' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-1'>{data?.title}</h3>
-                                <p>Ayer a las 5:35 - Expira en 3 días</p>
+                                <p>{getDateText(data?.updatedAt.seconds * 1000)}</p>
                             </div>
                             <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                         </div>

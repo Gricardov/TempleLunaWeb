@@ -8,13 +8,25 @@ const storage = firebase.storage();
 
 // Solicitudes
 
-export const takeRequest = async (collection, workerId, requestId) => {
-    let requestRef = firestore.collection(collection).doc(requestId);
-    return requestRef.update({
+export const takeRequest = async (workerId, requestId, type, expDays) => {
+    const batch = firestore.batch();
+    let requestRef = firestore.collection('solicitudes').doc(requestId); // Actualizo el estado de la solicitud
+    batch.update(requestRef, {
         takenBy: workerId,
         status: 'TOMADO',
-        takenAt: firebase.firestore.FieldValue.serverTimestamp()
+        takenAt: firebase.firestore.FieldValue.serverTimestamp(),
+        expiresInDays: expDays
     });
+    // Actualizo las estadísticas
+    let statisticsRef1 = firestore.collection('estadisticas').doc(type);
+    batch.update(statisticsRef1, {
+        available: firebase.firestore.FieldValue.increment(-1)
+    });
+    let statisticsRef2 = firestore.collection('estadisticas').doc(workerId + '-' + type);
+    batch.update(statisticsRef2, {
+        taken: firebase.firestore.FieldValue.increment(1)
+    });
+    return batch.commit();
 }
 
 export const saveRequest = async (id, object) => {
@@ -37,6 +49,7 @@ export const getRequest = async (requestId) => {
 }
 
 export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
+
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
 
     if (startAfter) {
@@ -46,6 +59,7 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
     if (workerId) {
         request = request.where('takenBy', '==', workerId);
     }
+
     return request.limit(limit + 1).get()
         .then(qsn => {
             let list = [];
@@ -71,6 +85,25 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
         callback(list);
     });
 }*/
+
+// Estadísticas
+
+export const getStatistics = async keys => {
+    let promises = keys.map(key => {
+        return firestore.collection('estadisticas').doc(key).get()
+            .then(doc => {
+                if (doc.exists) {
+                    return { statistics: { ...doc.data() } }
+                } else {
+                    return { error: 'No se pudo obtener la estadística ' + key }
+                }
+            })
+            .catch(error => {
+                return { error }
+            })
+    });
+    return Promise.all(promises);
+}
 
 // Sesión
 

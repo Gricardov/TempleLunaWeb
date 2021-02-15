@@ -3,4 +3,4 @@ export const designTypes = [{ type: 'POR', icon: 'fas fa-book', text: 'Portada' 
 export const contactTypes = [{ type: 'WSP', icon: 'fab fa-whatsapp', name: 'Whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram', name: 'Telegram' }];
 
 export const requestTypes = [{ type: 'DISENO', icon: 'fas fa-paint-brush', text: 'Diseños' }, { type: 'CRITICA', icon: 'fas fa-glasses', text: 'Críticas' }];
-export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos' }, { id: 'TOMADO', name: 'Elegidos' }, { id: 'TERMINADO', name: 'Listos' }];
+export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos', statistics: 0 }, { id: 'TOMADO', name: 'Elegidos', statistics: 0 }, { id: 'TERMINADO', name: 'Listos', statistics: 0 }];
