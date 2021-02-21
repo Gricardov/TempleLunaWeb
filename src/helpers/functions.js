@@ -1,4 +1,3 @@
-import { faMonument } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import "moment/locale/es";
 

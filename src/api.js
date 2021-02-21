@@ -17,21 +17,39 @@ export const takeRequest = async (workerId, requestId, type, expDays) => {
         takenAt: firebase.firestore.FieldValue.serverTimestamp(),
         expiresInDays: expDays
     });
+
     // Actualizo las estadísticas
     let statisticsRef1 = firestore.collection('estadisticas').doc(type);
     batch.update(statisticsRef1, {
         available: firebase.firestore.FieldValue.increment(-1)
     });
+
     let statisticsRef2 = firestore.collection('estadisticas').doc(workerId + '-' + type);
     batch.update(statisticsRef2, {
         taken: firebase.firestore.FieldValue.increment(1)
     });
+
     return batch.commit();
 }
 
 export const saveRequest = async (id, object) => {
-    return firestore.collection('solicitudes').doc(id).set(
-        { ...object, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+    return firestore.collection('solicitudes').doc(id).set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+}
+
+export const setRequestDone = async (path, data) => {
+    const idToken = await auth.currentUser.getIdToken();
+    const result = await fetch(process.env.REACT_APP_ENDPOINT + path, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            Authorization: 'Bearer ' + idToken
+        }
+    });
+    if (result.status == '200') {
+        return await result.json();
+    } else {
+        return { error: result.statusText };
+    }
 }
 
 export const getRequest = async (requestId) => {
@@ -50,8 +68,8 @@ export const getRequest = async (requestId) => {
 
 export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
 
-    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
-
+    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
+    
     if (startAfter) {
         request = request.startAfter(startAfter);
     }
@@ -75,7 +93,7 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
 }
 
 /*export const listenRequests = (workerId, type, status, limit = 10, callback) => {
-    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('updatedAt', 'desc');
+    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
     if (workerId) {
         request.where('takenBy', workerId);
     }

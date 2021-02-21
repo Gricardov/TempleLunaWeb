@@ -176,6 +176,14 @@ p {
   margin: 0 auto !important;
 }
 
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto !important;
+}
+
 .d-none {
   display: none;
 }
@@ -767,16 +775,16 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 }
 
 @media (min-width: 768px) {
-  .footer-card-container .button-container {
+  .button-container {
     display: flex;
   }
 }
 
 @media (min-width: 768px) {
-  .footer-card-container .button-container .button {
+  .button-container .button {
     margin-right: 2rem;
   }
-  .footer-card-container .button-container .button:last-of-type {
+  .button-container .button:last-of-type {
     margin-right: 0;
   }
 }

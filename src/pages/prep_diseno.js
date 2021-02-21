@@ -15,7 +15,7 @@ const overrideSpinnerInline = css`
 
 const maxFileSize = 5242880;
 
-const Preparacion = ({ location }) => {
+const Preparation = ({ location }) => {
 
     const { title, about, link, email } = location.state.data;
 
@@ -184,4 +184,4 @@ const Preparacion = ({ location }) => {
     );
 }
 
-export default Preparacion;
+export default Preparation;

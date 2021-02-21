@@ -18,7 +18,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                 <Avatar clases='request-avatar' />
                 <div className='title-container'>
                     <h3 className='clamp clamp-1'>{data?.title}</h3>
-                    <p>{getDateText(data?.updatedAt.seconds * 1000)}</p>
+                    <p>{getDateText(data?.createdAt.seconds * 1000)}</p>
                 </div>
             </div>
             <div className='description-container'>

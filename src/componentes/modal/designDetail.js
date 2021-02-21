@@ -76,9 +76,10 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
     }
 
     const isTakenByMe = data?.status == 'TOMADO' && data?.takenBy == logged.uid;
-    if (isTakenByMe){
-        getExpDateText(data?.updatedAt.seconds*1000,3)
+    if (isTakenByMe) {
+        getExpDateText(data?.createdAt.seconds * 1000, 3)
     }
+
     return (
         <>
             <ConfirmationModal
@@ -96,7 +97,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                             <Avatar clases='modal-avatar' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-1'>{data?.title}</h3>
-                                <p>{getDateText(data?.updatedAt.seconds * 1000)}</p>
+                                <p>{getDateText(data?.createdAt.seconds * 1000)}</p>
                             </div>
                             <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                         </div>
