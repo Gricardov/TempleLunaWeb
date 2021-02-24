@@ -69,15 +69,17 @@ const Admin = () => {
         }
     }
 
-    const updateStatistics = () => {
-        getStatistics([requestType, logged.uid + '-' + requestType])
-            .then(data => {
-                setTabList([
-                    !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
-                    !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
-                    !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2],
-                ])
-            })
+    const updateStatistics = (timeout = 0) => {
+        setTimeout(() => {
+            getStatistics([requestType, logged.uid + '-' + requestType])
+                .then(data => {
+                    setTabList([
+                        !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
+                        !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
+                        !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2],
+                    ])
+                })
+        }, timeout);
     }
 
     const requestMoreData = () => {
@@ -123,7 +125,7 @@ const Admin = () => {
                         getRequest(requestId).then(({ data, error }) => {
                             setTakingRequest(false);
                             if (!error) {
-                                updateStatistics(); // Actualizo las estadísticas
+                                updateStatistics(2000); // Actualizo las estadísticas
                                 setRegistry(data); // Establezco el nuevo registro actualizado
                                 setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
                                 setSuccesfulRequestTake(true);
