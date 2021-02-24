@@ -893,13 +893,27 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 @media (min-width: 768px) {
   .content-prev-row .content-prev-img {
+    height: 90%;
     flex-basis: calc(40% - 1rem);
+    display: flex;
+    align-items: center;
   }
 }
 
 .content-prev-row .content-prev-img img {
   border-radius: 10px;
   box-shadow: 0px 5px 20px #2c273829;
+}
+
+@media (min-width: 768px) {
+  .content-prev-row .content-prev-img img {
+    max-height: 100%;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+  }
+  .content-prev-row .content-prev-img img:hover {
+    transform: scale(1.1)
+  }
 }
 
 .content-prev-row .content-prev-description {
@@ -943,17 +957,25 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   flex: 1;
 }
 
-.prev-header-container .title-container p{
+.prev-header-container .title-container p {
   margin: 0;
   font-size: 1.6rem;
 }
 
 @media (min-width: 768px) {
-  .prev-header-container .title-container p{
+  .prev-header-container .title-container p {
     font-size: 1.8rem;
   }
 }
 
-.prev-content-container{
+.prev-content-container {
   margin-top: 2rem;
+}
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

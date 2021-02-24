@@ -11,8 +11,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 const override = css`
   display: block;
-  margin: 50px auto;
-  background-color: '#8B81EC';
+  margin: 0 auto;
 `;
 
 const Previsualizacion = ({ location }) => {
@@ -56,8 +55,10 @@ const Previsualizacion = ({ location }) => {
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative'>
-                    <div className='floating-form b-shadow-none container-background-prev'>
-                        <ClipLoader css={override} loading={isLoading} size={80} color={'#8B81EC'} />
+                    <div className='floating-form b-shadow-none container-background-prev position-relative'>
+                        <div className='loader-container'>
+                            <ClipLoader css={override} loading={isLoading} size={50} color={'#8B81EC'} />
+                        </div>
                         {
                             !isLoading && resultUrl
                             &&
