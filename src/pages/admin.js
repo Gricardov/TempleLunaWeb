@@ -125,7 +125,7 @@ const Admin = () => {
                         getRequest(requestId).then(({ data, error }) => {
                             setTakingRequest(false);
                             if (!error) {
-                                updateStatistics(); // Actualizo las estadísticas
+                                updateStatistics(5000); // Actualizo las estadísticas
                                 setRegistry(data); // Establezco el nuevo registro actualizado
                                 setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
                                 setSuccesfulRequestTake(true);
