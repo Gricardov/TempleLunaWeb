@@ -48,8 +48,8 @@ const Dropdown = ({ list, select, stretch }) => {
                 &&
                 <div className={`selectable-list ${stretch ? 'stretch' : ''}`}>
                     {
-                        list.map(item => (
-                            <div onClick={(e) => selectItem(e, item)} className='selectable-list-item'>
+                        list.map((item, index) => (
+                            <div key={index} onClick={(e) => selectItem(e, item)} className='selectable-list-item'>
                                 <span className={item.icon} style={{ color, fontSize: tamanoIcono + 'px' }}></span>
                                 {
                                     item.text

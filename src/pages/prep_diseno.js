@@ -2,11 +2,12 @@ import React, { useRef, useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import ClipLoader from "react-spinners/ClipLoader";
+import Fade from 'react-reveal/Fade';
 import { useHistory } from 'react-router-dom';
 import { css } from "@emotion/core";
-import { getGeneratedId, saveRequest } from '../api';
+import { getGeneratedId, uploadImage, setRequestDone } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPaperPlane, faCheckCircle, faHome, faEye } from '@fortawesome/free-solid-svg-icons';
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -17,11 +18,12 @@ const maxFileSize = 5242880;
 
 const Preparation = ({ location }) => {
 
-    const { title, about, link, email } = location.state.data;
+    const { title, id, type, link } = location.state.data;
 
     const refDesign = useRef(null);
 
     const [success, setSuccess] = useState(false);
+    const [urlResult, setUrlResult] = useState('');
     const [loading, setLoading] = useState(false); // Determina si se está enviando el form
     const [comment, setComment] = useState('');
     const [design, setDesign] = useState(null);
@@ -63,32 +65,37 @@ const Preparation = ({ location }) => {
         e.preventDefault();
         if (!checkErrors()) {
             setLoading(true);
-            const generatedId = await getGeneratedId('solicitudes');
-            saveChanges(generatedId);
+            saveChanges();
         }
     }
 
-    const saveChanges = (generatedId) => {
-        /*const data = {
-            name: name.trim(),
-            age: parseInt(age),
-            phone: phone.trim(),
-            messengerType,
-            email: email.trim(),
-            title: title.trim(),
-            link: link.trim(),
-            about: about.trim(),
-            intention: intention.trim(),
-            points,
-            type: 'CRITICA',
-            status: 'DISPONIBLE'
+    const saveChanges = () => {
+        const data = {
+            requestId: id,
+            type: type.trim(),
+            comment: comment.trim()
         };
 
-        saveRequest(generatedId, { ...data, active: 1 }).then(() => {
-            window.scrollTo(0, 0);
-            setLoading(false);
-            setSuccess(true);
-        });*/
+        uploadImage('solicitud-diseno', design)
+            .then(url => {
+                setRequestDone({ ...data, urlResult: url }).then(result => {
+                    window.scrollTo(0, 0);
+                    setLoading(false);
+                    if (!result.error) {
+                        setUrlResult(result.url);
+                        setSuccess(true);
+                    } else {
+                        alert(result.error);
+                        setSuccess(false);
+                    }
+                });
+            })
+            .catch(error => {
+                setLoading(false);
+                setSuccess(false);
+                alert('Error al subir la imagen. Reintente');
+                console.log(error);
+            })
     }
 
     const checkErrors = () => {
@@ -124,59 +131,85 @@ const Preparation = ({ location }) => {
                         <FontAwesomeIcon onClick={goBackwards} className='mr-1' icon={faArrowLeft} size='lg' />
                         <h4 className='request-prep-title m-0 clamp clamp-2'>Diseño: {title}</h4>
                     </div>
-                    <div className=''>
-                        <h4>Link de la obra</h4>
-                        {
-                            link
-                                ?
-                                <a target='_blank' href={link}>{link}</a>
-                                :
-                                <p>No existe link</p>
-                        }
-                        <div className='form-group'>
-                            <h4>Diseño terminado</h4>
-                            {
-                                design
-                                    ?
-                                    <button onClick={startSelectDesign} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
-                                        <span className='clamp clamp-1'>
-                                            {design.name}
+                    {
+                        success
+                            ?
+                            <div className='form-container text-align-center'>
+                                <Fade bottom>
+                                    <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
+                                    <h3 className='mt-1 mb-1'>¡Diseño enviado!</h3>
+                                </Fade>
+                                <p className='txt-responsive-form m0-auto'>Tu experiencia ha aumentado :)</p>
+                                <div className='button-container mt-3'>
+                                    <button onClick={() => window.open(urlResult, '_blank')} className='button button-light-purple button-option-request ml-auto'>
+                                        <FontAwesomeIcon icon={faEye} size='1x' />
+                                        {' '}
+                                                Ver resultado
+                                        </button>
+                                    <button onClick={goBackwards} className='button button-blue button-option-request mr-auto'>
+                                        <FontAwesomeIcon icon={faHome} size='1x' />
+                                        {' '}
+                                                Regresar
+                                        </button>
+                                </div>
+                            </div>
+                            :
+                            <>
+                                <div className=''>
+                                    <h4>Link de la obra</h4>
+                                    {
+                                        link
+                                            ?
+                                            <a target='_blank' href={link}>{link}</a>
+                                            :
+                                            <p>No existe link</p>
+                                    }
+                                    <div className='form-group'>
+                                        <h4>Diseño terminado</h4>
+                                        {
+                                            design
+                                                ?
+                                                <button onClick={startSelectDesign} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
+                                                    <span className='clamp clamp-1'>
+                                                        {design.name}
+                                                    </span>
+                                                    <span onClick={deleteDesign} className='fa fa-times' style={{ color: 'white' }}></span>
+                                                </button>
+                                                :
+                                                <button onClick={startSelectDesign} className={`button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
+                                                    <span>
+                                                        Subir diseño
                                         </span>
-                                        <span onClick={deleteDesign} className='fa fa-times' style={{ color: 'white' }}></span>
-                                    </button>
-                                    :
-                                    <button onClick={startSelectDesign} className={`button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
-                                        <span>
-                                            Subir diseño
-                                        </span>
-                                    </button>
-                            }
-                            <input type="file" onChange={selectDesign} accept="image/*" ref={refDesign} className='d-none' id="flDiseno" />
-                        </div>
-                        <div className='form-group'>
-                            <h4>¿Algún comentario o recomendación?</h4>
-                            <textarea minLength="1" maxLength="1000" rows="4" value={comment} onChange={updComment} id="txtEnganche" placeholder="Ejemplo: Considero que tiene un enganche bueno, pero no es suficiente. Debería enganchar mucho desde un inicio..."></textarea>
-                        </div>
-                    </div>
-                    <div className='form-buttons-container mt-3'>
-                        {
-                            loading
-                                ?
-                                <span className='button button-green justify-self-right'>
-                                    Enviando
-                                {' '}
-                                    <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
-                                </span>
-                                :
-                                <button onClick={send} className='button button-green justify-self-right'>
-                                    <FontAwesomeIcon icon={faPaperPlane} size='xl' />
-                                    {' '}
-                                    <span className='d-none d-md-inline'>
-                                        Enviar
-                            </span>
-                                </button>
-                        }
-                    </div>
+                                                </button>
+                                        }
+                                        <input type="file" onChange={selectDesign} accept="image/*" ref={refDesign} className='d-none' id="flDiseno" />
+                                    </div>
+                                    <div className='form-group'>
+                                        <h4>¿Algún comentario o recomendación? (Opcional)</h4>
+                                        <textarea minLength="1" maxLength="1000" rows="4" value={comment} onChange={updComment} placeholder="Ejemplo: Considero que tiene un enganche bueno, pero no es suficiente. Debería enganchar mucho desde un inicio..."></textarea>
+                                    </div>
+                                </div>
+                                <div className='form-buttons-container mt-3'>
+                                    {
+                                        loading
+                                            ?
+                                            <span className='button button-green justify-self-right'>
+                                                Enviando
+                                                {' '}
+                                                <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
+                                            </span>
+                                            :
+                                            <button onClick={send} className='button button-green justify-self-right'>
+                                                <FontAwesomeIcon icon={faPaperPlane} size='1x' />
+                                                {' '}
+                                                <span className='d-none d-md-inline'>
+                                                    Enviar
+                                                </span>
+                                            </button>
+                                    }
+                                </div>
+                            </>
+                    }
                 </section>
             </main>
             <Footer />

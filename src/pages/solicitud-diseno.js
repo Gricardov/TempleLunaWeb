@@ -8,7 +8,7 @@ import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
-import { getGeneratedId, uploadImage, saveRequest } from '../api';
+import { uploadImage, saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -121,11 +121,10 @@ const Solicitud = () => {
         e.preventDefault();
         if (!checkErrors()) {
             setLoading(true);
-            const generatedId = await getGeneratedId('solicitudes');
             if (imgSample) {
-                uploadImage('solicitud-diseno', generatedId, imgSample)
+                uploadImage('solicitud-diseno', imgSample)
                     .then(url => {
-                        saveChanges(url, generatedId);
+                        saveChanges(url);
                     })
                     .catch(error => {
                         setLoading(false);
@@ -134,12 +133,12 @@ const Solicitud = () => {
                         console.log(error);
                     })
             } else {
-                saveChanges('', generatedId);
+                saveChanges('');
             }
         }
     }
 
-    const saveChanges = (urlImg, generatedId) => {
+    const saveChanges = (urlImg) => {
         const data = {
             name: name.trim(),
             age: parseInt(age),
@@ -156,7 +155,7 @@ const Solicitud = () => {
             status: 'DISPONIBLE'
         };
 
-        saveRequest(generatedId, { ...data, active: 1 }).then(() => {
+        saveRequest({ ...data, active: 1 }).then(() => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);

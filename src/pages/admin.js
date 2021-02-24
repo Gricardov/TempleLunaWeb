@@ -84,7 +84,7 @@ const Admin = () => {
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
             const requestStatus = tabList[activeTabIndex].id;
-            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, getLastElement('updatedAt'), limit)
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, getLastElement('createdAt'), limit)
                 .then(data => {
                     setLoadingMore(false);
                     setIsLast(data.isLast);
@@ -117,25 +117,26 @@ const Admin = () => {
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
-            takeRequest(logged.uid, requestId, requestType, 3)
-                .then(_ => {
-                    getRequest(requestId).then(({ data, error }) => {
+            takeRequest(requestId, requestType, 3)
+                .then(({ error }) => {
+                    if (!error) {
+                        getRequest(requestId).then(({ data, error }) => {
+                            setTakingRequest(false);
+                            if (!error) {
+                                updateStatistics(); // Actualizo las estadísticas
+                                setRegistry(data); // Establezco el nuevo registro actualizado
+                                setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
+                                setSuccesfulRequestTake(true);
+                            } else {
+                                setSuccesfulRequestTake(false);
+                                alert('Hubo un error al actualizar la solicitud. Recargue e intente otra vez');
+                            }
+                        })
+                    } else {
+                        alert('Hubo un error al tomar esta solicitud. Intenta otra vez');
                         setTakingRequest(false);
-                        if (!error) {
-                            updateStatistics(); // Actualizo las estadísticas
-                            setRegistry(data); // Establezco el nuevo registro actualizado
-                            setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
-                            setSuccesfulRequestTake(true);
-                        } else {
-                            setSuccesfulRequestTake(false);
-                            alert('Hubo un error al actualizar la solicitud. Recargue e intente otra vez');
-                        }
-                    })
-                })
-                .catch(error => {
-                    alert('Hubo un error al tomar esta solicitud. Intenta otra vez');
-                    setTakingRequest(false);
-                    setSuccesfulRequestTake(true);
+                        setSuccesfulRequestTake(true);
+                    }
                 })
         }
     }

@@ -188,6 +188,10 @@ p {
   display: none;
 }
 
+.b-shadow-none {
+  box-shadow: none !important;
+}
+
 @media (min-width: 768px) {
   .d-md-none {
     display: none !important;
@@ -838,4 +842,118 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
     margin: 0;
     min-height: unset;
   }
+}
+
+/*Previsualización resultado*/
+
+.container-background-prev {
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .container-background-prev {
+    height: 500px;
+  }
+}
+
+.background-prev {
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  background-position: center center;
+  background-size: cover;
+  filter: blur(8px) brightness(110%) contrast(90%) saturate(50%);
+  -webkit-filter: blur(8px) brightness(120%) contrast(90%) saturate(50%);
+  width: 120%;
+  height: 120%;
+  z-index: 1;
+}
+
+.content-prev {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.content-prev-row {
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .content-prev-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.content-prev-row .content-prev-img {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .content-prev-row .content-prev-img {
+    flex-basis: calc(40% - 1rem);
+  }
+}
+
+.content-prev-row .content-prev-img img {
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #2c273829;
+}
+
+.content-prev-row .content-prev-description {
+  flex-basis: calc(60% - 1rem);
+  padding: 2rem;
+  border-radius: 10px;
+  background: white;
+  min-height: 45%;
+  box-shadow: 0px 5px 20px #2c273829;
+}
+
+.prev-header-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .prev-header-container {
+    display: flex;
+    text-align: left;
+    align-items: center;
+  }
+}
+
+.prev-header-container .prev-avatar {
+  display: block;
+  margin: 0 auto;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .prev-header-container .prev-avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-right: .6rem;
+  }
+}
+
+.prev-header-container .title-container {
+  flex: 1;
+}
+
+.prev-header-container .title-container p{
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+@media (min-width: 768px) {
+  .prev-header-container .title-container p{
+    font-size: 1.8rem;
+  }
+}
+
+.prev-content-container{
+  margin-top: 2rem;
 }

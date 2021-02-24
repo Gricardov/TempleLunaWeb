@@ -10,7 +10,7 @@ import { designTypes } from '../../data/data';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faHandPaper, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faHandPaper, faLayerGroup, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './modals.css';
 
 const iconSize = 20;
@@ -75,9 +75,10 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
         takeRequest(data?.id);
     }
 
-    const isTakenByMe = data?.status == 'TOMADO' && data?.takenBy == logged.uid;
+    const isTakenByMe = data?.takenBy == logged.uid;
+
     if (isTakenByMe) {
-        getExpDateText(data?.createdAt.seconds * 1000, 3)
+        getExpDateText(data?.takenAt, data?.expDate)
     }
 
     return (
@@ -97,7 +98,17 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                             <Avatar clases='modal-avatar' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-1'>{data?.title}</h3>
-                                <p>{getDateText(data?.createdAt.seconds * 1000)}</p>
+                                <p>{
+                                    data?.status == 'DISPONIBLE' || isTakenByMe && data?.status == 'HECHO'
+                                        ?
+                                        getDateText(data?.createdAt.seconds * 1000)
+                                        :
+                                        isTakenByMe && data?.status == 'TOMADO'
+                                            ?
+                                            getExpDateText(data?.expDate.seconds * 1000)
+                                            :
+                                            null
+                                }</p>
                             </div>
                             <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                         </div>
@@ -161,7 +172,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                                                             Tomar pedido
                                                         </button>
                                                         :
-                                                        isTakenByMe
+                                                        data?.status == 'TOMADO' && isTakenByMe
                                                             ?
                                                             <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
                                                                 <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
@@ -171,6 +182,15 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake,
                                                             null
                                                 }
                                             </>
+                                            {
+                                                data?.status == 'HECHO' && isTakenByMe
+                                                && (
+                                                    <button onClick={() => history.push('prev_resultado', { data })} className='button button-green button-option-request'>
+                                                        <FontAwesomeIcon color={'#fff'} icon={faLayerGroup} className='icon' />
+                                                        Ir a resultado
+                                                    </button>
+                                                )
+                                            }
                                             <button onClick={close} className='button button-red button-option-request'>
                                                 <FontAwesomeIcon color={'#fff'} icon={faTimes} className='icon' />
                                                 Cerrar

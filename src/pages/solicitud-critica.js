@@ -9,7 +9,7 @@ import Fade from 'react-reveal/Fade';
 import ImgLeyendo from '../img/sitting-reading.svg';
 import { Link } from 'react-router-dom';
 import { critiquePoints } from '../data/data';
-import { getGeneratedId, saveRequest } from '../api';
+import { saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -102,12 +102,11 @@ const Solicitud = () => {
         e.preventDefault();
         if (!checkErrors()) {
             setLoading(true);
-            const generatedId = await getGeneratedId('solicitudes');
-            saveChanges(generatedId);
+            saveChanges();
         }
     }
 
-    const saveChanges = (generatedId) => {
+    const saveChanges = () => {
         const data = {
             name: name.trim(),
             age: parseInt(age),
@@ -123,7 +122,7 @@ const Solicitud = () => {
             status: 'DISPONIBLE'
         };
 
-        saveRequest(generatedId, { ...data, active: 1 }).then(() => {
+        saveRequest({ ...data, active: 1 }).then(() => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);

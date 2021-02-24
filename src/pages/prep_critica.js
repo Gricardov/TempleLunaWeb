@@ -4,8 +4,8 @@ import Navbar from '../componentes/navbar';
 import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import { css } from "@emotion/core";
-import { getGeneratedId, setRequestDone } from '../api';
-import { Link, useHistory } from 'react-router-dom';
+import { setRequestDone } from '../api';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPaperPlane, faCheckCircle, faHome, faEye } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,6 +19,7 @@ const Preparation = ({ location }) => {
     const { id, title, about, link, type, points } = location.state.data;
 
     const [success, setSuccess] = useState(false);
+    const [urlResult, setUrlResult] = useState('');
     const [loading, setLoading] = useState(false); // Determina si se está enviando el form
     const [intention, setIntention] = useState('');
     const [hook, setHook] = useState('');
@@ -61,7 +62,6 @@ const Preparation = ({ location }) => {
     }
 
     const saveChanges = () => {
-        window.scrollTo(0, 0);
         const data = {
             requestId: id,
             title: title.trim(),
@@ -72,11 +72,11 @@ const Preparation = ({ location }) => {
             improvement: improvement.trim(),
         };
 
-        setRequestDone('generateResultRequest', data).then(result => {
+        setRequestDone(data).then(result => {
             window.scrollTo(0, 0);
             setLoading(false);
             if (!result.error) {
-                console.log(result)
+                setUrlResult(result.url);
                 setSuccess(true);
             } else {
                 alert(result.error);
@@ -146,7 +146,7 @@ const Preparation = ({ location }) => {
                                 </Fade>
                                 <p className='txt-responsive-form m0-auto'>Tu experiencia ha aumentado :)</p>
                                 <div className='button-container mt-3'>
-                                    <button onClick={() => { }} className='button button-light-purple button-option-request ml-auto'>
+                                    <button onClick={() => window.open(urlResult, '_blank')} className='button button-light-purple button-option-request ml-auto'>
                                         <FontAwesomeIcon icon={faEye} size='1x' />
                                         {' '}
                                                 Ver resultado

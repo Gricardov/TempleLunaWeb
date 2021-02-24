@@ -1,6 +1,7 @@
 //import 'babel-polyfill';
 import firebase from './firebase';
 import { setProfileStorage } from './helpers/userStorage';
+import { v4 as uuidv4 } from 'uuid';
 
 const firestore = firebase.firestore();
 const auth = firebase.auth();
@@ -8,48 +9,16 @@ const storage = firebase.storage();
 
 // Solicitudes
 
-export const takeRequest = async (workerId, requestId, type, expDays) => {
-    const batch = firestore.batch();
-    let requestRef = firestore.collection('solicitudes').doc(requestId); // Actualizo el estado de la solicitud
-    batch.update(requestRef, {
-        takenBy: workerId,
-        status: 'TOMADO',
-        takenAt: firebase.firestore.FieldValue.serverTimestamp(),
-        expiresInDays: expDays
-    });
-
-    // Actualizo las estadísticas
-    let statisticsRef1 = firestore.collection('estadisticas').doc(type);
-    batch.update(statisticsRef1, {
-        available: firebase.firestore.FieldValue.increment(-1)
-    });
-
-    let statisticsRef2 = firestore.collection('estadisticas').doc(workerId + '-' + type);
-    batch.update(statisticsRef2, {
-        taken: firebase.firestore.FieldValue.increment(1)
-    });
-
-    return batch.commit();
+export const takeRequest = async (requestId, type, expDays) => {
+    return request('takeRequest', { requestId, type, expDays }, 'POST', true);
 }
 
-export const saveRequest = async (id, object) => {
-    return firestore.collection('solicitudes').doc(id).set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+export const saveRequest = async (object) => {
+    return firestore.collection('solicitudes').doc().set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
 }
 
-export const setRequestDone = async (path, data) => {
-    const idToken = await auth.currentUser.getIdToken();
-    const result = await fetch(process.env.REACT_APP_ENDPOINT + path, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            Authorization: 'Bearer ' + idToken
-        }
-    });
-    if (result.status == '200') {
-        return await result.json();
-    } else {
-        return { error: result.statusText };
-    }
+export const setRequestDone = async (data) => {
+    return request('generateResultRequest', data, 'POST', true);
 }
 
 export const getRequest = async (requestId) => {
@@ -69,7 +38,7 @@ export const getRequest = async (requestId) => {
 export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
 
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
-    
+
     if (startAfter) {
         request = request.startAfter(startAfter);
     }
@@ -184,12 +153,12 @@ export const logout = async () => {
 }
 
 // Archivos
-export const uploadImage = async (ruta, id, archivo) => {
+export const uploadImage = async (ruta, archivo) => {    
     return new Promise((resolve, reject) => {
-        let storageRef = storage.ref();
-        let imgRef = storageRef.child(`${ruta}/${id}`);
-        const task = imgRef.put(archivo);
 
+        let storageRef = storage.ref();
+        let imgRef = storageRef.child(`${ruta}/${uuidv4()}`);
+        const task = imgRef.put(archivo);
         task.on('state_changed', function (snapshot) {
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
@@ -214,4 +183,20 @@ export const uploadImage = async (ruta, id, archivo) => {
 // Funciones firestore
 export const getGeneratedId = async (collection) => {
     return firestore.collection(collection).doc().id;
+}
+
+// Api fetch
+export const request = async (path, data, method, authorized) => {
+    const result = await fetch(process.env.REACT_APP_ENDPOINT + path, {
+        method: method,
+        body: data ? JSON.stringify(data) : null,
+        headers: {
+            Authorization: authorized ? 'Bearer ' + await auth.currentUser.getIdToken() : null
+        }
+    });
+    if (result.status == '200') {
+        return await result.json();
+    } else {
+        return { error: result.statusText };
+    }
 }

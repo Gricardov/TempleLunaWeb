@@ -20,17 +20,33 @@ export const getDateText = (dateMs) => {
     return toSentence(dayPortion);
 }
 
-export const getExpDateText = (dateMs, expDays) => {
-    const momentObj = moment(dateMs).add(expDays, 'days');
-    const totalMinutes = momentObj.diff(moment(), 'minutes', true);
+export const getExpDateText = (expDateMs) => {
+    let result = 'Vence en ';
+    let totalMinutes = moment(expDateMs).diff(moment(), 'minutes', true);
+
+    if (totalMinutes < 0) {
+        result = 'Venció hace ';
+        totalMinutes *= -1;
+    }
+
     const totalDays = totalMinutes / 1440;
     const wholeDays = Math.trunc(totalDays);
     const totalHours = (totalDays % 1) * 24;
     const wholeHours = Math.trunc(totalHours);
     const wholeMinutes = Math.trunc((totalHours % 1) * 60);
 
-    console.log(wholeDays + ' ' + wholeHours + ' ' + wholeMinutes)
+    if (wholeDays >= 1) {
+        result += wholeDays + ` dia${wholeDays > 1 ? 's' : ''}`;
+    }
 
+    if (wholeHours >= 1) {
+        result += ', ' + wholeHours + ` hora${wholeHours > 1 ? 's' : ''}`;
+    }
+
+    if (wholeMinutes >= 1 && wholeDays < 1) {
+        result += ', ' + wholeMinutes + ` minuto${wholeMinutes > 1 ? 's' : ''}`;
+    }
+    return result;
 }
 
 export const toSentence = (text, limit) => {
