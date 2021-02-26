@@ -105,6 +105,7 @@ const Admin = () => {
         const requestStatus = tabList[activeTabIndex].id;
         getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, undefined, limit)
             .then(data => {
+                updateStatistics();
                 setInitialLoading(false);
                 setIsLast(data.isLast);
                 setRequestList(data.list);
@@ -120,8 +121,8 @@ const Admin = () => {
         if (logged && logged.uid) {
             setTakingRequest(true);
             takeRequest(requestId, requestType, 3)
-                .then(({ error }) => {
-                    if (!error) {
+                .then((res) => {
+                    if (!res.error) {
                         getRequest(requestId).then(({ data, error }) => {
                             setTakingRequest(false);
                             if (!error) {
@@ -146,10 +147,6 @@ const Admin = () => {
     useEffect(() => {
         requestData();
     }, [activeTabIndex, requestType]);
-
-    useEffect(() => {
-        updateStatistics();
-    }, [requestType]);
 
     return (
         <div>
