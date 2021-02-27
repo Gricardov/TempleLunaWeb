@@ -136,6 +136,9 @@ export const login = async (email, password) => {
                 case 'auth/wrong-password':
                     errMessage = 'El usuario es inválido';
                     break;
+                case 'auth/too-many-requests':
+                    errMessage = 'Ha habido muchos intentos de login. Inténtalo en unos minutos.';
+                    break;
                 default:
                     errMessage = 'Ha ocurrido un error con el servicio de autenticación';
             }
@@ -153,7 +156,7 @@ export const logout = async () => {
 }
 
 // Archivos
-export const uploadImage = async (ruta, archivo) => {    
+export const uploadImage = async (ruta, archivo) => {
     return new Promise((resolve, reject) => {
 
         let storageRef = storage.ref();
