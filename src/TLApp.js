@@ -7,6 +7,7 @@ import SolicitudDiseno from './pages/solicitud-diseno'
 import PreparacionCritica from './pages/prep_critica'
 import PreparacionDiseno from './pages/prep_diseno'
 import PrevResultado from './pages/prev_resultado'
+import TestResultado from './pages/test_resultado'
 import Drawer from './componentes/drawer'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './componentes/customRouter/privateRoute'
@@ -28,6 +29,7 @@ const App = () => {
           <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
           <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />
           <Route exact path="/prev_resultado" component={PrevResultado} />
+          <Route exact path="/test_resultado" component={TestResultado} />
           <Redirect to="/" />
         </Switch>
       </Router>

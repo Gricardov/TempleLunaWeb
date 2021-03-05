@@ -847,6 +847,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 /*Previsualización resultado*/
 
 .container-background-prev {
+  min-height: 200px;
   overflow: hidden;
 }
 
