@@ -12,6 +12,7 @@ import Drawer from './componentes/drawer'
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './componentes/customRouter/privateRoute'
 import { PublicRoute } from './componentes/customRouter/publicRoute'
+import { AnyRoute } from './componentes/customRouter/anyRoute'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
 const App = () => {

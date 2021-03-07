@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import ClipLoader from "react-spinners/ClipLoader";
-import queryString from 'query-string'
+import queryString from 'query-string';
 import critiqueImg from '../img/critiqueImg.PNG';
 import { getRequest } from '../api';
 import { css } from "@emotion/core";
@@ -49,6 +49,9 @@ const Previsualizacion = ({ location }) => {
         }
     }, [location]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);        
+    }, []);
 
     return (
         <div>

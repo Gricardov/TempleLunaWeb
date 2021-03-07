@@ -231,7 +231,7 @@ const Solicitud = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         setSuccess(false);
-    }, [activeIndex])
+    }, [activeIndex]);
 
     return (
         <div>

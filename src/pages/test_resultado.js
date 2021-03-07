@@ -2,34 +2,34 @@ import React, { useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import ClipLoader from "react-spinners/ClipLoader";
-import queryString from 'query-string'
+import LoadingScreen from '../componentes/loading-screen';
+import queryString from 'query-string';
 import critiqueImg from '../img/critiqueImg.PNG';
 import { getRequest } from '../api';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faEye, faShareAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-const override = css`
-  display: block;
-  margin: 0 auto;
-`;
 
 const Previsualizacion = ({ location }) => {
 
     const [isLoading, setIsLoading] = useState(true);
+    const [success, setSuccess] = useState(false);
+    const [loadingMsg, setLoadingMsg] = useState('Obteniendo tu archivo...');
     const [type, setType] = useState('');
     const [resultUrl, setResultUrl] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
 
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
+    const [numPages, setNumPages] = useState(0);
+    //const [pageNumber, setPageNumber] = useState(1);
 
     useEffect(() => {
         if (location && location.state && location.state.data) {
             const { type, resultUrl, title, name } = location.state.data;
-            setIsLoading(false);
+            setLoadingMsg('Obtenido: ' + title);
             setType(type);
             setResultUrl(resultUrl);
             setTitle(title);
@@ -40,13 +40,16 @@ const Previsualizacion = ({ location }) => {
                 getRequest(id).then(({ data, error }) => {
                     if (!error) {
                         const { type, resultUrl, title, name } = data;
+                        setLoadingMsg('Obtenido: ' + title);
                         setType(type);
                         setResultUrl(resultUrl);
                         setTitle(title);
                         setAuthor(name);
-                        setIsLoading(false);
+                        //setIsLoading(false);
                     } else {
                         alert('No se encontró el archivo. Intente más tarde');
+                        setIsLoading(false);
+                        setSuccess(false);
                     }
                 });
             }
@@ -54,34 +57,66 @@ const Previsualizacion = ({ location }) => {
     }, [location]);
 
     const onDocumentLoadSuccess = ({ numPages }) => {
+        setIsLoading(false);
+        setSuccess(true);
         setNumPages(numPages);
     }
-    console.log(resultUrl)
+
+    const onDocumentError = () => {
+        setIsLoading(false);
+        setSuccess(false);
+    }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div>
+            {
+                isLoading && <LoadingScreen text={loadingMsg} />
+            }
             <Navbar />
-            <main className='main-body below-navbar colored-background'>
-                <section className='container-xl section position-relative'>
-                    <div className='floating-form b-shadow-none container-background-prev position-relative'>
-                        <div className='loader-container'>
-                            <ClipLoader css={override} loading={isLoading} size={50} color={'#8B81EC'} />
-                        </div>
-                        {
-                            !isLoading && resultUrl
-                            &&
-                            <div>
-                                <Document
-                                    file={resultUrl}
-                                    onLoadSuccess={onDocumentLoadSuccess}>
-                                    <Page pageNumber={pageNumber} />
-                                </Document>
-                                <p>Page {pageNumber} of {numPages}</p>
-                            </div>
-                        }
+            <main className='main-body below-navbar'>
+                <section className='container-pdf-preview position-relative'>
+                    <div>
+                        <Document
+                            file={resultUrl}
+                            onLoadSuccess={onDocumentLoadSuccess}
+                            onLoadError={onDocumentError}
+                            externalLinkTarget={'_blank'}>
+                            {
+                                Array.from(
+                                    new Array(numPages),
+                                    (el, index) => (
+                                        <Page
+                                            key={`page_${index + 1}`}
+                                            pageNumber={index + 1}
+                                        />
+                                    ),
+                                )
+                            }
+                        </Document>
                     </div>
                 </section>
             </main>
-            <Footer />
+            <div className='bottom-prev-navbar'>
+                <nav className='container-xl'>
+                    <button className='button-purple'>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faStar} className='icon' />
+                        {' '}
+                        Califica
+                    </button>
+                    <button className='button-purple'>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faShareAlt} className='icon' />
+                        {' '}
+                        Comparte
+                    </button>
+                    <button className='button-purple' onClick={() => window.open(resultUrl)}>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faDownload} className='icon' />
+                    </button>
+                </nav>
+            </div>
         </div>
     );
 }
