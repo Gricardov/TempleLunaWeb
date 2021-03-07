@@ -21,7 +21,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Drawer />
-        <HelmetMetaData />
+        <HelmetMetaData></HelmetMetaData>
         <Switch>
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />

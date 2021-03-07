@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 const Metadata = ({ quote = "", title = "Temple Luna - Lectores y escritores", image = "https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44", description = "Somos Temple Luna, la gran comunidad literaria de latinoamérica que plantea una nueva forma de compartir historias", hashtag = "#templeluna" }) => {
     let location = useLocation();
-    let currentUrl = "http://www.camperstribe.com" + location.pathname;
+    let currentUrl = "https://templeluna.netlify.app" + location.pathname;
 
     return (
         <Helmet>
