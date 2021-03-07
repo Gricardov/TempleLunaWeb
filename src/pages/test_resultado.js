@@ -84,12 +84,13 @@ const Previsualizacion = ({ location }) => {
                             file={resultUrl}
                             onLoadSuccess={onDocumentLoadSuccess}
                             onLoadError={onDocumentError}
+                            
                             externalLinkTarget={'_blank'}>
                             {
                                 Array.from(
                                     new Array(numPages),
                                     (el, index) => (
-                                        <Page
+                                        <Page                                        
                                             key={`page_${index + 1}`}
                                             pageNumber={index + 1}
                                         />

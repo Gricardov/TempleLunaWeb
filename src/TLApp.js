@@ -9,10 +9,10 @@ import PreparacionDiseno from './pages/prep_diseno'
 import PrevResultado from './pages/prev_resultado'
 import TestResultado from './pages/test_resultado'
 import Drawer from './componentes/drawer'
+import HelmetMetaData from "./componentes/helmet"
 import { AuthProvider } from './context/AuthContext'
 import { PrivateRoute } from './componentes/customRouter/privateRoute'
 import { PublicRoute } from './componentes/customRouter/publicRoute'
-import { AnyRoute } from './componentes/customRouter/anyRoute'
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
 const App = () => {
@@ -21,6 +21,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Drawer />
+        <HelmetMetaData />
         <Switch>
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />
