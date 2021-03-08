@@ -7,6 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
+import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { uploadImage, saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
@@ -236,6 +237,7 @@ const Solicitud = () => {
     return (
         <div>
             <Navbar />
+            <HelmetMetaData title="¡Pide tu diseño en Temple Luna!" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <h2 className='mb-0'>Pide un diseño</h2>

@@ -61,6 +61,10 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
         });;
 }
 
+export const likeRequestResult = (id, direction) => {
+    return firestore.collection('solicitudes').doc(id).update({ likes: firebase.firestore.FieldValue.increment(direction) }, { merge: true });
+}
+
 /*export const listenRequests = (workerId, type, status, limit = 10, callback) => {
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
     if (workerId) {

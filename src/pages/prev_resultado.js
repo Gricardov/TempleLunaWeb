@@ -1,31 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
-import ClipLoader from "react-spinners/ClipLoader";
+import LoadingScreen from '../componentes/loading-screen';
 import queryString from 'query-string';
-import critiqueImg from '../img/critiqueImg.PNG';
+import HelmetMetaData from "../componentes/helmet";
 import { getRequest } from '../api';
-import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-`;
+import { faDownload, faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import { FacebookShareButton } from "react-share";
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 const Previsualizacion = ({ location }) => {
 
+    const [isOpenPunctuationModal, setIsOpenPunctuationModal] = useState(false);
+
     const [isLoading, setIsLoading] = useState(true);
+    const [success, setSuccess] = useState(false);
+    const [loadingMsg, setLoadingMsg] = useState('Obteniendo tu archivo...');
     const [type, setType] = useState('');
     const [resultUrl, setResultUrl] = useState('');
+    const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
 
+    const [numPages, setNumPages] = useState(0);
+    const [hasScrolledToEnd, setHasScrolledToEnd] = useState(false);
+
+    const checkScroll = () => {
+        const body = document.body;
+        const html = document.documentElement;
+        const offsetY = window.scrollY; // Scrolled height
+        const vpHeight = window.innerHeight; // Viewport height
+
+        const totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+        if ((totalHeight - (offsetY + vpHeight)) <= 20) {
+            if (!hasScrolledToEnd) {
+                setHasScrolledToEnd(true);
+            }
+        } else if (hasScrolledToEnd) {
+            setHasScrolledToEnd(false);
+        }
+    }
+    console.log(hasScrolledToEnd)
     useEffect(() => {
         if (location && location.state && location.state.data) {
-            const { type, resultUrl, title, name } = location.state.data;
-            setIsLoading(false);
+            const { type, resultUrl, title, name, id } = location.state.data;
+            setLoadingMsg('Obtenido: ' + title);
+            setId(id);
             setType(type);
             setResultUrl(resultUrl);
             setTitle(title);
@@ -36,13 +60,16 @@ const Previsualizacion = ({ location }) => {
                 getRequest(id).then(({ data, error }) => {
                     if (!error) {
                         const { type, resultUrl, title, name } = data;
+                        setLoadingMsg('Obtenido: ' + title);
+                        setId(id);
                         setType(type);
                         setResultUrl(resultUrl);
                         setTitle(title);
                         setAuthor(name);
-                        setIsLoading(false);
                     } else {
                         alert('No se encontró el archivo. Intente más tarde');
+                        setIsLoading(false);
+                        setSuccess(false);
                     }
                 });
             }
@@ -50,69 +77,89 @@ const Previsualizacion = ({ location }) => {
     }, [location]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);        
+        window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', checkScroll);
+        return () => window.removeEventListener('scroll', checkScroll);
+    }, []);
+
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setIsLoading(false);
+        setSuccess(true);
+        setNumPages(numPages);
+    }
+
+    const onDocumentError = () => {
+        setIsLoading(false);
+        setSuccess(false);
+    }
+
+    const like = () => {
+
+    }
+
+    const unlike = () => {
+
+    }
 
     return (
         <div>
+            {
+                isLoading && <LoadingScreen text={loadingMsg} />
+            }
+            <HelmetMetaData title={title + " - Temple Luna"} />
             <Navbar />
-            <main className='main-body below-navbar colored-background'>
-                <section className='container-xl section position-relative'>
-                    <div className='floating-form b-shadow-none container-background-prev position-relative'>
-                        <div className='loader-container'>
-                            <ClipLoader css={override} loading={isLoading} size={50} color={'#8B81EC'} />
-                        </div>
-                        {
-                            !isLoading && resultUrl
-                            &&
-                            <>
-                                <div className='background-prev' style={{ backgroundImage: `url(${type == 'CRITICA' ? critiqueImg : resultUrl})` }}>
-                                </div>
-                                <div className='form-container content-prev text-align-center'>
-                                    <div className='content-prev-row'>
-                                        <div className='content-prev-img'>
-                                            <img alt='img-previsualizacion' src={type == 'CRITICA' ? critiqueImg : resultUrl} />
-                                        </div>
-                                        <div className='content-prev-description'>
-                                            <h3 className='m-0 clamp clamp-2'>{type == 'CRITICA' ? 'Crítica: ' : type == 'DISENO' ? 'Diseño: ' : ''}{title}</h3>
-                                            <div className='prev-header-container'>
-                                                <img alt="img-avatar" src="/static/media/usuario-generico.167daf89.svg" className="prev-avatar" />
-                                                <div className='title-container'>
-                                                    <p className='clamp clamp-1'>{author}</p>
-                                                </div>
-                                            </div>
-                                            <div className='prev-content-container'>
-                                                <button onClick={() => window.open(resultUrl, '_blank')} className="button button-blue stretch">
-                                                    {
-                                                        type == 'CRITICA'
-                                                            ?
-                                                            <>
-                                                                <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
-                                                                {' '}
-                                                        Abrir
-                                                    </>
-                                                            :
-                                                            type == 'DISENO'
-                                                                ?
-                                                                <>
-                                                                    <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
-                                                                    {' '}
-                                                            Abrir en máx. res.
-                                                        </>
-                                                                :
-                                                                null
-                                                    }
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        }
+            <main className='main-body below-navbar'>
+                <section className='container-pdf-preview position-relative'>
+                    <div>
+                        <Document
+                            file={resultUrl}
+                            onLoadSuccess={onDocumentLoadSuccess}
+                            onLoadError={onDocumentError}
+                            externalLinkTarget={'_blank'}>
+                            {
+                                Array.from(
+                                    new Array(numPages),
+                                    (el, index) => (
+                                        <Page
+                                            key={`page_${index + 1}`}
+                                            pageNumber={index + 1}
+                                        />
+                                    ),
+                                )
+                            }
+                        </Document>
                     </div>
                 </section>
             </main>
-            <Footer />
+            <div className='bottom-prev-navbar'>
+                <nav className='container-xl'>
+                    <button className='button-purple' onClick={like}>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
+                        {' '}
+                        Dar amor
+                    </button>
+                    <button className='button-purple' onClick={unlike}>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faHeartBroken} className='icon' />
+                    </button>
+                    <button className='button-purple'>
+                        <FacebookShareButton
+                            url={process.env.REACT_APP_WEBSITE + location.pathname + '?id=' + id}
+                            quote={`Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Tú también puedes pedir uno(a) en su página oficial :)`}
+                            hashtag="#templeluna"
+                            style={{ width: '100%', height: '100%' }}>
+                            <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
+                            {' '}
+                        Comparte
+                    </FacebookShareButton>
+                    </button>
+                    <button className='button-purple' onClick={() => window.open(resultUrl)}>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faDownload} className='icon' />
+                    </button>
+                </nav>
+            </div>
         </div>
     );
 }

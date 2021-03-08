@@ -1016,9 +1016,9 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   justify-content: space-between;
 }
 
-.bottom-prev-navbar button {
+.bottom-prev-navbar nav > button {
   display: block;
-  flex: 1;
+  flex-grow: 1;
   border: 2px solid #fbffba;
   border-radius: 10px;
   color: #fbffba;

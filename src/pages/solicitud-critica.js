@@ -7,6 +7,7 @@ import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import ImgLeyendo from '../img/sitting-reading.svg';
+import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { critiquePoints } from '../data/data';
 import { saveRequest } from '../api';
@@ -204,6 +205,7 @@ const Solicitud = () => {
 
     return (
         <div>
+            <HelmetMetaData title="¡Pide tu crítica en Temple Luna!" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
