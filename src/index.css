@@ -1016,7 +1016,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   justify-content: space-between;
 }
 
-.bottom-prev-navbar nav > button {
+.bottom-prev-navbar nav>button {
   display: block;
   flex-grow: 1;
   border: 2px solid #fbffba;
@@ -1042,6 +1042,30 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   padding-left: 1rem;
   padding-right: 1rem;
   flex: unset;
+}
+
+/*Burbuja de mensaje*/
+
+.bottom-prev-navbar .speech-container {
+  z-index: 50;
+  position: absolute;
+  bottom: calc(var(--bottom-navbar-height) - .8rem);
+  color: white;
+  left: 10%;
+  width: 70%;
+}
+
+@media (min-width: 768px) {
+  .bottom-prev-navbar .speech-container {
+    left: 30%;
+    width: auto;
+  }
+}
+
+@media (min-width: 1120px) {
+  .bottom-prev-navbar .speech-container {
+    left: 45%;
+  }
 }
 
 /*Pantalla de carga*/

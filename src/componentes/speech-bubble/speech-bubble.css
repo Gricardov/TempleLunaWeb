@@ -1,0 +1,36 @@
+.speech-bubble {
+    background: #35A5D4;
+    border-radius: .4em;
+    padding: .8rem 1.5rem;
+    font-size: 1.6rem;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgb(0 0 0 / 50%);
+}
+
+@media (min-width: 768px) {
+    .speech-bubble {
+        padding: 1.5rem;
+        font-size: 1.8rem;
+        width: auto;
+    }
+}
+
+.speech-bubble:hover {
+    background: #3fbff7;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 90%;
+    width: 0;
+    height: 0;
+    border: 22px solid transparent;
+    border-top-color: #35A5D4;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -11px;
+    margin-bottom: -22px;
+}

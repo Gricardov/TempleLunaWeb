@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../componentes/navbar';
 import LoadingScreen from '../componentes/loading-screen';
+import PunctuationModal from '../componentes/modal/punctuation';
 import queryString from 'query-string';
 import HelmetMetaData from "../componentes/helmet";
+import Fade from 'react-reveal/Fade';
 import { getRequest } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faDownload, faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { FacebookShareButton } from "react-share";
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import SpeechBubble from '../componentes/speech-bubble/speech-bubble';
 
 const Previsualizacion = ({ location }) => {
 
     const [isOpenPunctuationModal, setIsOpenPunctuationModal] = useState(false);
+    const [punctuationType, setPunctuationType] = useState('LIKE');
 
     const [isLoading, setIsLoading] = useState(true);
     const [success, setSuccess] = useState(false);
@@ -25,7 +29,7 @@ const Previsualizacion = ({ location }) => {
     const [author, setAuthor] = useState('');
 
     const [numPages, setNumPages] = useState(0);
-    const [hasScrolledToEnd, setHasScrolledToEnd] = useState(false);
+    const [hasScrolledToOffset, setHasScrolledToOffset] = useState(false);
 
     const checkScroll = () => {
         const body = document.body;
@@ -36,15 +40,17 @@ const Previsualizacion = ({ location }) => {
         const totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
             html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-        if ((totalHeight - (offsetY + vpHeight)) <= 20) {
-            if (!hasScrolledToEnd) {
-                setHasScrolledToEnd(true);
+        if ((totalHeight - (offsetY + vpHeight)) <= 350) {
+            if (!hasScrolledToOffset) {
+                setHasScrolledToOffset(true);
             }
-        } else if (hasScrolledToEnd) {
-            setHasScrolledToEnd(false);
+        } else {
+            if (hasScrolledToOffset) {
+                setHasScrolledToOffset(false);
+            }
+
         }
     }
-    console.log(hasScrolledToEnd)
     useEffect(() => {
         if (location && location.state && location.state.data) {
             const { type, resultUrl, title, name, id } = location.state.data;
@@ -83,7 +89,7 @@ const Previsualizacion = ({ location }) => {
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
         return () => window.removeEventListener('scroll', checkScroll);
-    }, []);
+    }, [hasScrolledToOffset]);
 
     const onDocumentLoadSuccess = ({ numPages }) => {
         setIsLoading(false);
@@ -97,11 +103,17 @@ const Previsualizacion = ({ location }) => {
     }
 
     const like = () => {
-
+        setPunctuationType('LIKE');
+        togglePunctuationModal();
     }
 
     const unlike = () => {
+        setPunctuationType('UNLIKE');
+        togglePunctuationModal();
+    }
 
+    const togglePunctuationModal = () => {
+        setIsOpenPunctuationModal(!isOpenPunctuationModal);
     }
 
     return (
@@ -111,6 +123,10 @@ const Previsualizacion = ({ location }) => {
             }
             <HelmetMetaData title={title + " - Temple Luna"} />
             <Navbar />
+            <PunctuationModal
+                type={punctuationType}
+                isOpen={isOpenPunctuationModal}
+                close={() => setIsOpenPunctuationModal(false)} />
             <main className='main-body below-navbar'>
                 <section className='container-pdf-preview position-relative'>
                     <div>
@@ -134,17 +150,23 @@ const Previsualizacion = ({ location }) => {
                     </div>
                 </section>
             </main>
-            <div className='bottom-prev-navbar'>
+            <div className='bottom-prev-navbar position-relative'>
+                <div className='speech-container'>
+                    <Fade when={hasScrolledToOffset}>
+                        <SpeechBubble text='Comparte esta crítica y genera interés en tu obra' />
+                    </Fade>
+                </div>
+
                 <nav className='container-xl'>
+                    <button className='button-purple' onClick={() => { }}>
+                        <FontAwesomeIcon color={'#fbffba'} icon={faBook} className='icon' />
+                        {' '}
+                        Leer obra
+                    </button>
                     <button className='button-purple' onClick={like}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
-                        {' '}
-                        Dar amor
                     </button>
-                    <button className='button-purple' onClick={unlike}>
-                        <FontAwesomeIcon color={'#fbffba'} icon={faHeartBroken} className='icon' />
-                    </button>
-                    <button className='button-purple'>
+                    <button className='button-purple position-relative'>
                         <FacebookShareButton
                             url={process.env.REACT_APP_WEBSITE + location.pathname + '?id=' + id}
                             quote={`Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Tú también puedes pedir uno(a) en su página oficial :)`}
