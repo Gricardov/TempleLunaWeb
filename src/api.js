@@ -61,8 +61,8 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
         });;
 }
 
-export const likeRequestResult = (id, direction) => {
-    return firestore.collection('solicitudes').doc(id).update({ likes: firebase.firestore.FieldValue.increment(direction) }, { merge: true });
+export const likeRequestResult = async (id, direction) => {
+    return request('addLove', { id, direction }, 'POST');
 }
 
 /*export const listenRequests = (workerId, type, status, limit = 10, callback) => {
@@ -194,16 +194,20 @@ export const getGeneratedId = async (collection) => {
 
 // Api fetch
 export const request = async (path, data, method, authorized) => {
-    const result = await fetch(process.env.REACT_APP_ENDPOINT + path, {
-        method: method,
-        body: data ? JSON.stringify(data) : null,
-        headers: {
-            Authorization: authorized ? 'Bearer ' + await auth.currentUser.getIdToken() : null
+    try {
+        const result = await fetch(process.env.REACT_APP_ENDPOINT + path, {
+            method: method,
+            body: data ? JSON.stringify(data) : null,
+            headers: {
+                Authorization: authorized ? 'Bearer ' + await auth.currentUser.getIdToken() : null
+            }
+        });
+        if (result.status == '200') {
+            return await result.json();
+        } else {
+            return { error: result.statusText || 'No se encontró el endpoint' };
         }
-    });
-    if (result.status == '200') {
-        return await result.json();
-    } else {
-        return { error: result.statusText };
+    } catch (error) {
+        return { error };
     }
 }

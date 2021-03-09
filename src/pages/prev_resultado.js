@@ -5,9 +5,9 @@ import PunctuationModal from '../componentes/modal/punctuation';
 import queryString from 'query-string';
 import HelmetMetaData from "../componentes/helmet";
 import Fade from 'react-reveal/Fade';
-import { getRequest } from '../api';
+import { getRequest, likeRequestResult } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faDownload, faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { FacebookShareButton } from "react-share";
@@ -22,11 +22,13 @@ const Previsualizacion = ({ location }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [success, setSuccess] = useState(false);
     const [loadingMsg, setLoadingMsg] = useState('Obteniendo tu archivo...');
+    const [link, setLink] = useState('');
     const [type, setType] = useState('');
     const [resultUrl, setResultUrl] = useState('');
     const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
+    const [isTemplated, setIsTemplated] = useState(false);
 
     const [numPages, setNumPages] = useState(0);
     const [hasScrolledToOffset, setHasScrolledToOffset] = useState(false);
@@ -53,25 +55,32 @@ const Previsualizacion = ({ location }) => {
     }
     useEffect(() => {
         if (location && location.state && location.state.data) {
-            const { type, resultUrl, title, name, id } = location.state.data;
+            const { type, resultUrl, title, name, link, id } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
             setId(id);
+            setLink(link);
             setType(type);
             setResultUrl(resultUrl);
             setTitle(title);
             setAuthor(name);
         } else {
             const id = queryString.parse(location.search).id;
+            const isTemplated = queryString.parse(location.search).templated;
             if (id) {
                 getRequest(id).then(({ data, error }) => {
                     if (!error) {
-                        const { type, resultUrl, title, name } = data;
+                        const { type, resultUrl, title, name, link } = data;
                         setLoadingMsg('Obtenido: ' + title);
                         setId(id);
+                        setLink(link);
                         setType(type);
                         setResultUrl(resultUrl);
                         setTitle(title);
                         setAuthor(name);
+
+                        if (isTemplated) {
+                            setIsTemplated(true);
+                        }
                     } else {
                         alert('No se encontró el archivo. Intente más tarde');
                         setIsLoading(false);
@@ -103,8 +112,14 @@ const Previsualizacion = ({ location }) => {
     }
 
     const like = () => {
-        setPunctuationType('LIKE');
-        togglePunctuationModal();
+        likeRequestResult(id, 1).then(({ data, error }) => {
+            if (!error) {
+                setPunctuationType('LIKE');
+                togglePunctuationModal();
+            } else {
+                alert('No se pudo agregar el like');
+            }
+        });
     }
 
     const unlike = () => {
@@ -114,6 +129,13 @@ const Previsualizacion = ({ location }) => {
 
     const togglePunctuationModal = () => {
         setIsOpenPunctuationModal(!isOpenPunctuationModal);
+    }
+
+    let shareQuote;
+    if (isTemplated) {
+        shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`;
+    } else {
+        shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'esta interesante crítica' : type == 'DISENO' ? 'este gran diseño' : 'este gran trabajo'} que encontré en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`
     }
 
     return (
@@ -158,18 +180,22 @@ const Previsualizacion = ({ location }) => {
                 </div>
 
                 <nav className='container-xl'>
-                    <button className='button-purple' onClick={() => { }}>
+                    <button className='button-purple' onClick={() => window.open(link)}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faBook} className='icon' />
                         {' '}
                         Leer obra
                     </button>
-                    <button className='button-purple' onClick={like}>
-                        <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
-                    </button>
+                    {
+                        isTemplated
+                        &&
+                        <button className='button-purple' onClick={like}>
+                            <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
+                        </button>
+                    }
                     <button className='button-purple position-relative'>
                         <FacebookShareButton
                             url={process.env.REACT_APP_WEBSITE + location.pathname + '?id=' + id}
-                            quote={`Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Tú también puedes pedir uno(a) en su página oficial :)`}
+                            quote={shareQuote}
                             hashtag="#templeluna"
                             style={{ width: '100%', height: '100%' }}>
                             <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
