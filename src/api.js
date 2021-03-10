@@ -65,6 +65,10 @@ export const likeRequestResult = async (id, direction) => {
     return request('addLove', { id, direction }, 'POST');
 }
 
+export const addCommentRequestResult = async (id, alias, message) => {
+    return request('addComment', { id, alias, message }, 'POST');
+}
+
 /*export const listenRequests = (workerId, type, status, limit = 10, callback) => {
     let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
     if (workerId) {

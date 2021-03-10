@@ -22,7 +22,7 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const Modal = ({ isOpen, data, takeRequest, takingRequest, succesfulRequestTake, close }) => {
+const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
 
     const { logged } = useContext(AuthContext);
 

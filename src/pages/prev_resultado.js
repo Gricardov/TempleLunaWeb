@@ -4,15 +4,22 @@ import LoadingScreen from '../componentes/loading-screen';
 import PunctuationModal from '../componentes/modal/punctuation';
 import queryString from 'query-string';
 import HelmetMetaData from "../componentes/helmet";
+import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import { getRequest, likeRequestResult } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { css } from "@emotion/core";
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { FacebookShareButton } from "react-share";
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import SpeechBubble from '../componentes/speech-bubble/speech-bubble';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+
+const overrideSpinnerInline = css`
+  display: inline-block;
+  vertical-align: middle;
+`;
 
 const Previsualizacion = ({ location }) => {
 
@@ -28,6 +35,8 @@ const Previsualizacion = ({ location }) => {
     const [id, setId] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
+    const [likes, setLikes] = useState(0);
+    const [addingLove, setAddingLove] = useState(false);
     const [isTemplated, setIsTemplated] = useState(false);
 
     const [numPages, setNumPages] = useState(0);
@@ -55,7 +64,7 @@ const Previsualizacion = ({ location }) => {
     }
     useEffect(() => {
         if (location && location.state && location.state.data) {
-            const { type, resultUrl, title, name, link, id } = location.state.data;
+            const { type, resultUrl, title, name, link, likes, id } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
             setId(id);
             setLink(link);
@@ -63,13 +72,14 @@ const Previsualizacion = ({ location }) => {
             setResultUrl(resultUrl);
             setTitle(title);
             setAuthor(name);
+            setLikes(likes);
         } else {
             const id = queryString.parse(location.search).id;
             const isTemplated = queryString.parse(location.search).templated;
             if (id) {
                 getRequest(id).then(({ data, error }) => {
                     if (!error) {
-                        const { type, resultUrl, title, name, link } = data;
+                        const { type, resultUrl, title, name, link, likes } = data;
                         setLoadingMsg('Obtenido: ' + title);
                         setId(id);
                         setLink(link);
@@ -77,6 +87,7 @@ const Previsualizacion = ({ location }) => {
                         setResultUrl(resultUrl);
                         setTitle(title);
                         setAuthor(name);
+                        setLikes(likes);
 
                         if (isTemplated) {
                             setIsTemplated(true);
@@ -112,20 +123,26 @@ const Previsualizacion = ({ location }) => {
     }
 
     const like = () => {
-        likeRequestResult(id, 1).then(({ data, error }) => {
-            if (!error) {
-                setPunctuationType('LIKE');
-                togglePunctuationModal();
-            } else {
-                alert('No se pudo agregar el like');
-            }
-        });
+        if (!likes) {
+            setAddingLove(true);
+            likeRequestResult(id, 1).then(({ data, error }) => {
+                if (!error) {
+                    setAddingLove(false);
+                    setLikes(1);
+                    setPunctuationType('LIKE');
+                    togglePunctuationModal();
+                } else {
+                    setAddingLove(false);
+                    alert('No se pudo agregar el like');
+                }
+            });
+        }
     }
 
-    const unlike = () => {
+    /*const unlike = () => {
         setPunctuationType('UNLIKE');
         togglePunctuationModal();
-    }
+    }*/
 
     const togglePunctuationModal = () => {
         setIsOpenPunctuationModal(!isOpenPunctuationModal);
@@ -146,6 +163,7 @@ const Previsualizacion = ({ location }) => {
             <HelmetMetaData title={title + " - Temple Luna"} />
             <Navbar />
             <PunctuationModal
+                requestId={id}
                 type={punctuationType}
                 isOpen={isOpenPunctuationModal}
                 close={() => setIsOpenPunctuationModal(false)} />
@@ -187,10 +205,24 @@ const Previsualizacion = ({ location }) => {
                     </button>
                     {
                         isTemplated
-                        &&
-                        <button className='button-purple' onClick={like}>
-                            <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
-                        </button>
+                            ?
+                            addingLove
+                                ?
+                                <button className='button-purple' onClick={like}>
+                                    <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
+                                </button>
+                                :
+                                likes > 0
+                                    ?
+                                    <button className='button-purple button-liked' onClick={() => { }}>
+                                        <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
+                                    </button>
+                                    :
+                                    <button className='button-purple' onClick={like}>
+                                        <FontAwesomeIcon color={'#fbffba'} icon={faHeart} className='icon' />
+                                    </button>
+                            :
+                            null
                     }
                     <button className='button-purple position-relative'>
                         <FacebookShareButton
@@ -208,7 +240,7 @@ const Previsualizacion = ({ location }) => {
                     </button>
                 </nav>
             </div>
-        </div>
+        </div >
     );
 }
 
