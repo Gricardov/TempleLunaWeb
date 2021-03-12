@@ -21,11 +21,16 @@ export const setRequestDone = async (data) => {
     return request('generateResultRequest', data, 'POST', true);
 }
 
-export const getRequest = async (requestId) => {
+export const getRequest = async (requestId, includeDetails) => {
     return firestore.collection('solicitudes').doc(requestId).get()
-        .then(doc => {
+        .then(async doc => {
             if (doc.exists) {
-                return { data: { ...doc.data(), id: doc.id } }
+                const res = await request('getArtistDataByRequestId', { requestId }, 'POST', true);
+                if (!res.error) {
+                    return { data: { ...doc.data(), id: doc.id, artist: res.artist } }
+                } else {
+                    return { error: 'No existe el artista' }
+                }
             } else {
                 return { error: 'No existe una solicitud con ese id' }
             }

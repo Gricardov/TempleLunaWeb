@@ -23,7 +23,7 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const Modal = ({ requestId, isOpen, type, close }) => {
+const Modal = ({ isOpen, requestId, requestType, close }) => {
 
     const { logged } = useContext(AuthContext);
     const [alias, setAlias] = useState('');
@@ -35,22 +35,27 @@ const Modal = ({ requestId, isOpen, type, close }) => {
     let message = '';
     let messagePlaceholder = '';
     let styles = '';
+
     if (isOpen) {
         styles = 'open';
     } else {
         styles = 'close';
     }
 
-    switch (type) {
-        case 'LIKE':
+    if (success) {
+        styles += ' punctuation-modal';
+    }
+
+    switch (requestType) {
+        case 'CRITICA':
             title = '¡Maravilloso!';
             message = 'Has dado amor a esta crítica. ¿Deseas dejarle un mensaje al crítico?';
             messagePlaceholder = 'Me encantó la crítica, tu punto de vista me ayudará en mucho.';
             break;
-        case 'UNLIKE':
-            title = '¡Listo!';
-            message = 'Siempre puedes decirle al crítico en qué podria mejorar';
-            messagePlaceholder = 'Pienso que podrías mejorar estos aspectos: ...'
+        case 'DISENO':
+            title = '¡Maravilloso!';
+            message = 'Has dado amor a este diseño. ¿Deseas dejarle un mensaje al diseñador?';
+            messagePlaceholder = 'Me encantó el diseño, aunque pienso que puedes mejorar en...';
             break;
     }
 
@@ -99,7 +104,7 @@ const Modal = ({ requestId, isOpen, type, close }) => {
                                         <h3 className='clamp clamp-1'>¡Listo!</h3>
                                     </div>
                                     <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
-                                </div>                                
+                                </div>
                                 <div className="footer-card-container">
                                     <button onClick={close} className='button button-green stretch'>
                                         <FontAwesomeIcon icon={faCheck} size='xl' />

@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faPaintBrush, faEye, faDownload, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { getProfileStorage } from '../../helpers/userStorage';
 import './card.css'
 
 const Card = React.forwardRef(({ data, select }, ref) => {
@@ -13,6 +14,15 @@ const Card = React.forwardRef(({ data, select }, ref) => {
     const history = useHistory();
 
     const isTakenByMe = data?.takenBy == logged.uid;
+
+    const profile = getProfileStorage();
+    const artist = {
+        fName: profile.fName || '',
+        lName: profile.lName || '',
+        contactEmail: profile.contactEmail || '',
+        networks: profile.networks || []
+    };
+    data.artist = artist;
 
     return (
         <div ref={ref} className='request-card-container'>
@@ -49,17 +59,17 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                                 ?
                                 <button onClick={() => history.push('prep_critica', { data })} className='button button-green button-option-request'>
                                     <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
-                                Iniciar crítica
-                            </button>
+                                    Iniciar crítica
+                                </button>
                                 :
                                 data?.type == 'DISENO'
                                     ?
-                                    <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
-                                        <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
+                                <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
+                                    <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
                                     Iniciar diseño
                                 </button>
                                     :
-                                    null
+                                null
                         )
                     }
                     {

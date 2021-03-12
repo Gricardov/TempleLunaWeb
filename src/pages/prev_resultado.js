@@ -36,6 +36,7 @@ const Previsualizacion = ({ location }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [likes, setLikes] = useState(0);
+    const [artist, setArtist] = useState({});
     const [addingLove, setAddingLove] = useState(false);
     const [isTemplated, setIsTemplated] = useState(false);
 
@@ -64,7 +65,7 @@ const Previsualizacion = ({ location }) => {
     }
     useEffect(() => {
         if (location && location.state && location.state.data) {
-            const { type, resultUrl, title, name, link, likes, id } = location.state.data;
+            const { type, resultUrl, title, name, link, likes, id, artist } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
             setId(id);
             setLink(link);
@@ -73,13 +74,14 @@ const Previsualizacion = ({ location }) => {
             setTitle(title);
             setAuthor(name);
             setLikes(likes);
+            setArtist(artist);
         } else {
             const id = queryString.parse(location.search).id;
             const isTemplated = queryString.parse(location.search).templated;
             if (id) {
-                getRequest(id).then(({ data, error }) => {
+                getRequest(id, true).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
                     if (!error) {
-                        const { type, resultUrl, title, name, link, likes } = data;
+                        const { type, resultUrl, title, name, link, likes, artist } = data;
                         setLoadingMsg('Obtenido: ' + title);
                         setId(id);
                         setLink(link);
@@ -88,7 +90,7 @@ const Previsualizacion = ({ location }) => {
                         setTitle(title);
                         setAuthor(name);
                         setLikes(likes);
-
+                        setArtist(artist);
                         if (isTemplated) {
                             setIsTemplated(true);
                         }
@@ -111,7 +113,7 @@ const Previsualizacion = ({ location }) => {
         return () => window.removeEventListener('scroll', checkScroll);
     }, [hasScrolledToOffset]);
 
-    const onDocumentLoadSuccess = ({ numPages }) => {
+    const onDocumentLoadSuccess = ({ numPages = 0 }) => {
         setIsLoading(false);
         setSuccess(true);
         setNumPages(numPages);
@@ -149,10 +151,21 @@ const Previsualizacion = ({ location }) => {
     }
 
     let shareQuote;
+    let speechBubble;
+
     if (isTemplated) {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`;
     } else {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'esta interesante crítica' : type == 'DISENO' ? 'este gran diseño' : 'este gran trabajo'} que encontré en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`
+    }
+
+    switch (type) {
+        case 'CRITICA':
+            speechBubble = 'Comparte esta crítica y genera interés en tu obra';
+            break;
+        case 'DISENO':
+            speechBubble = 'Comparte este diseño y genera interés en tu obra';
+            break;
     }
 
     return (
@@ -164,36 +177,53 @@ const Previsualizacion = ({ location }) => {
             <Navbar />
             <PunctuationModal
                 requestId={id}
-                type={punctuationType}
+                requestType={type}
+                punctuationType={punctuationType}
                 isOpen={isOpenPunctuationModal}
                 close={() => setIsOpenPunctuationModal(false)} />
             <main className='main-body below-navbar'>
                 <section className='container-pdf-preview position-relative'>
                     <div>
-                        <Document
-                            file={resultUrl}
-                            onLoadSuccess={onDocumentLoadSuccess}
-                            onLoadError={onDocumentError}
-                            externalLinkTarget={'_blank'}>
-                            {
-                                Array.from(
-                                    new Array(numPages),
-                                    (el, index) => (
-                                        <Page
-                                            key={`page_${index + 1}`}
-                                            pageNumber={index + 1}
-                                        />
-                                    ),
-                                )
-                            }
-                        </Document>
+                        {
+                            type == 'CRITICA'
+                                ?
+                                <Document
+                                    file={resultUrl}
+                                    onLoadSuccess={onDocumentLoadSuccess}
+                                    onLoadError={onDocumentError}
+                                    externalLinkTarget={'_blank'}>
+                                    {
+                                        Array.from(
+                                            new Array(numPages),
+                                            (el, index) => (
+                                                <Page
+                                                    key={`page_${index + 1}`}
+                                                    pageNumber={index + 1}
+                                                />
+                                            ),
+                                        )
+                                    }
+                                </Document>
+                                :
+                                type == 'DISENO'
+                                    ?
+                                    <div className='container-xl'>
+                                        <h3>Diseño de la obra: {title}</h3>
+                                        <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
+                                        <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
+                                        <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
+                                        <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
+                                    </div>
+                                    :
+                                    null
+                        }
                     </div>
                 </section>
             </main>
             <div className='bottom-prev-navbar position-relative'>
                 <div className='speech-container'>
                     <Fade when={hasScrolledToOffset}>
-                        <SpeechBubble text='Comparte esta crítica y genera interés en tu obra' />
+                        <SpeechBubble text={speechBubble} />
                     </Fade>
                 </div>
 

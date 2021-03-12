@@ -11,6 +11,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faHandPaper, faLayerGroup, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
 
 const iconSize = 20;
@@ -76,6 +77,17 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
     }
 
     const isTakenByMe = data?.takenBy == logged.uid;
+
+    const profile = getProfileStorage();
+    const artist = {
+        fName: profile.fName || '',
+        lName: profile.lName || '',
+        contactEmail: profile.contactEmail || '',
+        networks: profile.networks || []
+    };
+    if (data){
+        data.artist = artist;
+    }
 
     if (isTakenByMe) {
         getExpDateText(data?.takenAt, data?.expDate)

@@ -288,6 +288,20 @@ p {
   }
 }
 
+.container-pdf-preview img {
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgb(0 0 0 / 50%);
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container-pdf-preview img {
+    max-width: 100%;
+  }
+}
+
 .below-navbar {
   padding-top: var(--navbar-height);
 }

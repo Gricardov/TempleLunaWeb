@@ -177,3 +177,17 @@
     z-index: 50;
     position: relative
 }
+
+/*Puntuación modal*/
+
+.punctuation-modal {
+    min-height: 150px;
+    height: 150px;
+}
+
+@media (min-width: 768px) {
+    .punctuation-modal {
+        min-height: 200px;
+        height: 200px;
+    }
+}
