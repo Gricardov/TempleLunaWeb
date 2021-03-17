@@ -64,6 +64,7 @@ const Previsualizacion = ({ location }) => {
         }
     }
     useEffect(() => {
+        setTitle('Ejemplo')
         if (location && location.state && location.state.data) {
             const { type, resultUrl, title, name, link, likes, id, artist } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
@@ -168,8 +169,8 @@ const Previsualizacion = ({ location }) => {
             break;
     }
 
-    const url = process.env.REACT_APP_WEBSITE + location.pathname 
-    console.log(url+'xd')
+    const url = process.env.REACT_APP_WEBSITE + window.location.pathname + window.location.search;
+    
     return (
         <div>
             {
