@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
-const Metadata = ({ url, quote = "", title = "Temple Luna - Lectores y escritores", image = "https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44", description = "Somos Temple Luna, la gran comunidad literaria de latinoamérica que plantea una nueva forma de compartir historias.", hashtag = "#templeluna" }) => {
+const Metadata = ({ url, quote = "", title = "Temple Luna - Lectores y escritores", image = "https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44", description = "Somos Temple Luna, la gran comunidad literaria de habla hispana que plantea una nueva forma de compartir historias.", hashtag = "#templeluna" }) => {
     let location = useLocation();
     let currentUrl = url || process.env.REACT_APP_WEBSITE + location.pathname;
 
