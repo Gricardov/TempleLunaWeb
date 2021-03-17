@@ -168,12 +168,14 @@ const Previsualizacion = ({ location }) => {
             break;
     }
 
+    const url = process.env.REACT_APP_WEBSITE + location.pathname 
+
     return (
         <div>
             {
                 isLoading && <LoadingScreen text={loadingMsg} />
             }
-            <HelmetMetaData title={title + " - Temple Luna"} />
+            <HelmetMetaData url={url} title={title + " - Temple Luna"} />
             <Navbar />
             <PunctuationModal
                 requestId={id}
@@ -256,7 +258,7 @@ const Previsualizacion = ({ location }) => {
                     }
                     <button className='button-purple position-relative'>
                         <FacebookShareButton
-                            url={process.env.REACT_APP_WEBSITE + location.pathname + '?id=' + id}
+                            url={url}
                             quote={shareQuote}
                             hashtag="#templeluna"
                             style={{ width: '100%', height: '100%' }}>

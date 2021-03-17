@@ -25,7 +25,7 @@ export const getRequest = async (requestId, includeDetails) => {
     return firestore.collection('solicitudes').doc(requestId).get()
         .then(async doc => {
             if (doc.exists) {
-                const res = await request('getArtistDataByRequestId', { requestId }, 'POST', true);
+                const res = await request('getArtistDataByRequestId', { requestId }, 'POST');                
                 if (!res.error) {
                     return { data: { ...doc.data(), id: doc.id, artist: res.artist } }
                 } else {
