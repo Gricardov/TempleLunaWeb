@@ -169,7 +169,7 @@ const Previsualizacion = ({ location }) => {
     }
 
     const url = process.env.REACT_APP_WEBSITE + location.pathname 
-
+    console.log(url)
     return (
         <div>
             {
