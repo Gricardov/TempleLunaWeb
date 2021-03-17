@@ -33,7 +33,7 @@ const Previsualizacion = ({ location }) => {
     const [type, setType] = useState('');
     const [resultUrl, setResultUrl] = useState('');
     const [id, setId] = useState('');
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(queryString.parse(location.search).t || 'Tu obra');
     const [author, setAuthor] = useState('');
     const [likes, setLikes] = useState(0);
     const [artist, setArtist] = useState({});
@@ -64,7 +64,6 @@ const Previsualizacion = ({ location }) => {
         }
     }
     useEffect(() => {
-        setTitle('Ejemplo')
         if (location && location.state && location.state.data) {
             const { type, resultUrl, title, name, link, likes, id, artist } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
@@ -152,7 +151,7 @@ const Previsualizacion = ({ location }) => {
     }
 
     let shareQuote;
-    let speechBubble;
+    let speechBubble = 'Comparte en un grupo y atrae lectores hacia tu obra';
 
     if (isTemplated) {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`;
@@ -160,17 +159,8 @@ const Previsualizacion = ({ location }) => {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'esta interesante crítica' : type == 'DISENO' ? 'este gran diseño' : 'este gran trabajo'} que encontré en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`
     }
 
-    switch (type) {
-        case 'CRITICA':
-            speechBubble = 'Comparte esta crítica y genera interés en tu obra';
-            break;
-        case 'DISENO':
-            speechBubble = 'Comparte este diseño y genera interés en tu obra';
-            break;
-    }
-
     const url = process.env.REACT_APP_WEBSITE + window.location.pathname + window.location.search;
-    
+
     return (
         <div>
             {
@@ -259,7 +249,7 @@ const Previsualizacion = ({ location }) => {
                     }
                     <button className='button-purple position-relative'>
                         <FacebookShareButton
-                            url={url}
+                            url={url.toString().replace(/templated=true/g,"")}
                             quote={shareQuote}
                             hashtag="#templeluna"
                             style={{ width: '100%', height: '100%' }}>
