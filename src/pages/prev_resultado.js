@@ -252,7 +252,7 @@ const Previsualizacion = ({ location }) => {
                             url={url.toString().replace(/templated=true/g, "")}
                             quote={shareQuote}
                             className='py-08'
-                            hashtag="#templeluna"
+                            hashtag='#templeluna'
                             style={{ width: '100%', height: '100%' }}>
                             <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
                             {' '}

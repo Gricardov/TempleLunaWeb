@@ -120,7 +120,7 @@ const Admin = () => {
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
-            takeRequest(requestId, requestType, 3)
+            takeRequest(requestId, requestType)
                 .then((res) => {
                     if (!res.error) {
                         getRequest(requestId).then(({ data, error }) => {

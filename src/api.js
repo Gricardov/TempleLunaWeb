@@ -9,8 +9,8 @@ const storage = firebase.storage();
 
 // Solicitudes
 
-export const takeRequest = async (requestId, type, expDays) => {
-    return request('takeRequest', { requestId, type, expDays }, 'POST', true);
+export const takeRequest = async (requestId, type) => {
+    return request('takeRequest', { requestId, type }, 'POST', true);
 }
 
 export const saveRequest = async (object) => {

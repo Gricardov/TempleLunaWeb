@@ -223,7 +223,7 @@ const Solicitud = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>En menos de 3 días te contactaremos</p>
+                                    <p className='txt-responsive-form m0-auto'>En unos días te contactaremos</p>
                                     <div className='form-buttons-container mt-3'>
                                         <Link to={'inicio'} className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faHome} size='xl' />
