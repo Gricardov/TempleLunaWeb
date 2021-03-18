@@ -151,7 +151,7 @@ const Previsualizacion = ({ location }) => {
     }
 
     let shareQuote;
-    let speechBubble = 'Comparte en un grupo y atrae lectores a la obra';
+    let speechBubble = 'Compartelo en un grupo y atrae lectores a la obra';
 
     if (isTemplated) {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`;

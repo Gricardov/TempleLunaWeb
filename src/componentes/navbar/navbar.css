@@ -11,23 +11,21 @@
 }
 
 .container-navbar .navbar-nav {
-    display: none;
+    display: flex;
+    align-items: center;
 }
 
 @media (min-width: 768px) {
     .container-navbar .navbar-nav {
         display: flex;
-        align-items: center;
     }
 }
 
-.navbar-nav .btn-nav {
-    display: block;
-    text-align: center;
-    padding: 1.5rem 0 1.5rem 0;
+.navbar-nav .btn-nav {    
+    text-align: left;
     color: white;
     font-size: 2rem;
-    margin-left: 4rem;
+    margin: 0;
 }
 
 .navbar-nav .btn-nav:hover {
@@ -35,9 +33,15 @@
     cursor: pointer;
 }
 
-/*.navbar-nav .btn-nav:last-of-type {
-    margin-right: 0;
-}*/
+.navbar-nav .btn-nav:last-of-type {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav .btn-nav:last-of-type {
+        display: block;
+    }
+}
 
 .navbar-scrolled {
     background-color: #8B81EC;
@@ -45,6 +49,7 @@
 }
 
 .main-navbar {
+    display: flex;
     position: fixed;
     top: 0;
     width: 100%;
@@ -53,6 +58,7 @@
     text-align: center;
     z-index: 10;
     transition: all 200ms ease-in-out;
+    min-height: 63.66px;
 }
 
 @media (min-width: 768px) {
@@ -60,18 +66,21 @@
         padding-top: 2.5rem;
         padding-bottom: 2rem;
         text-align: left;
+        min-height: 103px;
     }
 }
 
 .main-navbar .logo-header {
     width: 150px;
     margin-left: auto;
+    display: none;
 }
 
 @media (min-width: 768px) {
     .main-navbar .logo-header {
         width: 200px;
         margin-left: 0;
+        display: block;
     }
 }
 
@@ -86,9 +95,18 @@
 }
 
 .main-navbar .img-profile-navbar {
+    order: -1;
     width: 50px;
     height: 50px;
-    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .main-navbar .img-profile-navbar {
+        order: 0;
+        margin-right: 0;
+        margin-left: 1rem;
+    }
 }
 
 .main-navbar .container-submenu-navbar {

@@ -108,14 +108,13 @@ const Navbar = ({ startTransparent }) => {
                 <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />
                 </Link>
-                <img alt='sanguchito' onClick={open} src={Sanguchito} className='img-sanguchito' />
                 <div className='navbar-nav'>
                     {
                         logged
                             ?
                             <>
-                                <span className='btn-nav'>
-                                    Hola, {fName}
+                                <span className='btn-nav clamp clamp-1'>
+                                    Te queremos, {fName}
                                 </span>
                                 <Avatar clases='img-profile-navbar' />
                                 <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav m-0 pl-1 pr-1'>
@@ -136,6 +135,7 @@ const Navbar = ({ startTransparent }) => {
                             </>
                     }
                 </div>
+                <img alt='sanguchito' onClick={open} src={Sanguchito} className='img-sanguchito' />
             </div>
             <div ref={outsideListenerRef} className={optionsClasses}>
                 <ul>
