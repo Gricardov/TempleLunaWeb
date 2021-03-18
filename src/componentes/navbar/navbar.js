@@ -105,10 +105,10 @@ const Navbar = ({ startTransparent }) => {
     return (
         <nav className={navClasses}>
             <div className='container-xl container-navbar position-relative'>
-                <Link to='/' className='logo-header'>
+                <Link to='/' className={`logo-header ${!logged ? 'd-block' : ''}`}>
                     <img alt='logo' src={Logo} />
                 </Link>
-                <div className='navbar-nav'>
+                <div className={`navbar-nav ${!logged ? 'd-none' : ''}`}>
                     {
                         logged
                             ?

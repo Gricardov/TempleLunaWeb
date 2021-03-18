@@ -196,7 +196,7 @@ p {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .b-shadow-none {
@@ -210,7 +210,7 @@ p {
 }
 
 .d-block {
-  display: block;
+  display: block !important;
 }
 
 .d-inline {
