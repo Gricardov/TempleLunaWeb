@@ -159,7 +159,7 @@ const Previsualizacion = ({ location }) => {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'esta interesante crítica' : type == 'DISENO' ? 'este gran diseño' : 'este gran trabajo'} que encontré en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`
     }
 
-    const url = process.env.REACT_APP_WEBSITE + window.location.pathname + window.location.search;
+    const url = process.env.REACT_APP_WEBSITE + window.location.pathname + '?id=' + id;
 
     return (
         <div>
@@ -247,10 +247,11 @@ const Previsualizacion = ({ location }) => {
                             :
                             null
                     }
-                    <button className='button-purple position-relative'>
+                    <button className='button-purple position-relative p-0'>
                         <FacebookShareButton
-                            url={url.toString().replace(/templated=true/g,"")}
+                            url={url.toString().replace(/templated=true/g, "")}
                             quote={shareQuote}
+                            className='py-08'
                             hashtag="#templeluna"
                             style={{ width: '100%', height: '100%' }}>
                             <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
