@@ -76,10 +76,10 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
 
     const profile = getProfileStorage();
     const artist = {
-        fName: profile.fName || '',
-        lName: profile.lName || '',
-        contactEmail: profile.contactEmail || '',
-        networks: profile.networks || []
+        fName: profile?.fName || '',
+        lName: profile?.lName || '',
+        contactEmail: profile?.contactEmail || '',
+        networks: profile?.networks || []
     };
     if (data){
         data.artist = artist;
