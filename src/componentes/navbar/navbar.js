@@ -86,6 +86,9 @@ const Navbar = ({ startTransparent }) => {
     if (!startTransparent || scrolled) {
         navClasses += ' navbar-scrolled';
     }
+    if (logged) {
+        navClasses += ' logged';
+    }
 
     let optionsClasses = 'container-submenu-navbar';
     if (openOptions) {
@@ -105,10 +108,10 @@ const Navbar = ({ startTransparent }) => {
     return (
         <nav className={navClasses}>
             <div className='container-xl container-navbar position-relative'>
-                <Link to='/' className={`logo-header ${!logged ? 'd-block' : ''}`}>
+                <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />
                 </Link>
-                <div className={`navbar-nav ${!logged ? 'd-none' : ''}`}>
+                <div className='navbar-nav'>
                     {
                         logged
                             ?

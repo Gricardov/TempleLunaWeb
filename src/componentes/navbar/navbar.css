@@ -10,18 +10,23 @@
     }
 }
 
-.container-navbar .navbar-nav {
+.main-navbar .container-navbar .navbar-nav {
+    display: none;
+}
+
+.main-navbar.logged .container-navbar .navbar-nav {
     display: flex;
     align-items: center;
 }
 
 @media (min-width: 768px) {
-    .container-navbar .navbar-nav {
+    .main-navbar .container-navbar .navbar-nav {
         display: flex;
+        align-items: center;
     }
 }
 
-.navbar-nav .btn-nav {    
+.navbar-nav .btn-nav {
     text-align: left;
     color: white;
     font-size: 2rem;
@@ -73,11 +78,14 @@
 .main-navbar .logo-header {
     width: 150px;
     margin-left: auto;
+}
+
+.main-navbar.logged .logo-header {
     display: none;
 }
 
 @media (min-width: 768px) {
-    .main-navbar .logo-header {
+    .main-navbar .logo-header, .main-navbar.logged .logo-header {
         width: 200px;
         margin-left: 0;
         display: block;
