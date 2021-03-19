@@ -237,7 +237,7 @@ const Solicitud = () => {
     return (
         <div>
             <Navbar />
-            <HelmetMetaData title="¡Pide tu diseño en Temple Luna!" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
+            <HelmetMetaData title="Diseños - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <h2 className='mb-0'>Pide un diseño</h2>
