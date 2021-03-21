@@ -38,3 +38,15 @@
 .selectable-list-item:hover {
     background: #ded9ff;
 }
+
+.dropdown-list-tag {
+    position: absolute;
+    right: -30px;
+    bottom: -15px;
+    padding: 2px 5px;
+    background: #8B81EC;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.2rem;
+    z-index: 100;
+}

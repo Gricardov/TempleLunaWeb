@@ -196,13 +196,11 @@ const Solicitud = () => {
             return true;
         }
 
-        // Link (optional)
-        if (link) {
+        // Link
             if (!(/^(?!\s*$).{1,500}/.test(link))) {
                 alert('Tu link debe tener de 1 a 500 caracteres');
                 return true;
             }
-        }
 
         // Title
         if (!(/^(?!\s*$).{1,100}/.test(title))) {
@@ -307,7 +305,7 @@ const Solicitud = () => {
                                                             select={updDesignType} />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtLink">Link de tu obra (Opcional)</label>
+                                                        <label htmlFor="txtLink">Link de tu obra</label>
                                                         <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />
                                                     </div>
                                                 </div>
@@ -326,7 +324,7 @@ const Solicitud = () => {
                                                         <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Quiero transmitir la idea de un mundo inestable e idealizado por una típica adolescente..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="flBoceto">¿Tienes algún boceto en imagen? (Opcional)</label>
+                                                        <label htmlFor="flBoceto">¿Tienes algún boceto en mente? Súbelo</label>
                                                         {
                                                             imgSample
                                                                 ?

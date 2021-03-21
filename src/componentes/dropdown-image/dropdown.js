@@ -30,16 +30,26 @@ const Dropdown = ({ list, select, stretch }) => {
         select(item.type);
     }
 
+    const tag = (text) => (
+        text &&
+        <span className='dropdown-list-tag'>
+            {text}
+        </span>
+    )
+
     return (
         <div
             ref={outsideListenerRef}
             className='container-select-image'>
-            <button className={`select-image ${stretch ? 'stretch' : ''}`} onClick={toggleDropdown}>
+            <button className={`select-image position-relative ${stretch ? 'stretch' : ''}`} onClick={toggleDropdown}>
                 <span className={selectedItem.icon} style={{ color, marginRight: '1rem', fontSize: tamanoIcono + 'px' }}></span>
                 {
                     selectedItem.text
                     &&
-                    <span className='mr-1' style={{ color }}>{selectedItem.text}</span>
+                    <span className='mr-1 position-relative' style={{ color }}>
+                        {selectedItem.text}
+                        {tag(selectedItem.tag)}
+                    </span>
                 }
                 <span className='fa fa-caret-down' style={{ color }}></span>
             </button>
@@ -54,7 +64,10 @@ const Dropdown = ({ list, select, stretch }) => {
                                 {
                                     item.text
                                     &&
-                                    <span className='ml-1' style={{ color }}>{item.text}</span>
+                                    <span className='ml-1 position-relative' style={{ color }}>
+                                        {item.text}
+                                        {tag(item.tag)}
+                                    </span>
                                 }
                             </div>
                         ))
