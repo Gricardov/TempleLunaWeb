@@ -35,7 +35,7 @@ const Solicitud = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
-    const [messengerType, setMessengerType] = useState('WSP');
+    const [messengerType, setMessengerType] = useState(contactTypes[0].type);
     const [email, setEmail] = useState('');
     const [link, setLink] = useState('');
     const [title, setTitle] = useState('');

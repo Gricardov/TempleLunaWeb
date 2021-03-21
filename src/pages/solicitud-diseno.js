@@ -36,9 +36,9 @@ const Solicitud = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
-    const [messengerType, setMessengerType] = useState('WSP');
+    const [messengerType, setMessengerType] = useState(contactTypes[0].type);
     const [email, setEmail] = useState('');
-    const [designType, setDesignType] = useState('POR');
+    const [designType, setDesignType] = useState(designTypes[0].type);
     const [link, setLink] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -197,10 +197,10 @@ const Solicitud = () => {
         }
 
         // Link
-            if (!(/^(?!\s*$).{1,500}/.test(link))) {
-                alert('Tu link debe tener de 1 a 500 caracteres');
-                return true;
-            }
+        if (!(/^(?!\s*$).{1,500}/.test(link))) {
+            alert('Tu link debe tener de 1 a 500 caracteres');
+            return true;
+        }
 
         // Title
         if (!(/^(?!\s*$).{1,100}/.test(title))) {
@@ -235,7 +235,7 @@ const Solicitud = () => {
     return (
         <div>
             <Navbar />
-            <HelmetMetaData title="Diseños - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
+            <HelmetMetaData title="Diseños - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!" />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <h2 className='mb-0'>Pide un diseño</h2>
