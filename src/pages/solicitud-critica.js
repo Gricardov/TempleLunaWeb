@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgLeyendo from '../img/sitting-reading.svg';
+import ImgLeyendo from '../img/cri-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { critiquePoints } from '../data/data';

@@ -25,15 +25,15 @@ const Inicio = () => {
                             </div>
                             <h3>Críticas</h3>
                             <p>Todos los críticos de historias ahora están en un mismo lugar.
-                                Solicita una crítica desde <Link to='/sol_critica'>aquí.</Link> ¡Es gratis!</p>
+                                Solicita una crítica <Link to='/sol_critica'>aquí.</Link> ¡Es gratis!</p>
                         </div>
                         <div className='main-section'>
                             <div className='img-container'>
                                 <img src={ImgPincel} className='img-pincel' alt='img-pincel' />
                             </div>
                             <h3>Diseños</h3>
-                            <p>Reunimos a todos los que aman diseñar portadas para que tu obra crezca.
-                                Pide tu diseño desde <Link to='/sol_diseno'>aquí.</Link></p>
+                            <p>Portadas, banners para posts y ahora ¡Cuentas regresivas!
+                                Pide tu diseño <Link to='/sol_diseno'>aquí.</Link></p>
                         </div>
                     </section>
                 </Fade>

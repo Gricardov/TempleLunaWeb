@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdown-image';
-import ImgBailando from '../img/dancing.svg';
+import ImgBailando from '../img/des-req.png';
 import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
@@ -311,7 +311,7 @@ const Solicitud = () => {
                                                 </div>
                                                 <div className='step-3'>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtTitulo">Título o frase principal</label>
+                                                        <label htmlFor="txtTitulo">Resume tu historia a una frase</label>
                                                         <input minLength="1" maxLength="100" type="text" value={title} onChange={updTitle} id="txtTitulo" placeholder="Ejemplo: El amor todo lo puede" />
 
                                                     </div>
