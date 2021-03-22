@@ -52,7 +52,7 @@ const Previsualizacion = ({ location }) => {
         const totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
             html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-        if ((totalHeight - (offsetY + vpHeight)) <= 350) {
+        if ((totalHeight - (offsetY + vpHeight)) <= 600) {
             if (!hasScrolledToOffset) {
                 setHasScrolledToOffset(true);
             }
