@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { designTypes, contactTypes, critiquePoints, contributors } from '../data/data';
 import "moment/locale/es";
 
 export const getPointNameFromKey = (key) => {
@@ -56,4 +57,52 @@ export const toSentence = (text, limit) => {
     } else {
         return '';
     }
+}
+
+export const getMessengerTypeName = (type) => {
+    const messengerType = contactTypes.find(c => c.type == type);
+    if (messengerType) {
+        return messengerType.name;
+    }
+    return '';
+}
+
+export const getDesignType = (type) => {
+    const obj = designTypes.find(e => e.type == type);
+    if (obj) {
+        return obj;
+    }
+    return {};
+}
+
+export const getAbrevPointName = (id) => {
+    const obj = critiquePoints.find(e => e.id == id);
+    if (obj) {
+        return obj.abrev;
+    }
+    return '';
+}
+
+export const getFormattedPhone = (rawPhone) => {
+    let result = '';
+    if (rawPhone) {
+        result = rawPhone.trim().replace(/' '/g, '');
+        if (result[0] != '+') {
+            result = '+' + result;
+        }
+        return result;
+    }
+    return null;
+}
+
+export const extractLink = (rawLink) => {
+    return rawLink ? rawLink.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+/g)[0] : '';
+}
+
+export const getRandomContributorName = () => {
+    const min = Math.ceil(0);
+    const max = Math.floor(contributors.length - 1);
+    const number = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log(number)
+    return contributors[number];
 }

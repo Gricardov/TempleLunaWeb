@@ -3,16 +3,15 @@ import ConfirmationModal from './confirmationModal';
 import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
-import { contactTypes } from '../../data/data';
-import { getDateText, getExpDateText } from '../../helpers/functions';
+import { getDateText, getExpDateText, getMessengerTypeName, getFormattedPhone, getAbrevPointName, extractLink } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
-import { critiquePoints } from '../../data/data';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faEdit, faHandPaper, faLayerGroup, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -28,13 +27,13 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
 
     const history = useHistory();
 
-    const getMessengerTypeName = (type) => {
-        const messengerType = contactTypes.find(c => c.type == type);
-        if (messengerType) {
-            return messengerType.name;
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
         }
-        return '';
-    }
+    }, [isOpen]);
 
     useEffect(() => {
         if (isOpen) {
@@ -51,40 +50,26 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
         styles = 'close';
     }
 
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-    }, [isOpen]);
-
-    const getAbrevPointName = (id) => {
-        const obj = critiquePoints.find(e => e.id == id);
-        if (obj) {
-            return obj.abrev;
-        }
-        return '';
-    }
-
     const confirm = () => {
         setOpenConfirmationModal(false);
         takeRequest(data?.id);
     }
 
     const isTakenByMe = data?.takenBy == logged.uid;
-
+    const messengerType = data?.messengerType;
     const profile = getProfileStorage();
+    const formattedPhone = getFormattedPhone(data?.phone);
+    const formattedLink = extractLink(data?.link);
     const artist = {
         fName: profile?.fName || '',
         lName: profile?.lName || '',
         contactEmail: profile?.contactEmail || '',
         networks: profile?.networks || []
     };
-    if (data){
+    if (data) {
         data.artist = artist;
-    }    
-
+    }
+    //console.log(formattedPhone)
     return (
         <>
             <ConfirmationModal
@@ -120,9 +105,8 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                             <p>{data?.about || 'No hay descripción'}</p>
                             <h4>Link de la obra</h4>
                             {
-                                data?.link
-                                    ?
-                                    <a target='_blank' href={data?.link}>{data?.link}</a>
+                                formattedLink ?
+                                    <a target='_blank' className='clamp clamp-1' href={formattedLink}>{formattedLink}</a>
                                     :
                                     <p>No existe link</p>
                             }
@@ -147,7 +131,15 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                 <>
                                     <h4>Datos de contacto</h4>
                                     <p className="m-0"><b>Nombre:</b> {data?.name}</p>
-                                    <p className="m-0"><b>Contacto:</b> {data?.phone} ({getMessengerTypeName(data?.messengerType)})</p>
+                                    <p className="m-0"><b>Contacto:</b> {data?.phone} ({getMessengerTypeName(messengerType)})</p>
+                                    {
+                                        messengerType == 'WSP' && formattedPhone
+                                        &&
+                                        <button onClick={() => window.open('https://web.whatsapp.com/send?phone=' + formattedPhone)} className='button button-whatsapp button-blue button-option-request my-1'>
+                                            <FontAwesomeIcon color={'#fff'} icon={faWhatsapp} className='icon' />
+                                                Contactar
+                                        </button>
+                                    }
                                     <p className="m-0 mb-2"><b>Correo:</b> {data?.email}</p>
                                 </>
                             }

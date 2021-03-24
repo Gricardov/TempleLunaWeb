@@ -117,7 +117,7 @@ const Navbar = ({ startTransparent }) => {
                             ?
                             <>
                                 <span className='btn-nav clamp clamp-1'>
-                                    Te queremos, {fName}
+                                    {fName} {lName}
                                 </span>
                                 <Avatar clases='img-profile-navbar' />
                                 <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav m-0 pl-1 pr-1'>
