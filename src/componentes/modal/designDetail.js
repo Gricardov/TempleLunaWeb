@@ -114,6 +114,14 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                             <h4>Tipo de diseño</h4>
                             <span className={icon} style={{ color, fontSize: iconSize }}>{data?.icon}</span>
                             <p className='d-inline ml-1'>{text}</p>
+                            {
+                                data?.designType == 'CR'
+                                &&
+                                <>
+                                    <h4>Días para el lanzamiento</h4>
+                                    <p>{data?.daysLeft}</p>
+                                </>
+                            }
                             <h4>¿Qué quiero transmitir?</h4>
                             <p>{data?.intention || 'No hay intención'}</p>
                             <h4>Boceto de referencia</h4>

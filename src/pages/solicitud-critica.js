@@ -120,10 +120,11 @@ const Solicitud = () => {
             intention: intention.trim(),
             points,
             type: 'CRITICA',
-            status: 'DISPONIBLE'
+            status: 'DISPONIBLE',
+            active: 1
         };
 
-        saveRequest({ ...data, active: 1 }).then(() => {
+        saveRequest(data).then(() => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);
@@ -205,7 +206,7 @@ const Solicitud = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Críticas - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!"/>
+            <HelmetMetaData title="Críticas - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>

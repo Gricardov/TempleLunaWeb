@@ -40,6 +40,7 @@ const Solicitud = () => {
     const [email, setEmail] = useState('');
     const [designType, setDesignType] = useState(designTypes[0].type);
     const [link, setLink] = useState('');
+    const [days, setDays] = useState(1);
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [intention, setIntention] = useState('');
@@ -71,6 +72,10 @@ const Solicitud = () => {
 
     const updLink = (e) => {
         setLink(e.target.value);
+    }
+
+    const updDays = (e) => {
+        setDays(e.target.value);
     }
 
     const updTitle = (e) => {
@@ -149,14 +154,16 @@ const Solicitud = () => {
             designType,
             link: link.trim(),
             title: title.trim(),
+            daysLeft: parseInt(days),
             author: author.trim(),
             intention: intention.trim(),
             urlImg: urlImg.trim(),
             type: 'DISENO',
-            status: 'DISPONIBLE'
+            status: 'DISPONIBLE',
+            active: 1
         };
 
-        saveRequest({ ...data, active: 1 }).then(() => {
+        saveRequest(data).then(() => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);
@@ -176,7 +183,7 @@ const Solicitud = () => {
         }
 
         // Age
-        if (!age || age < 10 || age > 99) {
+        if (isNaN(days) || age < 10 || age > 99) {
             alert('Introduce una edad válida');
             return true;
         }
@@ -194,6 +201,14 @@ const Solicitud = () => {
         else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
             alert('Introduce un correo válido');
             return true;
+        }
+
+        // Days left
+        if (designType == 'CR') {
+            if (isNaN(days) || days < 0 || days > 10) {
+                alert('Introduce días de lanzamiento válidos');
+                return true;
+            }
         }
 
         // Link
@@ -304,6 +319,14 @@ const Solicitud = () => {
                                                             list={designTypes}
                                                             select={updDesignType} />
                                                     </div>
+                                                    {
+                                                        designType == 'CR'
+                                                        &&
+                                                        <div className='form-group'>
+                                                            <label htmlFor="txtDaysLeft">¿En cuántos días lanzarás tu obra?</label>
+                                                            <input min="0" max="10" type="number" value={days} onChange={updDays} id="txtDaysLeft" placeholder="Máximo 10" />
+                                                        </div>
+                                                    }
                                                     <div className='form-group'>
                                                         <label htmlFor="txtLink">Link de tu obra</label>
                                                         <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />

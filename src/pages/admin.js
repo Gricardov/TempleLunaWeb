@@ -11,6 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
 import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
+import { setAdminRequestType, getAdminRequestType } from '../helpers/userStorage';
 
 const override = css`
   display: block;
@@ -54,6 +55,7 @@ const Admin = () => {
     }
 
     const updRequestType = (val) => {
+        //setAdminRequestType(val);
         setRequestType(val);
     }
 
@@ -149,7 +151,8 @@ const Admin = () => {
     }, [activeTabIndex, requestType]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);        
+        //setRequestType(getAdminRequestType());
+        window.scrollTo(0, 0);
     }, []);
 
     return (

@@ -103,6 +103,5 @@ export const getRandomContributorName = () => {
     const min = Math.ceil(0);
     const max = Math.floor(contributors.length - 1);
     const number = Math.floor(Math.random() * (max - min + 1)) + min;
-    console.log(number)
     return contributors[number];
 }
