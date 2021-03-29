@@ -55,7 +55,7 @@ const Admin = () => {
     }
 
     const updRequestType = (val) => {
-        //setAdminRequestType(val);
+        setAdminRequestType(val);
         setRequestType(val);
     }
 
@@ -150,8 +150,8 @@ const Admin = () => {
         requestData();
     }, [activeTabIndex, requestType.type]);
 
-    useEffect(() => {
-        //setRequestType(getAdminRequestType());
+    useEffect(() => {        
+        setRequestType(getAdminRequestType(requestTypeList[0]));
         window.scrollTo(0, 0);
     }, []);
 

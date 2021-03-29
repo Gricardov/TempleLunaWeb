@@ -24,7 +24,6 @@ export const getDateText = (dateMs) => {
 export const getExpDateText = (expDateMs) => {
     let result = 'Vence en ';
     let totalMinutes = moment(expDateMs).diff(moment(), 'minutes', true);
-
     if (totalMinutes < 0) {
         result = 'Venció hace ';
         totalMinutes *= -1;

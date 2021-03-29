@@ -112,7 +112,7 @@ const Solicitud = () => {
             name: name.trim(),
             age: parseInt(age),
             phone: phone.trim(),
-            messengerType,
+            messengerType: messengerType.type,
             email: email.trim(),
             title: title.trim(),
             link: link.trim(),

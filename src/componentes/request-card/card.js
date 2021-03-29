@@ -4,7 +4,7 @@ import { getDateText, getExpDateText } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faPaintBrush, faEye, faDownload, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPaintBrush, faEye, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './card.css'
 
@@ -23,7 +23,6 @@ const Card = React.forwardRef(({ data, select }, ref) => {
         networks: profile.networks || []
     };
     data.artist = artist;
-
     return (
         <div ref={ref} className='request-card-container'>
             <div className='header-container'>

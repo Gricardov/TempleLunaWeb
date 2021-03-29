@@ -59,7 +59,6 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
         setOpenConfirmationModal(false);
         takeRequest(data?.id);
     }
-
     const isTakenByMe = data?.takenBy == logged.uid;
     const messengerType = data?.messengerType;
     const profile = getProfileStorage();
