@@ -141,11 +141,6 @@ const Previsualizacion = ({ location }) => {
         }
     }
 
-    /*const unlike = () => {
-        setPunctuationType('UNLIKE');
-        togglePunctuationModal();
-    }*/
-
     const togglePunctuationModal = () => {
         setIsOpenPunctuationModal(!isOpenPunctuationModal);
     }
