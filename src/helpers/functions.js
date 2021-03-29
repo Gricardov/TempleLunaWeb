@@ -96,7 +96,13 @@ export const getFormattedPhone = (rawPhone) => {
 }
 
 export const extractLink = (rawLink) => {
-    return rawLink ? rawLink.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+/g)[0] : '';
+    if (rawLink) {
+        const matchedArray = rawLink.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+/g);
+        if (matchedArray) {
+            return matchedArray[0];
+        }
+    }
+    return '';
 }
 
 export const getRandomContributorName = () => {
