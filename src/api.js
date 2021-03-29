@@ -154,7 +154,7 @@ export const login = async (email, password) => {
                     break;
                 default:
                     errMessage = 'Error code: ' + error.code
-                    errMessage = 'Ha ocurrido un error con el servicio de autenticación';
+                    //errMessage = 'Ha ocurrido un error con el servicio de autenticación';
             }
             return { error: errMessage };
         });
