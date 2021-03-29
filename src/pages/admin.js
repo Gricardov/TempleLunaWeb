@@ -24,7 +24,7 @@ const limit = 3;
 const Admin = () => {
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
-    const [requestType, setRequestType] = useState('DISENO');
+    const [requestType, setRequestType] = useState(requestTypeList[0]);
     const [requestList, setRequestList] = useState([]);
     const [isLast, setIsLast] = useState(false);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -73,7 +73,7 @@ const Admin = () => {
 
     const updateStatistics = (timeout = 0) => {
         setTimeout(() => {
-            getStatistics([requestType, logged.uid + '-' + requestType])
+            getStatistics([requestType.type, logged.uid + '-' + requestType.type])
                 .then(data => {
                     setTabList([
                         !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
@@ -88,7 +88,7 @@ const Admin = () => {
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
             const requestStatus = tabList[activeTabIndex].id;
-            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, getLastElement('createdAt'), limit)
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, getLastElement('createdAt'), limit)
                 .then(data => {
                     setLoadingMore(false);
                     setIsLast(data.isLast);
@@ -105,7 +105,7 @@ const Admin = () => {
         //if (!initialLoading && !loadingMore) {
         setInitialLoading(true);
         const requestStatus = tabList[activeTabIndex].id;
-        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType, requestStatus, undefined, limit)
+        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, undefined, limit)
             .then(data => {
                 updateStatistics();
                 setInitialLoading(false);
@@ -122,7 +122,7 @@ const Admin = () => {
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
-            takeRequest(requestId, requestType)
+            takeRequest(requestId, requestType.type)
                 .then((res) => {
                     if (!res.error) {
                         getRequest(requestId).then(({ data, error }) => {
@@ -148,7 +148,7 @@ const Admin = () => {
 
     useEffect(() => {
         requestData();
-    }, [activeTabIndex, requestType]);
+    }, [activeTabIndex, requestType.type]);
 
     useEffect(() => {
         //setRequestType(getAdminRequestType());
@@ -180,6 +180,7 @@ const Admin = () => {
                         <div className='dropdown-container'>
                             <DropdownImage
                                 stretch
+                                selectedItem={requestType}
                                 list={requestTypeList}
                                 select={updRequestType} />
                         </div>

@@ -5,10 +5,9 @@ import './dropdown.css';
 const tamanoIcono = 20;
 const color = '#756F86';
 
-const Dropdown = ({ list, select, stretch }) => {
+const Dropdown = ({ list, select, stretch, selectedItem }) => {
 
     const [open, setOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(list[0]);
     const outsideListenerRef = useRef(null); // Escucha cuando se hace click fuera de
     const { outsideListener$ } = useOutsideListener(outsideListenerRef);
 
@@ -16,7 +15,7 @@ const Dropdown = ({ list, select, stretch }) => {
         outsideListener$.subscribe(() => {
             setOpen(false);
         })
-    }, [outsideListener$])
+    }, [outsideListener$]);
 
     const toggleDropdown = (e) => {
         e.preventDefault();
@@ -26,8 +25,7 @@ const Dropdown = ({ list, select, stretch }) => {
     const selectItem = (e, item) => {
         e.preventDefault();
         setOpen(false);
-        setSelectedItem(item);
-        select(item.type);
+        select(item);
     }
 
     const tag = (text) => (
@@ -58,7 +56,7 @@ const Dropdown = ({ list, select, stretch }) => {
                 &&
                 <div className={`selectable-list ${stretch ? 'stretch' : ''}`}>
                     {
-                        list.map((item, index) => (
+                        list.map((item, index) => item.displayInDropdown != false && (
                             <div key={index} onClick={(e) => selectItem(e, item)} className='selectable-list-item'>
                                 <span className={item.icon} style={{ color, fontSize: tamanoIcono + 'px' }}></span>
                                 {

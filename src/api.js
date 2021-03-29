@@ -25,7 +25,7 @@ export const getRequest = async (requestId, includeDetails) => {
     return firestore.collection('solicitudes').doc(requestId).get()
         .then(async doc => {
             if (doc.exists) {
-                const res = await request('getArtistDataByRequestId', { requestId }, 'POST');                
+                const res = await request('getArtistDataByRequestId', { requestId }, 'POST');
                 if (!res.error) {
                     return { data: { ...doc.data(), id: doc.id, artist: res.artist } }
                 } else {
@@ -153,6 +153,7 @@ export const login = async (email, password) => {
                     errMessage = 'Ha habido muchos intentos de login. Inténtalo en unos minutos.';
                     break;
                 default:
+                    errMessage = 'Error code: ' + error.code
                     errMessage = 'Ha ocurrido un error con el servicio de autenticación';
             }
             return { error: errMessage };

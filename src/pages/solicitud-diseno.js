@@ -36,9 +36,9 @@ const Solicitud = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
-    const [messengerType, setMessengerType] = useState(contactTypes[0].type);
+    const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
-    const [designType, setDesignType] = useState(designTypes[0].type);
+    const [designType, setDesignType] = useState(designTypes[1]);
     const [link, setLink] = useState('');
     const [days, setDays] = useState(1);
     const [title, setTitle] = useState('');
@@ -149,9 +149,9 @@ const Solicitud = () => {
             name: name.trim(),
             age: parseInt(age),
             phone: phone.trim(),
-            messengerType,
+            messengerType: messengerType.type,
             email: email.trim(),
-            designType,
+            designType: designType.type,
             link: link.trim(),
             title: title.trim(),
             daysLeft: parseInt(days),
@@ -204,7 +204,7 @@ const Solicitud = () => {
         }
 
         // Days left
-        if (designType == 'CR') {
+        if (designType.type == 'CR') {
             if (isNaN(days) || days < 0 || days > 10) {
                 alert('Introduce días de lanzamiento válidos');
                 return true;
@@ -301,6 +301,7 @@ const Solicitud = () => {
                                                         <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
+                                                                selectedItem={messengerType}
                                                                 list={contactTypes}
                                                                 select={updMessengerType} />
                                                             <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
@@ -316,11 +317,12 @@ const Solicitud = () => {
                                                         <label htmlFor="txtLink">Tipo de diseño</label>
                                                         <DropdownImage
                                                             stretch
+                                                            selectedItem={designType}
                                                             list={designTypes}
                                                             select={updDesignType} />
                                                     </div>
                                                     {
-                                                        designType == 'CR'
+                                                        designType.type == 'CR'
                                                         &&
                                                         <div className='form-group'>
                                                             <label htmlFor="txtDaysLeft">¿En cuántos días lanzarás tu obra?</label>

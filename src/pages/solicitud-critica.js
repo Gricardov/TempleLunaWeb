@@ -35,7 +35,7 @@ const Solicitud = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
-    const [messengerType, setMessengerType] = useState(contactTypes[0].type);
+    const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
     const [link, setLink] = useState('');
     const [title, setTitle] = useState('');
@@ -257,6 +257,7 @@ const Solicitud = () => {
                                                         <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
+                                                                selectedItem={messengerType}
                                                                 list={contactTypes}
                                                                 select={updMessengerType} />
                                                             <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
