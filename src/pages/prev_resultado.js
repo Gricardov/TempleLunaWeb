@@ -166,7 +166,7 @@ const Previsualizacion = ({ location }) => {
             {
                 isLoading && <LoadingScreen text={loadingMsg} />
             }
-            <HelmetMetaData url={url} title={title + " - Temple Luna"} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
+            <HelmetMetaData url={url} title={`${type == 'DISENO' ? '[Diseño]' : '[Crítica]'} ${title} - Temple Luna`} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
             <Navbar />
             <PunctuationModal
                 requestId={id}
