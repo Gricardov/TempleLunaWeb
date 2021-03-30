@@ -13,7 +13,7 @@ export const Panorama = () => {
             <div className='container-xl container-header'>
                 <div className='container-controls-header'>
                     <Fade left>
-                        <h1>Empieza a ser admirado por tu forma de escribir</h1>
+                        <h1>(test) Empieza a ser admirado por tu forma de escribir</h1>
                     </Fade>
                     <Fade left>
                         <a target='_blank' rel="noreferrer" href='https://www.facebook.com/groups/1004324056570387' className='button button-green'>
