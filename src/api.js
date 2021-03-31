@@ -153,8 +153,8 @@ export const login = async (email, password) => {
                     errMessage = 'Ha habido muchos intentos de login. Inténtalo en unos minutos.';
                     break;
                 default:
-                    errMessage = 'Error code: ' + error.message
-                    //errMessage = 'Ha ocurrido un error con el servicio de autenticación';
+                    //errMessage = 'Error code: ' + error.message
+                    errMessage = 'Ha ocurrido un error con el servicio de autenticación';
             }
             return { error: errMessage };
         });
