@@ -54,7 +54,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);        
+        window.scrollTo(0, 0);
     }, []);
 
     return (
@@ -67,23 +67,21 @@ const Login = () => {
                         <div className='floating-form'>
                             <h2 className='m-0'>Ingresa a Temple Luna</h2>
                             <p className='mb-3'>Si quieres pertenecer a nosotros, escríbenos por el grupo</p>
-                            <form>
-                                <div className='form-group'>
-                                    <label htmlFor="txtUsuario">Correo</label>
-                                    <input minLength="1" maxLength="50" type="email" value={email} onChange={updEmail} id="txtUsuario" placeholder="Ingresa tu correo" />
-                                </div>
-                                <div className='form-group'>
-                                    <label htmlFor="txtContrasena">Contraseña</label>
-                                    <input minLength="1" maxLength="50" type="password" value={password} onChange={updPassword} id="txtContrasena" placeholder="****************" />
-                                </div>
-                                <button onClick={loginUser} className='button button-green stretch'>
-                                    <span className='d-inline'>
-                                        Entrar
+                            <div className='form-group'>
+                                <label htmlFor="txtUsuario">Correo</label>
+                                <input minLength="1" maxLength="50" type="email" value={email} onChange={updEmail} id="txtUsuario" placeholder="Ingresa tu correo" />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor="txtContrasena">Contraseña</label>
+                                <input minLength="1" maxLength="50" type="password" value={password} onChange={updPassword} id="txtContrasena" placeholder="****************" />
+                            </div>
+                            <button onClick={loginUser} className='button button-green stretch'>
+                                <span className='d-inline'>
+                                    Entrar
                                     </span>
-                                    {' '}
-                                    <FontAwesomeIcon icon={faSignInAlt} size='xl' />
-                                </button>
-                            </form>
+                                {' '}
+                                <FontAwesomeIcon icon={faSignInAlt} size='xl' />
+                            </button>
                         </div>
                     </div>
                 </section>
