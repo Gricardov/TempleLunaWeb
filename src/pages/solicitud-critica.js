@@ -10,6 +10,7 @@ import ImgLeyendo from '../img/cri-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { critiquePoints } from '../data/data';
+import { extractLink, toName, toSentence } from '../helpers/functions';
 import { saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
@@ -109,13 +110,13 @@ const Solicitud = () => {
 
     const saveChanges = () => {
         const data = {
-            name: name.trim(),
+            name: toName(name.trim()),
             age: parseInt(age),
             phone: phone.trim(),
             messengerType: messengerType.type,
             email: email.trim(),
-            title: title.trim(),
-            link: link.trim(),
+            title: toSentence(title.trim()),
+            link: extractLink(link.trim()),
             about: about.trim(),
             intention: intention.trim(),
             points,
@@ -167,6 +168,9 @@ const Solicitud = () => {
         // Link
         if (!(/^(?!\s*$).{1,500}/.test(link))) {
             alert('Tu link debe tener de 1 a 500 caracteres');
+            return true;
+        } else if (!extractLink(link.trim())) {
+            alert('Parece que ese link no es válido. Revísalo bien');
             return true;
         }
 
@@ -254,7 +258,7 @@ const Solicitud = () => {
                                                         <input type="number" min={10} max={99} value={age} onChange={updAge} id="txtEdad" placeholder="Ingresa tu edad" />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtNumero">Bríndanos un número si hay consultas</label>
+                                                        <label htmlFor="txtNumero">Bríndanos un número para consultas (con código de país)</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
                                                                 selectedItem={messengerType}

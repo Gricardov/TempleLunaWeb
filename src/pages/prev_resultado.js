@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import HelmetMetaData from "../componentes/helmet";
 import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
+import { extractLink } from '../helpers/functions';
 import { getRequest, likeRequestResult } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -216,7 +217,7 @@ const Previsualizacion = ({ location }) => {
                 </div>
 
                 <nav className='container-xl'>
-                    <button className='button-purple' onClick={() => window.open(link)}>
+                    <button className='button-purple' onClick={() => window.open(extractLink(link))}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faBook} className='icon' />
                         {' '}
                         Leer obra

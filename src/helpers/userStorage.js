@@ -26,3 +26,13 @@ export const getAdminRequestType = (defaultType) => {
 export const setAdminRequestType = (reqType) => {
     return localStorage.setItem('adminRequestType', JSON.stringify(reqType));
 }
+
+// Esto guarda la pestana seleccionada en la pantalla de admin
+export const getAdminMainTabIndex = () => {
+    return parseInt(localStorage.getItem('adminMainTabIndex')) || 0;
+
+}
+
+export const setAdminMainTabIndex = (index) => {
+    return localStorage.setItem('adminMainTabIndex', index);
+}

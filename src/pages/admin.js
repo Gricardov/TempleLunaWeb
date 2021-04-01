@@ -11,7 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, requestTypes } from '../data/data';
 import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
-import { setAdminRequestType, getAdminRequestType } from '../helpers/userStorage';
+import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex } from '../helpers/userStorage';
 
 const override = css`
   display: block;
@@ -57,6 +57,11 @@ const Admin = () => {
     const updRequestType = (val) => {
         setAdminRequestType(val);
         setRequestType(val);
+    }
+
+    const updActiveTabIndex = (val) => {
+        setAdminMainTabIndex(val);
+        setActiveTabIndex(val);
     }
 
     const getLastElement = (field) => {
@@ -150,8 +155,9 @@ const Admin = () => {
         requestData();
     }, [activeTabIndex, requestType.type]);
 
-    useEffect(() => {        
+    useEffect(() => {
         setRequestType(getAdminRequestType(requestTypeList[0]));
+        setActiveTabIndex(getAdminMainTabIndex());
         window.scrollTo(0, 0);
     }, []);
 
@@ -195,7 +201,7 @@ const Admin = () => {
                         hasMore={!isLast}
                         loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
-                        select={setActiveTabIndex}
+                        select={updActiveTabIndex}
                         tabs={tabList.map(e => e.name + ' (' + e.statistics + ')')}>
                         <div>
                             {
