@@ -86,7 +86,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                         <div className='header-container position-relative'>
                             <Avatar clases='modal-avatar' />
                             <div className='title-container'>
-                                <h3 className='clamp clamp-1'>{data?.title}</h3>
+                                <h3 className='clamp clamp-2'>{data?.title}</h3>
                                 <p>{
                                     data?.status == 'DISPONIBLE' || isTakenByMe && data?.status == 'HECHO'
                                         ?
