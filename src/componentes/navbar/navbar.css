@@ -74,7 +74,7 @@
     text-align: center;
     z-index: 10;
     transition: all 200ms ease-in-out;
-    min-height: 63.66px;
+    height: var(--navbar-height);
 }
 
 @media (min-width: 768px) {
@@ -82,7 +82,7 @@
         padding-top: 2.5rem;
         padding-bottom: 2rem;
         text-align: left;
-        min-height: 103px;
+        /*height: 103px;*/
     }
 }
 
