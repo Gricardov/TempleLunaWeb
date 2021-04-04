@@ -15,7 +15,7 @@ const Inicio = () => {
     return (
         <div>
             <Panorama />
-            <main className='main-body'>
+            <main className='main-body' id='critique-block'>
 
                 <Fade bottom>
                     <section className='container-xl section section-body'>                        

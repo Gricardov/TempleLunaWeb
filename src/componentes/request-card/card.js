@@ -46,7 +46,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
             </div>
             <div className='description-container'>
                 <p className='clamp clamp-2'>
-                    {data.intention}
+                    {data.about}
                 </p>
             </div>
             <div className='footer-card-container'>
