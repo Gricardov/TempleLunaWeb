@@ -46,7 +46,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
             </div>
             <div className='description-container'>
                 <p className='clamp clamp-2'>
-                    {data.about}
+                    {data?.type == 'CRITICA' ? data.about : data.intention}
                 </p>
             </div>
             <div className='footer-card-container'>
@@ -63,12 +63,12 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                                 :
                                 data?.type == 'DISENO'
                                     ?
-                                <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
-                                    <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
+                                    <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
+                                        <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
                                     Iniciar diseño
                                 </button>
                                     :
-                                null
+                                    null
                         )
                     }
                     {
