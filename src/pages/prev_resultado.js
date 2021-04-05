@@ -7,7 +7,7 @@ import HelmetMetaData from "../componentes/helmet";
 import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import { extractLink } from '../helpers/functions';
-import { getRequest, likeRequestResult } from '../api';
+import { getRequest, likeRequestResult, addAnalitics } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -39,7 +39,11 @@ const Previsualizacion = ({ location }) => {
     const [likes, setLikes] = useState(0);
     const [artist, setArtist] = useState({});
     const [addingLove, setAddingLove] = useState(false);
+
+    // From query parameters
     const [isTemplated, setIsTemplated] = useState(false);
+    const [isTest, setIsTest] = useState(false);
+    const [origin, setOrigin] = useState('OTHER');
 
     const [numPages, setNumPages] = useState(0);
     const [hasScrolledToOffset, setHasScrolledToOffset] = useState(false);
@@ -65,6 +69,18 @@ const Previsualizacion = ({ location }) => {
         }
     }
     useEffect(() => {
+
+        // Por mejorar
+        const isTestMode = queryString.parse(location.search).test;
+        if (isTestMode) {
+            setIsTest(true);
+        }
+
+        const fbclid = queryString.parse(location.search).fbclid;
+        if (fbclid) {
+            setOrigin('FB');
+        }
+
         if (location && location.state && location.state.data) {
             const { type, resultUrl, title, name, link, likes, id, artist } = location.state.data;
             setLoadingMsg('Obtenido: ' + title);
@@ -78,7 +94,7 @@ const Previsualizacion = ({ location }) => {
             setArtist(artist);
         } else {
             const id = queryString.parse(location.search).id;
-            const isTemplated = queryString.parse(location.search).templated;
+            const templated = queryString.parse(location.search).templated;
             if (id) {
                 getRequest(id, true).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
                     if (!error) {
@@ -92,7 +108,7 @@ const Previsualizacion = ({ location }) => {
                         setAuthor(name);
                         setLikes(likes);
                         setArtist(artist);
-                        if (isTemplated) {
+                        if (templated) {
                             setIsTemplated(true);
                         }
                     } else {
@@ -139,6 +155,23 @@ const Previsualizacion = ({ location }) => {
                     alert('No se pudo agregar el like');
                 }
             });
+        }
+    }
+
+    const onFinishedSharedIntention = () => {
+        if (!isTest) {
+            const analObject = {
+                requestId: id,
+                templated: isTemplated,
+                origin,
+                action: 'FB-SHARE-INTENTION'
+            };
+
+            addAnalitics(analObject).then(() => {
+                console.log('Analítica actualizada!');
+            });
+        } else {
+            console.log('Test mode');
         }
     }
 
@@ -245,6 +278,7 @@ const Previsualizacion = ({ location }) => {
                     }
                     <button className='button-purple position-relative p-0'>
                         <FacebookShareButton
+                            onShareWindowClose={onFinishedSharedIntention}
                             url={url.toString().replace(/templated=true/g, "")}
                             quote={shareQuote}
                             className='py-08'

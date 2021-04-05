@@ -86,6 +86,11 @@ export const addCommentRequestResult = async (id, alias, message) => {
     });
 }*/
 
+// Analíticas
+export const addAnalitics = async (object) => {
+    return firestore.collection('analiticas').doc(object.id).set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+}
+
 // Estadísticas
 
 export const getStatistics = async keys => {
