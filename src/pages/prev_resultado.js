@@ -158,16 +158,34 @@ const Previsualizacion = ({ location }) => {
         }
     }
 
+    const onReadButtonClicked = () => {
+        window.open(extractLink(link));
+        if (!isTest) {
+            const analObject = {
+                requestId: id,
+                templated: isTemplated,
+                origin,
+                readIntention: true
+            };
+
+            addAnalitics(id, analObject).then(() => {
+                console.log('Analítica actualizada!');
+            });
+        } else {
+            console.log('Test mode');
+        }
+    }
+
     const onFinishedSharedIntention = () => {
         if (!isTest) {
             const analObject = {
                 requestId: id,
                 templated: isTemplated,
                 origin,
-                action: 'FB-SHARE-INTENTION'
+                shareIntention: true
             };
 
-            addAnalitics(analObject).then(() => {
+            addAnalitics(id, analObject).then(() => {
                 console.log('Analítica actualizada!');
             });
         } else {
@@ -250,7 +268,7 @@ const Previsualizacion = ({ location }) => {
                 </div>
 
                 <nav className='container-xl'>
-                    <button className='button-purple' onClick={() => window.open(extractLink(link))}>
+                    <button className='button-purple' onClick={onReadButtonClicked}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faBook} className='icon' />
                         {' '}
                         Leer obra
