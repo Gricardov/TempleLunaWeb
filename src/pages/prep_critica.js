@@ -166,7 +166,7 @@ const Preparation = ({ location }) => {
                                     {
                                         link
                                             ?
-                                            <a target='_blank' href={link}>{link}</a>
+                                            <a className='clamp clamp-1' target='_blank' href={link}>{link}</a>
                                             :
                                             <p>No existe link</p>
                                     }

@@ -5,7 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import { useHistory } from 'react-router-dom';
 import { css } from "@emotion/core";
-import { getGeneratedId, uploadImage, setRequestDone } from '../api';
+import { uploadImage, setRequestDone } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPaperPlane, faCheckCircle, faHome, faEye } from '@fortawesome/free-solid-svg-icons';
 
@@ -160,7 +160,7 @@ const Preparation = ({ location }) => {
                                     {
                                         link
                                             ?
-                                            <a target='_blank' href={link}>{link}</a>
+                                            <a className='clamp clamp-1' target='_blank' href={link}>{link}</a>
                                             :
                                             <p>No existe link</p>
                                     }

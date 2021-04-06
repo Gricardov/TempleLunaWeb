@@ -177,7 +177,6 @@ export const logout = async () => {
 // Archivos
 export const uploadImage = async (ruta, archivo) => {
     return new Promise((resolve, reject) => {
-
         let storageRef = storage.ref();
         let imgRef = storageRef.child(`${ruta}/${uuidv4()}`);
         const task = imgRef.put(archivo);
