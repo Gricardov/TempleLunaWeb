@@ -70,55 +70,48 @@ const Previsualizacion = ({ location }) => {
     }
     useEffect(() => {
 
-        // Por mejorar
-        const isTestMode = queryString.parse(location.search).test;
-        if (isTestMode) {
+        const { id, test, origin, fbclid, templated } = queryString.parse(location.search);
+
+        if (test) {
             setIsTest(true);
         }
 
-        const fbclid = queryString.parse(location.search).fbclid;
+        if (templated) {
+            setOrigin('MAIL');
+        }
+
+        if (origin == 'tl') {
+            setOrigin('TL');
+        }
+
         if (fbclid) {
             setOrigin('FB');
         }
 
-        if (location && location.state && location.state.data) {
-            const { type, resultUrl, title, name, link, likes, id, artist } = location.state.data;
-            setLoadingMsg('Obtenido: ' + title);
-            setId(id);
-            setLink(link);
-            setType(type);
-            setResultUrl(resultUrl);
-            setTitle(title);
-            setAuthor(name);
-            setLikes(likes);
-            setArtist(artist);
-        } else {
-            const id = queryString.parse(location.search).id;
-            const templated = queryString.parse(location.search).templated;
-            if (id) {
-                getRequest(id, true).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
-                    if (!error) {
-                        const { type, resultUrl, title, name, link, likes, artist } = data;
-                        setLoadingMsg('Obtenido: ' + title);
-                        setId(id);
-                        setLink(link);
-                        setType(type);
-                        setResultUrl(resultUrl);
-                        setTitle(title);
-                        setAuthor(name);
-                        setLikes(likes);
-                        setArtist(artist);
-                        if (templated) {
-                            setIsTemplated(true);
-                        }
-                    } else {
-                        alert('No se encontró el archivo. Intente más tarde');
-                        setIsLoading(false);
-                        setSuccess(false);
+        if (id) {
+            getRequest(id, true).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
+                if (!error) {
+                    const { type, resultUrl, title, name, link, likes, artist } = data;
+                    setLoadingMsg('Obtenido: ' + title);
+                    setId(id);
+                    setLink(link);
+                    setType(type);
+                    setResultUrl(resultUrl);
+                    setTitle(title);
+                    setAuthor(name);
+                    setLikes(likes);
+                    setArtist(artist);
+                    if (templated) {
+                        setIsTemplated(true);
                     }
-                });
-            }
+                } else {
+                    alert('No se encontró el archivo. Intente más tarde');
+                    setIsLoading(false);
+                    setSuccess(false);
+                }
+            });
         }
+
     }, [location]);
 
     useEffect(() => {

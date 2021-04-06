@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faHandPaper, faLayerGroup, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faEye, faHandPaper, faLayerGroup, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -199,7 +199,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                                 data?.status == 'HECHO' && isTakenByMe
                                                 && (
                                                     <button onClick={() => history.push('prev_resultado', { data })} className='button button-green button-option-request'>
-                                                        <FontAwesomeIcon color={'#fff'} icon={faLayerGroup} className='icon' />
+                                                        <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
                                                         Ir a resultado
                                                     </button>
                                                 )

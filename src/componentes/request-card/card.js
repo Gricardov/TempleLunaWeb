@@ -4,7 +4,7 @@ import { getDateText, getExpDateText } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faPaintBrush, faEye, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPaintBrush, faEye, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './card.css'
 
@@ -63,7 +63,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                                 :
                                 data?.type == 'DISENO'
                                     ?
-                                    <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
+                                    <button onClick={() => history.push(`prep_diseno?id=${data.id}&origin=tl`)} className='button button-green button-option-request'>
                                         <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
                                     Iniciar diseño
                                 </button>
@@ -74,15 +74,15 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                     {
                         data?.status == 'HECHO' && isTakenByMe
                         && (
-                            <button onClick={() => history.push('prev_resultado', { data })} className='button button-green button-option-request'>
-                                <FontAwesomeIcon color={'#fff'} icon={faLayerGroup} className='icon' />
+                            <button onClick={() => history.push(`prev_resultado?id=${data.id}&origin=tl`)} className='button button-green button-option-request'>
+                                <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
                                 Ir a resultado
                             </button>
                         )
                     }
                     <button onClick={() => select(data)} className='button button-blue button-option-request'>
-                        <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
-                        Ver
+                        <FontAwesomeIcon color={'#fff'} icon={faBoxOpen} className='icon' />
+                        Abrir
                 </button>
                 </div>
             </div>
