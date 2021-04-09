@@ -18,9 +18,7 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
         <div>
             <div className="material-tabs">
                 {
-                    tabs.map((pestana, index) => (
-                        <a key={index} onClick={(e) => switchTab(e, index)} className="active">{pestana}</a>
-                    ))
+                    tabs.map((pestana, index) => <a key={index} onClick={(e) => switchTab(e, index)} className="active">{pestana}</a>)
                 }
                 <span className="tab-bar" style={{ width: `${porcAnchoPestana}%`, left: `${porcAnchoPestana * activeIndex}%` }}></span>
             </div>

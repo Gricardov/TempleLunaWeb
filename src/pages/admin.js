@@ -202,7 +202,7 @@ const Admin = () => {
                         loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
                         select={updActiveTabIndex}
-                        tabs={tabList.map(e => e.name + ' (' + e.statistics + ')')}>
+                        tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
                         <div>
                             {
                                 requestList.map(request => (
