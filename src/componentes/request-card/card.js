@@ -23,6 +23,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
         networks: profile.networks || []
     };
     data.artist = artist;
+
     return (
         <div ref={ref} className='request-card-container'>
             <div className='header-container'>
@@ -63,7 +64,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                                 :
                                 data?.type == 'DISENO'
                                     ?
-                                    <button onClick={() => history.push(`prep_diseno?id=${data.id}&origin=tl`)} className='button button-green button-option-request'>
+                                    <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
                                         <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
                                     Iniciar diseño
                                 </button>
