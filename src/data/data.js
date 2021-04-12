@@ -1,10 +1,10 @@
 import ImgColaboracion from '../img/colaboracion.svg';
 import ImgMaquinaEscribir from '../img/typewriter.svg';
-import ImgLectora from '../img/cami.svg';
+import ImgFoco from '../img/bulb.png';
 
 export const carrouselData = [
+    { text: 'Apaga la luz. Llegó la obra ganadora del concurso de terror', buttonText: 'Leer ahora', href: 'https://www.wattpad.com/story/263097960', bg: 'radial-gradient(at 300px 100%, rgb(0 0 0) 10%, rgb(46 46 46) 50%)', img: ImgFoco, orientation: 'right', style: { top: '50px', right: '-120px' } }, //scrollTo: 'critique-block'
     { text: 'Conoce a los ganadores del #CuentoCorto Temple Luna', buttonText: 'Ver lista', href: 'https://www.facebook.com/groups/templeluna/permalink/1426497294353059/', bg: 'radial-gradient(at 70% 100%, rgb(125 109 214) 10%, rgb(79, 67, 201) 50%)', img: ImgMaquinaEscribir, style: { bottom: '-20px' } },
-    { text: 'Leyendo las mejores obras en vivo: Con Cami Orquera', buttonText: 'Quiero asistir', href: 'https://chat.whatsapp.com/FFuTtUO4J0KF0MEXpOdR4w', bg: 'rgb(42 95 148)', img: ImgLectora, orientation: 'right', style: { bottom: '-40px' } }, //scrollTo: 'critique-block'
     { text: 'Una editorial diferente, como nunca habías visto', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion }
 ]
 
