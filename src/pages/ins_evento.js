@@ -8,13 +8,12 @@ import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import ImgPlumaTinta from '../img/feather-ink.svg';
 import HelmetMetaData from "../componentes/helmet";
-import { Link } from 'react-router-dom';
 import { toName } from '../helpers/functions';
 import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faCircle, faCircleNotch, faClipboardCheck, faDotCircle, faHome, faPlus, faSquare, faWaveSquare } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { contactTypes } from '../data/data';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
@@ -157,7 +156,7 @@ const Solicitud = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setSuccess(false);
+        //setSuccess(false);
     }, [activeIndex]);
 
     return (
@@ -180,7 +179,9 @@ const Solicitud = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>Únete al grupo con el botón de abajo</p>
+                                    <p className='txt-responsive-form m0-auto'>¡No olvides unirte al grupo! Presiona el botón de abajo</p>
+                                    <FontAwesomeIcon icon={faAngleDown} size='2x' />
+
                                     <div className='form-buttons-container mt-3'>
                                         <a href="https://chat.whatsapp.com/EAJ12bJqnyW5OwjpkWrRs3" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
@@ -204,8 +205,8 @@ const Solicitud = () => {
 
                                                     <div className='form-group'>
                                                         <h2>¡Hola, escritor!</h2>
-                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad y lograr que estas destaquen sobre cualquier otra.<br /><br />
-                                                            Al final de tu inscripción, te daremos acceso al <b>grupo de Whatsapp</b> donde se encuentra el instructor y el resto de inscritos. Ahí es donde <b>pasaremos los links de transmisión</b> para las sesiones.<br /><br />
+                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad <p>desde la psicología de los personaje</p> y lograr que estas destaquen sobre cualquier otra.<br /><br />
+                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
                                                             Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
                                                             <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />
                                                             <b>El curso es gratuito.</b></p>
