@@ -4,6 +4,7 @@ import Login from './pages/login'
 import Admin from './pages/admin'
 import SolicitudCritica from './pages/solicitud-critica'
 import SolicitudDiseno from './pages/solicitud-diseno'
+import InscripcionEvento from './pages/ins_evento'
 import PreparacionCritica from './pages/prep_critica'
 import PreparacionDiseno from './pages/prep_diseno'
 import PrevResultado from './pages/prev_resultado'
@@ -25,6 +26,7 @@ const App = () => {
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />
           <PublicRoute exact path="/sol_diseno" component={SolicitudDiseno} />
+          <PublicRoute exact path="/ins_evento" component={InscripcionEvento} />
           <PublicRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />

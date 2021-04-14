@@ -213,7 +213,7 @@ const Solicitud = () => {
             <HelmetMetaData title="Críticas - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
-                <section className='container-xl section'>
+                <section className='container-xl section position-relative z-3'>
                     <h2 className='mb-0'>Pide una crítica</h2>
                     <p className='txt-responsive-form'>Y serás contactado(a) por un gran intelectual</p>
                 </section>
