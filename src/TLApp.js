@@ -26,11 +26,11 @@ const App = () => {
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />
           <PublicRoute exact path="/sol_diseno" component={SolicitudDiseno} />
-          <PublicRoute exact path="/ins_evento" component={InscripcionEvento} />
           <PublicRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
           <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />
+          <Route exact path="/ins_evento" component={InscripcionEvento} />
           <Route exact path="/prev_resultado" component={PrevResultado} />
           <Redirect to="/" />
         </Switch>
