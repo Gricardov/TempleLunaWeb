@@ -205,7 +205,7 @@ const Solicitud = () => {
 
                                                     <div className='form-group'>
                                                         <h2>¡Hola, escritor!</h2>
-                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad <p>desde la psicología de los personaje</p> y lograr que estas destaquen sobre cualquier otra.<br /><br />
+                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad desde <b>la psicología de los personajes</b> y lograr que estas destaquen sobre cualquier otra.<br /><br />
                                                             Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
                                                             Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
                                                             <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />
