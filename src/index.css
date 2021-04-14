@@ -501,6 +501,10 @@ p {
   color: #756F86;
 }
 
+.form-group a {
+  color: #8B81EC;
+}
+
 .form-buttons-container {
   display: flex;
   justify-content: space-between;

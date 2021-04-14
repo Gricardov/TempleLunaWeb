@@ -4,6 +4,7 @@ import Fade from 'react-reveal/Fade';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useHistory } from 'react-router-dom';
 import { carrouselData } from '../../data/data';
 import './panorama.css'
 
@@ -12,6 +13,8 @@ let interval;
 export const Panorama = () => {
     const [index, setIndex] = useState(0);
     const [autoScroll, setAutoScroll] = useState(true);
+
+    const history = useHistory();
 
     useEffect(() => {
         if (autoScroll) {
@@ -37,10 +40,13 @@ export const Panorama = () => {
         setIndex(selectedIndex);
     }
 
-    const goTo = ({ href, scrollTo }) => {
+    const goTo = ({ href, scrollTo, pushTo }) => {
         if (href) {
             window.open(href);
-        } else if (scrollTo) {
+        } else if (pushTo) {
+            history.push(pushTo);
+        }
+        else if (scrollTo) {
             const element = document.getElementById(scrollTo);
             element.scrollIntoView();
         }
@@ -85,7 +91,7 @@ export const Panorama = () => {
             </TransitionGroup>
             <div className='dots-panorama'>
                 {
-                    carrouselData.map((_, i) => <div onClick={() => showSlide(i)} className={`dot ${i == index ? 'selected' : ''}`} />)
+                    carrouselData.map((_, i) => <div key={i + 1} onClick={() => showSlide(i)} className={`dot ${i == index ? 'selected' : ''}`} />)
                 }
             </div>
         </div>

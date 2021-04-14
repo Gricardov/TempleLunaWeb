@@ -195,6 +195,7 @@ const Solicitud = () => {
             return true;
         }
 
+        // Email
         if (!(/^(?!\s*$).{6,100}/.test(email))) {
             alert('Tu correo debe tener de 6 a 100 caracteres');
             return true;

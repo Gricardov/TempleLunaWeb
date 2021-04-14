@@ -9,14 +9,13 @@ import Fade from 'react-reveal/Fade';
 import ImgLeyendo from '../img/cri-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
-import { critiquePoints } from '../data/data';
 import { extractLink, toName, toSentence } from '../helpers/functions';
 import { saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { contactTypes } from '../data/data';
+import { contactTypes,critiquePoints } from '../data/data';
 
 const steps = ['Contacto', 'Obra', 'Contenido'];
 const chkPoints = critiquePoints;
@@ -156,6 +155,7 @@ const Solicitud = () => {
             return true;
         }
 
+        // Email
         if (!(/^(?!\s*$).{6,100}/.test(email))) {
             alert('Tu correo debe tener de 6 a 100 caracteres');
             return true;

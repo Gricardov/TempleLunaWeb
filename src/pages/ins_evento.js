@@ -6,22 +6,22 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgLibro from '../img/books.svg';
+import ImgPlumaTinta from '../img/feather-ink.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
-import { critiquePoints } from '../data/data';
-import { extractLink, toName, toSentence } from '../helpers/functions';
-import { saveRequest } from '../api';
+import { toName } from '../helpers/functions';
+import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faCircle, faCircleNotch, faClipboardCheck, faDotCircle, faHome, faPlus, faSquare, faWaveSquare } from '@fortawesome/free-solid-svg-icons';
 import { contactTypes } from '../data/data';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 export const roleTypes = [{ type: 'AUD', icon: 'fas fa-person', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-person', text: 'Autor' }];
 
 const steps = ['Inicio', 'Contacto', 'Listo'];
-const chkPoints = critiquePoints;
+const chkPoints = [{ id: 'SI', name: 'Sí', abrev: 'Sí' }];
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -40,12 +40,7 @@ const Solicitud = () => {
     const [phone, setPhone] = useState('');
     const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
-    const [roleType, setRoleType] = useState(roleTypes[0]);
-    const [link, setLink] = useState('');
-    const [title, setTitle] = useState('');
-    const [about, setAbout] = useState('');
-    const [intention, setIntention] = useState('');
-    const [points, setPoints] = useState(['INTENCION']);
+    const [points, setPoints] = useState([]);
 
     const updName = (e) => {
         setName(e.target.value);
@@ -67,31 +62,9 @@ const Solicitud = () => {
         setEmail(e.target.value);
     }
 
-    const updLink = (e) => {
-        setLink(e.target.value);
-    }
-
-    const updTitle = (e) => {
-        setTitle(e.target.value);
-    }
-
-    const updAbout = (e) => {
-        setAbout(e.target.value);
-    }
-
-    const updIntention = (e) => {
-        setIntention(e.target.value);
-    }
-
-    const updRoleType = (val) => {
-        setRoleType(val);
-    }
-
     const selectPoint = (id) => {
         if (includesPoint(id)) {
-            if (id != 'INTENCION') {
-                setPoints(points.filter(p => p != id));
-            }
+            setPoints(points.filter(p => p != id));
         } else {
             setPoints([...points, id]);
         }
@@ -117,22 +90,15 @@ const Solicitud = () => {
 
     const saveChanges = () => {
         const data = {
+            eventId: 'OBRA-PROFESIONAL-CCADENA-1',
+            eventName: 'Construye tu novela como un profesional',
             name: toName(name.trim()),
             age: parseInt(age),
             phone: phone.trim(),
-            messengerType: messengerType.type,
-            email: email.trim(),
-            title: toSentence(title.trim()),
-            link: extractLink(link.trim()),
-            about: about.trim(),
-            intention: intention.trim(),
-            points,
-            type: 'CRITICA',
-            status: 'DISPONIBLE',
-            active: 1
+            email: email.trim()
         };
 
-        saveRequest(data).then(() => {
+        saveEvent(data).then(() => {
             window.scrollTo(0, 0);
             setLoading(false);
             setSuccess(true);
@@ -163,6 +129,7 @@ const Solicitud = () => {
             return true;
         }
 
+        // Email
         if (!(/^(?!\s*$).{6,100}/.test(email))) {
             alert('Tu correo debe tener de 6 a 100 caracteres');
             return true;
@@ -172,30 +139,8 @@ const Solicitud = () => {
             return true;
         }
 
-        // Link
-        if (!(/^(?!\s*$).{1,500}/.test(link))) {
-            alert('Tu link debe tener de 1 a 500 caracteres');
-            return true;
-        } else if (!extractLink(link.trim())) {
-            alert('Parece que ese link no es válido. Revísalo bien');
-            return true;
-        }
-
-        // Title
-        if (!(/^(?!\s*$).{1,100}/.test(title))) {
-            alert('Tu título debe tener de 1 a 100 caracteres');
-            return true;
-        }
-
-        // About
-        if (!(/^(?!\s*$).{1,1000}/.test(about))) {
-            alert('El resumen de tu historia debe contener de 1 a 1000 caracteres');
-            return true;
-        }
-
-        // Intention
-        if (!(/^(?!\s*$).{1,1000}/.test(intention))) {
-            alert('Lo que quieres transmitir debe tener de 1 a 1000 caracteres');
+        if (!includesPoint('SI')) {
+            alert('Debes confirmar tu asistencia y cumplimiento');
             return true;
         }
 
@@ -222,10 +167,10 @@ const Solicitud = () => {
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
                     <h2 className='mb-0'>Construye tu novela como un profesional</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Inscríbete a este gran curso en vivo y destaca tus obras sobre las demás</p>
+                    <p className='txt-responsive-form w-60 w-md-75'>Tu obra nunca volverá a ser "una obra más"</p>
                 </section>
                 <section className='container-xl mt-5 position-relative'>
-                    <img src={ImgLibro} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgPlumaTinta} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success
@@ -235,15 +180,15 @@ const Solicitud = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>En unos días te contactaremos</p>
+                                    <p className='txt-responsive-form m0-auto'>Únete al grupo con el botón de abajo</p>
                                     <div className='form-buttons-container mt-3'>
-                                        <Link to={'inicio'} className='button button-green m0-auto'>
-                                            <FontAwesomeIcon icon={faHome} size='xl' />
+                                        <a href="https://chat.whatsapp.com/EAJ12bJqnyW5OwjpkWrRs3" className='button button-green m0-auto'>
+                                            <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
-                                            <span className='d-none d-md-inline'>
-                                                Regresar
+                                            <span>
+                                                Unirme
                                             </span>
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 :
@@ -258,30 +203,27 @@ const Solicitud = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group'>
-                                                        <h2>Hola, escritor!</h2>
-                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad y lograr que estas destaquen sobre cualquier otra.<br /><br/>                                                            
+                                                        <h2>¡Hola, escritor!</h2>
+                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad y lograr que estas destaquen sobre cualquier otra.<br /><br />
                                                             Al final de tu inscripción, te daremos acceso al <b>grupo de Whatsapp</b> donde se encuentra el instructor y el resto de inscritos. Ahí es donde <b>pasaremos los links de transmisión</b> para las sesiones.<br /><br />
-                                                            Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br/>
-                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Lee bien el horario y requisitos.</b><br /><br />
+                                                            Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
+                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />
                                                             <b>El curso es gratuito.</b></p>
                                                     </div>
 
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtLink">¿Qué rol elijes?</label>
-                                                        <DropdownImage
-                                                            stretch
-                                                            selectedItem={roleType}
-                                                            list={roleTypes}
-                                                            select={updRoleType} />
+                                                        <ul>
+                                                            <li><b>Número de sesiones:</b> 2</li>
+                                                            <li><b>Instructor:</b> Carlos Cadena</li>
+                                                            <li><b>Plataforma:</b> Google Meets</li>
+                                                            <li><b>Horarios:</b> Domingo 18 y 25 de abril a las 11am (Hora Lima - Colombia)</li>
+                                                            <li><b>Requisito sesión 1:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
+                                                            <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Se pasará en PDF.</li>
+                                                        </ul>
                                                     </div>
 
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtTitulo">Título de tu obra</label>
-                                                        <input minLength="1" maxLength="100" type="text" value={title} onChange={updTitle} id="txtTitulo" placeholder="Ejemplo: La gran infidelidad" />
-                                                    </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="txtLink">Link de tu obra</label>
-                                                        <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />
+                                                        <p>Presiona siguiente para continuar.</p>
                                                     </div>
 
                                                 </div>
@@ -296,33 +238,26 @@ const Solicitud = () => {
                                                         <input type="number" min={10} max={99} value={age} onChange={updAge} id="txtEdad" placeholder="Ingresa tu edad" />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtNumero">Bríndanos un número para consultas (con código de país)</label>
+                                                        <label htmlFor="txtNumero">¿Con qué número entrarás? (con código de país)</label>
                                                         <div className='cbo-text'>
                                                             <DropdownImage
                                                                 selectedItem={messengerType}
-                                                                list={contactTypes}
+                                                                list={[contactTypes[0]]}
                                                                 select={updMessengerType} />
                                                             <input type="text" value={phone} onChange={updPhone} id="txtNumero" placeholder="Ej: +51 999 999 999" />
                                                         </div>
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtCorreo">Bríndanos un correo para enviarte el trabajo</label>
+                                                        <label htmlFor="txtCorreo">Bríndanos tu correo de contacto</label>
                                                         <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
                                                     </div>
 
 
                                                 </div>
                                                 <div className='step-3'>
+
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtAcerca">En general ¿De qué trata tu obra?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={about} onChange={updAbout} id="txtAcerca" placeholder="Ejemplo: Mi obra trata sobre las ocurrencias vividas con mi primer amor y el dolor causado por su posterior traición..."></textarea>
-                                                    </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="txtIntencion">¿Qué intención deseas transmitir?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Deseo transmitir miedo e incertidumbre, por medio de una historia ambientada en una pandemia mundial..."></textarea>
-                                                    </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="txtLink">¿Qué puntos tocamos en la crítica?</label>
+                                                        <label htmlFor="txtLink">Confirmo mi asistencia y el cumplimiento de las tareas solicitadas.</label>
                                                         {
                                                             chkPoints.map(point => {
                                                                 const included = includesPoint(point.id);
@@ -333,7 +268,7 @@ const Solicitud = () => {
                                                                                 ?
                                                                                 <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
                                                                                 :
-                                                                                <FontAwesomeIcon color={'#adadad'} icon={faPlus} style={{ fontSize: '1.6rem' }} />
+                                                                                <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
                                                                         }
                                                                         {' '}
                                                                         {point.name}
@@ -342,9 +277,7 @@ const Solicitud = () => {
                                                             })
                                                         }
                                                     </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="chkPortafolio">Si tu obra es muy larga, el crítico acordará contigo hasta donde llegará. El artista podrá usar la crítica en su propio portafolio.</label>
-                                                    </div>
+
                                                 </div>
                                             </StepManager>
                                             <div className='form-buttons-container'>

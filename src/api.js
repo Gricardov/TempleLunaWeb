@@ -7,6 +7,11 @@ const firestore = firebase.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();
 
+// Eventos
+export const saveEvent = async (object) => {
+    return firestore.collection('inscripciones').doc().set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+}
+
 // Solicitudes
 
 export const takeRequest = async (requestId, type) => {

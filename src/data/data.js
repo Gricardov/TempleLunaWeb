@@ -4,7 +4,7 @@ import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
 
 export const carrouselData = [
-    { text: '¿Eres escritor? Aprende a construir tu novela como un profesional', buttonText: 'Inscribirme', href: 'https://www.wattpad.com/story/263097960', bg: 'rgb(199 91 39)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } },
+    { text: '¿Eres escritor? Aprende a construir tu novela como un profesional', buttonText: 'Inscribirme', pushTo: 'ins_evento', bg: 'rgb(199 91 39)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } },
     { text: 'Apaga la luz. Llegó la obra ganadora del concurso de terror', buttonText: 'Leer ahora', href: 'https://www.wattpad.com/story/263097960', bg: 'radial-gradient(at 300px 100%, rgb(0 0 0) 10%, rgb(46 46 46) 50%)', img: ImgFoco, orientation: 'right', style: { top: '50px', right: '-120px' } }, //scrollTo: 'critique-block'
     { text: 'Conoce a los ganadores del #CuentoCorto Temple Luna', buttonText: 'Ver lista', href: 'https://www.facebook.com/groups/templeluna/permalink/1426497294353059/', bg: 'radial-gradient(at 70% 100%, rgb(125 109 214) 10%, rgb(79, 67, 201) 50%)', img: ImgMaquinaEscribir, style: { bottom: '-20px' } },
     { text: 'Una editorial diferente, como nunca habías visto', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion }
