@@ -156,7 +156,7 @@ const Solicitud = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        //setSuccess(false);
+        setSuccess(false);
     }, [activeIndex]);
 
     return (
