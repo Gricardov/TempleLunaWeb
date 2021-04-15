@@ -203,23 +203,24 @@ const Solicitud = () => {
                                             <StepManager currentIndex={activeIndex}>
                                                 <div className='step-1'>
 
-                                                    <div className='form-group'>
+                                                    <div className='form-group mb-0'>
                                                         <h2>¡Hola, escritor!</h2>
                                                         <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad desde <b>la psicología de los personajes</b> y lograr que estas destaquen sobre cualquier otra.<br /><br />
                                                             Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
                                                             Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
-                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />
-                                                            <b>El curso es gratuito.</b></p>
+                                                            El curso es <b>gratuito</b> y dado que algunas obras pueden contener temas <b>sensibles</b>, sugerimos que solo entres si eres <b>mayor de edad.</b><br /><br />
+                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />                                                            </p>
                                                     </div>
 
                                                     <div className='form-group'>
                                                         <ul>
                                                             <li><b>Número de sesiones:</b> 2</li>
+                                                            <li><b>Duración de cada sesión:</b> 1h 30m</li>
                                                             <li><b>Instructor:</b> Carlos Cadena</li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
                                                             <li><b>Horarios:</b> Domingo 18 y 25 de abril a las 11am (Hora Lima - Colombia)</li>
                                                             <li><b>Requisito sesión 1:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
-                                                            <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Se pasará en PDF.</li>
+                                                            <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Descárgalo desde <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">aquí</a></b>.</li>
                                                         </ul>
                                                     </div>
 
