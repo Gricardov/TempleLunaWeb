@@ -1,12 +1,12 @@
 import ImgColaboracion from '../img/colaboracion.svg';
-import ImgMaquinaEscribir from '../img/typewriter.svg';
+import ImgLecVivo from '../img/lec-vivo.svg';
 import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
 
 export const carrouselData = [
-    { text: '¿Eres escritor? Aprende a construir tu novela como un profesional', buttonText: 'Inscribirme', pushTo: 'ins_evento', bg: 'rgb(199 91 39)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } },
+    { text: 'Gran lectura de obras en vivo, con Laydy Czulewyez', buttonText: 'Participar', pushTo: 'ins_evento/LECTURA-VIVO-LACZU-1', bg: 'rgb(158 40 144)', img: ImgLecVivo, style: { bottom: '-50px', right: '-100px' } },
+    { text: '¿Eres escritor? Aprende a construir tu novela como un profesional', buttonText: 'Inscribirme', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-1', bg: 'rgb(199 91 39)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } },
     { text: 'Apaga la luz. Llegó la obra ganadora del concurso de terror', buttonText: 'Leer ahora', href: 'https://www.wattpad.com/story/263097960', bg: 'radial-gradient(at 300px 100%, rgb(0 0 0) 10%, rgb(46 46 46) 50%)', img: ImgFoco, orientation: 'right', style: { top: '50px', right: '-120px' } }, //scrollTo: 'critique-block'
-    { text: 'Conoce a los ganadores del #CuentoCorto Temple Luna', buttonText: 'Ver lista', href: 'https://www.facebook.com/groups/templeluna/permalink/1426497294353059/', bg: 'radial-gradient(at 70% 100%, rgb(125 109 214) 10%, rgb(79, 67, 201) 50%)', img: ImgMaquinaEscribir, style: { bottom: '-20px' } },
     { text: 'Una editorial diferente, como nunca habías visto', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion }
 ]
 
@@ -18,3 +18,6 @@ export const requestTypes = [{ type: 'DISENO', icon: 'fas fa-magic', text: 'Dise
 export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos', statistics: 0 }, { id: 'TOMADO', name: 'Elegidos', statistics: 0 }, { id: 'HECHO', name: 'Listos', statistics: 0 }];
 
 export const contributors = ['@Gricardov', '@JennyAline', '@CaroDePearolMorales', '@AlphaPhantom', '@JackDreamer', '@PiccolaScrittrice', '@SayraBaylon', '@JuliLorenzi'];
+
+// Para los roles de las dinámicas
+export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', text: 'Autor' }];

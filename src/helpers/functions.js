@@ -61,7 +61,7 @@ export const toSentence = (text, limit) => {
 export const toName = (rawName) => {
     const nameArray = rawName.replace(/'.'/g, '').trim().split(' ');
     let result = '';
-    nameArray.map(name => result += ' ' + toSentence(name));
+    nameArray.map((index, name) => result += (index == 0 ? '' : ' ') + toSentence(name));
     return result;
 }
 

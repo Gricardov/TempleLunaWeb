@@ -150,7 +150,7 @@ const Solicitud = () => {
         }
 
         // Phone
-        if (!(/(^\s*$)|(^[+]?[0-9 ]{7,20}$)/).test(phone)) {
+        if (!(/(^\s+$)|(^[+]?[0-9 ]{7,20}$)/).test(phone)) {
             alert('Introduce un teléfono válido');
             return true;
         }

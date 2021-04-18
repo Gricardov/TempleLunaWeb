@@ -6,15 +6,15 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgPlumaTinta from '../img/feather-ink.svg';
+import ImgAutor from '../img/laczu.jpg';
 import HelmetMetaData from "../componentes/helmet";
-import { toName } from '../helpers/functions';
+import { toName, extractLink } from '../helpers/functions';
 import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
-import { contactTypes } from '../data/data';
+import { contactTypes, inscriptionTypes } from '../data/data';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useHistory } from 'react-router-dom';
 
@@ -38,6 +38,8 @@ const Inscripcion = () => {
     const [phone, setPhone] = useState('');
     const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
+    const [inscriptionType, setInscriptionType] = useState(inscriptionTypes[0]);
+    const [link, setLink] = useState('');
     const [points, setPoints] = useState([]);
 
     const history = useHistory();
@@ -56,6 +58,14 @@ const Inscripcion = () => {
 
     const updMessengerType = (val) => {
         setMessengerType(val);
+    }
+
+    const updInscriptionType = (val) => {
+        setInscriptionType(val);
+    }
+
+    const updLink = (e) => {
+        setLink(e.target.value);
     }
 
     const updEmail = (e) => {
@@ -94,7 +104,7 @@ const Inscripcion = () => {
 
         const data = {
             eventId: idEvento,
-            eventName: 'Construye tu novela como un profesional',
+            eventName: 'Dinámica de lectura en vivo',
             name: toName(name.trim()),
             age: parseInt(age),
             phone: phone.trim(),
@@ -126,8 +136,8 @@ const Inscripcion = () => {
             return true;
         }
 
-        // Phone
-        if (!(/(^\s+$)|(^[+]?[0-9 ]{7,20}$)/).test(phone)) {
+        // Phone        
+        if (!(/(^\s+$)|(^[+]?[0-9]{7,20}$)/).test(phone)) {
             alert('Introduce un teléfono válido');
             return true;
         }
@@ -145,6 +155,17 @@ const Inscripcion = () => {
         if (!includesPoint('SI')) {
             alert('Debes confirmar tu asistencia y cumplimiento');
             return true;
+        }
+
+        // Link
+        if (inscriptionType.type == 'AUT') {
+            if (!(/^(?!\s*$).{1,500}/.test(link))) {
+                alert('Tu link debe tener de 1 a 500 caracteres');
+                return true;
+            } else if (!extractLink(link.trim())) {
+                alert('Parece que ese link no es válido. Revísalo bien');
+                return true;
+            }
         }
 
         return false;
@@ -169,11 +190,11 @@ const Inscripcion = () => {
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Construye tu novela como un profesional</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Tu obra nunca volverá a ser "una obra más"</p>
+                    <h2 className='mb-0'>Gran lectura de obras en vivo</h2>
+                    <p className='txt-responsive-form w-60 w-md-75'>Con Laydy Czulewyez</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                    <img src={ImgPlumaTinta} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgAutor} alt='img-fondo' className='img-fondo-formulario br-50' />
                     <div className='floating-form'>
                         {
                             success
@@ -187,7 +208,7 @@ const Inscripcion = () => {
                                     <FontAwesomeIcon icon={faAngleDown} size='2x' />
 
                                     <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/EAJ12bJqnyW5OwjpkWrRs3" className='button button-green m0-auto'>
+                                        <a href="https://chat.whatsapp.com/DiLJJ3vkzU9I2yapuWlLvz" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
                                             <span>
@@ -208,24 +229,24 @@ const Inscripcion = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group mb-0'>
-                                                        <h2>¡Hola, escritor!</h2>
-                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad desde <b>la psicología de los personajes</b> y lograr que estas destaquen sobre cualquier otra.<br /><br />
-                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
-                                                            Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
-                                                            El curso es <b>gratuito</b> y dado que algunas obras pueden contener temas <b>sensibles</b>, sugerimos que solo entres si eres <b>mayor de edad. </b><br /><br />
-                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />                                                            </p>
+                                                        <h2>¡Bienvenido(a) a la dinámica!</h2>
+                                                        <p>¿Cansado de tanto cliché allá afuera? Nosotros también.<br /><br />
+                                                        Por eso, te invitamos a este espacio <b>en vivo</b> donde haremos <b>lectura y recomendación</b> de obras seleccionadas
+                                                            por Laczully, una <b>autora de gran experiencia</b>. Síguela en Wattpad desde <b><a target="_blank" href="https://www.wattpad.com/user/Laczuly0711">aquí</a></b>.<br /><br />
+                                                           En esta dinámica, <b>hay dos roles:</b> Puedes participar como <b>audiencia</b> y escuchar la mejor selección de obras, o puedes participar como <b>autor</b> e inscribir tu obra para ser leída.<br /><br />
+                                                           Laczully elegirá <b>seis obras para leer</b>, en base a su criterio. Si tu obra es <b>elegida</b> y no te <b>reportas</b> por el grupo, tu obra será <b>reemplazada por otra.</b><br /><br />
+                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Inscríbete <b>solamente</b> si vas a asistir a la dinámica.<br /><br />
+
+                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otras dinámicas de Temple Luna.</b><br /><br />
+                                                        </p>
                                                     </div>
 
                                                     <div className='form-group'>
                                                         <ul>
-                                                            <li><b>Número de sesiones:</b> 2</li>
-                                                            <li><b>Duración de cada sesión:</b> 1h 30m</li>
-                                                            <li><b>Instructor:</b> Carlos Cadena</li>
+                                                            <li><b>Número de obras a leer:</b> 6</li>
+                                                            <li><b>Autora:</b> Laydy Czulewyez</li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horarios:</b> Domingo 18 y 25 de abril a las 11am (Hora Lima - Colombia)</li>
-                                                            <li><b>Requisito sesión 1:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
-                                                            <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Descárgalo desde <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">aquí</a></b>.</li>
-                                                            <li><b>¿Te perdiste una clase?:</b> Las grabaciones estarán <b><a target="_blank" href="https://www.facebook.com/groups/templeluna">aquí</a></b>.</li>
+                                                            <li><b>Horarios:</b> Viernes 23 abril a las 11am (Hora Lima - Colombia)</li>
                                                         </ul>
                                                     </div>
 
@@ -259,32 +280,48 @@ const Inscripcion = () => {
                                                         <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
                                                     </div>
 
-
                                                 </div>
                                                 <div className='step-3'>
 
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtLink">Confirmo mi asistencia y el cumplimiento de las tareas solicitadas.</label>
+                                                        <div className='form-group'>
+                                                            <label htmlFor="txtLink">¿Qué rol eliges?</label>
+                                                            <DropdownImage
+                                                                stretch
+                                                                selectedItem={inscriptionType}
+                                                                list={inscriptionTypes}
+                                                                select={updInscriptionType} />
+                                                        </div>
                                                         {
-                                                            chkPoints.map(point => {
-                                                                const included = includesPoint(point.id);
-                                                                return (
-                                                                    <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
-                                                                        {
-                                                                            included
-                                                                                ?
-                                                                                <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
-                                                                                :
-                                                                                <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
-                                                                        }
-                                                                        {' '}
-                                                                        {point.name}
-                                                                    </div>
-                                                                )
-                                                            })
+                                                            inscriptionType.type == 'AUT'
+                                                            &&
+                                                            <div className='form-group'>
+                                                                <label htmlFor="txtLink">Link de tu obra</label>
+                                                                <input minLength="1" maxLength="500" type="text" value={link} onChange={updLink} id="txtLink" placeholder="Ingresa el link" />
+                                                            </div>
                                                         }
+                                                        <div className='form-group'>
+                                                            <label htmlFor="txtLink">Confirmo mi asistencia y el cumplimiento de las tareas solicitadas.</label>
+                                                            {
+                                                                chkPoints.map(point => {
+                                                                    const included = includesPoint(point.id);
+                                                                    return (
+                                                                        <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
+                                                                            {
+                                                                                included
+                                                                                    ?
+                                                                                    <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
+                                                                                    :
+                                                                                    <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
+                                                                            }
+                                                                            {' '}
+                                                                            {point.name}
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </StepManager>
                                             <div className='form-buttons-container'>
