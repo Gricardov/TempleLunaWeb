@@ -45,9 +45,9 @@ export const getRequest = async (requestId, includeDetails) => {
         })
 }
 
-export const getRequests = async (workerId, type, status, startAfter, limit = 10) => {
+export const getRequests = async (workerId, type, status, startAfter, limit = 10, order = 'asc') => {
 
-    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', 'desc');
+    let request = firestore.collection('solicitudes').where('type', '==', type).where('status', '==', status).orderBy('createdAt', order);
 
     if (startAfter) {
         request = request.startAfter(startAfter);

@@ -93,7 +93,7 @@ const Admin = () => {
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
             const requestStatus = tabList[activeTabIndex].id;
-            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, getLastElement('createdAt'), limit)
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, getLastElement('createdAt'), limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
                 .then(data => {
                     setLoadingMore(false);
                     setIsLast(data.isLast);
@@ -110,7 +110,7 @@ const Admin = () => {
         //if (!initialLoading && !loadingMore) {
         setInitialLoading(true);
         const requestStatus = tabList[activeTabIndex].id;
-        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, undefined, limit)
+        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, undefined, limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
             .then(data => {
                 updateStatistics();
                 setInitialLoading(false);
