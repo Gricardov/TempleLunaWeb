@@ -153,7 +153,7 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Leyuendo tu obra en vivo - Temple Luna" description="¿Quieres obras buenas? Acompáñanos en esta lectura en vivo y descubre los mejores escritos junto a Laydy Czulewyez." />
+            <HelmetMetaData title="Leyendo tu obra en vivo - Temple Luna" description="¿Quieres obras buenas? Acompáñanos en esta lectura en vivo y descubre los mejores escritos junto a Laydy Czulewyez." />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
