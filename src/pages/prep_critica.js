@@ -89,32 +89,32 @@ const Preparation = ({ location }) => {
 
         // Name
         if (intentionRequested) {
-            if (!(/^(?!\s*$).{1,1000}/.test(intention))) {
-                alert('La intención de la obra debe tener de 1 a 1000 caracteres');
+            if (!(/^(?!\s*$).{1,5000}/.test(intention))) {
+                alert('La intención de la obra debe tener de 1 a 5000 caracteres');
                 return true;
             }
         }
 
         // Hooks
         if (hookRequested) {
-            if (!(/^(?!\s*$).{1,1000}/.test(hook))) {
-                alert('En enganche de la obra debe tener de 1 a 1000 caracteres');
+            if (!(/^(?!\s*$).{1,5000}/.test(hook))) {
+                alert('En enganche de la obra debe tener de 1 a 5000 caracteres');
                 return true;
             }
         }
 
         // Ortography
         if (ortographyRequested) {
-            if (!(/^(?!\s*$).{1,1000}/.test(ortography))) {
-                alert('La ortografía de la obra debe tener de 1 a 1000 caracteres');
+            if (!(/^(?!\s*$).{1,5000}/.test(ortography))) {
+                alert('La ortografía de la obra debe tener de 1 a 5000 caracteres');
                 return true;
             }
         }
 
         // Improvement (optional)
         if (improvement) {
-            if (!(/^(?!\s*$).{1,1000}/.test(improvement))) {
-                alert('El consejo para el autor debe tener de 1 a 1000 caracteres');
+            if (!(/^(?!\s*$).{1,5000}/.test(improvement))) {
+                alert('El consejo para el autor debe tener de 1 a 5000 caracteres');
                 return true;
             }
         }
@@ -175,7 +175,7 @@ const Preparation = ({ location }) => {
                                         &&
                                         <div className='form-group'>
                                             <h4>¿Se logró transmitir la idea?</h4>
-                                            <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Siento que la idea se transmite correctamente, porque genera en el lector una sensación de..."></textarea>
+                                            <textarea minLength="1" maxLength="5000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Siento que la idea se transmite correctamente, porque genera en el lector una sensación de..."></textarea>
                                         </div>
                                     }
                                     {
@@ -183,7 +183,7 @@ const Preparation = ({ location }) => {
                                         &&
                                         <div className='form-group'>
                                             <h4>¿Qué tal fue el enganche de la obra?</h4>
-                                            <textarea minLength="1" maxLength="1000" rows="4" value={hook} onChange={updHook} id="txtEnganche" placeholder="Ejemplo: Considero que tiene un enganche bueno, pero no es suficiente. Debería enganchar mucho desde un inicio..."></textarea>
+                                            <textarea minLength="1" maxLength="5000" rows="4" value={hook} onChange={updHook} id="txtEnganche" placeholder="Ejemplo: Considero que tiene un enganche bueno, pero no es suficiente. Debería enganchar mucho desde un inicio..."></textarea>
                                         </div>
                                     }
                                     {
@@ -191,12 +191,12 @@ const Preparation = ({ location }) => {
                                         &&
                                         <div className='form-group'>
                                             <h4>¿Qué tal fue la ortografía?</h4>
-                                            <textarea minLength="1" maxLength="1000" rows="4" value={ortography} onChange={updOrtography} id="txtOrtografia" placeholder="Ejemplo: La ortografía fue excelente. Haces un correcto uso de las comas, los puntos y las tildes..."></textarea>
+                                            <textarea minLength="1" maxLength="5000" rows="4" value={ortography} onChange={updOrtography} id="txtOrtografia" placeholder="Ejemplo: La ortografía fue excelente. Haces un correcto uso de las comas, los puntos y las tildes..."></textarea>
                                         </div>
                                     }
                                     <div className='form-group'>
                                         <h4>¿Algún consejo para que el autor pueda mejorar? (Opcional)</h4>
-                                        <textarea minLength="1" maxLength="1000" rows="4" value={improvement} onChange={updImprovement} id="txtOrtografia" placeholder="Ejemplo: La ortografía fue excelente. Haces un correcto uso de las comas, los puntos y las tildes..."></textarea>
+                                        <textarea minLength="1" maxLength="5000" rows="4" value={improvement} onChange={updImprovement} id="txtOrtografia" placeholder="Ejemplo: La ortografía fue excelente. Haces un correcto uso de las comas, los puntos y las tildes..."></textarea>
                                     </div>
                                 </div>
                                 <div className='form-buttons-container mt-3'>
