@@ -72,7 +72,7 @@ const Inicio = () => {
                 <Fade bottom>
                     <section className='container-xl section section-body'>
                         <div className='text-section'>
-                            <h3>Disfusión al instante</h3>
+                            <h3>Difusión al instante</h3>
                             <p>Olvida las típicas páginas de lectura online. Promociona tus obras con un video, un meme o un estado.
                                 El límite será tu imaginación.</p>
                             <Tag />

@@ -1,12 +1,11 @@
 .panorama {
     border: 1px solid #707070;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
+    /*border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;*/
     position: relative;
     overflow: hidden;
     min-height: 466px;
     height: 50vh;
-    background: green;
 }
 
 @media (min-width: 768px) {

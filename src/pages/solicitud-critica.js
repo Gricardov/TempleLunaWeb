@@ -10,12 +10,13 @@ import ImgLeyendo from '../img/cri-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { extractLink, toName, toSentence } from '../helpers/functions';
+import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid, isTitleInvalid, isAboutInvalid, isIntentionInvalid } from '../helpers/validators';
 import { saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { contactTypes,critiquePoints } from '../data/data';
+import { contactTypes, critiquePoints } from '../data/data';
 
 const steps = ['Contacto', 'Obra', 'Contenido'];
 const chkPoints = critiquePoints;
@@ -133,64 +134,19 @@ const Solicitud = () => {
 
     const checkErrors = () => {
 
-        // Name
-        if (!(/^(?!\s*$).{1,50}/.test(name))) {
-            alert('Tu nombre debe tener de 1 a 50 caracteres');
-            return true;
-        }
-        else if (!(/^[a-zA-Z\sáéíóúñÑ]*$/.test(name))) {
-            alert('Tu nombre no puede tener caracteres especiales');
-            return true;
-        }
+        let error = (isNameInvalid(name)
+            || isAgeInvalid(age)
+            || isPhoneInvalid(phone)
+            || isEmailInvalid(email)
+            || isLinkInvalid(link)
+            || isTitleInvalid(title)
+            || isAboutInvalid(about)
+            || isIntentionInvalid(intention));
 
-        // Age
-        if (!age || age < 10 || age > 99) {
-            alert('Introduce una edad válida');
+        if (error) {
+            alert(error);
             return true;
-        }
-
-        // Phone
-        if (!(/(^\s+$)|(^[+]?[0-9 ]{7,20}$)/).test(phone)) {
-            alert('Introduce un teléfono válido');
-            return true;
-        }
-
-        // Email
-        if (!(/^(?!\s*$).{6,100}/.test(email))) {
-            alert('Tu correo debe tener de 6 a 100 caracteres');
-            return true;
-        }
-        else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
-            alert('Introduce un correo válido');
-            return true;
-        }
-
-        // Link
-        if (!(/^(?!\s*$).{1,500}/.test(link))) {
-            alert('Tu link debe tener de 1 a 500 caracteres');
-            return true;
-        } else if (!extractLink(link.trim())) {
-            alert('Parece que ese link no es válido. Revísalo bien');
-            return true;
-        }
-
-        // Title
-        if (!(/^(?!\s*$).{1,100}/.test(title))) {
-            alert('Tu título debe tener de 1 a 100 caracteres');
-            return true;
-        }
-
-        // About
-        if (!(/^(?!\s*$).{1,1000}/.test(about))) {
-            alert('El resumen de tu historia debe contener de 1 a 1000 caracteres');
-            return true;
-        }
-
-        // Intention
-        if (!(/^(?!\s*$).{1,1000}/.test(intention))) {
-            alert('Lo que quieres transmitir debe tener de 1 a 1000 caracteres');
-            return true;
-        }
+        };
 
         return false;
     }

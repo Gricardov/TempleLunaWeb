@@ -9,6 +9,7 @@ import Fade from 'react-reveal/Fade';
 import ImgAutor from '../img/laczu.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName, extractLink } from '../helpers/functions';
+import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid } from '../helpers/validators';
 import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
@@ -106,6 +107,7 @@ const Inscripcion = () => {
             eventId: idEvento,
             eventName: 'Dinámica de lectura en vivo',
             name: toName(name.trim()),
+            role: inscriptionType.type,
             age: parseInt(age),
             phone: phone.trim(),
             email: email.trim()
@@ -120,53 +122,20 @@ const Inscripcion = () => {
 
     const checkErrors = () => {
 
-        // Name
-        if (!(/^(?!\s*$).{1,50}/.test(name))) {
-            alert('Tu nombre debe tener de 1 a 50 caracteres');
-            return true;
-        }
-        else if (!(/^[a-zA-Z\sáéíóúñÑ]*$/.test(name))) {
-            alert('Tu nombre no puede tener caracteres especiales');
-            return true;
-        }
+        let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email));
 
-        // Age
-        if (!age || age < 10 || age > 99) {
-            alert('Introduce una edad válida');
-            return true;
-        }
-
-        // Phone        
-        if (!(/(^\s+$)|(^[+]?[0-9]{7,20}$)/).test(phone)) {
-            alert('Introduce un teléfono válido');
-            return true;
-        }
-
-        // Email
-        if (!(/^(?!\s*$).{6,100}/.test(email))) {
-            alert('Tu correo debe tener de 6 a 100 caracteres');
-            return true;
-        }
-        else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
-            alert('Introduce un correo válido');
-            return true;
-        }
-
+        // Custom errors
         if (!includesPoint('SI')) {
-            alert('Debes confirmar tu asistencia y cumplimiento');
-            return true;
+            error = 'Debes confirmar tu asistencia y cumplimiento';
         }
 
-        // Link
-        if (inscriptionType.type == 'AUT') {
-            if (!(/^(?!\s*$).{1,500}/.test(link))) {
-                alert('Tu link debe tener de 1 a 500 caracteres');
-                return true;
-            } else if (!extractLink(link.trim())) {
-                alert('Parece que ese link no es válido. Revísalo bien');
-                return true;
-            }
-        }
+        // Link        
+        error = isLinkInvalid(link, inscriptionType.type != 'AUT');
+
+        if (error) {
+            alert(error);
+            return true;
+        };
 
         return false;
     }
@@ -194,7 +163,7 @@ const Inscripcion = () => {
                     <p className='txt-responsive-form w-60 w-md-75'>Con Laydy Czulewyez</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                    <img src={ImgAutor} alt='img-fondo' className='img-fondo-formulario br-50' />
+                    <img src={ImgAutor} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success
@@ -246,7 +215,7 @@ const Inscripcion = () => {
                                                             <li><b>Número de obras a leer:</b> 6</li>
                                                             <li><b>Autora:</b> Laydy Czulewyez</li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horarios:</b> Viernes 23 abril a las 11am (Hora Lima - Colombia)</li>
+                                                            <li><b>Horarios:</b> Viernes 23 abril a las 4pm (Hora Lima - Colombia)</li>
                                                         </ul>
                                                     </div>
 

@@ -11,7 +11,7 @@ const Steps = ({ activeIndex, navigateTo, steps }) => {
             <div className='line' style={{ left: chunksPercentage + '%', width: totalWidth + '%' }}></div>
             {
                 steps.map((step, index) => (
-                    <div className='step-container'>
+                    <div key={index + 1} className='step-container'>
                         <div onClick={() => navigateTo(index)} className={`form-step ${index == activeIndex ? 'active' : ''}`}>{index + 1}</div>
                         <div className='step-text'>{step}</div>
                     </div>

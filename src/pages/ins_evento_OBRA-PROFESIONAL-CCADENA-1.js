@@ -9,6 +9,7 @@ import Fade from 'react-reveal/Fade';
 import ImgPlumaTinta from '../img/feather-ink.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
+import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
 import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
@@ -109,43 +110,17 @@ const Inscripcion = () => {
     }
 
     const checkErrors = () => {
+        let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email));
 
-        // Name
-        if (!(/^(?!\s*$).{1,50}/.test(name))) {
-            alert('Tu nombre debe tener de 1 a 50 caracteres');
-            return true;
-        }
-        else if (!(/^[a-zA-Z\sáéíóúñÑ]*$/.test(name))) {
-            alert('Tu nombre no puede tener caracteres especiales');
-            return true;
-        }
-
-        // Age
-        if (!age || age < 10 || age > 99) {
-            alert('Introduce una edad válida');
-            return true;
-        }
-
-        // Phone
-        if (!(/(^\s+$)|(^[+]?[0-9 ]{7,20}$)/).test(phone)) {
-            alert('Introduce un teléfono válido');
-            return true;
-        }
-
-        // Email
-        if (!(/^(?!\s*$).{6,100}/.test(email))) {
-            alert('Tu correo debe tener de 6 a 100 caracteres');
-            return true;
-        }
-        else if (!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/).test(email)) {
-            alert('Introduce un correo válido');
-            return true;
-        }
-
+        // Custom errors
         if (!includesPoint('SI')) {
-            alert('Debes confirmar tu asistencia y cumplimiento');
-            return true;
+            error = 'Debes confirmar tu asistencia y cumplimiento';
         }
+
+        if (error) {
+            alert(error);
+            return true;
+        };
 
         return false;
     }

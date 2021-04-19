@@ -52,17 +52,16 @@ export const getExpDateText = (expDateMs) => {
 export const toSentence = (text, limit) => {
     limit = !limit ? text.length : limit;
     if (text && text.length > 0) {
-        return (text.substring(0, 1).toUpperCase() + text.substring(1, limit)).trim();
+        return (text.substring(0, 1).toUpperCase() + text.substring(1, limit).toLowerCase()).trim();
     } else {
         return '';
     }
 }
 
 export const toName = (rawName) => {
-    const nameArray = rawName.replace(/'.'/g, '').trim().split(' ');
-    let result = '';
-    nameArray.map((index, name) => result += (index == 0 ? '' : ' ') + toSentence(name));
-    return result;
+    let nameArray = rawName.replace(/'.'/g, '').trim().split(' ');
+    nameArray = nameArray.filter(name => name != '').map(name => name && toSentence(name.trim()));
+    return nameArray.join(' ');
 }
 
 export const getMessengerTypeName = (type) => {
