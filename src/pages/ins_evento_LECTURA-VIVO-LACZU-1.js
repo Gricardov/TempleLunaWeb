@@ -128,7 +128,7 @@ const Inscripcion = () => {
         // Custom errors
         if (!includesPoint('SI')) {
             error = 'Debes confirmar tu asistencia y cumplimiento';
-        }       
+        }
 
         if (error) {
             alert(error);
@@ -268,7 +268,7 @@ const Inscripcion = () => {
                                                             </div>
                                                         }
                                                         <div className='form-group'>
-                                                            <label htmlFor="txtLink">Confirmo mi asistencia y el cumplimiento de las tareas solicitadas.</label>
+                                                            <label htmlFor="txtLink">Confirmo mi asistencia a la lectura en vivo.</label>
                                                             {
                                                                 chkPoints.map(point => {
                                                                     const included = includesPoint(point.id);
