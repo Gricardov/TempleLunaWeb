@@ -122,15 +122,12 @@ const Inscripcion = () => {
 
     const checkErrors = () => {
 
-        let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email));
+        let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email) || isLinkInvalid(link, inscriptionType.type != 'AUT'));
 
         // Custom errors
         if (!includesPoint('SI')) {
             error = 'Debes confirmar tu asistencia y cumplimiento';
-        }
-
-        // Link        
-        error = isLinkInvalid(link, inscriptionType.type != 'AUT');
+        }       
 
         if (error) {
             alert(error);
