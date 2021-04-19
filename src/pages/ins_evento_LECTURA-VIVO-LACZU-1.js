@@ -107,6 +107,7 @@ const Inscripcion = () => {
             eventId: idEvento,
             eventName: 'Dinámica de lectura en vivo',
             name: toName(name.trim()),
+            link: extractLink(link.trim()),
             role: inscriptionType.type,
             age: parseInt(age),
             phone: phone.trim(),
