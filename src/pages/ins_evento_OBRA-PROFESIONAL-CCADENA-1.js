@@ -200,7 +200,7 @@ const Inscripcion = () => {
                                                             <li><b>Horarios:</b> Domingo 18 y 25 de abril a las 11am (Hora Lima - Colombia)</li>
                                                             <li><b>Requisito sesión 1:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
                                                             <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Descárgalo desde <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">aquí</a></b>.</li>
-                                                            <li><b>¿Te perdiste una clase?:</b> Las grabaciones estarán <b><a target="_blank" href="https://www.facebook.com/groups/templeluna">aquí</a></b>.</li>
+                                                            <li><b>¿Te perdiste la sesión 1?:</b> Mírala <b><a target="_blank" href="https://www.youtube.com/watch?v=4VQ_MMYBI5Y&ab_channel=TempleLuna">aquí</a></b>.</li>
                                                         </ul>
                                                     </div>
 
