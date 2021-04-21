@@ -1,6 +1,5 @@
 //import 'babel-polyfill';
 import firebase from './firebase';
-import { setProfileStorage } from './helpers/userStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 const firestore = firebase.firestore();
@@ -30,7 +29,7 @@ export const getRequest = async (requestId, includeDetails) => {
     return firestore.collection('solicitudes').doc(requestId).get()
         .then(async doc => {
             if (doc.exists) {
-                const res = await request('getArtistDataByRequestId', { requestId }, 'POST');
+                const res = await request('getArtistDataByRequestId', { requestId }, 'POST'); // TO BE FIXED, DENORMALIZE!!
                 if (!res.error) {
                     return { data: { ...doc.data(), id: doc.id, artist: res.artist } }
                 } else {
@@ -136,8 +135,7 @@ export const login = async (email, password) => {
         .then(user => {
             return getProfile(user.user.uid).then(({ profile, error }) => {
                 if (!error) {
-                    setProfileStorage(profile);
-                    return { user };
+                    return { user, profile };
                 } else {
                     logout();
                     return { error: 'No se pudo obtener el perfil' };
@@ -172,7 +170,6 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
     return auth.signOut().then(function () {
-        setProfileStorage(null);
         return true;
     }).catch(function (error) {
         console.log(error.message);

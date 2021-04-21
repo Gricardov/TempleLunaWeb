@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { login } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { setProfileStorage } from '../helpers/userStorage';
 
 const Login = () => {
 
@@ -25,8 +26,9 @@ const Login = () => {
         e.preventDefault();
         if (!checkErrors()) {
             login(email, password)
-                .then(({ user, error }) => {
+                .then(({ user, profile, error }) => {
                     if (user) {
+                        setProfileStorage(profile);
                         history.push('/admin');
                     } else {
                         alert(error);

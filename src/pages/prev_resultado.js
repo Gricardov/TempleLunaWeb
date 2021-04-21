@@ -68,6 +68,7 @@ const Previsualizacion = ({ location }) => {
 
         }
     }
+
     useEffect(() => {
 
         const { id, test, origin, fbclid, templated } = queryString.parse(location.search);
@@ -156,7 +157,6 @@ const Previsualizacion = ({ location }) => {
         if (!isTest) {
             const analObject = {
                 requestId: id,
-                templated: isTemplated,
                 origin,
                 readIntention: true
             };
@@ -218,7 +218,7 @@ const Previsualizacion = ({ location }) => {
                 <section className='container-pdf-preview position-relative'>
                     <div>
                         {
-                            type == 'CRITICA'
+                            resultUrl && type == 'CRITICA'
                                 ?
                                 <Document
                                     file={resultUrl}
@@ -226,19 +226,17 @@ const Previsualizacion = ({ location }) => {
                                     onLoadError={onDocumentError}
                                     externalLinkTarget={'_blank'}>
                                     {
-                                        Array.from(
-                                            new Array(numPages),
-                                            (el, index) => (
-                                                <Page
-                                                    key={`page_${index + 1}`}
-                                                    pageNumber={index + 1}
-                                                />
-                                            ),
+                                        Array.from(new Array(numPages), (el, index) => (
+                                            <Page
+                                                key={`page_${index + 1}`}
+                                                pageNumber={index + 1}
+                                            />
+                                        )
                                         )
                                     }
                                 </Document>
                                 :
-                                type == 'DISENO'
+                                resultUrl && type == 'DISENO'
                                     ?
                                     <div className='container-xl'>
                                         <h3>Diseño de la obra: {title}</h3>

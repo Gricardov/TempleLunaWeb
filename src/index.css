@@ -297,6 +297,7 @@ p {
   width: 95%;
   margin: 0 auto;
   padding-bottom: var(--bottom-navbar-height);
+  margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -1204,7 +1205,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   height: auto !important;
   margin: 0 auto;
   border-radius: 15px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+  box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 50%);
   margin-bottom: 1rem;
 }
 
