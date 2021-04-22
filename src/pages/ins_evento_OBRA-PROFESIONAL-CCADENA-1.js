@@ -239,7 +239,7 @@ const Inscripcion = () => {
                                                 <div className='step-3'>
 
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtLink">Confirmo mi asistencia y el cumplimiento de las tareas solicitadas.</label>
+                                                        <label htmlFor="txtLink">He leído los horarios, plataformas, requisitos y confirmo mi asistencia.</label>
                                                         {
                                                             chkPoints.map(point => {
                                                                 const included = includesPoint(point.id);
