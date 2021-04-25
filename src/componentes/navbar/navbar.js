@@ -62,7 +62,7 @@ const Navbar = ({ startTransparent }) => {
                 setOpenOptions(false);
             }
         })
-    }, [outsideListener$, arrowTogglerRef])
+    }, [outsideListener$, arrowTogglerRef]);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll)
