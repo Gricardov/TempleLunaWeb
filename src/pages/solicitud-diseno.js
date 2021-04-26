@@ -104,7 +104,7 @@ const Solicitud = () => {
             if (file.size <= maxFileSize) {
                 setImgSample(file);
             } else {
-                alert('La imagen debe ser menor a 5MB')
+                alert('La imagen debe ser menor a 5MB');
             }
         }
     }
@@ -139,7 +139,7 @@ const Solicitud = () => {
                         setSuccess(false);
                         alert('Error al subir la imagen. Reintente');
                         console.log(error);
-                    })
+                    });
             } else {
                 saveChanges('');
             }

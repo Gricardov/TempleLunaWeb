@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdown-image';
@@ -6,21 +6,21 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgPlumaTinta from '../img/feather-ink.svg';
+import ImgFondo from '../img/ccadena.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
-import { saveEvent } from '../api';
+import { uploadImage, saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { contactTypes } from '../data/data';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useHistory } from 'react-router-dom';
 
 const steps = ['Inicio', 'Contacto', 'Listo'];
 const chkPoints = [{ id: 'SI', name: 'Sí', abrev: 'Sí' }];
+const maxFileSize = 5242880;
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -40,8 +40,10 @@ const Inscripcion = () => {
     const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
     const [points, setPoints] = useState([]);
+    const [imgScn, setImgScn] = useState(null);
 
     const history = useHistory();
+    const refScn = useRef(null);
 
     const updName = (e) => {
         setName(e.target.value);
@@ -71,6 +73,29 @@ const Inscripcion = () => {
         }
     }
 
+    const startSelectScn = (e) => {
+        e.preventDefault();
+        refScn.current.click();
+    }
+
+    const selectScn = (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size <= maxFileSize) {
+                setImgScn(file);
+            } else {
+                alert('La imagen debe ser menor a 5MB');
+            }
+        }
+    }
+
+    const deleteScn = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setImgScn(null);
+    }
+
     const previous = (e) => {
         e.preventDefault();
         navigateTo(activeIndex - 1);
@@ -85,19 +110,31 @@ const Inscripcion = () => {
         e.preventDefault();
         if (!checkErrors()) {
             setLoading(true);
-            saveChanges();
+            if (imgScn) {
+                uploadImage('inscripcion', imgScn)
+                    .then(url => {
+                        saveChanges(url);
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        setSuccess(false);
+                        alert('Error al subir la imagen. Reintente');
+                        console.log(error);
+                    });
+            }
         }
     }
 
-    const saveChanges = () => {
+    const saveChanges = (urlImgInv) => {
 
         const idEvento = history.location.pathname.toString().replace(/\//g, '').replace(/ins_evento/g, '');
 
         const data = {
             eventId: idEvento,
-            eventName: 'Construye tu novela como un profesional',
+            eventName: 'Gran curso de guión, texto y novela',
             name: toName(name.trim()),
             age: parseInt(age),
+            urlImgInv: urlImgInv.trim(),
             phone: phone.trim(),
             email: email.trim()
         };
@@ -115,6 +152,10 @@ const Inscripcion = () => {
         // Custom errors
         if (!includesPoint('SI')) {
             error = 'Debes confirmar tu asistencia y cumplimiento';
+        }
+
+        if (!imgScn) {
+            error = 'Debes subir la imagen de la transacción';
         }
 
         if (error) {
@@ -140,15 +181,15 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Aprende a construir tu novela como un profesional - Temple Luna" description="¿Eres escritor? Perfecciona tus habilidades con este curso en vivo y destaca sobre los demás. Es gratuito." />
+            <HelmetMetaData title="Gran curso de guión, texto y novela - Temple Luna" description="Aprende a destacar tus obras como nunca antes" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Construye tu novela como un profesional</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Tu obra nunca volverá a ser "una obra más"</p>
+                    <h2 className='mb-0'>Gran curso de guión, texto y novela</h2>
+                    <p className='txt-responsive-form w-60 w-md-75'>Aprende a crear obras de gran calidad</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                    <img src={ImgPlumaTinta} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgFondo} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success
@@ -158,18 +199,7 @@ const Inscripcion = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>¡No olvides unirte al grupo! Presiona el botón de abajo</p>
-                                    <FontAwesomeIcon icon={faAngleDown} size='2x' />
-
-                                    <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/EAJ12bJqnyW5OwjpkWrRs3" className='button button-green m0-auto'>
-                                            <FontAwesomeIcon icon={faWhatsapp} size='1x' />
-                                            {' '}
-                                            <span>
-                                                Unirme
-                                            </span>
-                                        </a>
-                                    </div>
+                                    <p className='txt-responsive-form m0-auto'>Te contactaremos para unirte al grupo del curso</p>
                                 </div>
                                 :
                                 <>
@@ -183,24 +213,30 @@ const Inscripcion = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group mb-0'>
-                                                        <h2>¡Hola, escritor!</h2>
-                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad desde <b>la psicología de los personajes</b> y lograr que estas destaquen sobre cualquier otra.<br /><br />
-                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
-                                                            Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
-                                                            El curso es <b>gratuito</b> y dado que algunas obras pueden contener temas <b>sensibles</b>, sugerimos que solo entres si eres <b>mayor de edad. </b><br /><br />
-                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />                                                            </p>
+                                                        <h2>Empecemos por una realidad:</h2>
+                                                        <p>Tú <b>jamás revelarías</b> tus íntimos secretos ni tus contraseñas, ¿Cierto? <b>Porque no quieres que alguien los vea.</b><br /><br />
+                                                            <b>Sin embargo</b>, ¿Te has dado cuenta de que cuando tienes un momento de <b>inspiración</b>, escribes algo, lo pintas o lo manifiestas en algún tipo de <b>arte</b>?<br /><br />
+                                                            <b>Ahí está la diferencia.</b> Todo arte lleva implícito el deseo de ser visto por los otros. Si no fuera así, <b>lo esconderías</b>.<br /><br />
+                                                            <b>¿Por qué negarlo? ¡Tú también quieres ser leído(a)!</b> Pero ¿Sabes quién decide sí una obra triunfa? <b>Exacto. Es el público</b>.<br /><br />
+                                                            <b>Por esa razón, creamos este curso</b>, aquí dejarás las excusas y crearás obras de calidad que les gusten a los demás, sin dejar tu esencia.
+                                                        </p>
                                                     </div>
 
                                                     <div className='form-group'>
                                                         <ul>
-                                                            <li><b>Número de sesiones:</b> 2</li>
-                                                            <li><b>Duración de cada sesión:</b> 1h 30m</li>
-                                                            <li><b>Instructor:</b> Carlos Cadena</li>
+                                                            <li><b>Número de sesiones:</b> 6</li>
+                                                            <li><b>Instructor:</b> Carlos Cadena </li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horarios:</b> Domingo 18 y 25 de abril a las 11am (Hora Lima - Colombia)</li>
-                                                            <li><b>Requisito sesión 1:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
-                                                            <li><b>Requisito sesión 2:</b> Leer "La reina de unicel". Descárgalo desde <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">aquí</a></b>.</li>
-                                                            <li><b>¿Te perdiste la sesión 1?:</b> Mírala <b><a target="_blank" href="https://www.youtube.com/watch?v=4VQ_MMYBI5Y&ab_channel=TempleLuna">aquí</a></b>.</li>
+                                                            <li><b>Horarios:</b> Mayo: 9, 16, 23 y 30; Junio: 6 y 13. De 11am a 1pm (Hora Lima - Colombia)</li>
+                                                            <li><b>Temario:</b> <b><a target="_blank" href="https://drive.google.com/file/d/1KjkDV_54swrMFseRpm7xkQtmowAx9Kr2/view?usp=sharing">Ver aquí</a></b></li>
+                                                            <li><b>Inversión:</b> 30 dólares</li>
+                                                            <li><b>Método:</b> Paypal</li>
+                                                            <li><b>Facilidades:</b> 15 dólares antes de iniciar y el resto, después de la sesión del 23</li>
+                                                            <li><b>Fecha máxima de pago:</b> 5 de mayo</li>
+                                                            <li><b>Condición:</b> 10 inscritos como mínimo</li>
+                                                            <li><b>Obras llevadas al teatro:</b> <b><a target="_blank" href="https://www.facebook.com/LosDemoniosDetrasDeLaPared/">Ver aquí</a></b>.</li>
+                                                            <li><b>Obra "Eróstrato":</b> <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">Leer aquí</a></b></li>
+                                                            <li><b>Obra "La reina de Unicel":</b> <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">Leer aquí</a></b></li>
                                                         </ul>
                                                     </div>
 
@@ -237,6 +273,27 @@ const Inscripcion = () => {
 
                                                 </div>
                                                 <div className='step-3'>
+
+                                                    <div className='form-group'>
+                                                        <label htmlFor="flScn">Realiza el pago <b><a target="_blank" href="https://paypal.me/gricardov">aquí</a></b> y sube la captura</label>
+                                                        {
+                                                            imgScn
+                                                                ?
+                                                                <button onClick={startSelectScn} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${imgScn ? 'd-flex' : ''}`}>
+                                                                    <span className='clamp clamp-1'>
+                                                                        {imgScn.name}
+                                                                    </span>
+                                                                    <span onClick={deleteScn} className='fa fa-times' style={{ color: 'white' }}></span>
+                                                                </button>
+                                                                :
+                                                                <button onClick={startSelectScn} className={`button button-light-purple button-thin stretch ${imgScn ? 'd-flex' : ''}`}>
+                                                                    <span>
+                                                                        Subir captura
+                                                                    </span>
+                                                                </button>
+                                                        }
+                                                        <input type="file" onChange={selectScn} accept="image/*" ref={refScn} className='d-none' id="flScn" />
+                                                    </div>
 
                                                     <div className='form-group'>
                                                         <label htmlFor="txtLink">He leído los horarios, plataformas, requisitos y confirmo mi asistencia.</label>

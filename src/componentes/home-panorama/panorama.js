@@ -72,7 +72,7 @@ export const Panorama = () => {
                                 </Fade>
                                 <Fade left>
                                     {
-                                        <a target='_blank' rel="noreferrer" onClick={() => goTo(slide)} className='button button-green'>
+                                        <a target='_blank' rel="noreferrer" onClick={() => goTo(slide)} style={slide.buttonStyles} className='button button-green'>
                                             {slide.buttonText}
                                             {' '}
                                             <FontAwesomeIcon icon={faAngleRight} size='lg' />
