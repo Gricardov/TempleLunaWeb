@@ -1,6 +1,7 @@
 import React from 'react'
 import Inicio from './pages/inicio'
 import Login from './pages/login'
+import Perfil from './pages/perfil'
 import Admin from './pages/admin'
 import SolicitudCritica from './pages/solicitud-critica'
 import SolicitudDiseno from './pages/solicitud-diseno'
@@ -30,6 +31,7 @@ const App = () => {
           <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
           <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />
+          <Route exact path="/perfil" component={Perfil} />
           <Route exact path="/ins_evento/:id" component={InscripcionEvento} />
           <Route exact path="/prev_resultado" component={PrevResultado} />
           <Redirect to="/" />

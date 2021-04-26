@@ -13,7 +13,7 @@ import Logo from '../../img/logo.png'
 import Sanguchito from '../../img/sanguchito.svg'
 import './navbar.css'
 
-const Navbar = ({ startTransparent }) => {
+const Navbar = ({ startTransparent, defaultColor }) => {
 
     const { open, close } = useContext(DrawerContext);
     const { logged } = useContext(AuthContext);
@@ -83,9 +83,14 @@ const Navbar = ({ startTransparent }) => {
     }, [width]);
 
     let navClasses = 'main-navbar';
+    let customStyles = {};
+
     if (!startTransparent || scrolled) {
-        navClasses += ' navbar-scrolled';
+        navClasses += ' navbar-default';
+        scrolled && (navClasses += ' navbar-shadow');
+        customStyles = defaultColor ? { background: defaultColor } : {};
     }
+
     if (logged) {
         navClasses += ' logged';
     }
@@ -106,7 +111,7 @@ const Navbar = ({ startTransparent }) => {
     }
 
     return (
-        <nav className={navClasses}>
+        <nav className={navClasses} style={customStyles}>
             <div className='container-xl container-navbar position-relative'>
                 <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />
@@ -147,7 +152,7 @@ const Navbar = ({ startTransparent }) => {
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav >
     )
 }
 

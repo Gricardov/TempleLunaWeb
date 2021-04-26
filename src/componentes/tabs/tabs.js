@@ -20,6 +20,7 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
 
     const switchTab = (e, index) => {
         e && e.preventDefault();
+        setOpenOptions(false);
         select(index);
     }
 
@@ -67,17 +68,26 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
         optionsClasses += ' close';
     }
 
-    // Recalculo el tamaño
-    const porcAnchoPestana = 100 / minVisibleTabs;
+    let anchoPestana;
+    let desplazamiento;
+
+    // Recalculo los tamaños
+    if (activeIndex < minVisibleTabs) {
+        anchoPestana = (100 / minVisibleTabs) + '%';
+        desplazamiento = (100 / minVisibleTabs) * activeIndex + '%';
+    } else {
+        anchoPestana = arrowTogglerRef.current.offsetWidth;
+        desplazamiento = (100 / minVisibleTabs) * (minVisibleTabs) + '%';
+    }
 
     return (
         <div className='main-tabs-container'>
             <div className='tabs-container'>
                 <div className="material-tabs">
                     {
-                        tabs.slice(0, minVisibleTabs).map((pestana, index) => <a key={index} onClick={(e) => switchTab(e, index)} className="active">{pestana}</a>)
+                        tabs.slice(0, minVisibleTabs).map((pestana, index) => <a key={index} onClick={(e) => switchTab(e, index)} className={index == activeIndex && 'active'}>{pestana}</a>)
                     }
-                    <span className="tab-bar" style={{ width: `${porcAnchoPestana}%`, left: `${porcAnchoPestana * activeIndex}%` }}></span>
+                    <span className="tab-bar" style={{ width: anchoPestana, left: desplazamiento }}></span>
                     <span className="guide-line" />
                 </div>
                 {
@@ -90,7 +100,7 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
                             <ul>
                                 {
                                     tabs.slice(minVisibleTabs, tabs.length).map((e, i) => (
-                                        <li key={i} onClick={(e) => switchTab(e, minVisibleTabs + i)}>
+                                        <li key={i} className={minVisibleTabs + i == activeIndex && 'active'} onClick={(e) => switchTab(e, minVisibleTabs + i)}>
                                             {e}
                                         </li>
                                     ))
@@ -124,7 +134,7 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
                             <h2 className="text-align-center m-0 text-empty">Oops! aún nada por aquí</h2>
                         </div>
             }
-        </div>
+        </div >
     )
 }
 

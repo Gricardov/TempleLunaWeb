@@ -1,5 +1,4 @@
 import ImgColaboracion from '../img/colaboracion.svg';
-import ImgLecVivo from '../img/lec-vivo.svg';
 import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
 
@@ -17,7 +16,7 @@ export const contactTypes = [{ type: 'WSP', icon: 'fab fa-whatsapp', name: 'What
 export const requestTypes = [{ type: 'DISENO', icon: 'fas fa-magic', text: 'Diseños' }, { type: 'CRITICA', icon: 'far fa-lightbulb', text: 'Críticas' }];
 export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos', statistics: 0 }, { id: 'TOMADO', name: 'Elegidos', statistics: 0 }, { id: 'HECHO', name: 'Listos', statistics: 0 }];
 
-export const contributors = ['@Gricardov', '@JennyAline', '@CaroDePearolMorales', '@AlphaPhantom', '@JackDreamer', '@PiccolaScrittrice', '@SayraBaylon', '@JuliLorenzi'];
+export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMorales', '@Marylundhautor', '@LuzCespedesMartinez', '@Irisadk94', '@JackDreamer', '@PiccolaScrittrice', '@SayraBaylon', '@Alkaiid', '@TristeMancebo', '@Gianna04G02DL'];
 
 // Para los roles de las dinámicas
 export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', text: 'Autor', displayInDropdown: false }];

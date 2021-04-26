@@ -5,9 +5,9 @@
     padding: 0;
 }
 
-.material-tabs~div {
+/*.material-tabs~div {
     overflow: auto;
-}
+}*/
 
 .material-tabs>a {
     flex: 1;
@@ -17,12 +17,20 @@
     padding-bottom: 1.6rem;
     text-transform: uppercase;
     font-size: 1.6rem;
-    font-weight: 600;
     color: #8B81EC;
     text-align: center;
     text-decoration: none;
     transition: all 200ms ease-in-out;
     font-style: normal;
+}
+
+.material-tabs>a {
+    outline: none;
+    text-decoration: none;
+}
+
+.material-tabs>a.active {
+    font-weight: 600;
 }
 
 @media (min-width: 768px) {
@@ -34,18 +42,7 @@
 }
 
 .material-tabs>a:hover {
-    background-color: #ded9ff;
-}
-
-.material-tabs>a.active {
-    outline: none;
-    text-decoration: none;
-}
-
-.material-tabs>a:not(.active):hover {
-    background-color: inherit;
-    color: #7c848a;
-    text-decoration: none;
+    color: #8B81EC;
 }
 
 .material-tabs .tab-bar {
@@ -86,17 +83,15 @@
     text-align: left;
     color: #8B81EC;
     font-size: 2rem;
-    padding-left: .5rem;
-
+    padding-left: 1rem;   
+    padding-right: 1rem;
 }
 
 @media (min-width: 768px) {
     .tabs-container .btn-switch {
         display: flex;
         text-align: center;
-        padding: 1.5rem 0 1.5rem 0;
         font-size: 2rem;
-        padding-left: 1rem;
     }
 }
 
@@ -105,10 +100,28 @@
     cursor: pointer;
 }
 
+.main-tabs-container {
+    user-select: none;
+}
+
+.main-tabs-container .container-submenu::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -24px;
+    right: 3%;
+    border-style: solid;
+    border-width: 12px;
+    border-color: transparent;
+    border-bottom-color: white;
+    z-index: 10;
+}
+
 .main-tabs-container .container-submenu {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 5px;
     padding: .8rem 1rem;
     border-radius: 5px;
     background: #fff;
@@ -132,6 +145,11 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 200ms ease-in-out;
+}
+
+.container-submenu ul li.active {
+    background-color: #a69ef0;
+    color: white;
 }
 
 .container-submenu ul li:hover {

@@ -83,8 +83,7 @@ const Admin = () => {
                     setTabList([
                         !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
                         !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
-                        !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2],
-                        //{ id: 'TEST1', name: 'Test 1', statistics: 0 }, { id: 'TEST2', name: 'Test 2', statistics: 0 }
+                        !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2]
                     ])
                 })
         }, timeout);
@@ -108,7 +107,6 @@ const Admin = () => {
     }
 
     const requestData = () => {
-        //if (!initialLoading && !loadingMore) {
         setInitialLoading(true);
         const requestStatus = tabList[activeTabIndex].id;
         getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, undefined, limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
@@ -122,7 +120,6 @@ const Admin = () => {
                 setInitialLoading(false);
                 alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
             });
-        //}
     }
 
     const confirmRequest = (requestId) => {
