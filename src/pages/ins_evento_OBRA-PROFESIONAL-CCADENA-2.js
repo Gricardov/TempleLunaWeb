@@ -217,8 +217,9 @@ const Inscripcion = () => {
                                                         <p>Tú <b>jamás revelarías</b> tus íntimos secretos ni tus contraseñas, ¿Cierto? <b>Porque no quieres que alguien los vea.</b><br /><br />
                                                             <b>Sin embargo</b>, ¿Te has dado cuenta de que cuando tienes un momento de <b>inspiración</b>, escribes algo, lo pintas o lo manifiestas en algún tipo de <b>arte</b>?<br /><br />
                                                             <b>Ahí está la diferencia.</b> Todo arte lleva implícito el deseo de ser visto por los otros. Si no fuera así, <b>lo esconderías</b>.<br /><br />
-                                                            <b>¿Por qué negarlo? ¡Tú también quieres ser leído(a)!</b> Pero ¿Sabes quién decide sí una obra triunfa? <b>Exacto. Es el público</b>.<br /><br />
+                                                            <b>¿Por qué negarlo? ¡Tú también quieres ser leído(a)!</b> Pero ¿Quién decide sí una obra triunfa? <b>Exacto. Es el público</b>.<br /><br />
                                                             <b>Por esa razón, creamos este curso</b>, aquí dejarás las excusas y crearás obras de calidad que les gusten a los demás, sin dejar tu esencia.
+                                                            Puedes ver la enseñanza del profesor <b><a target="_blank" href="https://www.youtube.com/channel/UCrHV9JlQKBNWLUs5wm8dYCA">en nuestro canal</a>.</b>
                                                         </p>
                                                     </div>
 
