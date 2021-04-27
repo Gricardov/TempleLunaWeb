@@ -18,10 +18,14 @@ const Drawer = () => {
         logout()
             .then(res => {
                 if (res) {
-                    close();
-                    history.push('/login');
+                    navigateTo('login');
                 }
             })
+    }
+
+    const navigateTo = (route) => {
+        history.push(route);
+        close();
     }
 
     useEffect(() => {
@@ -47,9 +51,17 @@ const Drawer = () => {
                 {
                     logged
                         ?
-                        <a onClick={logoutUser} className='btn-drawer'>
-                            Salir
+                        <>
+                            <span onClick={() => navigateTo('admin')} className='btn-drawer'>
+                                Pedidos
+                            </span>
+                            <span onClick={() => navigateTo('perfil/1234')} className='btn-drawer'>
+                                Mi perfil
+                            </span>
+                            <a onClick={logoutUser} className='btn-drawer'>
+                                Salir
                         </a>
+                        </>
                         :
                         <>
                             <Link to='/sol_critica' onClick={close} className='btn-drawer'>

@@ -83,7 +83,7 @@
     text-align: left;
     color: #8B81EC;
     font-size: 2rem;
-    padding-left: 1rem;   
+    padding-left: 1rem;
     padding-right: 1rem;
 }
 
@@ -98,6 +98,12 @@
 .tabs-container .btn-switch:hover {
     color: #ded9ff;
     cursor: pointer;
+}
+
+/*Themed*/
+
+.light-theme .main-tabs-container {
+    background: white;
 }
 
 .main-tabs-container {

@@ -42,10 +42,15 @@ const Navbar = ({ startTransparent, defaultColor }) => {
         logout()
             .then(res => {
                 if (res) {
-                    close();
-                    history.push('/login');
+                    navigateTo('login');
                 }
             })
+    }
+
+    const navigateTo = (route) => {
+        history.push(route);
+        setOpenOptions(false);
+        close();
     }
 
     const toggleOptionsContainer = () => {
@@ -121,11 +126,11 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                         logged
                             ?
                             <>
-                                <span className='btn-nav clamp clamp-1'>
+                                <Link onClick={() => history.push('perfil/1234')} className='btn-nav clamp clamp-1'>
                                     {fName} {lName}
-                                </span>
+                                </Link>
                                 <Avatar clases='img-profile-navbar' />
-                                <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav m-0 pl-1 pr-1'>
+                                <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav nav-arrow m-0 pl-1 pr-1'>
                                     <FontAwesomeIcon icon={faAngleDown} size='1x' />
                                 </span>
                             </>
@@ -147,6 +152,12 @@ const Navbar = ({ startTransparent, defaultColor }) => {
             </div>
             <div ref={outsideListenerRef} className={optionsClasses}>
                 <ul>
+                    <li onClick={() => navigateTo('admin')}>
+                        Pedidos
+                    </li>
+                    <li onClick={() => navigateTo('perfil/1234')}>
+                        Mi perfil
+                    </li>
                     <li onClick={logoutUser}>
                         Salir
                     </li>
