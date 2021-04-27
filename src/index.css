@@ -685,7 +685,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   margin: auto 0;
 }
 
-/*Diseños / críticas*/
+/*Formulario de solicitud*/
 
 .floating-form {
   position: relative;
@@ -768,8 +768,6 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 }
 
 /*Login*/
-
-.login-container {}
 
 .img-fondo-login {
   position: absolute;

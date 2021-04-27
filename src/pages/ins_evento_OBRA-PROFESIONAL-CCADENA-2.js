@@ -364,7 +364,6 @@ const Inscripcion = () => {
                                 </>
                         }
                     </div>
-
                 </section>
             </main>
             <Footer />
