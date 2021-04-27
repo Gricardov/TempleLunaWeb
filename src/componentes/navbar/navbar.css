@@ -72,8 +72,6 @@
     position: fixed;
     top: 0;
     width: 100%;
-    padding-top: 1.4rem;
-    padding-bottom: 1.3rem;
     text-align: center;
     z-index: 10;
     transition: all 200ms ease-in-out;
@@ -82,14 +80,15 @@
 
 @media (min-width: 768px) {
     .main-navbar {
-        padding-top: 2.5rem;
-        padding-bottom: 2rem;
         text-align: left;
         /*height: 103px;*/
     }
 }
 
 .main-navbar .logo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 150px;
     margin-left: auto;
 }
@@ -102,7 +101,7 @@
     .main-navbar .logo-header, .main-navbar.logged .logo-header {
         width: 180px;
         margin-left: 0;
-        display: block;
+        display: flex;
     }
 }
 

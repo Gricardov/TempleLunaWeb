@@ -75,7 +75,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
             <ConfirmationModal
                 isOpen={openConfirmationModal}
                 title='Casi listo'
-                message='Al aceptar, tienes tres días para entregar la crítica o acordar una fecha con la persona interesada. ¿Continuar?'
+                message='Al aceptar, tienes hasta 7 días para entregar la crítica o acordar una fecha con la persona interesada. ¿Continuar?'
                 confirm={confirm}
                 close={() => setOpenConfirmationModal(false)} />
             <div className={'overlay overlay-modal ' + styles} onClick={close}>

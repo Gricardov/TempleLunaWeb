@@ -40,25 +40,27 @@ const Login = () => {
             <main className='main-body below-navbar light-theme'>
                 <section className='profile-header-container' style={{ background: 'white' }}>
                     <div className='profile-container'>
-                        <div className='profile-img'>
-                            <div className='sn-container'>
-                                <div className='sn-icon sn-wattpad'>
-                                    <img src={WattpadIcon} alt='img-wattpad' />
+                        <div>
+                            <div className='profile-img'>
+                                <div className='sn-container'>
+                                    <div className='sn-icon sn-wattpad'>
+                                        <img src={WattpadIcon} alt='img-wattpad' />
+                                    </div>
+                                    <div className='sn-icon sn-facebook'>
+                                        <FontAwesomeIcon icon={faFacebook} />
+                                    </div>
                                 </div>
-                                <div className='sn-icon sn-facebook'>
-                                    <FontAwesomeIcon icon={faFacebook} />
-                                </div>
-                            </div>
-                            <div className='editorial-tag clamp clamp-1'>
-                                <img src={SampleEditorialIcon} alt='img-editorial' />
-                                <span className='clamp clamp-1'>
-                                    Editorial Pedro Castillo
+                                <div className='editorial-tag clamp clamp-1'>
+                                    <img src={SampleEditorialIcon} alt='img-editorial' />
+                                    <span className='clamp clamp-1'>
+                                        Editorial Pedro Castillo
                                 </span>
+                                </div>
+                                <img src={ImgPerfil} alt='img-perfil' />
                             </div>
-                            <img src={ImgPerfil} alt='img-perfil' />
                         </div>
                         <div className='profile-data'>
-                            <h2 className='clamp clamp-2'>Shany Dubi</h2>
+                            <h2 className='clamp clamp-2 no-break'>Shany Dubi Loedrin</h2>
                             <div className='statistics'>
                                 <div className='statistic'>
                                     {'20 '}
@@ -70,11 +72,18 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className='description'>
-                                <p>Fundadora de editorial</p>
-                                <p>Crítica y diseñadora</p>
+                                <p>Fundadora de su editorial</p>
+                                <p>Crítica, diseñadora y <b>3 más</b></p>
                             </div>
                         </div>
-
+                        <div className='profile-editorial'>
+                            <div className='editorial-tag clamp clamp-1'>
+                                <img src={SampleEditorialIcon} alt='img-editorial' />
+                                <span className='clamp clamp-1'>
+                                    Editorial Pedro Castillo
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <Tabs
