@@ -1,18 +1,16 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import './service_card.css'
+import React from 'react';
+import { hexToRgb } from '../../helpers/functions';
+import './service_card.css';
 
-const Card = ({ titulo, vistas, img }) => {
+const Card = ({ titulo, img, contrastColor }) => {
+
+    contrastColor = contrastColor ? 'rgba(' + hexToRgb(contrastColor) + ',0.25)' : 'transparent';
+    
     return (
         <div className='service_card' style={{ backgroundImage: `url(${img})` }}>
-            <div className='service_card_overlay'>
+            <div className='service_card_overlay' style={{ backgroundColor: contrastColor }} >
                 <div className='service_card_controls'>
                     <p>{titulo}</p>
-                    <div>
-                        <FontAwesomeIcon icon={faEye} size='sm' className='card_icon' />
-                        {vistas}
-                    </div>
                 </div>
             </div>
         </div>

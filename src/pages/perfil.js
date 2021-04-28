@@ -9,6 +9,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import ServiceCard from '../componentes/service-card';
 import { css } from "@emotion/core";
 import { login } from '../api';
+import { editorialServices } from '../data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faHeart, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +20,7 @@ const override = css`
   margin: 5rem auto;
 `;
 
-const tabList = [{ id: 'CRI', name: 'Críticas', statistics: 5 }, { id: 'DIS', name: 'Diseños', statistics: 9 }, { id: 'COR', name: 'Correc...', statistics: 10 }, { id: 'ENT', name: 'Entrevistas', statistics: 9 }, { id: 'BKT', name: 'Booktrailers', statistics: 2 }];
+const tabList = editorialServices;
 
 const Login = () => {
 
@@ -98,9 +99,9 @@ const Login = () => {
                     tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
                     <div className='services-profile-container'>
                         {
-                            requestList.map(request => (
+                            editorialServices.map(service => (
                                 <div className='service-card-container'>
-                                    <ServiceCard img={ImgPerfil} titulo='Ventanas grises, ventanas verdes' vistas={4} />
+                                    <ServiceCard img={service.img} titulo={service.name} contrastColor={service.color} />
                                 </div>
                             ))
                         }

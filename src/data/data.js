@@ -1,6 +1,12 @@
 import ImgColaboracion from '../img/colaboracion.svg';
 import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
+import ImgServCritica from '../img/ser-critica.svg';
+import ImgServDiseno from '../img/ser-diseno.svg';
+import ImgServCoreccion from '../img/ser-correccion.svg';
+import ImgServBooktrailer from '../img/ser-bookt.svg';
+import ImgServEntrevista from '../img/ser-entrev.svg';
+import ImgServPromo from '../img/ser-promo.svg';
 
 export const carrouselData = [
     //{ text: 'Gran lectura de obras en vivo, con Laydy Czulewyez', buttonText: 'Participar', pushTo: 'ins_evento/LECTURA-VIVO-LACZU-1', bg: 'radial-gradient(at 80% 100%, rgb(164 118 166) 10%, rgb(151 67 148) 50%)', img: ImgLecVivo, style: { bottom: '-50px', right: '-100px' } },
@@ -20,3 +26,6 @@ export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMoral
 
 // Para los roles de las dinámicas
 export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', text: 'Autor', displayInDropdown: false }];
+
+// Para los servicios de las editoriales
+export const editorialServices = [{ id: 'CRI', name: 'Críticas', img: ImgServCritica, color: '#F8FFD5' }, { id: 'DIS', name: 'Diseños', img: ImgServDiseno, color: '#FFF0D5' }, { id: 'COR', name: 'Correcciones', img: ImgServCoreccion, color: '#D5F8FF' }, { id: 'ENT', name: 'Entrevistas', img: ImgServEntrevista, color: '#C7D7FF' }, { id: 'BKT', name: 'Booktrailers', img: ImgServBooktrailer, color: '#E1DEFF' }, { id: 'DIF', name: 'Difusión', img: ImgServPromo, color: '#CFFFE2' }];
