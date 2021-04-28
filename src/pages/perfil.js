@@ -6,6 +6,7 @@ import WattpadIcon from '../img/wattpad.svg';
 import SampleEditorialIcon from '../img/sample-editorial-icon.svg';
 import Tabs from '../componentes/tabs';
 import PuffLoader from "react-spinners/PuffLoader";
+import ServiceCard from '../componentes/service-card';
 import { css } from "@emotion/core";
 import { login } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +25,7 @@ const Login = () => {
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
-    const [requestList, setRequestList] = useState([]);
+    const [requestList, setRequestList] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     const updActiveTabIndex = (val) => {
         setActiveTabIndex(val);
@@ -89,17 +90,18 @@ const Login = () => {
                 <Tabs
                     initialLoading={initialLoading}
                     loadingMore={false}
-                    requestList={requestList}
                     requestMoreData={() => { }}
                     hasMore={false}
                     loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                     activeIndex={activeTabIndex}
                     select={updActiveTabIndex}
                     tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
-                    <div>
+                    <div className='services-profile-container'>
                         {
                             requestList.map(request => (
-                                <div>asd</div>
+                                <div className='service-card-container'>
+                                    <ServiceCard img={ImgPerfil} titulo='Ventanas grises, ventanas verdes' vistas={4} />
+                                </div>
                             ))
                         }
                     </div>

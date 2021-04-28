@@ -194,7 +194,6 @@ const Admin = () => {
                     <Tabs
                         initialLoading={initialLoading}
                         loadingMore={loadingMore}
-                        requestList={requestList}
                         requestMoreData={requestMoreData}
                         hasMore={!isLast}
                         loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}

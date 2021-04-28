@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import StoryCard from '../story-card';
-import ImgPortada1 from '../../img/portada1.jpg'
-import ImgPortada2 from '../../img/portada2.jpg'
-import ImgPortada3 from '../../img/portada3.jpg'
-import ImgPortada4 from '../../img/portada4.jpg'
-import ImgPortada5 from '../../img/portada5.jpg'
-import ImgPortada6 from '../../img/portada6.jpg'
-import ImgPortada7 from '../../img/portada7.jpg'
-import ImgPortada8 from '../../img/portada8.jpg'
-import ImgPortada9 from '../../img/portada9.jpg'
-import ImgPortada10 from '../../img/portada10.jpg'
-import ImgPortada11 from '../../img/portada11.jpg'
+import ImgPortada1 from '../../img/portada1.jpg';
+import ImgPortada2 from '../../img/portada2.jpg';
+import ImgPortada3 from '../../img/portada3.jpg';
+import ImgPortada4 from '../../img/portada4.jpg';
+import ImgPortada5 from '../../img/portada5.jpg';
+import ImgPortada6 from '../../img/portada6.jpg';
+import ImgPortada7 from '../../img/portada7.jpg';
+import ImgPortada8 from '../../img/portada8.jpg';
+import ImgPortada9 from '../../img/portada9.jpg';
+import ImgPortada10 from '../../img/portada10.jpg';
+import ImgPortada11 from '../../img/portada11.jpg';
 
 import './carrousel.css'
 

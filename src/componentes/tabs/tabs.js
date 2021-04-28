@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import './tabs.css';
 
-const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex, select, initialLoading, loadingMore, children }) => {
+const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, initialLoading, children }) => {
 
     const arrowTogglerRef = useRef(null);
     const [minVisibleTabs, setMinVisibleTabs] = useState(2);
@@ -80,6 +80,8 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
         desplazamiento = (100 / minVisibleTabs) * (minVisibleTabs) + '%';
     }
 
+    const childrenNum = childrenArray[0].props.children.length;
+
     return (
         <div className='main-tabs-container'>
             <div className='tabs-container'>
@@ -116,11 +118,11 @@ const Tabs = ({ tabs, requestList, requestMoreData, hasMore, loader, activeIndex
                     ?
                     loader
                     :
-                    requestList && requestList.length > 0
+                    childrenNum > 0
                         ?
                         <InfiniteScroll
                             className="tab-content"
-                            dataLength={requestList.length}
+                            dataLength={childrenNum}
                             next={requestMoreData}
                             hasMore={hasMore}
                             loader={loader}>
