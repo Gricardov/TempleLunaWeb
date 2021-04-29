@@ -1,7 +1,7 @@
-import React from 'react'
-import PuffLoader from "react-spinners/PuffLoader"
-import { css } from "@emotion/core"
-import Logo from '../../img/logo.png'
+import React from 'react';
+import PuffLoader from "react-spinners/PuffLoader";
+import { css } from "@emotion/core";
+import Logo from '../../img/logo.png';
 
 const override = css`
   display: block;

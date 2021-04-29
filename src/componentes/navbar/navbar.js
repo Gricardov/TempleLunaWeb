@@ -42,7 +42,7 @@ const Navbar = ({ startTransparent, defaultColor }) => {
         logout()
             .then(res => {
                 if (res) {
-                    navigateTo('login');
+                    navigateTo('/login');
                 }
             })
     }
@@ -152,10 +152,10 @@ const Navbar = ({ startTransparent, defaultColor }) => {
             </div>
             <div ref={outsideListenerRef} className={optionsClasses}>
                 <ul>
-                    <li onClick={() => navigateTo('admin')}>
+                    <li onClick={() => navigateTo('/admin')}>
                         Pedidos
                     </li>
-                    <li onClick={() => navigateTo('perfil/1234')}>
+                    <li onClick={() => navigateTo('/perfil/1234')}>
                         Mi perfil
                     </li>
                     <li onClick={logoutUser}>

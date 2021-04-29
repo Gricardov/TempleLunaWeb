@@ -18,7 +18,7 @@ const Drawer = () => {
         logout()
             .then(res => {
                 if (res) {
-                    navigateTo('login');
+                    navigateTo('/login');
                 }
             })
     }
@@ -52,12 +52,12 @@ const Drawer = () => {
                     logged
                         ?
                         <>
-                            <span onClick={() => navigateTo('admin')} className='btn-drawer'>
+                            <a onClick={() => navigateTo('/admin')} className='btn-drawer'>
                                 Pedidos
-                            </span>
-                            <span onClick={() => navigateTo('perfil/1234')} className='btn-drawer'>
+                            </a>
+                            <a onClick={() => navigateTo('/perfil/1234')} className='btn-drawer'>
                                 Mi perfil
-                            </span>
+                            </a>
                             <a onClick={logoutUser} className='btn-drawer'>
                                 Salir
                         </a>

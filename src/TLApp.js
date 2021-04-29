@@ -1,20 +1,21 @@
-import React from 'react'
-import Inicio from './pages/inicio'
-import Login from './pages/login'
-import Perfil from './pages/perfil'
-import Admin from './pages/admin'
-import SolicitudCritica from './pages/solicitud-critica'
-import SolicitudDiseno from './pages/solicitud-diseno'
-import InscripcionEvento from './pages/ins_evento'
-import PreparacionCritica from './pages/prep_critica'
-import PreparacionDiseno from './pages/prep_diseno'
-import PrevResultado from './pages/prev_resultado'
-import Drawer from './componentes/drawer'
-import HelmetMetaData from "./componentes/helmet"
-import { AuthProvider } from './context/AuthContext'
-import { PrivateRoute } from './componentes/customRouter/privateRoute'
-import { PublicRoute } from './componentes/customRouter/publicRoute'
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
+import React from 'react';
+import Inicio from './pages/inicio';
+import Login from './pages/login';
+import Perfil from './pages/perfil';
+import Admin from './pages/admin';
+import SolicitudCritica from './pages/solicitud-critica';
+import SolicitudDiseno from './pages/solicitud-diseno';
+import InscripcionEvento from './pages/ins_evento';
+import PreparacionCritica from './pages/prep_critica';
+import PreparacionDiseno from './pages/prep_diseno';
+import PrevResultado from './pages/prev_resultado';
+import Drawer from './componentes/drawer';
+import HelmetMetaData from './componentes/helmet';
+import { AuthProvider } from './context/AuthContext';
+import { AnyRoute } from './componentes/customRouter/anyRoute';
+import { PrivateRoute } from './componentes/customRouter/privateRoute';
+import { PublicRoute } from './componentes/customRouter/publicRoute';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 const App = () => {
 
@@ -22,7 +23,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Drawer />
-        <HelmetMetaData></HelmetMetaData>
+        <HelmetMetaData />
         <Switch>
           <PublicRoute exact path="/" component={Inicio} />
           <PublicRoute exact path="/sol_critica" component={SolicitudCritica} />
@@ -31,9 +32,9 @@ const App = () => {
           <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
           <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />
-          <Route exact path="/perfil/:id" component={Perfil} />
-          <Route exact path="/ins_evento/:id" component={InscripcionEvento} />
-          <Route exact path="/prev_resultado" component={PrevResultado} />
+          <AnyRoute exact path="/perfil/:id" component={Perfil} />
+          <AnyRoute exact path="/ins_evento/:id" component={InscripcionEvento} />
+          <AnyRoute exact path="/prev_resultado" component={PrevResultado} />
           <Redirect to="/" />
         </Switch>
       </Router>

@@ -6,7 +6,6 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import './normalize.css';
 import './index.css';
 
-
 ReactDOM.render(
   <DrawerProvider>
     <TLApp />
