@@ -729,7 +729,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 .img-fondo-formulario {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.5;
+  opacity: 0.4;
   width: 253px;
   height: 248px;
   top: -180px;
