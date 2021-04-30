@@ -6,7 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import './tabs.css';
 
-const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, initialLoading, children }) => {
+const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, initialLoading, theme, children }) => {
+
+    // Tema
+    const style = {
+        background: (theme && theme.main) || '',
+        color: (theme && theme.contrast) || ''
+    };
 
     const arrowTogglerRef = useRef(null);
     const [minVisibleTabs, setMinVisibleTabs] = useState(2);
@@ -84,18 +90,18 @@ const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, ini
 
     return (
         <div className='main-tabs-container'>
-            <div className='tabs-container'>
+            <div className='tabs-container' style={{ background: style.background }}>
                 <div className="material-tabs">
                     {
-                        tabs.slice(0, minVisibleTabs).map((pestana, index) => <a key={index} onClick={(e) => switchTab(e, index)} className={index == activeIndex && 'active'}>{pestana}</a>)
+                        tabs.slice(0, minVisibleTabs).map((pestana, index) => <a key={index} onClick={(e) => switchTab(e, index)} className={index == activeIndex && 'active'} style={style}>{pestana}</a>)
                     }
-                    <span className="tab-bar" style={{ width: anchoPestana, left: desplazamiento }}></span>
-                    <span className="guide-line" />
+                    <span className="tab-bar" style={{ width: anchoPestana, left: desplazamiento, background: style.color }}></span>
+                    <span className="guide-line" style={{ background: style.background && 'transparent' }} />
                 </div>
                 {
                     (tabs.length > minVisibleTabs) &&
                     <>
-                        <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-switch'>
+                        <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-switch' style={{ color: style.color }}>
                             <FontAwesomeIcon icon={faAngleDown} size='1x' />
                         </span>
                         <div ref={outsideListenerRef} className={optionsClasses}>

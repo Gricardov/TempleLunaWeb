@@ -61,7 +61,7 @@ body {
 a, a:hover {
   text-decoration: none;
   cursor: pointer;
-  border: none;
+  /*border: none;*/
   outline: none;
 }
 
@@ -149,6 +149,10 @@ p {
 
 .mb-1 {
   margin-bottom: 1rem !important;
+}
+
+.mb-1p5 {
+  margin-bottom: 1.5rem !important;
 }
 
 .mb-2 {
@@ -964,7 +968,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .profile-header-container {
   position: relative;
-  min-height: 300px;
+  min-height: 340px;
 }
 
 @media (min-width: 768px) {
@@ -979,6 +983,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   padding-top: 4rem;
   padding-bottom: 1.5rem;
   text-align: center;
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -1009,13 +1014,15 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   }
 }
 
-.profile-header-container .profile-img>img {
+.profile-header-container .profile-img>img.rounded-border {
   border-radius: 50%;
   border: 2px solid white;
   box-shadow: 0px 5px 20px #2c273829;
 }
 
-.profile-img .sn-container {
+/*Perfil persona*/
+
+.profile-img>.sn-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1027,19 +1034,49 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 }
 
 @media (min-width: 480px) {
-  .profile-img .sn-container {
+  .profile-img>.sn-container {
     width: 220%;
   }
 }
 
 @media (min-width: 768px) {
-  .profile-img .sn-container {
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-    justify-content: space-evenly;
+  .profile-img>.sn-container {
+    display: block;
+    top: 0;
+    margin-top: 1rem;
+    left: -80px;
+    transform: unset;
+    width: auto;
+  }
+  .profile-img>.sn-container .sn-icon {
+    margin-bottom: 1.5rem;
   }
 }
+
+/*Perfil editorial*/
+
+.profile-container>.sn-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+  .profile-container>.sn-container {
+    position: absolute;
+    display: block;
+    left: -80px;
+    margin-top: 1rem;
+  }
+  .profile-container>.sn-container .sn-icon {
+    margin-bottom: 1.5rem;
+  }
+  .profile-container>.sn-container .sn-icon:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+/*Continuación*/
 
 .editorial-tag {
   user-select: none;
@@ -1126,8 +1163,11 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   .profile-data h2 {
     font-size: 3rem;
     margin-top: .5rem;
+    margin-bottom: 1.5rem;
   }
 }
+
+/*Perfil persona*/
 
 .profile-data .statistics {
   display: flex;
@@ -1150,6 +1190,23 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   margin-right: 0;
 }
 
+/*Perfil editorial*/
+
+.profile-data .follow-name {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+@media (min-width: 768px) {
+  .profile-data .follow-name {
+    text-align: left;
+  }
+}
+
+/*Continuación*/
+
 .profile-data .description p {
   font-size: 1.6rem;
   margin: 0;
@@ -1169,11 +1226,13 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   height: 35px;
   border: 2px solid black;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .sn-icon>img, .sn-icon>svg {
   width: 22px !important;
   height: 22px !important;
+  border-radius: 50% !important;
 }
 
 .sn-wattpad {
@@ -1185,11 +1244,67 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 }
 
 .sn-facebook {
-  border-color: #3b5998;
+  border-color: #3c5a9a;
 }
 
 .sn-facebook>svg {
-  color: #3b5998;
+  color: #3c5a9a;
+}
+
+.sn-twitter {
+  border-color: #157dc3;
+}
+
+.sn-twitter>svg {
+  color: #157dc3;
+}
+
+.sn-instagram {
+  border-color: #b947ba;
+}
+
+.sn-instagram>svg {
+  color: #b947ba;
+}
+
+.sn-buenovela {
+  border-color: #d88627;
+}
+
+.sn-buenovela>svg {
+  color: #d88627;
+}
+
+.sn-booknet {
+  border-color: #683903;
+}
+
+.sn-booknet>svg {
+  color: #683903;
+}
+
+.sn-inkspired {
+  border-color: #1e8e22;
+}
+
+.sn-inkspired>svg {
+  color: #1e8e22;
+}
+
+.sn-youtube {
+  border-color: #ff0000;
+}
+
+.sn-youtube>svg {
+  color: #ff0000;
+}
+
+.sn-generic-link {
+  border-color: #3366cc;
+}
+
+.sn-generic-link>svg {
+  color: #3366cc;
 }
 
 .services-profile-container {
@@ -1206,7 +1321,6 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 @media (min-width: 610px) {
   .services-profile-container {
     grid-template-columns: 1fr 1fr;
-
   }
 }
 

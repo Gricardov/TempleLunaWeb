@@ -1,5 +1,14 @@
 import moment from 'moment';
 import { designTypes, contactTypes, critiquePoints, contributors } from '../data/data';
+import WattpadIcon from '../img/wattpad.svg';
+import FacebookIcon from '../img/facebook.svg';
+import TwitterIcon from '../img/twitter.svg';
+import InstaIcon from '../img/instagram.svg';
+import BuenovelaIcon from '../img/buenovela.png';
+import InkspiredIcon from '../img/inkspired.png';
+import YoutubeIcon from '../img/youtube.svg';
+import LinkIcon from '../img/link.svg';
+
 import "moment/locale/es";
 
 export const getPointNameFromKey = (key) => {
@@ -125,4 +134,58 @@ export const hexToRgb = (hex) => {
     var b = bigint & 255;
 
     return r + "," + g + "," + b;
+}
+
+// Verifica si una cadena contiene alguno de los términos del arreglo
+export const stringContainsAnyOf = (mainString, coincidences) => {
+    return coincidences.some(c => mainString.includes(c));
+}
+
+export const getSnIconByUrl = (url) => {
+    if (extractLink(url)) {
+        if (stringContainsAnyOf(url, ['my.w.tt', 'wattpad.'])) {
+            return {
+                className: 'sn-wattpad',
+                imgSrc: WattpadIcon
+            }
+        } else if (stringContainsAnyOf(url, ['fb.', 'facebook.'])) {
+            return {
+                className: 'sn-facebook',
+                imgSrc: FacebookIcon
+            }
+        } else if (stringContainsAnyOf(url, ['twitter.'])) {
+            return {
+                className: 'sn-twitter',
+                imgSrc: TwitterIcon
+            }
+        } else if (stringContainsAnyOf(url, ['instagram.'])) {
+            return {
+                className: 'sn-instagram',
+                imgSrc: InstaIcon
+            }
+        } else if (stringContainsAnyOf(url, ['buenovela.'])) {
+            return {
+                className: 'sn-buenovela',
+                imgSrc: BuenovelaIcon
+            }
+        } else if (stringContainsAnyOf(url, ['getinkspired.'])) {
+            return {
+                className: 'sn-inkspired',
+                imgSrc: InkspiredIcon
+            }
+        } else if (stringContainsAnyOf(url, ['youtube.'])) {
+            return {
+                className: 'sn-youtube',
+                imgSrc: YoutubeIcon
+            }
+        }
+        else {
+            return {
+                className: 'sn-generic-link',
+                imgSrc: LinkIcon
+            }
+        }
+    } else {
+        return null;
+    }
 }

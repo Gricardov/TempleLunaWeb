@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../componentes/navbar';
 import Footer from '../componentes/footer/footer';
-import ImgPerfil from '../img/crushita.jpg';
-import WattpadIcon from '../img/wattpad.svg';
-import SampleEditorialIcon from '../img/sample-editorial-icon.svg';
+import ImgPerfil from '../img/pedrito.png';
+import WattpadIcon from '../img/inkspired.png';
 import Tabs from '../componentes/tabs';
 import PuffLoader from "react-spinners/PuffLoader";
 import ServiceCard from '../componentes/service-card';
 import { css } from "@emotion/core";
 import { login } from '../api';
+import { getSnIconByUrl } from '../helpers/functions';
 import { editorialServices } from '../data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faHeart, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { setProfileStorage } from '../helpers/userStorage';
 
@@ -22,7 +21,13 @@ const override = css`
 
 const tabList = editorialServices;
 
-const Perfil = () => {
+const Perfil = ({ name, likes, views, networks, followName, about, services, theme }) => {
+
+    // Tema
+    const style = {
+        background: (theme && theme.main) || '',
+        color: (theme && theme.contrast) || ''
+    };
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -38,57 +43,51 @@ const Perfil = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar defaultColor={style.background} />
             <main className='main-body below-navbar'>
-                <section className='profile-header-container' style={{ background: 'white' }}>
+                <section className='profile-header-container' style={style}>
                     <div className='profile-container'>
                         <div>
                             <div className='profile-img'>
-                                <div className='sn-container'>
-                                    <div className='sn-icon sn-wattpad'>
-                                        <img src={WattpadIcon} alt='img-wattpad' />
-                                    </div>
-                                    <div className='sn-icon sn-facebook'>
-                                        <FontAwesomeIcon icon={faFacebook} />
-                                    </div>
-                                </div>
-                                <div className='editorial-tag clamp clamp-1'>
-                                    <img src={SampleEditorialIcon} alt='img-editorial' />
-                                    <span className='clamp clamp-1'>
-                                        Editorial Pedro Castillo
-        </span>
-                                </div>
                                 <img src={ImgPerfil} alt='img-perfil' />
                             </div>
                         </div>
                         <div className='profile-data'>
-                            <h2 className='clamp clamp-2 no-break'>Shany Dubi Loedrin</h2>
-                            <div className='statistics'>
-                                <div className='statistic'>
-                                    {'20 '}
-                                    <FontAwesomeIcon icon={faEye} className='icon' />
-                                </div>
-                                <div className='statistic'>
-                                    {'50 '}
-                                    <FontAwesomeIcon icon={faHeart} className='icon' />
-                                </div>
+                            <h2 className='clamp clamp-2 no-break'>{name}</h2>
+                            <div className='follow-name clamp clamp-1'>
+                                @{followName}
                             </div>
-                            <div className='description'>
-                                <p>Fundadora de su editorial</p>
-                                <p>Crítica, diseñadora y <b>3 más</b></p>
+                            <div className='description d-none d-md-block'>
+                                <p className='clamp clamp-3 no-break'>{about.whoWeAre}</p>
                             </div>
                         </div>
-                        <div className='profile-editorial'>
-                            <div className='editorial-tag clamp clamp-1'>
-                                <img src={SampleEditorialIcon} alt='img-editorial' />
-                                <span className='clamp clamp-1'>
-                                    Editorial Pedro Castillo
-        </span>
-                            </div>
+                        <div className='sn-container'>
+                            {
+                                networks.slice(0, 3).map(network => {
+                                    const iconData = getSnIconByUrl(network);
+
+                                    if (iconData) {
+                                        return (
+                                            <a target='_blank' href={network} className={`sn-icon ${iconData.className}`}>
+                                                <img src={iconData.imgSrc} alt='img-icon' />
+                                            </a>
+                                        )
+                                    }
+                                })
+                            }
+                            {
+                                /*<div className='sn-icon sn-wattpad'>
+                                    <img src={WattpadIcon} alt='img-wattpad' />
+                                </div>
+                                <div className='sn-icon sn-facebook'>
+                                    <FontAwesomeIcon icon={faFacebook} />
+                                </div>*/
+                            }
                         </div>
                     </div>
                 </section>
                 <Tabs
+                    theme={theme}
                     initialLoading={initialLoading}
                     loadingMore={false}
                     requestMoreData={() => { }}

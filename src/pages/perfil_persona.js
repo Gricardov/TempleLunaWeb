@@ -22,7 +22,13 @@ const override = css`
 
 const tabList = editorialServices;
 
-const Perfil = ({ name, likes, views, networks, services, editorial }) => {
+const Perfil = ({ name, likes, views, networks, theme, services, editorial }) => {
+
+    // Tema
+    const style = {
+        background: (theme && theme.main) || '',
+        color: (theme && theme.contrast) || ''
+    };
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -45,20 +51,31 @@ const Perfil = ({ name, likes, views, networks, services, editorial }) => {
                         <div>
                             <div className='profile-img'>
                                 <div className='sn-container'>
-                                    <div className='sn-icon sn-wattpad'>
-                                        <img src={WattpadIcon} alt='img-wattpad' />
-                                    </div>
-                                    <div className='sn-icon sn-facebook'>
-                                        <FontAwesomeIcon icon={faFacebook} />
-                                    </div>
+                                    {
+                                        networks.slice(0, 2).map(network => (
+                                            <div className='sn-icon sn-facebook'>
+                                                <FontAwesomeIcon icon={faFacebook} />
+                                            </div>
+                                        ))
+                                    }
                                 </div>
-                                <div className='editorial-tag clamp clamp-1'>
-                                    <img src={SampleEditorialIcon} alt='img-editorial' />
-                                    <span className='clamp clamp-1'>
-                                        Editorial Pedro Castillo
-                                </span>
-                                </div>
-                                <img src={ImgPerfil} alt='img-perfil' />
+                                {
+                                    editorial
+                                        ?
+                                        <div className='editorial-tag clamp clamp-1'>
+                                            <img src={SampleEditorialIcon} alt='img-editorial' />
+                                            <span className='clamp clamp-1'>
+                                                {editorial.name}
+                                            </span>
+                                        </div>
+                                        :
+                                        <div className='editorial-tag clamp clamp-1'>
+                                            <span className='clamp clamp-1'>
+                                                Independiente
+                                        </span>
+                                        </div>
+                                }
+                                <img src={ImgPerfil} alt='img-perfil' className='rounded-border' />
                             </div>
                         </div>
                         <div className='profile-data'>
@@ -79,12 +96,23 @@ const Perfil = ({ name, likes, views, networks, services, editorial }) => {
                             </div>
                         </div>
                         <div className='profile-editorial'>
-                            <div className='editorial-tag clamp clamp-1'>
-                                <img src={SampleEditorialIcon} alt='img-editorial' />
-                                <span className='clamp clamp-1'>
-                                    Editorial Pedro Castillo
-                                </span>
-                            </div>
+                            {
+                                editorial
+                                    ?
+                                    <div className='editorial-tag clamp clamp-1'>
+                                        <img src={SampleEditorialIcon} alt='img-editorial' />
+                                        <span className='clamp clamp-1'>
+                                            {editorial.name}
+                                        </span>
+                                    </div>
+                                    :
+                                    <div className='editorial-tag clamp clamp-1'>
+                                        <img src={SampleEditorialIcon} alt='img-editorial' />
+                                        <span className='clamp clamp-1'>
+                                            Independiente
+                                        </span>
+                                    </div>
+                            }
                         </div>
                     </div>
                 </section>
