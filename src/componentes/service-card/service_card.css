@@ -18,7 +18,7 @@
 .service_card .service_card_overlay {
     display: flex;
     position: absolute;
-    background: transparent linear-gradient(180deg, #D8D8D800 0%, #000000 98%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient( 173deg, #6e6e6e00 0%, #00000052 50%, #000000 91%, #000000 100%) 0% 0% no-repeat padding-box;
     border-radius: 15px;
     width: 100%;
     height: 100%;
@@ -34,5 +34,5 @@
 
 .service_card_controls p {
     font-size: 1.8rem;
-    margin: 0;    
+    margin: 0;
 }

@@ -1,20 +1,26 @@
 import React from 'react';
-import { hexToRgb } from '../../helpers/functions';
+import { getServiceById } from '../../helpers/functions';
 import './service_card.css';
 
-const Card = ({ titulo, img, contrastColor }) => {
+const Card = ({ id, img, color }) => {
 
-    contrastColor = contrastColor ? 'rgba(' + hexToRgb(contrastColor) + ',0.25)' : 'transparent';
-    
-    return (
-        <div className='service_card' style={{ backgroundImage: `url(${img})` }}>
-            <div className='service_card_overlay' style={{ backgroundColor: contrastColor }} >
-                <div className='service_card_controls'>
-                    <p>{titulo}</p>
+    const serviceData = getServiceById(id);
+
+    if (serviceData) {
+
+        return (
+            <div className='service_card' style={{ backgroundImage: `url(${img || serviceData.img})`, backgroundColor: color || serviceData.color, backgroundSize: img && '100% 100%' }}>
+                <div className='service_card_overlay'>
+                    <div className='service_card_controls'>
+                        <p>{serviceData.name}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    return null;
+
 }
 
 export default Card;

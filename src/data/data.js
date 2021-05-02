@@ -27,5 +27,8 @@ export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMoral
 // Para los roles de las dinámicas
 export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', text: 'Autor', displayInDropdown: false }];
 
-// Para los servicios de las editoriales
+// Para los servicios que se pueden brindar
 export const editorialServices = [{ id: 'CRI', name: 'Críticas', img: ImgServCritica, color: '#F8FFD5' }, { id: 'DIS', name: 'Diseños', img: ImgServDiseno, color: '#FFF0D5' }, { id: 'COR', name: 'Correcciones', img: ImgServCoreccion, color: '#D5F8FF' }, { id: 'ENT', name: 'Entrevistas', img: ImgServEntrevista, color: '#C7D7FF' }, { id: 'BKT', name: 'Booktrailers', img: ImgServBooktrailer, color: '#E1DEFF' }, { id: 'DIF', name: 'Difusión', img: ImgServPromo, color: '#CFFFE2' }];
+
+// Para las pestañas de las editoriales
+export const editorialTabs = [{ id: 'SERV', name: 'Servicios' }, { id: 'MIEM', name: 'Miembros' }, { id: 'ACER', name: 'Acerca de' }];

@@ -1275,14 +1275,6 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   color: #d88627;
 }
 
-.sn-booknet {
-  border-color: #683903;
-}
-
-.sn-booknet>svg {
-  color: #683903;
-}
-
 .sn-inkspired {
   border-color: #1e8e22;
 }

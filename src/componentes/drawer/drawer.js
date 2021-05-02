@@ -55,7 +55,7 @@ const Drawer = () => {
                             <a onClick={() => navigateTo('/admin')} className='btn-drawer'>
                                 Pedidos
                             </a>
-                            <a onClick={() => navigateTo('/perfil/1234')} className='btn-drawer'>
+                            <a onClick={() => navigateTo('/perfil/EditorialPedroCastillo')} className='btn-drawer'>
                                 Mi perfil
                             </a>
                             <a onClick={logoutUser} className='btn-drawer'>

@@ -9,7 +9,7 @@ import ServiceCard from '../componentes/service-card';
 import { css } from "@emotion/core";
 import { login } from '../api';
 import { getSnIconByUrl } from '../helpers/functions';
-import { editorialServices } from '../data/data';
+import { editorialTabs } from '../data/data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faHeart, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { setProfileStorage } from '../helpers/userStorage';
@@ -19,7 +19,6 @@ const override = css`
   margin: 5rem auto;
 `;
 
-const tabList = editorialServices;
 
 const Perfil = ({ name, likes, views, networks, followName, about, services, theme }) => {
 
@@ -75,14 +74,6 @@ const Perfil = ({ name, likes, views, networks, followName, about, services, the
                                     }
                                 })
                             }
-                            {
-                                /*<div className='sn-icon sn-wattpad'>
-                                    <img src={WattpadIcon} alt='img-wattpad' />
-                                </div>
-                                <div className='sn-icon sn-facebook'>
-                                    <FontAwesomeIcon icon={faFacebook} />
-                                </div>*/
-                            }
                         </div>
                     </div>
                 </section>
@@ -95,12 +86,12 @@ const Perfil = ({ name, likes, views, networks, followName, about, services, the
                     loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                     activeIndex={activeTabIndex}
                     select={updActiveTabIndex}
-                    tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
+                    tabs={editorialTabs.map(e => e.name)}>
                     <div className='services-profile-container'>
                         {
-                            editorialServices.map(service => (
+                            services.map(service => (
                                 <div className='service-card-container'>
-                                    <ServiceCard img={service.img} titulo={service.name} contrastColor={service.color} />
+                                    <ServiceCard id={service.id} img={service.img} color={service.color} />
                                 </div>
                             ))
                         }

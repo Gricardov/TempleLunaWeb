@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PerfilPersona from './perfil_persona';
 import PerfilEditorial from './perfil_editorial';
+import LoadingScreen from '../componentes/loading-screen';
+import { getProfileByFollowName } from '../api';
 
 const profileData = {
     /*
@@ -33,7 +35,7 @@ const profileData = {
         'temple.com'
     ],
     roles: ['COLAB'],
-    services: ['CRI', 'DIS'],
+    services: [{ id: 'CRI' }, { id: 'DIS' }],
     members: [],
     about: {
         whoWeAre: 'Te voy a quitar todo, todo, todito. ¿Tienes? Dirás tenemos. Bienvenido a mi gobierno, junto al COVID-21 vamos a ser tu peor pesadilla',
@@ -43,26 +45,49 @@ const profileData = {
             messengerType: '',
             number: ''
         },
-        createAt: ''
+        createdAt: ''
     },
-    likes: 20,
+    /*likes: 20,
     views: 30,
-    statistics: [{ type: 'CRI', cound: 10 }, { type: 'DIS', count: 2 }],
+    statistics: [{ type: 'CRI', count: 10 }, { type: 'DIS', count: 2 }],*/
     theme: {
-        main: '#BE67C1',
+        main: '#333333',
         contrast: '#FFF'
     }
 }
 
-const Perfil = () => {
+const Perfil = ({ match }) => {
 
-    switch (profileData.type) {
-        case 'PERSON':
-            return <PerfilPersona {...profileData} />
-        case 'EDITORIAL':
-            return <PerfilEditorial {...profileData} />
-        default:
-            return <div>Tipo de perfil inválido</div>;
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const followName = match.params.id;
+        return getProfileByFollowName(followName)
+            .then(({ profile, error }) => {
+                if (!error) {
+                    setLoading(false);
+                    setProfileData(profile);
+                } else {
+                    setLoading(false);
+                    alert('Ha ocurrido un error al obtener al perfil');
+                }
+            })
+    }, []);
+
+    if (loading) {
+        return <LoadingScreen text={'Obteniendo perfil'} />
+    } else if (profileData) {
+        switch (profileData.type) {
+            case 'PERSON':
+                return <PerfilPersona {...profileData} />
+            case 'EDITORIAL':
+                return <PerfilEditorial {...profileData} />
+            default:
+                return <PerfilPersona {...profileData} />
+        }
+    } else {
+        return <div>No hay información del perfil</div>
     }
 }
 

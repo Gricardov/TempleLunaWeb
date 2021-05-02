@@ -73,7 +73,7 @@
     top: 0;
     width: 100%;
     text-align: center;
-    z-index: 10;
+    z-index: 12;
     transition: all 200ms ease-in-out;
     height: var(--navbar-height);
 }

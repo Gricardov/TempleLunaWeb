@@ -114,7 +114,7 @@ export const getStatistics = async keys => {
     return Promise.all(promises);
 }
 
-// Sesión
+// Perfil
 
 export const getProfile = async (uid) => {
     return firestore.collection('perfiles').doc(uid).get()
@@ -129,6 +129,20 @@ export const getProfile = async (uid) => {
             return { error }
         })
 }
+
+export const getProfileByFollowName = async (followName) => {
+    return firestore.collection('perfiles').where('followName', '==', followName).limit(1).get()
+        .then(qsn => {
+            let list = [];
+            qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));
+            return { profile: list[0] };
+        })
+        .catch(error => {
+            return { error }
+        })
+}
+
+// Sesión
 
 export const login = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password)

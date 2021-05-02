@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { designTypes, contactTypes, critiquePoints, contributors } from '../data/data';
+import { designTypes, contactTypes, critiquePoints, contributors, editorialServices } from '../data/data';
 import WattpadIcon from '../img/wattpad.svg';
 import FacebookIcon from '../img/facebook.svg';
 import TwitterIcon from '../img/twitter.svg';
@@ -141,6 +141,13 @@ export const stringContainsAnyOf = (mainString, coincidences) => {
     return coincidences.some(c => mainString.includes(c));
 }
 
+
+// Obtiene el servicio según id
+export const getServiceById = (id) => {
+    return editorialServices.find(service => service.id == id);
+}
+
+// Obtiene el ícono del perfil editorial, según red social
 export const getSnIconByUrl = (url) => {
     if (extractLink(url)) {
         if (stringContainsAnyOf(url, ['my.w.tt', 'wattpad.'])) {

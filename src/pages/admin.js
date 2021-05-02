@@ -126,8 +126,8 @@ const Admin = () => {
         if (logged && logged.uid) {
             setTakingRequest(true);
             takeRequest(requestId, requestType.type)
-                .then((res) => {
-                    if (!res.error) {
+                .then(({ error }) => {
+                    if (!error) {
                         getRequest(requestId).then(({ data, error }) => {
                             setTakingRequest(false);
                             if (!error) {

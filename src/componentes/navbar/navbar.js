@@ -126,7 +126,7 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                         logged
                             ?
                             <>
-                                <Link onClick={() => history.push('/perfil/1234')} className='btn-nav clamp clamp-1'>
+                                <Link onClick={() => history.push('/perfil/EditorialPedroCastillo')} className='btn-nav clamp clamp-1'>
                                     {fName} {lName}
                                 </Link>
                                 <Avatar clases='img-profile-navbar' />
