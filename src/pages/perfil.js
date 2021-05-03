@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PerfilPersona from './perfil_persona';
 import PerfilEditorial from './perfil_editorial';
 import LoadingScreen from '../componentes/loading-screen';
-import { getProfileByFollowName } from '../api';
+import { getProfileByQueryFollowName } from '../api';
 
 const profileData = {
     /*
     type: 'PERSON',
-    name: 'Shany Dubi',
+    fName: 'Shany',
+    lName:'Dubi',
     networks: [
         'https://firebase.google.com/docs/firestore/security/rules-fields',
         'https://firebase.google.com/docs/firestore/security/rules-fields',
@@ -62,8 +63,8 @@ const Perfil = ({ match }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const followName = match.params.id;
-        return getProfileByFollowName(followName)
+        const qFollowName = match.params.id;
+        return getProfileByQueryFollowName(qFollowName.toLowerCase())
             .then(({ profile, error }) => {
                 if (!error) {
                     setLoading(false);

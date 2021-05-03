@@ -27,7 +27,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
     return (
         <div ref={ref} className='request-card-container'>
             <div className='header-container'>
-                <Avatar clases='request-avatar' />
+                <Avatar clases='request-avatar img-avatar-container' />
                 <div className='title-container'>
                     <h3 className='clamp clamp-1'>{data?.title}</h3>
                     <p>

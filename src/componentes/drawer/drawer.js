@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react'
-import { DrawerContext } from '../../context/DrawerContext'
-import { AuthContext } from '../../context/AuthContext'
-import { useHistory } from "react-router-dom"
-import { Link } from "react-router-dom"
-import { logout } from '../../api'
-import './drawer.css'
+import React, { useEffect, useContext } from 'react';
+import { DrawerContext } from '../../context/DrawerContext';
+import { AuthContext } from '../../context/AuthContext';
+import { getProfileStorage } from '../../helpers/userStorage';
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { logout } from '../../api';
+import './drawer.css';
 
 const Drawer = () => {
 
@@ -27,6 +28,8 @@ const Drawer = () => {
         history.push(route);
         close();
     }
+
+    const { qFollowName } = getProfileStorage() || {};
 
     useEffect(() => {
         if (isOpen) {
@@ -55,7 +58,7 @@ const Drawer = () => {
                             <a onClick={() => navigateTo('/admin')} className='btn-drawer'>
                                 Pedidos
                             </a>
-                            <a onClick={() => navigateTo('/perfil/EditorialPedroCastillo')} className='btn-drawer'>
+                            <a onClick={() => navigateTo('/perfil/' + qFollowName)} className='btn-drawer'>
                                 Mi perfil
                             </a>
                             <a onClick={logoutUser} className='btn-drawer'>

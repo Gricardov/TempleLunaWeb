@@ -130,8 +130,8 @@ export const getProfile = async (uid) => {
         })
 }
 
-export const getProfileByFollowName = async (followName) => {
-    return firestore.collection('perfiles').where('followName', '==', followName).limit(1).get()
+export const getProfileByQueryFollowName = async (followName) => {
+    return firestore.collection('perfiles').where('qFollowName', '==', followName).limit(1).get()
         .then(qsn => {
             let list = [];
             qsn.forEach(doc => list.push({ ...doc.data(), id: doc.id }));

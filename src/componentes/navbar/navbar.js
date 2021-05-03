@@ -1,17 +1,17 @@
-import React, { useRef, useState, useContext, useEffect } from 'react'
-import Avatar from '../avatar'
+import React, { useRef, useState, useContext, useEffect } from 'react';
+import Avatar from '../avatar';
+import Logo from '../../img/logo.png';
+import Sanguchito from '../../img/sanguchito.svg';
 import { useOutsideListener } from '../../hooks/useOutsideListener';
-import { useHistory } from "react-router-dom"
-import { logout } from '../../api'
-import { Link } from "react-router-dom"
-import { DrawerContext } from '../../context/DrawerContext'
-import { AuthContext } from '../../context/AuthContext'
-import { getProfileStorage } from '../../helpers/userStorage'
+import { useHistory } from "react-router-dom";
+import { logout } from '../../api';
+import { Link } from "react-router-dom";
+import { DrawerContext } from '../../context/DrawerContext';
+import { AuthContext } from '../../context/AuthContext';
+import { getProfileStorage } from '../../helpers/userStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import Logo from '../../img/logo.png'
-import Sanguchito from '../../img/sanguchito.svg'
-import './navbar.css'
+import './navbar.css';
 
 const Navbar = ({ startTransparent, defaultColor }) => {
 
@@ -61,6 +61,8 @@ const Navbar = ({ startTransparent, defaultColor }) => {
         setWidth(window.innerWidth);
     }
 
+    const { fName, lName, qFollowName, imgUrl } = getProfileStorage() || { fName: '', lName: '' };
+
     useEffect(() => {
         outsideListener$.subscribe(event => {
             if (arrowTogglerRef.current && !arrowTogglerRef.current.contains(event.target)) {
@@ -107,14 +109,6 @@ const Navbar = ({ startTransparent, defaultColor }) => {
         optionsClasses += ' close';
     }
 
-    let fName, lName, urlImg;
-    const profile = getProfileStorage();
-    if (profile) {
-        fName = profile.fName;
-        lName = profile.lName;
-        urlImg = profile.urlImg;
-    }
-
     return (
         <nav className={navClasses} style={customStyles}>
             <div className='container-xl container-navbar position-relative'>
@@ -126,10 +120,10 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                         logged
                             ?
                             <>
-                                <Link onClick={() => history.push('/perfil/EditorialPedroCastillo')} className='btn-nav clamp clamp-1'>
+                                <Link onClick={() => history.push('/perfil/' + qFollowName)} className='btn-nav clamp clamp-1'>
                                     {fName} {lName}
                                 </Link>
-                                <Avatar clases='img-profile-navbar' />
+                                <Avatar img={imgUrl} clases='img-profile-navbar img-avatar-container' />
                                 <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav nav-arrow m-0 pl-1 pr-1'>
                                     <FontAwesomeIcon icon={faAngleDown} size='1x' />
                                 </span>
@@ -155,7 +149,7 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                     <li onClick={() => navigateTo('/admin')}>
                         Pedidos
                     </li>
-                    <li onClick={() => navigateTo('/perfil/1234')}>
+                    <li onClick={() => navigateTo('/perfil/' + qFollowName)}>
                         Mi perfil
                     </li>
                     <li onClick={logoutUser}>

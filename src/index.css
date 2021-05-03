@@ -275,6 +275,10 @@ p {
   position: relative;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .align-flex-start {
   align-self: flex-start;
 }
@@ -397,7 +401,6 @@ p {
 
 @media (min-width: 768px) {
   .button {
-    /*padding: 1.2rem 3rem;*/
     font-size: 2rem;
   }
 }
@@ -480,6 +483,12 @@ p {
 
 .text-align-center {
   text-align: center;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .overlay {
@@ -1000,9 +1009,6 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   margin: 0 auto;
   width: 136px;
   height: 136px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (min-width: 768px) {
@@ -1014,8 +1020,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   }
 }
 
-.profile-header-container .profile-img>img.rounded-border {
-  border-radius: 50%;
+.profile-header-container .profile-img>img.border-shadow {
   border: 2px solid white;
   box-shadow: 0px 5px 20px #2c273829;
 }
@@ -1097,6 +1102,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   padding: .3rem 1.2rem;
   border-radius: 30px;
   box-shadow: 0px 0px 5px #2c273829;
+  z-index: 2;
 }
 
 @media (min-width: 768px) {

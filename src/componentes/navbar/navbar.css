@@ -89,7 +89,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
+    width: 145px;
     margin-left: auto;
 }
 
@@ -99,13 +99,14 @@
 
 @media (min-width: 768px) {
     .main-navbar .logo-header, .main-navbar.logged .logo-header {
-        width: 180px;
+        width: 160px;
         margin-left: 0;
         display: flex;
     }
 }
 
 .main-navbar .img-sanguchito {
+    width: 26px;
     margin-left: auto;
 }
 

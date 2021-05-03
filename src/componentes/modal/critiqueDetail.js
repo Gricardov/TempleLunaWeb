@@ -84,7 +84,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                 <div className={'modal ' + styles}>
                     <div className='modal-container'>
                         <div className='header-container position-relative'>
-                            <Avatar clases='modal-avatar' />
+                            <Avatar clases='modal-avatar img-avatar-container' />
                             <div className='title-container'>
                                 <h3 className='clamp clamp-2'>{data?.title}</h3>
                                 <p>{
