@@ -10,16 +10,16 @@ import ImgLeyendo from '../img/cri-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { extractLink, toName, toSentence } from '../helpers/functions';
-import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid, isTitleInvalid, isAboutInvalid, isIntentionInvalid } from '../helpers/validators';
+import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid, isTitleInvalid, isAboutInvalid } from '../helpers/validators';
 import { saveRequest } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { contactTypes, critiquePoints } from '../data/data';
+import { contactTypes, correctionPoints } from '../data/data';
 
 const steps = ['¡Hola!', 'Contacto', 'Obra', 'Contenido'];
-const chkPoints = critiquePoints;
+const chkPoints = correctionPoints;
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -41,7 +41,6 @@ const Solicitud = () => {
     const [link, setLink] = useState('');
     const [title, setTitle] = useState('');
     const [about, setAbout] = useState('');
-    const [intention, setIntention] = useState('');
     const [points, setPoints] = useState([chkPoints[0].id]);
 
     const updName = (e) => {
@@ -76,13 +75,9 @@ const Solicitud = () => {
         setAbout(e.target.value);
     }
 
-    const updIntention = (e) => {
-        setIntention(e.target.value);
-    }
-
     const selectPoint = (id) => {
         if (includesPoint(id)) {
-            if (id != 'INTENCION') {
+            if (id != 'ORTOGRAFIA') {
                 setPoints(points.filter(p => p != id));
             }
         } else {
@@ -118,9 +113,8 @@ const Solicitud = () => {
             title: toSentence(title.trim()),
             link: extractLink(link.trim()),
             about: about.trim(),
-            intention: intention.trim(),
             points,
-            type: 'CRITICA',
+            type: 'CORRECCION',
             status: 'DISPONIBLE',
             active: 1
         };
@@ -141,7 +135,7 @@ const Solicitud = () => {
             || isLinkInvalid(link)
             || isTitleInvalid(title)
             || isAboutInvalid(about)
-            || isIntentionInvalid(intention));
+        );
 
         if (error) {
             alert(error);
@@ -166,11 +160,11 @@ const Solicitud = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Críticas - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!" />
+            <HelmetMetaData title="Correcciones - Temple Luna" description="Estamos dispuestos a ayudarte con aquellas obra que tanto amas. ¡Es gratis!" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Pide una crítica</h2>
+                    <h2 className='mb-0'>Pide una corrección</h2>
                     <p className='txt-responsive-form'>Y te la enviaremos a tu correo en PDF</p>
                 </section>
                 <section className='container-xl mt-2 position-relative'>
@@ -221,18 +215,21 @@ const Solicitud = () => {
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
                                                             Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
                                                             Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.
-                                                            Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b><br /><br />
+                                                            Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b>.<br /><br />
 
                                                             <b>4- ¿Cuál es el costo?</b><br /><br />
                                                             Por el momento, este servicio es <b>gratuito</b>. Cuando no lo sea, <b>lo dejaremos claro</b>.<br /><br />
 
                                                             <b>5- ¿Quienes atienden los pedidos?</b><br /><br />
-                                                            El equipo está conformado por <b>voluntarios</b>, los cuales han tenido que demostrar <b>experiencia en críticas</b>.<br /><br />
+                                                            El equipo está conformado por <b>voluntarios</b>, los cuales han tenido que demostrar <b>experiencia en correcciones</b>.<br /><br />
 
-                                                            <b>6- ¿Cómo puedo agradecer?</b><br /><br />
+                                                            <b>6- ¿Hay un límite de páginas?</b><br /><br />
+                                                            <b>Sí.</b> El máximo es de 300 páginas.<br /><br />
+
+                                                            <b>7- ¿Cómo puedo agradecer?</b><br /><br />
                                                             Cuando <b>recibas</b> tu pedido, tendrás disponible el botón de <b>Compartir</b>. Comparte nuestro trabajo para que <b>más personas</b> conozcan la iniciativa.<br /><br />
 
-                                                            <b>7- ¿Cómo puedo ser voluntario?</b><br /><br />
+                                                            <b>8- ¿Cómo puedo ser voluntario?</b><br /><br />
                                                             Escríbenos por el <b> <a target='_blank' href='https://www.facebook.com/groups/templeluna/'>grupo oficial</a></b> y podemos coordinar una <b>entrevista con el creador</b>.
                                                         </p>
                                                     </div>
@@ -280,11 +277,7 @@ const Solicitud = () => {
                                                         <textarea minLength="1" maxLength="1000" rows="4" value={about} onChange={updAbout} id="txtAcerca" placeholder="Ejemplo: Mi obra trata sobre las ocurrencias vividas con mi primer amor y el dolor causado por su posterior traición..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtIntencion">¿Qué intención deseas transmitir?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Deseo transmitir miedo e incertidumbre, por medio de una historia ambientada en una pandemia mundial..."></textarea>
-                                                    </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="txtLink">¿Qué puntos tocamos en la crítica?</label>
+                                                        <label htmlFor="txtLink">¿En qué puntos deseas la corrección?</label>
                                                         {
                                                             chkPoints.map(point => {
                                                                 const included = includesPoint(point.id);

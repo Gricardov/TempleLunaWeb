@@ -3,22 +3,24 @@ import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DesignDetailModal from '../componentes/modal/designDetail';
 import CritiqueDetailModal from '../componentes/modal/critiqueDetail';
+import CorrectionDetailModal from '../componentes/modal/correctionDetail';
 import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
-import { requestStatuses, requestTypes } from '../data/data';
+import { requestStatuses, editorialServices } from '../data/data';
 import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
-import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex } from '../helpers/userStorage';
+import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
+import { getServiceById } from '../helpers/functions';
 
 const override = css`
   display: block;
   margin: 5rem auto;
 `;
 
-const requestTypeList = requestTypes;
+const requestTypeList = editorialServices;
 const limit = 3;
 
 const Admin = () => {
@@ -31,6 +33,7 @@ const Admin = () => {
     const [loadingMore, setLoadingMore] = useState(false);
     const [isOpenDesignModal, setOpenDesignModal] = useState(false);
     const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
+    const [isOpenCorrectionModal, setOpenCorrectionModal] = useState(false);
     const [registry, setRegistry] = useState(null);
     const [tabList, setTabList] = useState(requestStatuses);
 
@@ -39,7 +42,10 @@ const Admin = () => {
 
     const { logged } = useContext(AuthContext);
 
+    const { services } = getProfileStorage() || { services: [] };
+
     const openModal = (request) => {
+
         setRegistry(request);
         setTakingRequest(false);
         setSuccesfulRequestTake(false);
@@ -50,6 +56,9 @@ const Admin = () => {
                 break;
             case 'DISENO':
                 setOpenDesignModal(true);
+                break;
+            case 'CORRECCION':
+                setOpenCorrectionModal(true);
                 break;
         }
     }
@@ -78,11 +87,11 @@ const Admin = () => {
 
     const updateStatistics = (timeout = 0) => {
         setTimeout(() => {
-            getStatistics([requestType.type, logged.uid + '-' + requestType.type])
+            getStatistics([requestType.id, logged.uid + '-' + requestType.id])
                 .then(data => setTabList([
-                    !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
-                    !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
-                    !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2]
+                    !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : { ...tabList[0], statistics: 0 },
+                    !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : { ...tabList[1], statistics: 0 },
+                    !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : { ...tabList[1], statistics: 0 }
                 ]))
         }, timeout);
     }
@@ -91,7 +100,7 @@ const Admin = () => {
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
             const requestStatus = tabList[activeTabIndex].id;
-            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, getLastElement('createdAt'), limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
+            getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.id, requestStatus, getLastElement('createdAt'), limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
                 .then(data => {
                     setLoadingMore(false);
                     setIsLast(data.isLast);
@@ -107,7 +116,7 @@ const Admin = () => {
     const requestData = () => {
         setInitialLoading(true);
         const requestStatus = tabList[activeTabIndex].id;
-        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.type, requestStatus, undefined, limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
+        getRequests(getUidBasedOnRequestStatus(requestStatus), requestType.id, requestStatus, undefined, limit, requestStatus == 'TOMADO' || requestStatus == 'HECHO' ? 'desc' : 'asc')
             .then(data => {
                 updateStatistics();
                 setInitialLoading(false);
@@ -123,7 +132,7 @@ const Admin = () => {
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
-            takeRequest(requestId, requestType.type)
+            takeRequest(requestId, requestType.id)
                 .then(({ error }) => {
                     if (!error) {
                         getRequest(requestId).then(({ data, error }) => {
@@ -149,7 +158,7 @@ const Admin = () => {
 
     useEffect(() => {
         requestData();
-    }, [activeTabIndex, requestType.type]);
+    }, [activeTabIndex, requestType.id]);
 
     useEffect(() => {
         setRequestType(getAdminRequestType(requestTypeList[0]));
@@ -174,7 +183,14 @@ const Admin = () => {
                 takingRequest={takingRequest}
                 succesfulRequestTake={succesfulRequestTake}
                 takeRequest={confirmRequest} />
-
+            <CorrectionDetailModal
+                data={registry}
+                isOpen={isOpenCorrectionModal}
+                close={() => setOpenCorrectionModal(false)}
+                takingRequest={takingRequest}
+                succesfulRequestTake={succesfulRequestTake}
+                takeRequest={confirmRequest}
+            />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
@@ -183,7 +199,7 @@ const Admin = () => {
                             <DropdownImage
                                 stretch
                                 selectedItem={requestType}
-                                list={requestTypeList}
+                                list={services.map(service => getServiceById(service))}
                                 select={updRequestType} />
                         </div>
                     </div>

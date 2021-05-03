@@ -4,7 +4,7 @@ import { getDateText, getExpDateText } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faPaintBrush, faEye, faBoxOpen } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPaintBrush, faEye, faBoxOpen, faTasks } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './card.css'
 
@@ -23,7 +23,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
         networks: profile.networks || []
     };
     data.artist = artist;
-
+    console.log(data)
     return (
         <div ref={ref} className='request-card-container'>
             <div className='header-container'>
@@ -47,7 +47,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
             </div>
             <div className='description-container'>
                 <p className='clamp clamp-2'>
-                    {data?.type == 'CRITICA' ? data.about : data.intention}
+                    {data.about || data.intention}
                 </p>
             </div>
             <div className='footer-card-container'>
@@ -69,7 +69,14 @@ const Card = React.forwardRef(({ data, select }, ref) => {
                                     Iniciar diseño
                                 </button>
                                     :
-                                    null
+                                    data?.type == 'CORRECCION'
+                                        ?
+                                        <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
+                                            <FontAwesomeIcon color={'#fff'} icon={faTasks} className='icon' />
+                                    Iniciar corrección
+                                </button>
+                                        :
+                                        null
                         )
                     }
                     {

@@ -42,10 +42,10 @@ const Dropdown = ({ list, select, stretch, selectedItem }) => {
             <button className={`select-image position-relative ${stretch ? 'stretch' : ''}`} onClick={toggleDropdown}>
                 <span className={selectedItem.icon} style={{ color, marginRight: '1rem', fontSize: tamanoIcono + 'px' }}></span>
                 {
-                    selectedItem.text
+                    stretch
                     &&
                     <span className='mr-1 position-relative' style={{ color }}>
-                        {selectedItem.text}
+                        {selectedItem.name}
                         {tag(selectedItem.tag)}
                     </span>
                 }
@@ -60,10 +60,10 @@ const Dropdown = ({ list, select, stretch, selectedItem }) => {
                             <div key={index} onClick={(e) => selectItem(e, item)} className='selectable-list-item'>
                                 <span className={item.icon} style={{ color, fontSize: tamanoIcono + 'px' }}></span>
                                 {
-                                    item.text
+                                    stretch
                                     &&
                                     <span className='ml-1 position-relative' style={{ color }}>
-                                        {item.text}
+                                        {item.name}
                                         {tag(item.tag)}
                                     </span>
                                 }

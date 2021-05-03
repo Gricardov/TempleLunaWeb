@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faEdit, faEye, faHandPaper, faLayerGroup, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faEdit, faEye, faHandPaper, faLayerGroup, faTasks, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -167,9 +167,9 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                                         :
                                                         data?.status == 'TOMADO' && isTakenByMe
                                                             ?
-                                                            <button onClick={() => history.push('prep_critica', { data })} className='button button-green button-option-request'>
-                                                                <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
-                                                            Iniciar crítica
+                                                            <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
+                                                                <FontAwesomeIcon color={'#fff'} icon={faTasks} className='icon' />
+                                                            Iniciar correccion
                                                             </button>
                                                             :
                                                             null
@@ -178,7 +178,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                             {
                                                 data?.status == 'HECHO' && isTakenByMe
                                                 && (
-                                                    <button onClick={() => history.push('prev_resultado', { data })} className='button button-green button-option-request'>
+                                                    <button onClick={() => history.push(`prev_resultado?id=${data.id}&origin=tl`)} className='button button-green button-option-request'>
                                                         <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
                                                         Ir a resultado
                                                     </button>

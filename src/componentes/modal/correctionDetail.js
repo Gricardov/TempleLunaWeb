@@ -3,18 +3,15 @@ import ConfirmationModal from './confirmationModal';
 import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
-import { getDateText, getExpDateText, getMessengerTypeName, getDesignType, getFormattedPhone, extractLink } from '../../helpers/functions';
+import { getDateText, getExpDateText, getMessengerTypeName, getFormattedPhone, getAbrevPointName, extractLink } from '../../helpers/functions';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faEye, faHandPaper, faLayerGroup, faPaintBrush, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faEdit, faEye, faHandPaper, faLayerGroup, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-
-const iconSize = 20;
-const color = '#756F86';
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -53,12 +50,11 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
         styles = 'close';
     }
 
-    const { icon, name } = getDesignType(data?.designType);
-
     const confirm = () => {
         setOpenConfirmationModal(false);
         takeRequest(data?.id);
     }
+
     const isTakenByMe = data?.takenBy == logged.uid;
     const messengerType = data?.messengerType;
     const profile = getProfileStorage();
@@ -73,17 +69,13 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
     if (data) {
         data.artist = artist;
     }
-
-    if (isTakenByMe) {
-        getExpDateText(data?.takenAt, data?.expDate)
-    }
-
+    //console.log(formattedPhone)
     return (
         <>
             <ConfirmationModal
                 isOpen={openConfirmationModal}
                 title='Casi listo'
-                message='Al aceptar, tienes hasta 7 días para entregar el diseño o acordar una fecha con la persona interesada. ¿Continuar?'
+                message='Al aceptar, tienes hasta 7 días para entregar la corrección o acordar una fecha con la persona interesada. ¿Continuar?'
                 confirm={confirm}
                 close={() => setOpenConfirmationModal(false)} />
             <div className={'overlay overlay-modal ' + styles} onClick={close}>
@@ -110,41 +102,27 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                             <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                         </div>
                         <div className='description-container'>
-                            <h4>Tipo de diseño</h4>
-                            <span className={icon} style={{ color, fontSize: iconSize }}>{data?.icon}</span>
-                            <p className='d-inline ml-1'>{name}</p>
-                            {
-                                data?.designType == 'CR'
-                                &&
-                                <>
-                                    <h4>Días para el lanzamiento</h4>
-                                    <p>{data?.daysLeft}</p>
-                                </>
-                            }
-                            <h4>¿Qué quiero transmitir?</h4>
-                            <p>{data?.intention || 'No hay intención'}</p>
-                            <h4>Boceto de referencia</h4>
-                            {
-                                data?.urlImg
-                                    ?
-                                    <div>
-                                        <a target='_blank' href={data?.urlImg}>
-                                            <img src={data?.urlImg} alt='img-boceto' className='sample-design-detail' />
-                                        </a>
-                                    </div>
-                                    :
-                                    <p>'No hay boceto de referencia</p>
-                            }
+                            <p>{data?.about || 'No hay descripción'}</p>
                             <h4>Link de la obra</h4>
                             {
-                                formattedLink
-                                    ?
+                                formattedLink ?
                                     <a target='_blank' className='clamp clamp-1' href={formattedLink}>{formattedLink}</a>
                                     :
                                     <p>No existe link</p>
+                            }                            
+                            <h4>Puntos requeridos</h4>
+                            <ul>
+                                {
+                                    data?.points?.map(point => (
+                                        <li key={point}>{getAbrevPointName(point)}</li>
+                                    ))
+                                }
+                            </ul>
+                            {
+                                (!data?.points || data?.points?.length < 1)
+                                &&
+                                <p>No se han especificado puntos</p>
                             }
-                            <h4>Pseudónimo del autor</h4>
-                            <p>{data?.author || 'Sin nombre'}</p>
                             {
                                 isTakenByMe
                                 &&
@@ -187,9 +165,9 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                                         :
                                                         data?.status == 'TOMADO' && isTakenByMe
                                                             ?
-                                                            <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
-                                                                <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
-                                                            Iniciar diseño
+                                                            <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
+                                                                <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
+                                                            Iniciar corrección
                                                             </button>
                                                             :
                                                             null
@@ -213,7 +191,9 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </Zoom>
         </>
     )

@@ -18,7 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome } from '@fortawesome/free-solid-svg-icons';
 import { designTypes, contactTypes } from '../data/data';
 
-const steps = ['Contacto', 'Tipo', 'Trasfondo'];
+const steps = ['¡Hola!', 'Contacto', 'Tipo', 'Trasfondo'];
 const maxFileSize = 5242880;
 
 const overrideSpinnerInline = css`
@@ -214,9 +214,9 @@ const Solicitud = () => {
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
                     <h2 className='mb-0'>Pide un diseño</h2>
-                    <p className='txt-responsive-form'>Y uno de nuestros artistas te contactará a la brevedad</p>
+                    <p className='txt-responsive-form'>Y te lo enviaremos a tu correo</p>
                 </section>
-                <section className='container-xl mt-5 position-relative'>
+                <section className='container-xl mt-2 position-relative'>
                     <img src={ImgBailando} alt='img-fondo' className='img-fondo-formulario' />
 
                     <div className='floating-form'>
@@ -248,6 +248,42 @@ const Solicitud = () => {
                                     <div className='form-container'>
                                         <form>
                                             <StepManager currentIndex={activeIndex}>
+                                                <div className='step-0'>
+                                                    <div className='form-group mb-0'>
+                                                        <p><b>Gracias</b> por elegir a <b>Temple Luna</b>. ¡Estamos seguros de que te va a encantar!<br /><br />
+                                                        Antes de continuar, te pedimos que leas algunas <b>preguntas frecuentes:</b><br /><br />
+
+                                                            <b>1- ¿Qué solicitamos?</b><br /><br />
+                                                            Solicitamos tus datos de contacto para poder <b>(1)</b> enviarte el trabajo final y <b>(2)</b> contactarte si es que necesitamos
+                                                            más información sobre tu pedido.<br /><br />
+
+                                                            <b>2- ¿Qué obtendré?</b><br /><br />
+                                                            Obtendrás una <b>imagen en alta calidad</b> con el resultado de tu pedido. Ese archivo será <b>enviado a tu correo</b>. Contendrá,
+                                                            además, un <b>link</b> que podrás usar para compartirlo. Puedes ver un ejemplo
+                                                            <b> <a target='_blank' href='https://templeluna.app/prev_resultado?id=qsTf8adrnZTEYercSfWY&t=Cuando%20el%20destino%20es%20imprevisible%20cualquier%20camino%20es%20v%C3%A1lido&test=true'>aquí</a></b>.<br /><br />
+
+                                                            <b>3- ¿Hay condiciones?</b><br /><br />
+                                                            Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
+                                                            Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.<br/>
+                                                            Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b>.<br /><br />
+
+                                                            <b>4- ¿Cuál es el costo?</b><br /><br />
+                                                            Por el momento, este servicio es <b>gratuito</b>. Cuando no lo sea, <b>lo dejaremos claro</b>.<br /><br />
+
+                                                            <b>5- ¿Quienes atienden los pedidos?</b><br /><br />
+                                                            El equipo está conformado por <b>voluntarios</b>, los cuales han tenido que demostrar <b>experiencia en diseños</b>.<br /><br />
+
+                                                            <b>6- ¿Cómo puedo agradecer?</b><br /><br />
+                                                            Cuando <b>recibas</b> tu pedido, tendrás disponible el botón de <b>Compartir</b>. Comparte nuestro trabajo para que <b>más personas</b> conozcan la iniciativa.<br /><br />
+
+                                                            <b>7- ¿Cómo puedo ser voluntario?</b><br /><br />
+                                                            Escríbenos por el <b> <a target='_blank' href='https://www.facebook.com/groups/templeluna/'>grupo oficial</a></b> y podemos coordinar una <b>entrevista con el creador</b>.
+                                                        </p>
+                                                    </div>
+                                                    <div className='form-group'>
+                                                        <p>Presiona siguiente para continuar.</p>
+                                                    </div>
+                                                </div>
                                                 <div className='step-1'>
                                                     <div className='form-group'>
                                                         <label htmlFor="txtNombres">¿Cómo te llamas?</label>
@@ -327,9 +363,6 @@ const Solicitud = () => {
                                                                 </button>
                                                         }
                                                         <input type="file" onChange={selectSample} accept="image/*" ref={refBoceto} className='d-none' id="flBoceto" />
-                                                    </div>
-                                                    <div className='form-group'>
-                                                        <label htmlFor="chkPortafolio">El artista podrá usar el diseño final en su propio portafolio.</label>
                                                     </div>
                                                 </div>
                                             </StepManager>
