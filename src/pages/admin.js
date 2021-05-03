@@ -79,13 +79,11 @@ const Admin = () => {
     const updateStatistics = (timeout = 0) => {
         setTimeout(() => {
             getStatistics([requestType.type, logged.uid + '-' + requestType.type])
-                .then(data => {
-                    setTabList([
-                        !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
-                        !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
-                        !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2]
-                    ])
-                })
+                .then(data => setTabList([
+                    !data[0].error ? { ...tabList[0], statistics: data[0].statistics.available } : tabList[0],
+                    !data[1].error ? { ...tabList[1], statistics: data[1].statistics.taken } : tabList[1],
+                    !data[1].error ? { ...tabList[2], statistics: data[1].statistics.done } : tabList[2]
+                ]))
         }, timeout);
     }
 
@@ -199,7 +197,7 @@ const Admin = () => {
                         loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
                         select={updActiveTabIndex}
-                        tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
+                        tabs={tabList.map(tab => tab.name + ` (${tab.statistics ? tab.statistics : 0})`)}>
                         <div>
                             {
                                 requestList.map(request => (

@@ -20,7 +20,7 @@ export const designTypes = [{ type: 'CR', icon: 'fas fa-burn', text: 'Cuenta reg
 export const contactTypes = [{ type: 'WSP', icon: 'fab fa-whatsapp', name: 'Whatsapp' }, { type: 'TLG', icon: 'fab fa-telegram', name: 'Telegram' }];
 
 export const requestTypes = [{ type: 'DISENO', icon: 'fas fa-magic', text: 'Diseños' }, { type: 'CRITICA', icon: 'far fa-lightbulb', text: 'Críticas' }];
-export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos', statistics: 0 }, { id: 'TOMADO', name: 'Elegidos', statistics: 0 }, { id: 'HECHO', name: 'Listos', statistics: 0 }];
+export const requestStatuses = [{ id: 'DISPONIBLE', name: 'Nuevos', statistics: 0 }, { id: 'TOMADO', name: 'Tomados', statistics: 0 }, { id: 'HECHO', name: 'Listos', statistics: 0 }];
 
 export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMorales', '@Marylundhautor', '@LuzCespedesMartinez', '@Irisadk94', '@JackDreamer', '@PiccolaScrittrice', '@SayraBaylon', '@Alkaiid', '@TristeMancebo', '@Gianna04G02DL', '@Soytatyautor'];
 
@@ -28,7 +28,7 @@ export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMoral
 export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', text: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', text: 'Autor', displayInDropdown: false }];
 
 // Para los servicios que pueden brindar las personas y editoriales
-export const editorialServices = [{ id: 'CRI', name: 'Críticas', img: ImgServCritica, color: '#F8FFD5' }, { id: 'DIS', name: 'Diseños', img: ImgServDiseno, color: '#FFF0D5' }, { id: 'COR', name: 'Correcciones', img: ImgServCoreccion, color: '#D5F8FF' }, { id: 'ENT', name: 'Entrevistas', img: ImgServEntrevista, color: '#C7D7FF' }, { id: 'BKT', name: 'Booktrailers', img: ImgServBooktrailer, color: '#E1DEFF' }, { id: 'DIF', name: 'Difusión', img: ImgServPromo, color: '#CFFFE2' }];
+export const editorialServices = [{ id: 'CRITICA', name: 'Críticas', img: ImgServCritica, color: '#F8FFD5' }, { id: 'DISENO', name: 'Diseños', img: ImgServDiseno, color: '#FFF0D5' }, { id: 'CORRECCION', name: 'Correcciones', img: ImgServCoreccion, color: '#D5F8FF' }, { id: 'ENTREVISTA', name: 'Entrevistas', img: ImgServEntrevista, color: '#C7D7FF' }, { id: 'BOOKTRAILER', name: 'Booktrailers', img: ImgServBooktrailer, color: '#E1DEFF' }, { id: 'DIFUSION', name: 'Difusión', img: ImgServPromo, color: '#CFFFE2' }];
 
 // Para las pestañas de las pestañas de editoriales
 export const editorialTabs = [{ id: 'SERV', name: 'Servicios' }, { id: 'MIEM', name: 'Miembros' }, { id: 'ACER', name: 'Acerca de' }];

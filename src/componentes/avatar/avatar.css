@@ -1,4 +1,7 @@
 .img-avatar-container {
     border-radius: 50%;
     background: white;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

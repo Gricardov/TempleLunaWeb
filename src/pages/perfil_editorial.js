@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Navbar from '../componentes/navbar';
 import Footer from '../componentes/footer/footer';
 import ImgPerfil from '../img/pedrito.png';
-import WattpadIcon from '../img/inkspired.png';
 import Tabs from '../componentes/tabs';
+import HelmetMetaData from "../componentes/helmet";
 import PuffLoader from "react-spinners/PuffLoader";
 import ServiceCard from '../componentes/service-card';
 import { css } from "@emotion/core";
-import { login } from '../api';
 import { getSnIconByUrl } from '../helpers/functions';
 import { editorialTabs } from '../data/data';
+import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faHeart, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { setProfileStorage } from '../helpers/userStorage';
@@ -19,14 +19,15 @@ const override = css`
   margin: 5rem auto;
 `;
 
-
-const Perfil = ({ name, likes, views, networks, followName, about, services, theme }) => {
+const Perfil = ({ id, name, likes, views, networks, followName, about, services, theme }) => {
 
     // Tema
     const style = {
         background: (theme && theme.main) || '',
         color: (theme && theme.contrast) || ''
     };
+
+    const { logged } = useContext(AuthContext);
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
@@ -42,6 +43,7 @@ const Perfil = ({ name, likes, views, networks, followName, about, services, the
 
     return (
         <div>
+            <HelmetMetaData title={`${logged ? name + ' - Temple Luna' : '¡' + name + ' está en Temple Luna!'}`} />
             <Navbar defaultColor={style.background} />
             <main className='main-body below-navbar'>
                 <section className='profile-header-container' style={style}>

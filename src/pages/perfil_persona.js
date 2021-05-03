@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Navbar from '../componentes/navbar';
 import Footer from '../componentes/footer/footer';
-import ImgPerfil from '../img/crushita.jpg';
 import SampleEditorialIcon from '../img/sample-editorial-icon.svg';
 import Tabs from '../componentes/tabs';
+import HelmetMetaData from "../componentes/helmet";
 import PuffLoader from "react-spinners/PuffLoader";
 import ServiceCard from '../componentes/service-card';
 import Tooltip from '../componentes/tooltip';
@@ -11,17 +11,17 @@ import Avatar from '../componentes/avatar';
 import { css } from "@emotion/core";
 import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/functions';
 import { editorialServices } from '../data/data';
+import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { getStatistics } from '../api';
 
 const override = css`
   display: block;
   margin: 5rem auto;
 `;
 
-const tabList = editorialServices;
-
-const Perfil = ({ fName, lName, likes, views, networks, imgUrl, theme, roles, services, editorial }) => {
+const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles, services, editorial }) => {
 
     // Tema
     const style = {
@@ -29,9 +29,12 @@ const Perfil = ({ fName, lName, likes, views, networks, imgUrl, theme, roles, se
         color: (theme && theme.contrast) || ''
     };
 
+    const { logged } = useContext(AuthContext);
+
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
     const [requestList, setRequestList] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    const [tabList, setTabList] = useState(services.map(service => getServiceById(service)));
 
     const [roleTooltipOpen, setRoleTooltipOpen] = useState(false);
     const [servTooltipOpen, setServiceTooltipOpen] = useState(false);
@@ -40,12 +43,22 @@ const Perfil = ({ fName, lName, likes, views, networks, imgUrl, theme, roles, se
         setActiveTabIndex(val);
     }
 
+    const updateStatistics = () => {
+        getStatistics(tabList.map(tab => id + '-' + tab.id))
+            .then(data => setTabList(tabList.map((e, i) => !data[i].error ? { ...tabList[i], statistics: data[i].statistics.done } : tabList[i])));
+    }
+
+    useEffect(() => {
+        updateStatistics();
+    }, []);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <div>
+            <HelmetMetaData title={`${logged ? fName + ' ' + lName + ' - Temple Luna' : '¡' + fName + ' ' + lName + ' está en Temple Luna!'}`} image={imgUrl} />
             <Navbar />
             <main className='main-body below-navbar'>
                 <section className='profile-header-container' style={{ background: 'white' }}>
@@ -170,7 +183,7 @@ const Perfil = ({ fName, lName, likes, views, networks, imgUrl, theme, roles, se
                     loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                     activeIndex={activeTabIndex}
                     select={updActiveTabIndex}
-                    tabs={tabList.map(e => e.name + ` (${e.statistics ? e.statistics : 0})`)}>
+                    tabs={tabList.map(tab => tab.name + ` (${tab.statistics ? tab.statistics : 0})`)}>
                     <div className='services-profile-container'>
                         {
                             editorialServices.map(service => (

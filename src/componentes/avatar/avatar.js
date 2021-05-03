@@ -33,7 +33,8 @@ const Avatar = ({ img = GenericUserImg, clases, defaultImg = GenericUserImg }) =
                     <ClipLoader color={'black'} loading className='loader' css={override} />
                 </div>
             }
-            <img className={`${'flex-all-center ' + clases} ${loading ? 'd-none' : 'd-block'}`} onLoad={() => setLoading(false)} onError={() => updateImg(defaultImg)} alt='img-avatar' src={avatarImg} />
+            <div className={`${'flex-all-center ' + clases} ${loading ? 'd-none' : 'd-block'}`} style={{ backgroundImage: `url(${avatarImg})` }} />
+            <img className={'d-none'} onLoad={() => setLoading(false)} onError={() => updateImg(defaultImg)} alt='img-avatar' src={avatarImg} />
         </>
     )
 }
