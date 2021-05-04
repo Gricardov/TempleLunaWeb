@@ -23,7 +23,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
         networks: profile.networks || []
     };
     data.artist = artist;
-    console.log(data)
+    
     return (
         <div ref={ref} className='request-card-container'>
             <div className='header-container'>
