@@ -56,8 +56,8 @@ const Preparation = ({ location }) => {
             correctedText: ortography,
             improvement: improvement.trim(),
         };
-        
-        /*setRequestDone(data).then(result => {
+
+        setRequestDone(data).then(result => {
             window.scrollTo(0, 0);
             setLoading(false);
             if (!result.error) {
@@ -67,7 +67,7 @@ const Preparation = ({ location }) => {
                 alert(result.error);
                 setSuccess(false);
             }
-        });*/
+        });
     }
 
     const checkErrors = () => {
