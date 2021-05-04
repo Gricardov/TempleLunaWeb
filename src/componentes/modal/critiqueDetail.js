@@ -167,9 +167,9 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                                         :
                                                         data?.status == 'TOMADO' && isTakenByMe
                                                             ?
-                                                            <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
+                                                            <button onClick={() => history.push('prep_critica', { data })} className='button button-green button-option-request'>
                                                                 <FontAwesomeIcon color={'#fff'} icon={faTasks} className='icon' />
-                                                            Iniciar correccion
+                                                            Iniciar crítica
                                                             </button>
                                                             :
                                                             null
