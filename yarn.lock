@@ -9928,7 +9928,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   "version" "17.0.1"
 
-"react-pdf@^5.2.0":
+"react-pdf@5.2":
   "integrity" "sha512-/vl+fzurHzz1o1knGSnLzFu1lL/1yb67JSE3WSX3bC/ioL/j34q5WiJbxK2D61Og0RZe6CNy9rve6JyB+sfHCw=="
   "resolved" "https://registry.npmjs.org/react-pdf/-/react-pdf-5.2.0.tgz"
   "version" "5.2.0"

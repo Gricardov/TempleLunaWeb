@@ -29,6 +29,7 @@ const Previsualizacion = ({ location }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [success, setSuccess] = useState(false);
+    const [isLoadTimeout, setLoadTimeout] = useState(false);
     const [loadingMsg, setLoadingMsg] = useState('Obteniendo tu archivo...');
     const [link, setLink] = useState('');
     const [type, setType] = useState('');
@@ -105,10 +106,10 @@ const Previsualizacion = ({ location }) => {
                     if (templated) {
                         setIsTemplated(true);
                     }
+                    // Una vez obtenidos los datos, inicia la cuenta para el timeout de carga del documento
                 } else {
                     alert('No se encontró el archivo. Intente más tarde');
                     setIsLoading(false);
-                    setSuccess(false);
                 }
             });
         }
@@ -118,6 +119,18 @@ const Previsualizacion = ({ location }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Timeout para la carga del documento EN PANTALLA
+    useEffect(() => {
+        if (id) {
+            let timeout = setTimeout(() => {
+                if (!success) {
+                    setLoadTimeout(true);
+                }
+            }, 10000);
+            return () => clearTimeout(timeout);
+        }
+    }, [id, success])
 
     useEffect(() => {
         window.addEventListener('scroll', checkScroll);
@@ -204,7 +217,7 @@ const Previsualizacion = ({ location }) => {
     return (
         <div>
             {
-                isLoading && <LoadingScreen text={loadingMsg} />
+                isLoading && !isLoadTimeout && <LoadingScreen text={loadingMsg} />
             }
             <HelmetMetaData url={url} title={`${type == 'DISENO' ? '[Diseño]' : '[Crítica]'} ${title} - Temple Luna`} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
             <Navbar />
@@ -218,35 +231,41 @@ const Previsualizacion = ({ location }) => {
                 <section className='container-pdf-preview position-relative'>
                     <div>
                         {
-                            resultUrl && type == 'CRITICA'
+                            isLoadTimeout
                                 ?
-                                <Document
-                                    file={resultUrl}
-                                    onLoadSuccess={onDocumentLoadSuccess}
-                                    onLoadError={onDocumentError}
-                                    externalLinkTarget={'_blank'}>
-                                    {
-                                        Array.from(new Array(numPages), (el, index) => (
-                                            <Page
-                                                key={`page_${index + 1}`}
-                                                pageNumber={index + 1}
-                                            />
-                                        )
-                                        )
-                                    }
-                                </Document>
+                                <div className='container-xl form-group'>
+                                    <h3>¡Vaya! Tu documento ha demorado en mostrarse</h3>
+                                    <p className="m-0">Descárgalo directamente desde <b><a target='_blank' href={resultUrl}>aquí</a></b> o con el botón de la barra inferior.</p>
+                                </div>
                                 :
-                                resultUrl && type == 'DISENO'
+                                resultUrl && type == 'CRITICA'
                                     ?
-                                    <div className='container-xl'>
-                                        <h3>Diseño de la obra: {title}</h3>
-                                        <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
-                                        <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
-                                        <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
-                                        <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
-                                    </div>
+                                    <Document
+                                        file={resultUrl}
+                                        onLoadSuccess={onDocumentLoadSuccess}
+                                        onLoadError={onDocumentError}
+                                        externalLinkTarget={'_blank'}>
+                                        {
+                                            Array.from(new Array(numPages), (_, index) => (
+                                                <Page
+                                                    key={`page_${index + 1}`}
+                                                    pageNumber={index + 1}
+                                                />
+                                            ))
+                                        }
+                                    </Document>
                                     :
-                                    null
+                                    resultUrl && type == 'DISENO'
+                                        ?
+                                        <div className='container-xl'>
+                                            <h3>Diseño de la obra: {title}</h3>
+                                            <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
+                                            <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
+                                            <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
+                                            <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
+                                        </div>
+                                        :
+                                        null
                         }
                     </div>
                 </section>
