@@ -163,7 +163,7 @@ const Inscripcion = () => {
                                     <FontAwesomeIcon icon={faAngleDown} size='2x' />
 
                                     <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/J7T9yHij1ewFNLV41qlZoB" className='button button-green m0-auto'>
+                                        <a href="https://chat.whatsapp.com/E1xRukxw3GzEZHZHczhiN4" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
                                             <span>
