@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdown-image';
-import ImgBailando from '../img/des-req.png';
+import ImgTematica from '../img/des-req.png';
 import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
@@ -217,7 +217,7 @@ const Solicitud = () => {
                     <p className='txt-responsive-form'>Y te lo enviaremos a tu correo</p>
                 </section>
                 <section className='container-xl mt-2 position-relative'>
-                    <img src={ImgBailando} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgTematica} alt='img-fondo' className='img-fondo-formulario' />
 
                     <div className='floating-form'>
                         {
@@ -264,7 +264,7 @@ const Solicitud = () => {
 
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
                                                             Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
-                                                            Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.<br/>
+                                                            Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.<br />
                                                             Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b>.<br /><br />
 
                                                             <b>4- ¿Cuál es el costo?</b><br /><br />

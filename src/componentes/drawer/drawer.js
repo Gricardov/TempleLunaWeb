@@ -70,6 +70,9 @@ const Drawer = () => {
                             <Link to='/sol_critica' onClick={close} className='btn-drawer'>
                                 Pide tu crítica
                             </Link>
+                            <Link to='/sol_correccion' onClick={close} className='btn-drawer'>
+                                Pide tu corrección
+                            </Link>
                             <Link to='/sol_diseno' onClick={close} className='btn-drawer'>
                                 Pide tu diseño
                             </Link>

@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgLeyendo from '../img/cri-req.svg';
+import ImgTematica from '../img/corr-req.svg';
 import HelmetMetaData from "../componentes/helmet";
 import { Link } from 'react-router-dom';
 import { extractLink, toName, toSentence } from '../helpers/functions';
@@ -168,7 +168,7 @@ const Solicitud = () => {
                     <p className='txt-responsive-form'>Y te la enviaremos a tu correo en PDF</p>
                 </section>
                 <section className='container-xl mt-2 position-relative'>
-                    <img src={ImgLeyendo} alt='img-fondo' className='img-fondo-formulario' />
+                    <img src={ImgTematica} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success

@@ -133,6 +133,9 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                                 <Link to='/sol_critica' className='btn-nav'>
                                     Críticas
                                 </Link>
+                                <Link to='/sol_correccion' className='btn-nav'>
+                                    Correcciones
+                                </Link>
                                 <Link to='/sol_diseno' className='btn-nav'>
                                     Diseños
                                 </Link>
