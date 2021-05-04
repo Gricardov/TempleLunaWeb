@@ -238,7 +238,7 @@ const Previsualizacion = ({ location }) => {
                                     <p className="m-0">Descárgalo directamente desde <b><a target='_blank' href={resultUrl}>aquí</a></b> o con el botón de la barra inferior.</p>
                                 </div>
                                 :
-                                resultUrl && type == 'CRITICA'
+                                resultUrl && (type == 'CRITICA' || type == 'CORRECCION')
                                     ?
                                     <Document
                                         file={resultUrl}
