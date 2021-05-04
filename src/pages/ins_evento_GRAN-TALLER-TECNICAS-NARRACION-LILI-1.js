@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Footer from '../componentes/footer/footer';
 import Navbar from '../componentes/navbar';
 import DropdownImage from '../componentes/dropdown-image';
@@ -6,21 +6,21 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgAutor from '../img/ccadena.jpg';
+import ImgAutor from '../img/lili.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
-import { uploadImage, saveEvent } from '../api';
+import { saveEvent } from '../api';
 import { useStepObserver } from '../hooks/useStepObserver';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleLeft, faAngleRight, faCheck, faCheckCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import { contactTypes } from '../data/data';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useHistory } from 'react-router-dom';
 
 const steps = ['Inicio', 'Contacto', 'Listo'];
 const chkPoints = [{ id: 'SI', name: 'Sí', abrev: 'Sí' }];
-const maxFileSize = 5242880;
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -40,10 +40,8 @@ const Inscripcion = () => {
     const [messengerType, setMessengerType] = useState(contactTypes[0]);
     const [email, setEmail] = useState('');
     const [points, setPoints] = useState([]);
-    const [imgScn, setImgScn] = useState(null);
 
     const history = useHistory();
-    const refScn = useRef(null);
 
     const updName = (e) => {
         setName(e.target.value);
@@ -73,29 +71,6 @@ const Inscripcion = () => {
         }
     }
 
-    const startSelectScn = (e) => {
-        e.preventDefault();
-        refScn.current.click();
-    }
-
-    const selectScn = (e) => {
-        e.preventDefault();
-        const file = e.target.files[0];
-        if (file) {
-            if (file.size <= maxFileSize) {
-                setImgScn(file);
-            } else {
-                alert('La imagen debe ser menor a 5MB');
-            }
-        }
-    }
-
-    const deleteScn = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setImgScn(null);
-    }
-
     const previous = (e) => {
         e.preventDefault();
         navigateTo(activeIndex - 1);
@@ -110,31 +85,19 @@ const Inscripcion = () => {
         e.preventDefault();
         if (!checkErrors()) {
             setLoading(true);
-            if (imgScn) {
-                uploadImage('inscripcion', imgScn)
-                    .then(url => {
-                        saveChanges(url);
-                    })
-                    .catch(error => {
-                        setLoading(false);
-                        setSuccess(false);
-                        alert('Error al subir la imagen. Reintente');
-                        console.log(error);
-                    });
-            }
+            saveChanges();
         }
     }
 
-    const saveChanges = (urlImgInv) => {
+    const saveChanges = () => {
 
         const idEvento = history.location.pathname.toString().replace(/\//g, '').replace(/ins_evento/g, '');
 
         const data = {
             eventId: idEvento,
-            eventName: 'Gran curso de guión, texto y novela',
+            eventName: 'Aprende a ser pagado por escribir',
             name: toName(name.trim()),
             age: parseInt(age),
-            urlImgInv: urlImgInv.trim(),
             phone: phone.trim(),
             email: email.trim()
         };
@@ -147,15 +110,12 @@ const Inscripcion = () => {
     }
 
     const checkErrors = () => {
+
         let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email));
 
         // Custom errors
         if (!includesPoint('SI')) {
             error = 'Debes confirmar tu asistencia y cumplimiento';
-        }
-
-        if (!imgScn) {
-            error = 'Debes subir la imagen de la transacción';
         }
 
         if (error) {
@@ -181,15 +141,15 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Gran curso de guión, texto y novela - Temple Luna" description="Aprende a destacar tus obras como nunca antes" />
+            <HelmetMetaData title="Aprende a ser pagado por escribir - Temple Luna" description="¿La plataforma de turno no valora lo que escribes? Puedes tener una joya oculta entre manos por la que muchos pagarían." />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Gran curso de guión, texto y novela</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Aprende a crear obras de gran calidad</p>
+                    <h2 className='mb-0'>Gran taller de técnicas de narración</h2>
+                    <p className='txt-responsive-form w-60 w-md-75'>Con Liliana Martinez</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                <div style={{ backgroundImage: `url(${ImgAutor})` }} alt='img-fondo' className='img-fondo-formulario' />
+                    <div style={{ backgroundImage: `url(${ImgAutor})`, backgroundSize: '80% 90%' }} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success
@@ -199,7 +159,18 @@ const Inscripcion = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>Te contactaremos para unirte al grupo del curso</p>
+                                    <p className='txt-responsive-form m0-auto'>¡No olvides unirte al grupo! Presiona el botón de abajo</p>
+                                    <FontAwesomeIcon icon={faAngleDown} size='2x' />
+
+                                    <div className='form-buttons-container mt-3'>
+                                        <a href="https://chat.whatsapp.com/J7T9yHij1ewFNLV41qlZoB" className='button button-green m0-auto'>
+                                            <FontAwesomeIcon icon={faWhatsapp} size='1x' />
+                                            {' '}
+                                            <span>
+                                                Unirme
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                                 :
                                 <>
@@ -213,32 +184,30 @@ const Inscripcion = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group mb-0'>
-                                                        <h2>Empecemos por una realidad:</h2>
-                                                        <p>Tú <b>jamás revelarías</b> tus íntimos secretos ni tus contraseñas, ¿Cierto? <b>Porque no quieres que alguien los vea.</b><br /><br />
-                                                            <b>Sin embargo</b>, ¿Te has dado cuenta de que cuando tienes un momento de <b>inspiración</b>, escribes algo, lo pintas o lo manifiestas en algún tipo de <b>arte</b>?<br /><br />
-                                                            <b>Ahí está la diferencia.</b> Todo arte lleva implícito el deseo de ser visto por los otros. Si no fuera así, <b>lo esconderías</b>.<br /><br />
-                                                            <b>¿Por qué negarlo? ¡Tú también quieres ser leído(a)!</b> Pero ¿Quién decide sí una obra triunfa? <b>Exacto. Es el público</b>.<br /><br />
-                                                            <b>Por esa razón, creamos este curso</b>, aquí dejarás las excusas y crearás obras de calidad que les gusten a los demás, sin dejar tu esencia.
-                                                            Puedes ver la enseñanza del profesor <b><a target="_blank" href="https://www.youtube.com/channel/UCrHV9JlQKBNWLUs5wm8dYCA">en nuestro canal</a>.</b>
-                                                        </p>
-                                                    </div>
+                                                        <h2>¡Bienvenido(a) al taller!</h2>
+                                                        <p>¿Amas <b>narrar historias</b> o quieres hacer videos con <b> calidad de voz</b> impresionante? Este taller es para ti.<br /><br />
 
-                                                    <div className='form-group'>
-                                                        <ul>
-                                                            <li><b>Número de sesiones:</b> 6</li>
-                                                            <li><b>Instructor:</b> Carlos Cadena </li>
-                                                            <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horarios:</b> Mayo: 9, 16, 23 y 30; Junio: 6 y 13. De 11am a 1pm (Hora Lima - Colombia)</li>
-                                                            <li><b>Temario:</b> <b><a target="_blank" href="https://drive.google.com/file/d/1KjkDV_54swrMFseRpm7xkQtmowAx9Kr2/view?usp=sharing">Ver aquí</a></b></li>
-                                                            <li><b>Inversión:</b> 30 dólares</li>
-                                                            <li><b>Método:</b> Paypal</li>
-                                                            <li><b>Facilidades:</b> 15 dólares antes de iniciar y el resto, después de la sesión del 23</li>
-                                                            <li><b>Fecha máxima de pago:</b> 5 de mayo</li>
-                                                            <li><b>Condición:</b> 10 inscritos como mínimo</li>
-                                                            <li><b>Obras llevadas al teatro:</b> <b><a target="_blank" href="https://www.facebook.com/LosDemoniosDetrasDeLaPared/">Ver aquí</a></b>.</li>
-                                                            <li><b>Obra "Eróstrato":</b> <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">Leer aquí</a></b></li>
-                                                            <li><b>Obra "La reina de Unicel":</b> <b><a target="_blank" href="https://drive.google.com/file/d/1ocv-43xvgYUXhF2OL9Z5bsZhaStTnigT/view?usp=sharing">Leer aquí</a></b></li>
-                                                        </ul>
+                                                            <b>Modular</b> la voz, <b>articularla</b> y dominar la <b>timidez</b> son algunas de las <b>habilidades</b> que se requieren
+                                                            para <b>sobresalir</b> en este mundo.
+                                                            Aquí te las enseñaremos.<br /><br />
+
+                                                            <b>Temario</b><br />
+                                                            <b>1.</b> Importancia de la voz<br />
+                                                            <b>2.</b> Hablar en público<br />
+                                                            <b>3.</b> Fonación y articulación<br />
+                                                            <b>4.</b> La articulación de los finos<br />
+                                                            <b>5.</b> Trabalenguas<br /><br />
+
+                                                            <b>Número de sesiones:</b> 1<br />
+                                                            <b>Costo:</b> Gratuito<br />
+                                                            <b>Autora:</b> Liliana Martinez<br />
+                                                            <b>Plataforma:</b> Google Meets<br />
+                                                            <b>Horario:</b> Viernes, 7 de mayo, de 5pm a 7pm (Hora Lima - Colombia)<br /><br />
+
+                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Inscríbete <b>solamente</b> si vas a asistir.<br /><br />
+
+                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otras dinámicas de Temple Luna.</b><br /><br />
+                                                        </p>
                                                     </div>
 
                                                     <div className='form-group'>
@@ -271,53 +240,33 @@ const Inscripcion = () => {
                                                         <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
                                                     </div>
 
-
                                                 </div>
                                                 <div className='step-3'>
 
                                                     <div className='form-group'>
-                                                        <label htmlFor="flScn">Realiza el pago <b><a target="_blank" href="https://paypal.me/gricardov">aquí</a></b> y sube la captura</label>
-                                                        {
-                                                            imgScn
-                                                                ?
-                                                                <button onClick={startSelectScn} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${imgScn ? 'd-flex' : ''}`}>
-                                                                    <span className='clamp clamp-1'>
-                                                                        {imgScn.name}
-                                                                    </span>
-                                                                    <span onClick={deleteScn} className='fa fa-times' style={{ color: 'white' }}></span>
-                                                                </button>
-                                                                :
-                                                                <button onClick={startSelectScn} className={`button button-light-purple button-thin stretch ${imgScn ? 'd-flex' : ''}`}>
-                                                                    <span>
-                                                                        Subir captura
-                                                                    </span>
-                                                                </button>
-                                                        }
-                                                        <input type="file" onChange={selectScn} accept="image/*" ref={refScn} className='d-none' id="flScn" />
-                                                    </div>
 
-                                                    <div className='form-group'>
-                                                        <label htmlFor="txtLink">He leído los horarios, plataformas, requisitos y confirmo mi asistencia.</label>
-                                                        {
-                                                            chkPoints.map(point => {
-                                                                const included = includesPoint(point.id);
-                                                                return (
-                                                                    <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
-                                                                        {
-                                                                            included
-                                                                                ?
-                                                                                <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
-                                                                                :
-                                                                                <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
-                                                                        }
-                                                                        {' '}
-                                                                        {point.name}
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        }
+                                                        <div className='form-group'>
+                                                            <label htmlFor="txtLink">He leído los horarios y confirmo mi asistencia</label>
+                                                            {
+                                                                chkPoints.map(point => {
+                                                                    const included = includesPoint(point.id);
+                                                                    return (
+                                                                        <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
+                                                                            {
+                                                                                included
+                                                                                    ?
+                                                                                    <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
+                                                                                    :
+                                                                                    <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
+                                                                            }
+                                                                            {' '}
+                                                                            {point.name}
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </StepManager>
                                             <div className='form-buttons-container'>
@@ -365,6 +314,7 @@ const Inscripcion = () => {
                                 </>
                         }
                     </div>
+
                 </section>
             </main>
             <Footer />
