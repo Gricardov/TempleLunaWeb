@@ -10,9 +10,6 @@ import { css } from "@emotion/core";
 import { getSnIconByUrl } from '../helpers/functions';
 import { editorialTabs } from '../data/data';
 import { AuthContext } from '../context/AuthContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faHeart, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import { setProfileStorage } from '../helpers/userStorage';
 
 const override = css`
   display: block;

@@ -233,7 +233,7 @@ export const request = async (path, data, method, authorized) => {
             }
         });
         if (result.status == '200') {
-            return await result.json();
+            return await result.json(); // Esto se debe arreglar
         } else {
             return { error: result.statusText || 'No se encontró el endpoint' };
         }

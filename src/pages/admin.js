@@ -42,7 +42,7 @@ const Admin = () => {
 
     const { logged } = useContext(AuthContext);
 
-    const { services } = getProfileStorage() || { services: [] };
+    const { services = [] } = getProfileStorage();
 
     const openModal = (request) => {
 
