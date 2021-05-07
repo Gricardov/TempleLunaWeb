@@ -213,7 +213,8 @@ const Solicitud = () => {
                                                             <b> <a target='_blank' href='https://templeluna.app/prev_resultado?id=Ik52xvRTdBelcdRKQBKt&t=Remordimiento&test=true'>aquí</a></b>.<br /><br />
 
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
-                                                            Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
+                                                            No envíes links de <b>Wattpad,</b> recuerda que no se pueden <b>copiar</b> para corregir. Una opción es subir tu texto a Google Drive y compartir el <b>link de acceso</b>.<br />
+                                                            Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
                                                             Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.
                                                             Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b>.<br /><br />
 
@@ -223,13 +224,10 @@ const Solicitud = () => {
                                                             <b>5- ¿Quienes atienden los pedidos?</b><br /><br />
                                                             El equipo está conformado por <b>voluntarios</b>, los cuales han tenido que demostrar <b>experiencia en correcciones</b>.<br /><br />
 
-                                                            <b>6- ¿Hay un límite de páginas?</b><br /><br />
-                                                            <b>Sí.</b> El máximo es de 300 páginas.<br /><br />
-
-                                                            <b>7- ¿Cómo puedo agradecer?</b><br /><br />
+                                                            <b>6- ¿Cómo puedo agradecer?</b><br /><br />
                                                             Cuando <b>recibas</b> tu pedido, tendrás disponible el botón de <b>Compartir</b>. Comparte nuestro trabajo para que <b>más personas</b> conozcan la iniciativa.<br /><br />
 
-                                                            <b>8- ¿Cómo puedo ser voluntario?</b><br /><br />
+                                                            <b>7- ¿Cómo puedo ser voluntario?</b><br /><br />
                                                             Escríbenos por el <b> <a target='_blank' href='https://www.facebook.com/groups/templeluna/'>grupo oficial</a></b> y podemos coordinar una <b>entrevista con el creador</b>.
                                                         </p>
                                                     </div>
