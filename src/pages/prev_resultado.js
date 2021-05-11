@@ -231,12 +231,16 @@ const Previsualizacion = ({ location }) => {
             <main className='main-body below-navbar'>
                 <div className='mini-profile-container'>
                     <div className='container-xl'>
-                        <MiniProfile
-                            editorial={artist.editorial}
-                            networks={artist.networks}
-                            title={artist.fName + ' ' + artist.lName}
-                            description={artist.services.slice(0, 3).map(service => getServiceById(service)?.name).join(artist.services.length > 2 ? ', ' : ' y ') + (artist.services.length > 3 ? ' y ' + (artist.services.length - 3) + ' más' : '')}
-                            img={artist.imgUrl} />
+                        {
+                            artist
+                            &&
+                            <MiniProfile
+                                id={artist.id}
+                                editorial={artist.editorial}
+                                networks={artist.networks}
+                                title={artist.fName + ' ' + artist.lName}
+                                img={artist.imgUrl} />
+                        }
                     </div>
                 </div>
                 <section className='container-pdf-preview position-relative'>
@@ -267,11 +271,7 @@ const Previsualizacion = ({ location }) => {
                                 :
                                 resultUrl && type == 'DISENO'
                                     ?
-                                    <div className='container-xl form-group'>
-                                        <h3>Diseño de la obra: {title}</h3>
-                                        <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
-                                        <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
-                                        <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
+                                    <div className='container-xl form-group'>                                        
                                         <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
                                     </div>
                                     :

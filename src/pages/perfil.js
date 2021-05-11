@@ -64,7 +64,7 @@ const Perfil = ({ match }) => {
 
     useEffect(() => {
         const qFollowNameOrId = match.params.id;
-        return getProfile(qFollowNameOrId) // Busco perfil por nombre de seguidor
+        return getProfile(qFollowNameOrId) // Busco perfil por id
             .then(({ profile, error, errCode }) => {
                 if (!error) {
                     // Lo encontró por id, así que actualizo la url
@@ -72,7 +72,7 @@ const Perfil = ({ match }) => {
                     setLoading(false);
                     setProfileData(profile);
                 } else if (errCode == 'NOT FOUND') {
-                    return getProfileByQueryFollowName(qFollowNameOrId.toLowerCase()) // Si no, lo busco por simple id
+                    return getProfileByQueryFollowName(qFollowNameOrId.toLowerCase()) // Si no, lo busco por nombre de seguidor
                         .then(({ profile, error }) => {
                             if (!error) {
                                 setLoading(false);
