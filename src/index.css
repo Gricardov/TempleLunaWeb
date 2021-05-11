@@ -394,7 +394,7 @@ p {
   cursor: pointer;
   display: inline-block;
   border-radius: 30px;
-  padding: .7rem 3rem;
+  padding: .5rem 3rem;
   color: white;
   /*margin-top: .8rem;*/
   box-shadow: 0px 3px 6px #00000029;
@@ -578,24 +578,24 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 /*Inicio*/
 
 .section {
-  margin-top: 2rem;
+  margin-top: 1.6rem;
 }
 
 @media (min-width: 768px) {
   .section {
-    margin-top: 3.5rem;
+    margin-top: 3rem;
   }
 }
 
 @media (min-width: 768px) {
   .section h2 {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
   }
 }
 
 @media (min-width: 768px) {
   .section h3 {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 }
 
@@ -833,6 +833,12 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 /*Admin*/
 
+.title-admin-container>h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
 .title-admin-container {}
 
 @media (min-width: 768px) {
@@ -842,12 +848,13 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
     justify-content: space-between;
   }
   .title-admin-container>h2 {
-    flex-basis: 75%;
+    font-size: 2.8rem;
+    text-align: left;
   }
 }
 
 .title-admin-container>.dropdown-container {
-  margin-top: 2.5rem;
+  margin-top: 1.6rem;
 }
 
 @media (min-width: 768px) {
@@ -893,7 +900,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .button-option-request {
   margin-bottom: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   width: 100%;
 }
 
@@ -1166,13 +1173,13 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .profile-data h2 {
   font-weight: normal;
-  font-size: 2.6rem;
-  margin: 1.2rem 0 2rem 0;
+  font-size: 2rem;
+  margin: 1.2rem 0 1.6rem 0;
 }
 
 @media (min-width: 768px) {
   .profile-data h2 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin-top: .5rem;
     margin-bottom: 1.5rem;
   }
@@ -1195,10 +1202,17 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .profile-data .statistics .statistic {
   margin-right: 1rem;
+  font-size: 1.4rem;
 }
 
 .profile-data .statistics .statistic:last-of-type {
   margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  .profile-data .statistics .statistic {
+    font-size: 1.6rem;
+  }
 }
 
 /*Perfil editorial*/
@@ -1219,9 +1233,15 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 /*Continuación*/
 
 .profile-data .description p {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: 0;
   margin-bottom: .5rem;
+}
+
+@media (min-width: 768px) {
+  .profile-data .description p {
+    font-size: 1.6rem;
+  }
 }
 
 .profile-data .description p:last-of-type {

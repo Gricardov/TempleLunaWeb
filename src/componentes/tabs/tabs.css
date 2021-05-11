@@ -13,10 +13,10 @@
     flex: 1;
     display: inline-block;
     text-decoration: none;
-    padding-top: 1.6rem;
-    padding-bottom: 1.6rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
     text-transform: uppercase;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     color: #8B81EC;
     text-align: center;
     text-decoration: none;
@@ -35,7 +35,7 @@
 
 @media (min-width: 768px) {
     .material-tabs>a {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         padding-top: 2rem;
         padding-bottom: 2rem;
     }

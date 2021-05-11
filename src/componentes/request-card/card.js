@@ -29,7 +29,7 @@ const Card = React.forwardRef(({ data, select }, ref) => {
             <div className='header-container'>
                 <Avatar clases='request-avatar img-avatar-container' />
                 <div className='title-container'>
-                    <h3 className='clamp clamp-1'>{data?.title}</h3>
+                    <h4 className='clamp clamp-1'>{data?.title}</h4>
                     <p>
                         {
                             data?.status == 'DISPONIBLE' || isTakenByMe && data?.status == 'HECHO'

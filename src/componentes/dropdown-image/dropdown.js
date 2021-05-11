@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useOutsideListener } from '../../hooks/useOutsideListener';
 import './dropdown.css';
 
-const tamanoIcono = 20;
+const tamanoIcono = 15;
 const color = '#756F86';
 
 const Dropdown = ({ list, select, stretch, selectedItem }) => {

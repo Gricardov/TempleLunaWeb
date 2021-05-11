@@ -108,7 +108,7 @@ const Admin = () => {
                 })
                 .catch(error => {
                     setLoadingMore(false);
-                    alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
+                    alert('Ha ocurrido un error. Vuelve a intentarlo más tarde (EC.RMD)');
                 });
         }
     }
@@ -125,7 +125,7 @@ const Admin = () => {
             })
             .catch(error => {
                 setInitialLoading(false);
-                alert('Ha ocurrido un error. Vuelve a intentarlo más tarde');
+                alert('Ha ocurrido un error. Vuelve a intentarlo más tarde (EC.RD)');
             });
     }
 
