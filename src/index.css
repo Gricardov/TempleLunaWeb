@@ -1568,10 +1568,11 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 .bottom-prev-navbar .speech-container {
   z-index: 50;
   position: absolute;
-  bottom: calc(var(--bottom-navbar-height) - .8rem);
+  bottom: calc(var(--bottom-navbar-height) - .2rem);
   color: white;
   left: 10%;
   width: 70%;
+  text-align: center;
 }
 
 @media (min-width: 768px) {

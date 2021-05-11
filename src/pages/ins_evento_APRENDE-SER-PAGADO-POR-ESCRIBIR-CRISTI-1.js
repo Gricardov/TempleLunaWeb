@@ -205,7 +205,7 @@ const Inscripcion = () => {
                                                             <li><b>Número de sesiones:</b> 1</li>
                                                             <li><b>Autora:</b> Cristina de Martinez</li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horario:</b> Lunes, 3 de mayo a las 5pm (Hora Lima - Colombia)</li>
+                                                            <li><b>Horario:</b> Lunes, 17 de mayo a las 5pm (Hora Lima - Colombia)</li>
                                                         </ul>
                                                     </div>
 

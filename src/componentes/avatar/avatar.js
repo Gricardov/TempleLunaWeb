@@ -29,7 +29,7 @@ const Avatar = ({ img = GenericUserImg, clases, defaultImg = GenericUserImg, onC
             {
                 loading
                 &&
-                <div className={'flex-all-center ' + clases}>
+                <div className={'flex-all-center img-avatar-container__img ' + clases}>
                     <ClipLoader color={'black'} loading className='loader' css={override} />
                 </div>
             }

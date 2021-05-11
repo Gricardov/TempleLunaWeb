@@ -1,8 +1,8 @@
 .speech-bubble {
     background: #35A5D4;
     border-radius: .4em;
-    padding: .8rem 1.5rem;
-    font-size: 1.6rem;
+    padding: .8rem 1rem;
+    font-size: 1.4rem;
     transition: all 200ms ease-in-out;
     cursor: pointer;
     box-shadow: 0 0 8px rgb(0 0 0 / 50%);
@@ -10,8 +10,8 @@
 
 @media (min-width: 768px) {
     .speech-bubble {
-        padding: 1.5rem;
-        font-size: 1.8rem;
+        padding: 1rem 1.2rem;
+        font-size: 1.6rem;
         width: auto;
     }
 }
@@ -32,5 +32,5 @@
     border-bottom: 0;
     border-right: 0;
     margin-left: -11px;
-    margin-bottom: -22px;
+    margin-bottom: -12px;
 }
