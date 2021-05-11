@@ -6,7 +6,8 @@ import queryString from 'query-string';
 import HelmetMetaData from "../componentes/helmet";
 import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
-import { extractLink } from '../helpers/functions';
+import MiniProfile from '../componentes/profile/mini-profile';
+import { extractLink, getServiceById } from '../helpers/functions';
 import { getRequest, likeRequestResult, addAnalitics } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -38,7 +39,7 @@ const Previsualizacion = ({ location }) => {
     const [title, setTitle] = useState(queryString.parse(location.search).t || 'Tu obra');
     const [author, setAuthor] = useState('');
     const [likes, setLikes] = useState(0);
-    const [artist, setArtist] = useState({});
+    const [artist, setArtist] = useState({ networks: [], services: [], roles: [] });
     const [addingLove, setAddingLove] = useState(false);
 
     // From query parameters
@@ -220,7 +221,7 @@ const Previsualizacion = ({ location }) => {
                 isLoading && !isLoadTimeout && <LoadingScreen text={loadingMsg} />
             }
             <HelmetMetaData url={url} title={`${type == 'DISENO' ? '[Diseño]' : '[Crítica]'} ${title} - Temple Luna`} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
-            <Navbar />
+            <Navbar position='absolute' />
             <PunctuationModal
                 requestId={id}
                 requestType={type}
@@ -228,46 +229,54 @@ const Previsualizacion = ({ location }) => {
                 isOpen={isOpenPunctuationModal}
                 close={() => setIsOpenPunctuationModal(false)} />
             <main className='main-body below-navbar'>
-                <section className='container-pdf-preview position-relative'>
-                    <div>
-                        {
-                            isLoadTimeout
-                                ?
-                                <div className='container-xl form-group'>
-                                    <h3>¡Vaya! Tu documento ha demorado en mostrarse</h3>
-                                    <p className="m-0">Descárgalo directamente desde <b><a target='_blank' href={resultUrl}>aquí</a></b> o con el botón de la barra inferior.</p>
-                                </div>
-                                :
-                                resultUrl && (type == 'CRITICA' || type == 'CORRECCION')
-                                    ?
-                                    <Document
-                                        file={resultUrl}
-                                        onLoadSuccess={onDocumentLoadSuccess}
-                                        onLoadError={onDocumentError}
-                                        externalLinkTarget={'_blank'}>
-                                        {
-                                            Array.from(new Array(numPages), (_, index) => (
-                                                <Page
-                                                    key={`page_${index + 1}`}
-                                                    pageNumber={index + 1}
-                                                />
-                                            ))
-                                        }
-                                    </Document>
-                                    :
-                                    resultUrl && type == 'DISENO'
-                                        ?
-                                        <div className='container-xl'>
-                                            <h3>Diseño de la obra: {title}</h3>
-                                            <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
-                                            <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
-                                            <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
-                                            <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
-                                        </div>
-                                        :
-                                        null
-                        }
+                <div className='mini-profile-container'>
+                    <div className='container-xl'>
+                        <MiniProfile
+                            editorial={artist.editorial}
+                            networks={artist.networks}
+                            title={artist.fName + ' ' + artist.lName}
+                            description={artist.services.slice(0, 3).map(service => getServiceById(service)?.name).join(artist.services.length > 2 ? ', ' : ' y ') + (artist.services.length > 3 ? ' y ' + (artist.services.length - 3) + ' más' : '')}
+                            img={artist.imgUrl} />
                     </div>
+                </div>
+                <section className='container-pdf-preview position-relative'>
+                    {
+                        isLoadTimeout
+                            ?
+                            <div className='container-xl form-group'>
+                                <h3>¡Vaya! Tu documento ha demorado en mostrarse</h3>
+                                <p className="m-0">Descárgalo directamente desde <b><a target='_blank' href={resultUrl}>aquí</a></b> o con el botón de la barra inferior.</p>
+                            </div>
+                            :
+                            resultUrl && (type == 'CRITICA' || type == 'CORRECCION')
+                                ?
+                                <Document
+                                    file={resultUrl}
+                                    onLoadSuccess={onDocumentLoadSuccess}
+                                    onLoadError={onDocumentError}
+                                    externalLinkTarget={'_blank'}>
+                                    {
+                                        Array.from(new Array(numPages), (_, index) => (
+                                            <Page
+                                                key={`page_${index + 1}`}
+                                                pageNumber={index + 1}
+                                            />
+                                        ))
+                                    }
+                                </Document>
+                                :
+                                resultUrl && type == 'DISENO'
+                                    ?
+                                    <div className='container-xl form-group'>
+                                        <h3>Diseño de la obra: {title}</h3>
+                                        <p className="m-0"><b>Diseñador:</b> {artist.fName + ' ' + artist.lName}</p>
+                                        <p className="m-0"><b>Redes:</b> {artist.networks && artist.networks.join(', ')}</p>
+                                        <p className="m-0 mb-2"><b>Correo:</b> {artist.contactEmail}</p>
+                                        <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
+                                    </div>
+                                    :
+                                    null
+                    }
                 </section>
             </main>
             <div className='bottom-prev-navbar position-relative'>

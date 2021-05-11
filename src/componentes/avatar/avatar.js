@@ -10,7 +10,7 @@ const override = css`
   height: 50%;
 `;
 
-const Avatar = ({ img = GenericUserImg, clases, defaultImg = GenericUserImg }) => {
+const Avatar = ({ img = GenericUserImg, clases, defaultImg = GenericUserImg, onClick }) => {
 
     const [avatarImg, setAvatarImg] = useState(img);
     const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const Avatar = ({ img = GenericUserImg, clases, defaultImg = GenericUserImg }) =
                     <ClipLoader color={'black'} loading className='loader' css={override} />
                 </div>
             }
-            <div className={`${'flex-all-center ' + clases} ${loading ? 'd-none' : 'd-block'}`} style={{ backgroundImage: `url(${avatarImg})` }} />
+            <div onClick={onClick} className={`${'flex-all-center img-avatar-container__img ' + clases} ${loading ? 'd-none' : 'd-block'}`} style={{ backgroundImage: `url(${avatarImg})`, cursor: onClick && 'pointer' }} />
             <img className={'d-none'} onLoad={() => setLoading(false)} onError={() => updateImg(defaultImg)} alt='img-avatar' src={avatarImg} />
         </>
     )

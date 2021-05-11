@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PerfilPersona from './perfil_persona';
 import PerfilEditorial from './perfil_editorial';
 import LoadingScreen from '../componentes/loading-screen';
-import { getProfileByQueryFollowName } from '../api';
+import { getProfileByQueryFollowName, getProfile } from '../api';
 
 const profileData = {
     /*
@@ -63,15 +63,26 @@ const Perfil = ({ match }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const qFollowName = match.params.id;
-        return getProfileByQueryFollowName(qFollowName.toLowerCase())
-            .then(({ profile, error }) => {
+        const qFollowNameOrId = match.params.id;
+        return getProfile(qFollowNameOrId) // Busco perfil por nombre de seguidor
+            .then(({ profile, error, errCode }) => {
                 if (!error) {
+                    // Lo encontró por id, así que actualizo la url
+                    window.history.replaceState(null, '', profile.qFollowName)
                     setLoading(false);
                     setProfileData(profile);
-                } else {
-                    setLoading(false);
-                    alert('Ha ocurrido un error al obtener al perfil');
+                } else if (errCode == 'NOT FOUND') {
+                    return getProfileByQueryFollowName(qFollowNameOrId.toLowerCase()) // Si no, lo busco por simple id
+                        .then(({ profile, error }) => {
+                            if (!error) {
+                                setLoading(false);
+                                setProfileData(profile);
+                            }
+                            else {
+                                setLoading(false);
+                                alert('No se encontró un perfil con ese identificador');
+                            }
+                        })
                 }
             })
     }, []);

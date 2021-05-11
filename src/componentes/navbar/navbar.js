@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import './navbar.css';
 
-const Navbar = ({ startTransparent, defaultColor }) => {
+const Navbar = ({ startTransparent, defaultColor, position }) => {
 
     const { open, close } = useContext(DrawerContext);
     const { logged } = useContext(AuthContext);
@@ -110,7 +110,7 @@ const Navbar = ({ startTransparent, defaultColor }) => {
     }
 
     return (
-        <nav className={navClasses} style={customStyles}>
+        <nav className={navClasses} style={{ ...customStyles, position}}>
             <div className='container-xl container-navbar position-relative'>
                 <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />
@@ -120,10 +120,10 @@ const Navbar = ({ startTransparent, defaultColor }) => {
                         logged
                             ?
                             <>
-                                <Link onClick={() => history.push('/perfil/' + qFollowName)} className='btn-nav clamp clamp-1'>
+                                <span onClick={() => navigateTo('/perfil/' + qFollowName)} className='btn-nav clamp clamp-1'>
                                     {fName} {lName}
-                                </Link>
-                                <Avatar img={imgUrl} clases='img-profile-navbar img-avatar-container' />
+                                </span>
+                                <Avatar onClick={() => navigateTo('/perfil/' + qFollowName)} img={imgUrl} clases='img-profile-navbar' />
                                 <span ref={arrowTogglerRef} onClick={toggleOptionsContainer} className='btn-nav nav-arrow m-0 pl-1 pr-1'>
                                     <FontAwesomeIcon icon={faAngleDown} size='1x' />
                                 </span>

@@ -316,6 +316,7 @@ p {
   margin: 0 auto;
   padding-bottom: var(--bottom-navbar-height);
   margin-top: 1rem;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
@@ -634,7 +635,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 .main-body {
   min-height: 95vh;
   padding-bottom: 5rem;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .section-body .main-section {
@@ -1350,9 +1351,27 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 /*Previsualización resultado*/
 
+.mini-profile-container {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  font-size: 20px;
+  padding-top: 1.2rem;
+  padding-bottom: 1rem;
+  z-index: 10;
+  box-shadow: 0px 5px 20px #2c273829;
+}
+
+@media (min-width: 768px) {
+  .mini-profile-container {
+    /*margin-top: 2rem;
+    margin-bottom: 3rem;*/
+  }
+}
+
 .container-background-prev {
   min-height: 200px;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {

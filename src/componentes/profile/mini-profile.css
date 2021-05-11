@@ -1,0 +1,89 @@
+.mini-profile {
+    display: flex;
+    align-items: center;
+}
+
+.mini-profile__data-container {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.mini-profile__pre-title {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.mini-profile__header {
+    display: flex;
+    align-items: center;
+}
+
+.mini-profile__tag {
+    display: none;
+    min-width: 50px;
+    padding: 0 8px 0 8px;
+    background-color: #BE67C1;
+    color: white;
+    border-radius: 30px;
+    line-height: 1.5;
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+@media (min-width: 768px) {
+    .mini-profile__tag {
+        display: block;
+        font-size: 1.2rem;
+    }
+}
+
+.mini-profile__title {
+    font-size: 1.6rem;
+    color: rgba(41, 41, 41, 1);
+}
+
+.mini-profile__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mini-profile__description {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.mini-profile__rs {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .mini-profile__rs {
+        display: flex;
+    }
+}
+
+/*Íconos*/
+
+.mini-profile__sn-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    margin-right: 1.5rem;
+}
+
+.mini-profile__sn-icon:last-of-type {
+    margin: 0;
+}
+
+.mini-profile__sn-icon>img, .mini-profile__sn-icon>svg {
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+}

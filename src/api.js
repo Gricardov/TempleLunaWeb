@@ -25,13 +25,13 @@ export const setRequestDone = async (data) => {
     return request('generateResultRequest', data, 'POST', true);
 }
 
-export const getRequest = async (requestId, includeDetails) => {
+export const getRequest = async (requestId) => {
     return firestore.collection('solicitudes').doc(requestId).get()
         .then(async doc => {
             if (doc.exists) {
-                const res = await request('getArtistDataByRequestId', { requestId }, 'POST'); // TO BE FIXED, DENORMALIZE!!
-                if (!res.error) {
-                    return { data: { ...doc.data(), id: doc.id, artist: res.artist } }
+                const artist = await request('getArtistDataByRequestId', { requestId }, 'POST'); // TO BE FIXED, DENORMALIZE!!
+                if (!artist.error) {
+                    return { data: { ...doc.data(), id: doc.id, artist } }
                 } else {
                     return { error: 'No existe el artista' }
                 }
@@ -122,7 +122,7 @@ export const getProfile = async (uid) => {
             if (doc.exists) {
                 return { profile: { ...doc.data() } }
             } else {
-                return { error: 'No existe un usuario con ese id' }
+                return { error: 'No existe un usuario con ese id', errCode: 'NOT FOUND' }
             }
         })
         .catch(error => {
