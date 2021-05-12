@@ -232,7 +232,7 @@ const Inscripcion = () => {
                                                             <li><b>Temario:</b> <b><a target="_blank" href="https://drive.google.com/file/d/1KjkDV_54swrMFseRpm7xkQtmowAx9Kr2/view?usp=sharing">Ver aquí</a></b></li>
                                                             <li><b>Inversión:</b> 30 dólares</li>
                                                             <li><b>Método:</b> Paypal</li>
-                                                            <li><b>¿Hay facilidades?:</b> 15 dólares antes de iniciar y el resto, después de la sesión del 23</li>
+                                                            <li><b>¿Hay facilidades?:</b> 15 dólares antes de iniciar y el resto, después de la sesión del 6</li>
                                                             <li><b>Condición:</b> 10 inscritos como mínimo</li>
                                                             <li><b>Obras llevadas al teatro:</b> <b><a target="_blank" href="https://www.facebook.com/LosDemoniosDetrasDeLaPared/">Ver aquí</a></b>.</li>
                                                             <li><b>Obra "Eróstrato":</b> <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">Leer aquí</a></b></li>
