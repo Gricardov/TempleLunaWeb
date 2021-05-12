@@ -1,13 +1,16 @@
 import ImgColaboracion from '../img/colaboracion.svg';
 import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
-import ImgComunicacion from '../img/communicating.svg';
 import ImgServCritica from '../img/ser-critica.svg';
 import ImgServDiseno from '../img/ser-diseno.svg';
 import ImgServCoreccion from '../img/ser-correccion.svg';
 import ImgServBooktrailer from '../img/ser-bookt.svg';
 import ImgServEntrevista from '../img/ser-entrev.svg';
 import ImgServPromo from '../img/ser-promo.svg';
+import ImgPrevCritica from '../img/pre-critica.png';
+import ImgPrevDiseno from '../img/pre-diseno.png';
+import ImgPrevCorreccion from '../img/pre-correccion.png';
+import ImgPrevServicio from '../img/pre-servicio.png';
 
 export const carrouselData = [
     //{ text: 'Gran lectura de obras en vivo, con Laydy Czulewyez', buttonText: 'Participar', pushTo: 'ins_evento/LECTURA-VIVO-LACZU-1', bg: 'radial-gradient(at 80% 100%, rgb(164 118 166) 10%, rgb(151 67 148) 50%)', img: ImgLecVivo, style: { bottom: '-50px', right: '-100px' } },
@@ -33,7 +36,7 @@ export const contributors = ['@Gricardov', '@OsitaLectora1', '@CaroDePearolMoral
 export const inscriptionTypes = [{ type: 'AUD', icon: 'fas fa-users', name: 'Audiencia' }, { type: 'AUT', icon: 'fas fa-pencil-alt', name: 'Autor', displayInDropdown: false }];
 
 // Para los servicios que pueden brindar las personas y editoriales
-export const editorialServices = [{ id: 'CRITICA', name: 'Críticas', img: ImgServCritica, color: '#F8FFD5', icon: 'far fa-lightbulb' }, { id: 'DISENO', name: 'Diseños', img: ImgServDiseno, color: '#FFF0D5', icon: 'fas fa-magic', }, { id: 'CORRECCION', name: 'Correcciones', img: ImgServCoreccion, color: '#D5F8FF', icon: 'fas fa-tasks', }, { id: 'ENTREVISTA', name: 'Entrevistas', img: ImgServEntrevista, color: '#C7D7FF' }, { id: 'BOOKTRAILER', name: 'Booktrailers', img: ImgServBooktrailer, color: '#E1DEFF' }, { id: 'DIFUSION', name: 'Difusión', img: ImgServPromo, color: '#CFFFE2' }];
+export const editorialServices = [{ id: 'CRITICA', name: 'Críticas', editorialImg: ImgServCritica, prevImg: ImgPrevCritica, color: '#F8FFD5', icon: 'far fa-lightbulb' }, { id: 'DISENO', name: 'Diseños', editorialImg: ImgServDiseno, prevImg: ImgPrevDiseno, color: '#FFF0D5', icon: 'fas fa-magic', }, { id: 'CORRECCION', name: 'Correcciones', editorialImg: ImgServCoreccion, prevImg: ImgPrevCorreccion, color: '#D5F8FF', icon: 'fas fa-tasks', }, { id: 'ENTREVISTA', name: 'Entrevistas', editorialImg: ImgServEntrevista, prevImg: ImgPrevServicio, color: '#C7D7FF' }, { id: 'BOOKTRAILER', name: 'Booktrailers', editorialImg: ImgServBooktrailer, prevImg: ImgPrevServicio, color: '#E1DEFF' }, { id: 'DIFUSION', name: 'Difusión', editorialImg: ImgServPromo, prevImg: ImgPrevServicio, color: '#CFFFE2' }];
 
 // Para las pestañas de las pestañas de editoriales
 export const editorialTabs = [{ id: 'SERV', name: 'Servicios' }, { id: 'MIEM', name: 'Miembros' }, { id: 'ACER', name: 'Acerca de' }];

@@ -141,7 +141,6 @@ export const stringContainsAnyOf = (mainString, coincidences) => {
     return coincidences.some(c => mainString.includes(c));
 }
 
-
 // Obtiene el servicio según id
 export const getServiceById = (id) => {
     return editorialServices.find(service => service.id == id);

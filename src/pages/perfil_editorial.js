@@ -86,15 +86,13 @@ const Perfil = ({ id, name, likes, views, networks, followName, about, services,
                     activeIndex={activeTabIndex}
                     select={updActiveTabIndex}
                     tabs={editorialTabs.map(e => e.name)}>
-                    <div className='services-profile-container'>
-                        {
-                            services.map(service => (
-                                <div className='service-card-container'>
+                        <div className='container-xl services-profile-container'>
+                            {
+                                services.map(service => (
                                     <ServiceCard id={service.id} img={service.img} color={service.color} />
-                                </div>
-                            ))
-                        }
-                    </div>
+                                ))
+                            }
+                        </div>
                 </Tabs>
             </main>
             <Footer />

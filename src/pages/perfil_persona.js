@@ -5,7 +5,7 @@ import SampleEditorialIcon from '../img/sample-editorial-icon.svg';
 import Tabs from '../componentes/tabs';
 import HelmetMetaData from "../componentes/helmet";
 import PuffLoader from "react-spinners/PuffLoader";
-import ServiceCard from '../componentes/service-card';
+import ResultPreviewCard from '../componentes/result-preview-card';
 import Tooltip from '../componentes/tooltip';
 import Avatar from '../componentes/avatar';
 import { css } from "@emotion/core";
@@ -14,14 +14,19 @@ import { editorialServices } from '../data/data';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { getStatistics } from '../api';
+import { getStatistics, getRequests } from '../api';
+import { useHistory } from 'react-router-dom';
 
 const override = css`
   display: block;
   margin: 5rem auto;
 `;
 
+const limit = 3;
+
 const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles, services, editorial }) => {
+
+    const history = useHistory();
 
     // Tema
     const style = {
@@ -33,11 +38,17 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
-    const [requestList, setRequestList] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    const [loadingMore, setLoadingMore] = useState(false);
+    const [isLast, setIsLast] = useState(false);
+    const [requestList, setRequestList] = useState([]);
     const [tabList, setTabList] = useState(services.map(service => getServiceById(service)));
 
     const [roleTooltipOpen, setRoleTooltipOpen] = useState(false);
     const [servTooltipOpen, setServiceTooltipOpen] = useState(false);
+
+    const navigateTo = (route) => {
+        history.push(route);
+    }
 
     const updActiveTabIndex = (val) => {
         setActiveTabIndex(val);
@@ -47,6 +58,46 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
         getStatistics(tabList.map(tab => id + '-' + tab.id))
             .then(data => setTabList(tabList.map((e, i) => !data[i].error ? { ...tabList[i], statistics: data[i].statistics.done } : tabList[i])));
     }
+
+    const getLastElement = (field) => {
+        return requestList[requestList.length - 1] ? requestList[requestList.length - 1][field] : undefined;
+    }
+
+    const requestData = () => {
+        setInitialLoading(true);
+        const requestType = tabList[activeTabIndex].id;
+        getRequests(id, requestType, 'HECHO', undefined, limit, 'desc')
+            .then(data => {
+                setInitialLoading(false);
+                setIsLast(data.isLast);
+                setRequestList(data.list);
+            })
+            .catch(error => {
+                setInitialLoading(false);
+                alert('Ha ocurrido un error. Vuelve a intentarlo más tarde (EC.RD)');
+            });
+    }
+
+    const requestMoreData = () => {
+        if (!initialLoading && !loadingMore) {
+            setLoadingMore(true);
+            const requestType = tabList[activeTabIndex].id;
+            getRequests(id, requestType, 'HECHO', getLastElement('createdAt'), limit, 'desc')
+                .then(data => {
+                    setLoadingMore(false);
+                    setIsLast(data.isLast);
+                    setRequestList((state) => ([...state, ...data.list]));
+                })
+                .catch(error => {
+                    setLoadingMore(false);
+                    alert('Ha ocurrido un error. Vuelve a intentarlo más tarde (EC.RMD)');
+                });
+        }
+    }
+
+    useEffect(() => {
+        requestData();
+    }, [activeTabIndex]);
 
     useEffect(() => {
         updateStatistics();
@@ -80,7 +131,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                                         })
                                     }
                                 </div>
-                                {
+                                {/*
                                     editorial
                                         ?
                                         <div className='editorial-tag clamp clamp-1'>
@@ -95,7 +146,12 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                                                 Independiente
                                         </span>
                                         </div>
-                                }
+                                */}
+                                <div className='editorial-tag clamp clamp-1'>
+                                    <span className='clamp clamp-1'>
+                                        Independiente
+                                    </span>
+                                </div>
                                 <Avatar img={imgUrl} clases='profile-img img-avatar-container border-shadow' />
                             </div>
                         </div>
@@ -103,50 +159,50 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                             <h2 className='clamp clamp-2 no-break'>{fName + ' ' + lName}</h2>
                             <div className='statistics'>
                                 <div className='statistic'>
-                                    {views || 0 + ' '}
+                                    {(views ? views >= 1000 ? (views / 1000).toFixed(1) + 'k' : views : 0) + ' '}
                                     <FontAwesomeIcon icon={faEye} className='icon' />
                                 </div>
                                 <div className='statistic'>
-                                    {likes || 0 + ' '}
+                                    {(likes ? likes >= 1000 ? (likes / 1000).toFixed(1) + 'k' : likes : 0) + ' '}
                                     <FontAwesomeIcon icon={faHeart} className='icon' />
                                 </div>
                             </div>
                             <div className='description'>
                                 {
-                                    <p className={'position-relative'}>{getUserRoleById(roles[0])?.name}
+                                    <p>{getUserRoleById(roles[0])?.name}
                                         {
                                             roles.length > 1
                                             &&
                                             <>
                                                 {' y '}
-                                                <b onMouseEnter={() => setRoleTooltipOpen(true)} onMouseLeave={() => setRoleTooltipOpen(false)} className='cursor-pointer'>
+                                                <b onMouseEnter={() => setRoleTooltipOpen(true)} onMouseLeave={() => setRoleTooltipOpen(false)} className='position-relative cursor-pointer'>
                                                     {roles.length - 1} más
+                                                    <Tooltip isOpen={roleTooltipOpen}>
+                                                        {
+                                                            roles.slice(1, roles.length).map(role => <p>{getUserRoleById(role)?.name}</p>)
+                                                        }
+                                                    </Tooltip>
                                                 </b>
-                                                <Tooltip isOpen={roleTooltipOpen}>
-                                                    {
-                                                        roles.slice(1, roles.length).map(role => <p>{getUserRoleById(role)?.name}</p>)
-                                                    }
-                                                </Tooltip>
                                             </>
                                         }
                                     </p>
                                 }
                                 {
                                     // Solo se deben mostrar 2 en pantalla y el resto en tooltip                                    
-                                    <p className={'position-relative'}>Servicio de {services.slice(0, 2).map(service => getServiceById(service)?.name).join(services.length > 2 ? ', ' : ' y ').toLowerCase()}
+                                    <p>Servicio de {services.slice(0, 2).map(service => getServiceById(service)?.name).join(services.length > 2 ? ', ' : ' y ').toLowerCase()}
                                         {
                                             services.length > 2
                                             &&
                                             <>
                                                 {' y '}
-                                                <b onMouseEnter={() => setServiceTooltipOpen(true)} onMouseLeave={() => setServiceTooltipOpen(false)} className='cursor-pointer'>
+                                                <b onMouseEnter={() => setServiceTooltipOpen(true)} onMouseLeave={() => setServiceTooltipOpen(false)} className='position-relative cursor-pointer'>
                                                     {services.length - 2} más
+                                                    <Tooltip isOpen={servTooltipOpen}>
+                                                        {
+                                                            services.slice(2, services.length).map(service => <p>{getServiceById(service).name}</p>)
+                                                        }
+                                                    </Tooltip>
                                                 </b>
-                                                <Tooltip isOpen={servTooltipOpen}>
-                                                    {
-                                                        services.slice(2, services.length).map(service => <p>{getServiceById(service).name}</p>)
-                                                    }
-                                                </Tooltip>
                                             </>
                                         }
                                     </p>
@@ -155,7 +211,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                             </div>
                         </div>
                         <div className='profile-editorial'>
-                            {
+                            {/*
                                 editorial
                                     ?
                                     <div className='editorial-tag clamp clamp-1'>
@@ -171,25 +227,35 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                                             Independiente
                                         </span>
                                     </div>
-                            }
+                            */}
+                            <div className='editorial-tag clamp clamp-1'>
+                                <img src={SampleEditorialIcon} alt='img-editorial' />
+                                <span className='clamp clamp-1'>
+                                    Independiente
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </section>
                 <Tabs
                     initialLoading={initialLoading}
-                    loadingMore={false}
-                    requestMoreData={() => { }}
-                    hasMore={false}
+                    loadingMore={loadingMore}
+                    requestMoreData={requestMoreData}
+                    hasMore={!isLast}
                     loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
                     activeIndex={activeTabIndex}
                     select={updActiveTabIndex}
                     tabs={tabList.map(tab => tab.name + ` (${tab.statistics ? tab.statistics : 0})`)}>
-                    <div className='services-profile-container'>
+                    <div className='container-xl services-profile-container'>
                         {
-                            editorialServices.map(service => (
-                                <div className='service-card-container'>
-                                    <ServiceCard img={service.img} titulo={service.name} contrastColor={service.color} />
-                                </div>
+                            requestList.map(request => (
+                                <ResultPreviewCard
+                                    id={request.id}
+                                    likes={request.likes}
+                                    views={request.views}
+                                    onClick={(id) => navigateTo(`/prev_resultado?id=${id}`)}
+                                    title={request.title}
+                                    type={request.type} />
                             ))
                         }
                     </div>

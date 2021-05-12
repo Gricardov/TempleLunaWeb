@@ -1,1 +1,1 @@
-export { default } from './service_card';
+export { default } from './service-card';

@@ -994,7 +994,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 .profile-header-container {
   position: relative;
-  min-height: 340px;
+  min-height: 300px;
 }
 
 @media (min-width: 768px) {
@@ -1006,7 +1006,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 .profile-container {
   margin: 0 auto;
   width: 70%;
-  padding-top: 4rem;
+  padding-top: 2.8rem;
   padding-bottom: 1.5rem;
   text-align: center;
   position: relative;
@@ -1331,14 +1331,12 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 }
 
 .services-profile-container {
-  /*display: flex;
-  flex-wrap: wrap;*/
   padding-top: 2rem;
   padding-bottom: 2rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: 2.5rem;
-  grid-column-gap: 1.5rem;
+  grid-row-gap: 3rem;
+  grid-column-gap: 4rem;
 }
 
 @media (min-width: 610px) {
@@ -1357,16 +1355,6 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   .services-profile-container {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-}
-
-.service-card-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.service-card-container:last-of-type {
-  padding-bottom: 0;
 }
 
 /*Previsualización resultado*/
