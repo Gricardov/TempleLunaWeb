@@ -228,7 +228,7 @@ const Previsualizacion = ({ location }) => {
                 punctuationType={punctuationType}
                 isOpen={isOpenPunctuationModal}
                 close={() => setIsOpenPunctuationModal(false)} />
-            <main className='main-body below-navbar'>
+            <main className='main-body below-navbar overflow-unset'>
                 <div className='mini-profile-container'>
                     <div className='container-xl'>
                         {
@@ -271,7 +271,7 @@ const Previsualizacion = ({ location }) => {
                                 :
                                 resultUrl && type == 'DISENO'
                                     ?
-                                    <div className='container-xl form-group'>                                        
+                                    <div className='container-xl form-group'>
                                         <img onLoad={onDocumentLoadSuccess} onError={onDocumentError} src={resultUrl} />
                                     </div>
                                     :

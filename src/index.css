@@ -374,6 +374,18 @@ p {
   word-break: keep-all;
 }
 
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.overflow-auto {
+  overflow: auto !important; 
+}
+
+.overflow-unset {
+  overflow: unset !important; 
+}
+
 .w-60 {
   width: 60% !important;
 }
@@ -635,7 +647,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 .main-body {
   min-height: 95vh;
   padding-bottom: 5rem;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 
 .section-body .main-section {
