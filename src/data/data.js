@@ -42,4 +42,4 @@ export const editorialServices = [{ id: 'CRITICA', name: 'Críticas', editorialI
 export const editorialTabs = [{ id: 'SERV', name: 'Servicios' }, { id: 'MIEM', name: 'Miembros' }, { id: 'ACER', name: 'Acerca de' }];
 
 // Para los roles que pueden desempeñar los usuarios
-export const userRoles = [{ id: 'FOUN-E', name: 'Fundador(a) de su editorial' }, { id: 'COLAB', name: 'Colaborador(a) de editorial' }, { id: 'CREA-TL', name: 'Creador de Temple Luna' }, { id: 'MOD-TL', name: 'Moderador de Temple Luna' }];
+export const userRoles = [{ id: 'FOUN-E', name: 'Fundador(a) de su editorial' }, { id: 'COLAB', name: 'Colaborador(a) de editorial' }, { id: 'CREA-TL', name: 'Creador de Temple Luna' }, { id: 'MOD-TL', name: 'Moderador de Temple Luna' }, { id: 'SUP-CRITICA', name: 'Supervisor(a) de críticas' }, { id: 'SUP-CORRECCION', name: 'Supervisor(a) de correcciones' }, { id: 'SUP-DISENO', name: 'Supervisor(a) de diseños' }];
