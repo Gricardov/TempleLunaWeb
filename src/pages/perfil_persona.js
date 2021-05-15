@@ -8,6 +8,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import ResultPreviewCard from '../componentes/result-preview-card';
 import Tooltip from '../componentes/tooltip';
 import Avatar from '../componentes/avatar';
+import { useWindowSize } from '../hooks/useWindowSize';
 import { css } from "@emotion/core";
 import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/functions';
 import { editorialServices } from '../data/data';
@@ -26,6 +27,7 @@ const limit = 3;
 
 const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles, services, editorial }) => {
 
+    const { logged } = useContext(AuthContext);
     const history = useHistory();
 
     // Tema
@@ -34,14 +36,14 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
         color: (theme && theme.contrast) || ''
     };
 
-    const { logged } = useContext(AuthContext);
-
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [initialLoading, setInitialLoading] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
     const [isLast, setIsLast] = useState(false);
     const [requestList, setRequestList] = useState([]);
+    const [visibleColumns, setVisibleColumns] = useState(0); // Esto estblaece cuantos datos solicitar * 2 para que se vea en la pantasa
     const [tabList, setTabList] = useState(services.map(service => getServiceById(service)));
+    const { width } = useWindowSize();
 
     const [roleTooltipOpen, setRoleTooltipOpen] = useState(false);
     const [servTooltipOpen, setServiceTooltipOpen] = useState(false);
@@ -66,7 +68,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
     const requestData = () => {
         setInitialLoading(true);
         const requestType = tabList[activeTabIndex].id;
-        getRequests(id, requestType, 'HECHO', undefined, limit, 'desc')
+        getRequests(id, requestType, 'HECHO', undefined, visibleColumns * 2, 'desc')
             .then(data => {
                 setInitialLoading(false);
                 setIsLast(data.isLast);
@@ -82,7 +84,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
         if (!initialLoading && !loadingMore) {
             setLoadingMore(true);
             const requestType = tabList[activeTabIndex].id;
-            getRequests(id, requestType, 'HECHO', getLastElement('createdAt'), limit, 'desc')
+            getRequests(id, requestType, 'HECHO', getLastElement('createdAt'), visibleColumns, 'desc')
                 .then(data => {
                     setLoadingMore(false);
                     setIsLast(data.isLast);
@@ -96,8 +98,22 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
     }
 
     useEffect(() => {
+
+        if (width < 610) {
+            setVisibleColumns(1);
+        } else if (width < 910) {
+            setVisibleColumns(2);
+        } else if (width < 1500) {
+            setVisibleColumns(3);
+        } else {
+            setVisibleColumns(4);
+        }
+
+    }, [width]);
+
+    useEffect(() => {
         requestData();
-    }, [activeTabIndex]);
+    }, [activeTabIndex, visibleColumns]);
 
     useEffect(() => {
         updateStatistics();
@@ -250,12 +266,10 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                         {
                             requestList.map(request => (
                                 <ResultPreviewCard
-                                    id={request.id}
-                                    likes={request.likes}
-                                    views={request.views}
+                                    {...request}
+                                    isOwner={logged ? logged.uid == request.takenBy : false}
                                     onClick={(id) => navigateTo(`/prev_resultado?id=${id}`)}
-                                    title={request.title}
-                                    type={request.type} />
+                                />
                             ))
                         }
                     </div>

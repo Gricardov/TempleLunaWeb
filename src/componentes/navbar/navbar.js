@@ -2,6 +2,7 @@ import React, { useRef, useState, useContext, useEffect } from 'react';
 import Avatar from '../avatar';
 import Logo from '../../img/logo.png';
 import Sanguchito from '../../img/sanguchito.svg';
+import { useWindowSize } from '../../hooks/useWindowSize';
 import { useOutsideListener } from '../../hooks/useOutsideListener';
 import { useHistory } from "react-router-dom";
 import { logout } from '../../api';
@@ -26,7 +27,10 @@ const Navbar = ({ startTransparent, defaultColor, position }) => {
 
     const { outsideListener$ } = useOutsideListener(outsideListenerRef);
     const [scrolled, setScrolled] = useState(false);
-    const [width, setWidth] = useState(0);
+
+    const { width } = useWindowSize();
+
+    const { fName, lName, qFollowName, imgUrl } = getProfileStorage() || { fName: '', lName: '' };
 
     const handleScroll = () => {
         const offset = window.scrollY
@@ -57,12 +61,6 @@ const Navbar = ({ startTransparent, defaultColor, position }) => {
         setOpenOptions(!openOptions);
     }
 
-    const updWith = () => {
-        setWidth(window.innerWidth);
-    }
-
-    const { fName, lName, qFollowName, imgUrl } = getProfileStorage() || { fName: '', lName: '' };
-
     useEffect(() => {
         outsideListener$.subscribe(event => {
             if (arrowTogglerRef.current && !arrowTogglerRef.current.contains(event.target)) {
@@ -77,16 +75,11 @@ const Navbar = ({ startTransparent, defaultColor, position }) => {
     }, [scrolled]);
 
     useEffect(() => {
-        if (width === 0) {
-            setWidth(window.innerWidth);
-        }
-
+    
         if (width < 768) {
             setOpenOptions(false);
         }
 
-        window.addEventListener('resize', updWith);
-        return () => window.removeEventListener('resize', updWith);
     }, [width]);
 
     let navClasses = 'main-navbar';
@@ -110,7 +103,7 @@ const Navbar = ({ startTransparent, defaultColor, position }) => {
     }
 
     return (
-        <nav className={navClasses} style={{ ...customStyles, position}}>
+        <nav className={navClasses} style={{ ...customStyles, position }}>
             <div className='container-xl container-navbar position-relative'>
                 <Link to='/' className='logo-header'>
                     <img alt='logo' src={Logo} />

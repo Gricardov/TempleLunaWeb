@@ -126,7 +126,7 @@ export const getProfile = async (uid) => {
     return firestore.collection('perfiles').doc(uid).get()
         .then(doc => {
             if (doc.exists) {
-                return { profile: { ...doc.data() } }
+                return { profile: { ...doc.data(), id: doc.id } }
             } else {
                 return { error: 'No existe un usuario con ese id', errCode: 'NOT FOUND' }
             }

@@ -18,7 +18,7 @@ const Screen = ({ text }) => {
                     {
                         text
                         &&
-                        <p className='clamp clamp-2'>{text}</p>
+                        <p className='clamp clamp-2 no-break'>{text}</p>
                     }
                 </div>
             </div>

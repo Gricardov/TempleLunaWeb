@@ -55,3 +55,7 @@
 .result-preview-card__statistic-icon {
     margin-bottom: .4rem;
 }
+
+.result-preview-card__lock-icon {
+    font-size: 1.2rem;
+}

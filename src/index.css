@@ -379,11 +379,11 @@ p {
 }
 
 .overflow-auto {
-  overflow: auto !important; 
+  overflow: auto !important;
 }
 
 .overflow-unset {
-  overflow: unset !important; 
+  overflow: unset !important;
 }
 
 .w-60 {
@@ -1179,7 +1179,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 @media (min-width: 768px) {
   .profile-data {
-    margin-right: 4rem;
+    margin-right: 2rem;
   }
 }
 

@@ -128,6 +128,7 @@ const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, ini
                         ?
                         <InfiniteScroll
                             className="tab-content"
+                            scrollThreshold={0.7}
                             dataLength={childrenNum}
                             next={requestMoreData}
                             hasMore={hasMore}

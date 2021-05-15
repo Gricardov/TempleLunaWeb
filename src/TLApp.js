@@ -17,13 +17,16 @@ import { AuthProvider } from './context/AuthContext';
 import { AnyRoute } from './componentes/customRouter/anyRoute';
 import { PrivateRoute } from './componentes/customRouter/privateRoute';
 import { PublicRoute } from './componentes/customRouter/publicRoute';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Router, Switch, Redirect } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 const App = () => {
 
+  const history = createBrowserHistory();
+
   return (
     <AuthProvider>
-      <Router>
+      <Router history={history}>
         <Drawer />
         <HelmetMetaData />
         <Switch>

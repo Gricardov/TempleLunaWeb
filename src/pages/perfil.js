@@ -61,20 +61,22 @@ const Perfil = ({ match }) => {
 
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         const qFollowNameOrId = match.params.id;
         return getProfile(qFollowNameOrId) // Busco perfil por id
             .then(({ profile, error, errCode }) => {
                 if (!error) {
                     // Lo encontró por id, así que actualizo la url
-                    window.history.replaceState(null, '', profile.qFollowName)
+                    window.history.replaceState(null, '', profile.qFollowName);
                     setLoading(false);
                     setProfileData(profile);
                 } else if (errCode == 'NOT FOUND') {
                     return getProfileByQueryFollowName(qFollowNameOrId.toLowerCase()) // Si no, lo busco por nombre de seguidor
                         .then(({ profile, error }) => {
                             if (!error) {
+                                // Lo reemplazo pr el id en minúsculas
+                                window.history.replaceState(null, '', qFollowNameOrId.toLowerCase());
                                 setLoading(false);
                                 setProfileData(profile);
                             }
