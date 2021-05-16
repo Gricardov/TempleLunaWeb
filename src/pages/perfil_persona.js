@@ -11,7 +11,6 @@ import Avatar from '../componentes/avatar';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { css } from "@emotion/core";
 import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/functions';
-import { editorialServices } from '../data/data';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -125,7 +124,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
 
     return (
         <div>
-            <HelmetMetaData title={`${logged ? fName + ' ' + lName + ' - Temple Luna' : '¡' + fName + ' ' + lName + ' está en Temple Luna!'}`} image={imgUrl} />
+            <HelmetMetaData title={`${logged ? fName + ' ' + lName + ' - Temple Luna' : '¡' + fName + ' ' + lName + ' ya está en Temple Luna!'}`} image={imgUrl} />
             <Navbar />
             <main className='main-body below-navbar'>
                 <section className='profile-header-container' style={{ background: 'white' }}>
