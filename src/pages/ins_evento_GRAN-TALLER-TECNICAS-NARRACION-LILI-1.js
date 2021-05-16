@@ -27,6 +27,9 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
+const mainTitle = 'Gran taller de técnicas de narración';
+const hostName = 'Liliana Martinez';
+
 const Inscripcion = () => {
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -95,7 +98,7 @@ const Inscripcion = () => {
 
         const data = {
             eventId: idEvento,
-            eventName: 'Aprende a ser pagado por escribir',
+            eventName: mainTitle,
             name: toName(name.trim()),
             age: parseInt(age),
             phone: phone.trim(),
@@ -141,12 +144,12 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Aprende a ser pagado por escribir - Temple Luna" description="¿La plataforma de turno no valora lo que escribes? Puedes tener una joya oculta entre manos por la que muchos pagarían." />
+            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="¿La plataforma de turno no valora lo que escribes? Puedes tener una joya oculta entre manos por la que muchos pagarían." />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Gran taller de técnicas de narración</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Con Liliana Martinez</p>
+                    <h2 className='mb-0'>{mainTitle}</h2>
+                    <p className='txt-responsive-form w-60 w-md-75'>Con {hostName}</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
                     <div style={{ backgroundImage: `url(${ImgAutor})`, backgroundSize: '80% 90%' }} alt='img-fondo' className='img-fondo-formulario' />

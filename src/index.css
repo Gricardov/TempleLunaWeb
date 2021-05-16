@@ -411,6 +411,7 @@ p {
   /*margin-top: .8rem;*/
   box-shadow: 0px 3px 6px #00000029;
   transition: all 200ms ease-in-out;
+  font-size: 1.5rem;
 }
 
 .button:active {
@@ -419,7 +420,7 @@ p {
 
 @media (min-width: 768px) {
   .button {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -563,7 +564,7 @@ p {
   color: #756F86;
 }
 
-.form-group a {
+.form-group a, .modal a {
   color: #8B81EC;
 }
 
@@ -1548,15 +1549,16 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
   margin-right: 1rem;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .bottom-prev-navbar button {
+  .bottom-prev-navbar>button {
     font-size: 2.2rem;
   }
 }
 
-.bottom-prev-navbar button:last-of-type {
+.bottom-prev-navbar>button:last-of-type {
   margin-right: 0;
   padding-left: 1rem;
   padding-right: 1rem;

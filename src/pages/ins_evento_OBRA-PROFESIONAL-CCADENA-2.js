@@ -27,6 +27,9 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
+const mainTitle = 'Gran curso de guión, texto y novela';
+const hostName = 'Carlos Cadena';
+
 const Inscripcion = () => {
 
     const [activeIndex, setActiveIndex] = useState(0);
@@ -131,7 +134,7 @@ const Inscripcion = () => {
 
         const data = {
             eventId: idEvento,
-            eventName: 'Gran curso de guión, texto y novela',
+            eventName: mainTitle,
             name: toName(name.trim()),
             age: parseInt(age),
             urlImgInv: urlImgInv.trim(),
@@ -181,15 +184,15 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title="Gran curso de guión, texto y novela - Temple Luna" description="Aprende a destacar tus obras como nunca antes" />
+            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="Aprende a destacar tus obras como nunca antes" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
-                    <h2 className='mb-0'>Gran curso de guión, texto y novela</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>Aprende a crear obras de gran calidad</p>
+                    <h2 className='mb-0'>{mainTitle}</h2>
+                    <p className='txt-responsive-form w-60 w-md-75'>con {hostName}</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                <div style={{ backgroundImage: `url(${ImgAutor})` }} alt='img-fondo' className='img-fondo-formulario' />
+                    <div style={{ backgroundImage: `url(${ImgAutor})` }} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success

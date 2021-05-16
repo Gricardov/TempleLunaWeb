@@ -1,21 +1,12 @@
-import React, { useContext, useState } from 'react';
-import ConfirmationModal from './confirmationModal';
+import React, { useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
-import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
-import { contactTypes } from '../../data/data';
-import { getDateText, getExpDateText } from '../../helpers/functions';
-import { useHistory } from 'react-router-dom';
-import { designTypes } from '../../data/data';
 import { addCommentRequestResult } from '../../api';
-import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
+import { FacebookShareButton } from "react-share";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 import './modals.css';
-
-const iconSize = 20;
-const color = '#756F86';
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -23,40 +14,19 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const Modal = ({ isOpen, requestId, requestType, close }) => {
+const Modal = ({ isOpen, requestId, url, shareQuote, onFinishedSharedIntention, close }) => {
 
-    const { logged } = useContext(AuthContext);
     const [alias, setAlias] = useState('');
     const [feedback, setFeedback] = useState('');
     const [sendingFeedback, setSendingFeedback] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    let title = '';
-    let message = '';
-    let messagePlaceholder = '';
     let styles = '';
 
     if (isOpen) {
         styles = 'open';
     } else {
         styles = 'close';
-    }
-
-    if (success) {
-        styles += ' punctuation-modal';
-    }
-
-    switch (requestType) {
-        case 'CRITICA':
-            title = '¡Maravilloso!';
-            message = 'Has dado amor a esta crítica. ¿Deseas dejarle un mensaje al crítico?';
-            messagePlaceholder = 'Me encantó la crítica, tu punto de vista me ayudará en mucho.';
-            break;
-        case 'DISENO':
-            title = '¡Maravilloso!';
-            message = 'Has dado amor a este diseño. ¿Deseas dejarle un mensaje al diseñador?';
-            messagePlaceholder = 'Me encantó el diseño, aunque pienso que puedes mejorar en...';
-            break;
     }
 
     const addComment = () => {
@@ -94,22 +64,34 @@ const Modal = ({ isOpen, requestId, requestType, close }) => {
             <div className={'overlay overlay-modal ' + styles} onClick={close}>
             </div>
             <Zoom bottom collapse when={isOpen}>
-                <div className={'modal modal-fit modal-center ' + styles}>
+                <div className={`modal modal-fit modal-center ${success && 'punctuation-modal'}`}>
                     {
                         success
                             ?
                             <div className='modal-container'>
                                 <div className='header-container position-relative'>
                                     <div className='title-container'>
-                                        <h3 className='clamp clamp-1'>¡Listo!</h3>
+                                        <h3 className='clamp clamp-1 text-align-center'>¡Mensaje enviado!</h3>
                                     </div>
                                     <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
+                                </div>
+                                <div className='description-container'>
+                                    <p>{'Por favor, ayúdanos compartiendo el trabajo del artista '}
+                                        <FacebookShareButton
+                                            onShareWindowClose={onFinishedSharedIntention}
+                                            url={url.toString().replace(/templated=true/g, "")}
+                                            quote={shareQuote}
+                                            hashtag='#templeluna'
+                                            style={{ color: '#8b81ec' }}>
+                                            aquí.
+                                        </FacebookShareButton>
+                                    </p>
                                 </div>
                                 <div className="footer-card-container">
                                     <button onClick={close} className='button button-green stretch'>
                                         <FontAwesomeIcon icon={faCheck} size='xl' />
                                         {' '}
-                                        Volver
+                                        Listo
                                     </button>
                                 </div>
                             </div>
@@ -117,12 +99,12 @@ const Modal = ({ isOpen, requestId, requestType, close }) => {
                             <div className='modal-container'>
                                 <div className='header-container position-relative'>
                                     <div className='title-container'>
-                                        <h3 className='clamp clamp-1'>{title}</h3>
+                                        <h3 className='clamp clamp-1 text-align-center'>{'¡Has dado amor!'}</h3>
                                     </div>
                                     <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                                 </div>
                                 <div className='description-container'>
-                                    <p>{message}</p>
+                                    <p>{'Motívalo con un mensaje de agradecimiento y compartiendo su trabajo'}</p>
                                     <form>
                                         <div className='form-group'>
                                             <label htmlFor="txtAlias">Tu alias</label>
@@ -130,7 +112,7 @@ const Modal = ({ isOpen, requestId, requestType, close }) => {
                                         </div>
                                         <div className='form-group'>
                                             <label htmlFor="txtFeedback">Mensaje</label>
-                                            <textarea minLength="1" maxLength="1000" rows="3" value={feedback} onChange={(e) => setFeedback(e.target.value)} id="txtFeedback" placeholder={messagePlaceholder}></textarea>
+                                            <textarea minLength="1" maxLength="1000" rows="3" value={feedback} onChange={(e) => setFeedback(e.target.value)} id="txtFeedback" placeholder={'Por ejemplo: Me encantó, tu punto de vista me ayudará en mucho.'}></textarea>
                                         </div>
                                     </form>
                                 </div>

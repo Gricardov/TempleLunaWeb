@@ -180,3 +180,7 @@
         height: 300px;
     }
 }
+
+.tab-content {
+    overflow: unset !important;
+}

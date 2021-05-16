@@ -2,7 +2,7 @@
     position: fixed;
     border-radius: 10px;
     width: 90%;
-    min-height: 200px;
+    min-height: 100px;
     height: calc(100vh - 6rem);
     overflow-y: auto;
     left: 0;
@@ -10,7 +10,7 @@
     margin: 3rem auto;
     background: #fff;
     z-index: 16;
-    padding: 2.5rem;
+    padding: 2rem;
     -webkit-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
     box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
@@ -20,8 +20,12 @@
 @media (min-width: 768px) {
     .modal {
         width: 80%;
-        padding: 3.5rem 5rem;
     }
+}
+
+.modal .description-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .modal .footer-modal {
@@ -191,12 +195,4 @@
 
 .punctuation-modal {
     min-height: 150px;
-    height: 150px;
-}
-
-@media (min-width: 768px) {
-    .punctuation-modal {
-        min-height: 200px;
-        height: 200px;
-    }
 }

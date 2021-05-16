@@ -1,26 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ConfirmationModal from './confirmationModal';
-import ClipLoader from "react-spinners/ClipLoader";
-import Avatar from '../avatar';
-import Zoom from 'react-reveal/Zoom';
-import { getDateText, getExpDateText, getMessengerTypeName, getFormattedPhone, getAbrevPointName, extractLink } from '../../helpers/functions';
-import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-import { css } from "@emotion/core";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faEdit, faEye, faHandPaper, faLayerGroup, faTasks, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { getProfileStorage } from '../../helpers/userStorage';
 import './modals.css';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import CorrectionModal from './correctionDetail';
 import CritiqueModal from './critiqueDetail';
 import DesignModal from './designDetail';
 
-const overrideSpinnerInline = css`
-  display: inline-block;
-  margin-left: .6rem;
-  vertical-align: middle;
-`;
+const maxDaysExp = 7;
 
 const Modal = (props) => {
 
@@ -31,7 +16,8 @@ const Modal = (props) => {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
-        }        
+        }
+        return () => document.body.style.overflow = 'unset';
     }, [props.isOpen]);
 
     const confirm = () => {
@@ -57,7 +43,7 @@ const Modal = (props) => {
             <ConfirmationModal
                 isOpen={openConfirmationModal}
                 title='Casi listo'
-                message='Al aceptar, tienes hasta 7 días para entregar la corrección o acordar una fecha con la persona interesada. ¿Continuar?'
+                message={'Al aceptar, tienes hasta ' + maxDaysExp + ' días para entregar la corrección o acordar una fecha con la persona interesada. ¿Continuar?'}
                 confirm={confirm}
                 close={() => setOpenConfirmationModal(false)} />
             {

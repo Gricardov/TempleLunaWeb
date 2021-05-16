@@ -7,7 +7,8 @@ import HelmetMetaData from "../componentes/helmet";
 import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import MiniProfile from '../componentes/profile/mini-profile';
-import { extractLink, getServiceById } from '../helpers/functions';
+import SpeechBubble from '../componentes/speech-bubble/speech-bubble';
+import { extractLink } from '../helpers/functions';
 import { getRequest, likeRequestResult, addAnalitics } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faDownload, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +16,6 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { css } from "@emotion/core";
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 import { FacebookShareButton } from "react-share";
-import SpeechBubble from '../componentes/speech-bubble/speech-bubble';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
 const overrideSpinnerInline = css`
@@ -198,6 +198,7 @@ const Previsualizacion = ({ location }) => {
         } else {
             console.log('Test mode');
         }
+        setIsOpenPunctuationModal(false);
     }
 
     const togglePunctuationModal = () => {
@@ -205,7 +206,6 @@ const Previsualizacion = ({ location }) => {
     }
 
     let shareQuote;
-    let speechBubble = 'Atrae lectores a tu obra con este botón';
 
     if (isTemplated) {
         shareQuote = `Hola amigos, les quiero compartir ${type == 'CRITICA' ? 'la crítica' : type == 'DISENO' ? 'el diseño' : 'el trabajo'} que me hicieron en Temple Luna. Los invito a pedir uno(a) en su página oficial :)`;
@@ -220,10 +220,13 @@ const Previsualizacion = ({ location }) => {
             {
                 isLoading && !isLoadTimeout && <LoadingScreen text={loadingMsg} />
             }
-            <HelmetMetaData url={url} title={`${type == 'DISENO' ? '[Diseño]' : '[Crítica]'} ${title} - Temple Luna`} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
+            <HelmetMetaData url={url} title={`${type == 'DISENO' ? '[Diseño]' : type == 'CRITICA' ? '[Crítica]' : ''} ${title} - Temple Luna`} image={type == 'DISENO' ? resultUrl : 'https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44'} />
             <Navbar position='absolute' />
             <PunctuationModal
                 requestId={id}
+                url={url}
+                shareQuote={shareQuote}
+                onFinishedSharedIntention={onFinishedSharedIntention}
                 requestType={type}
                 punctuationType={punctuationType}
                 isOpen={isOpenPunctuationModal}
@@ -282,7 +285,7 @@ const Previsualizacion = ({ location }) => {
             <div className='bottom-prev-navbar position-relative'>
                 <div className='speech-container'>
                     <Fade when={hasScrolledToOffset}>
-                        <SpeechBubble text={speechBubble} />
+                        <SpeechBubble text={'Comparte aquí el trabajo de este artista'} />
                     </Fade>
                 </div>
 
@@ -290,7 +293,7 @@ const Previsualizacion = ({ location }) => {
                     <button className='button-purple' onClick={onReadButtonClicked}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faBook} className='icon' />
                         {' '}
-                        Leer obra
+                        Ver obra
                     </button>
                     {
                         isTemplated
@@ -323,7 +326,7 @@ const Previsualizacion = ({ location }) => {
                             style={{ width: '100%', height: '100%' }}>
                             <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
                             {' '}
-                        Comparte
+                        Compartir
                     </FacebookShareButton>
                     </button>
                     <button className='button-purple' onClick={() => window.open(resultUrl)}>

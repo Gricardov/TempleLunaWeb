@@ -2,9 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DetailRequestModal from '../componentes/modal/detailRequestModal';
-import DesignDetailModal from '../componentes/modal/designDetail';
-import CritiqueDetailModal from '../componentes/modal/critiqueDetail';
-import CorrectionDetailModal from '../componentes/modal/correctionDetail';
+import FeedbackModal from '../componentes/modal/feedbackModal';
 import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
@@ -12,7 +10,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, editorialServices } from '../data/data';
-import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
+import { getStatistics, getRequests, getRequest, takeRequest, request } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
 import { getServiceById } from '../helpers/functions';
 
@@ -32,7 +30,8 @@ const Admin = () => {
     const [isLast, setIsLast] = useState(false);
     const [initialLoading, setInitialLoading] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [isOpenModal, setOpenModal] = useState(false);
+    const [isOpenDetailModal, setDetailOpenModal] = useState(false);
+    const [isOpenFeedbackModal, setOpenFeedbackModal] = useState(false);
     const [registry, setRegistry] = useState(null);
     const [tabList, setTabList] = useState(requestStatuses);
 
@@ -43,11 +42,16 @@ const Admin = () => {
 
     const { services = [] } = getProfileStorage() || {};
 
-    const openModal = (request) => {
+    const openDetailModal = (request) => {
         setRegistry(request);
         setTakingRequest(false);
         setSuccesfulRequestTake(false);
-        setOpenModal(true);
+        setDetailOpenModal(true);
+    }
+
+    const openFeedbackModal = (request) => {
+        setRegistry(request);
+        setOpenFeedbackModal(true);
     }
 
     const updRequestType = (val) => {
@@ -156,14 +160,20 @@ const Admin = () => {
     return (
         <div>
             <Navbar />
-            
+
             <DetailRequestModal
                 data={registry}
-                isOpen={isOpenModal}
-                close={() => setOpenModal(false)}
+                isOpen={isOpenDetailModal}
+                close={() => setDetailOpenModal(false)}
                 takingRequest={takingRequest}
                 succesfulRequestTake={succesfulRequestTake}
                 takeRequest={confirmRequest} />
+
+            <FeedbackModal
+                isOpen={isOpenFeedbackModal}
+                close={() => setOpenFeedbackModal(false)}
+                message={registry?.feedback?.message}
+                authorName={registry?.name.split(' ')[0]} />
 
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
@@ -191,7 +201,11 @@ const Admin = () => {
                         <div>
                             {
                                 requestList.map(request => (
-                                    <RequestCard key={request.id} data={request} select={openModal} />
+                                    <RequestCard
+                                        key={request.id}
+                                        showFeedback={openFeedbackModal}
+                                        select={openDetailModal}
+                                        data={request} />
                                 ))
                             }
                         </div>
