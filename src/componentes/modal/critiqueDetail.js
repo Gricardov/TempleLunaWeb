@@ -10,8 +10,8 @@ import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faEdit, faEye, faHandPaper, faLayerGroup, faTasks, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getProfileStorage } from '../../helpers/userStorage';
-import './modals.css';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import './modals.css';
 
 const overrideSpinnerInline = css`
   display: inline-block;
@@ -19,29 +19,15 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
-
-    const { logged } = useContext(AuthContext);
-
-    const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) => {
 
     const history = useHistory();
 
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-    }, [isOpen]);
-
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-    }, [isOpen]);
+    const { logged } = useContext(AuthContext);
+    const isTakenByMe = data?.takenBy == logged.uid;
+    const messengerType = data?.messengerType;
+    const formattedPhone = getFormattedPhone(data?.phone);
+    const formattedLink = extractLink(data?.link);
 
     let styles = '';
     if (isOpen) {
@@ -49,37 +35,10 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
     } else {
         styles = 'close';
     }
-
-    const confirm = () => {
-        setOpenConfirmationModal(false);
-        takeRequest(data?.id);
-    }
-
-    const isTakenByMe = data?.takenBy == logged.uid;
-    const messengerType = data?.messengerType;
-    const profile = getProfileStorage();
-    const formattedPhone = getFormattedPhone(data?.phone);
-    const formattedLink = extractLink(data?.link);
-    const artist = {
-        fName: profile?.fName || '',
-        lName: profile?.lName || '',
-        contactEmail: profile?.contactEmail || '',
-        networks: profile?.networks || []
-    };
-    if (data) {
-        data.artist = artist;
-    }
-    //console.log(formattedPhone)
+ 
     return (
         <>
-            <ConfirmationModal
-                isOpen={openConfirmationModal}
-                title='Casi listo'
-                message='Al aceptar, tienes hasta 7 días para entregar la crítica o acordar una fecha con la persona interesada. ¿Continuar?'
-                confirm={confirm}
-                close={() => setOpenConfirmationModal(false)} />
-            <div className={'overlay overlay-modal ' + styles} onClick={close}>
-            </div>
+            <div className={'overlay overlay-modal ' + styles} onClick={close} />
             <Zoom bottom collapse when={isOpen}>
                 <div className={'modal ' + styles}>
                     <div className='modal-container'>
@@ -160,7 +119,7 @@ const Modal = ({ isOpen, data, takeRequest, takingRequest, close }) => {
                                                 {
                                                     data?.status == 'DISPONIBLE'
                                                         ?
-                                                        <button onClick={() => setOpenConfirmationModal(true)} className='button button-blue button-option-request'>
+                                                        <button onClick={() => openConfirmationModal(true)} className='button button-blue button-option-request'>
                                                             <FontAwesomeIcon color={'#fff'} icon={faHandPaper} className='icon' />
                                                             Tomar pedido
                                                         </button>

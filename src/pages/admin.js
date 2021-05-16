@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
+import DetailRequestModal from '../componentes/modal/detailRequestModal';
 import DesignDetailModal from '../componentes/modal/designDetail';
 import CritiqueDetailModal from '../componentes/modal/critiqueDetail';
 import CorrectionDetailModal from '../componentes/modal/correctionDetail';
@@ -31,9 +32,7 @@ const Admin = () => {
     const [isLast, setIsLast] = useState(false);
     const [initialLoading, setInitialLoading] = useState(false);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [isOpenDesignModal, setOpenDesignModal] = useState(false);
-    const [isOpenCritiqueModal, setOpenCritiqueModal] = useState(false);
-    const [isOpenCorrectionModal, setOpenCorrectionModal] = useState(false);
+    const [isOpenModal, setOpenModal] = useState(false);
     const [registry, setRegistry] = useState(null);
     const [tabList, setTabList] = useState(requestStatuses);
 
@@ -45,22 +44,10 @@ const Admin = () => {
     const { services = [] } = getProfileStorage() || {};
 
     const openModal = (request) => {
-
         setRegistry(request);
         setTakingRequest(false);
         setSuccesfulRequestTake(false);
-
-        switch (request.type) {
-            case 'CRITICA':
-                setOpenCritiqueModal(true);
-                break;
-            case 'DISENO':
-                setOpenDesignModal(true);
-                break;
-            case 'CORRECCION':
-                setOpenCorrectionModal(true);
-                break;
-        }
+        setOpenModal(true);
     }
 
     const updRequestType = (val) => {
@@ -169,28 +156,15 @@ const Admin = () => {
     return (
         <div>
             <Navbar />
-            <DesignDetailModal
+            
+            <DetailRequestModal
                 data={registry}
-                isOpen={isOpenDesignModal}
-                close={() => setOpenDesignModal(false)}
+                isOpen={isOpenModal}
+                close={() => setOpenModal(false)}
                 takingRequest={takingRequest}
                 succesfulRequestTake={succesfulRequestTake}
                 takeRequest={confirmRequest} />
-            <CritiqueDetailModal
-                data={registry}
-                isOpen={isOpenCritiqueModal}
-                close={() => setOpenCritiqueModal(false)}
-                takingRequest={takingRequest}
-                succesfulRequestTake={succesfulRequestTake}
-                takeRequest={confirmRequest} />
-            <CorrectionDetailModal
-                data={registry}
-                isOpen={isOpenCorrectionModal}
-                close={() => setOpenCorrectionModal(false)}
-                takingRequest={takingRequest}
-                succesfulRequestTake={succesfulRequestTake}
-                takeRequest={confirmRequest}
-            />
+
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
