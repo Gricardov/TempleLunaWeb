@@ -10,7 +10,7 @@
     margin: 3rem auto;
     background: #fff;
     z-index: 16;
-    padding: 2rem;
+    padding: 2.2rem;
     -webkit-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
     box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
@@ -20,6 +20,7 @@
 @media (min-width: 768px) {
     .modal {
         width: 80%;
+        padding: 2.8rem;
     }
 }
 
