@@ -184,7 +184,7 @@ const Solicitud = () => {
                                         <FontAwesomeIcon color={'#3DE58D'} icon={faCheckCircle} style={{ fontSize: '8rem' }} />
                                         <h3 className='mt-1 mb-1'>Listo</h3>
                                     </Fade>
-                                    <p className='txt-responsive-form m0-auto'>En unos días te contactaremos</p>
+                                    <p className='txt-responsive-form m0-auto'>Cuando terminemos tu pedido, lo recibirás en tu correo</p>
                                     <div className='form-buttons-container mt-3'>
                                         <Link to={'inicio'} className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faHome} size='xl' />
@@ -219,9 +219,9 @@ const Solicitud = () => {
                                                             <b> <a target='_blank' href='https://templeluna.app/prev_resultado?id=Ik52xvRTdBelcdRKQBKt&t=Remordimiento&test=true'>aquí</a></b>.<br /><br />
 
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
-                                                            Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
-                                                            Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.
-                                                            Finalmente, el artista podrá usar el pedido para promocionar en su <b>propio portafolio</b><br /><br />
+                                                            - Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
+                                                            - Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.<br />
+                                                            - <b>Finalmente</b>, el artista podrá usar la crítica su <b>portafolio</b>.<br /><br />
 
                                                             <b>4- ¿Cuál es el costo?</b><br /><br />
                                                             Por el momento, este servicio es <b>gratuito</b>. Cuando no lo sea, <b>lo dejaremos claro</b>.<br /><br />
@@ -230,7 +230,7 @@ const Solicitud = () => {
                                                             El equipo está conformado por <b>voluntarios</b>, los cuales han tenido que demostrar <b>experiencia en críticas</b>.<br /><br />
 
                                                             <b>6- ¿Cómo puedo agradecer?</b><br /><br />
-                                                            Cuando <b>recibas</b> tu pedido, tendrás disponible el botón de <b>Compartir</b>. Comparte nuestro trabajo para que <b>más personas</b> conozcan la iniciativa.<br /><br />
+                                                            <b>Comparte</b> nuestro trabajo en redes. Tendrás un <b>botón de "Compartir"</b> cuando recibas tu pedido. Eso nos ayudaría <b>mucho</b>.<br /><br />
 
                                                             <b>7- ¿Cómo puedo ser voluntario?</b><br /><br />
                                                             Escríbenos por el <b> <a target='_blank' href='https://www.facebook.com/groups/templeluna/'>grupo oficial</a></b> y podemos coordinar una <b>entrevista con el creador</b>.
