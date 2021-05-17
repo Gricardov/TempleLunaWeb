@@ -278,7 +278,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
             <FacebookShareButton
                 url={`${process.env.REACT_APP_WEBSITE}/perfil/${qFollowName}`}
                 quote={'¡Pídeme ' + services.map(service => getServiceById(service)?.name).join(services.length > 2 ? ', ' : ' y ').toLowerCase() + ' en Temple Luna! :)'}
-                className='fab'
+                className='fab fab-hide-first'
                 hashtag='#templeluna'>
                 {' '}
                 <FontAwesomeIcon icon={faShareAlt} className='icon' />

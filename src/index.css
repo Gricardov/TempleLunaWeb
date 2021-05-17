@@ -422,14 +422,14 @@ p {
 }
 
 /*Una pendejada para que se vea otro ícono diferente*/
-.react-share__ShareButton > svg {
+.react-share__ShareButton.fab-hide-first > svg {
   display: none;
   color: white;  
 }
 
 /*Una pendejada para que se vea otro ícono diferente*/
-.react-share__ShareButton > svg:last-of-type {
-  display: block;
+.react-share__ShareButton.fab-hide-first > svg:last-of-type {
+  display: inline;
   color: white;
   font-size: 2.2rem;
 }
