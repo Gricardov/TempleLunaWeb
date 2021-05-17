@@ -53,15 +53,15 @@ const Card = React.forwardRef(({ data, select, showFeedback }, ref) => {
                                     ?
                                     <button onClick={() => history.push('prep_critica', { data })} className='button button-green button-option-request'>
                                         <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
-                                    Iniciar crítica
-                                </button>
+                                        Iniciar crítica
+                                    </button>
                                     :
                                     data.type == 'DISENO'
                                         ?
                                         <button onClick={() => history.push('prep_diseno', { data })} className='button button-green button-option-request'>
                                             <FontAwesomeIcon color={'#fff'} icon={faPaintBrush} className='icon' />
-                                    Iniciar diseño
-                                </button>
+                                            Iniciar diseño
+                                        </button>
                                         :
                                         data.type == 'CORRECCION'
                                             ?

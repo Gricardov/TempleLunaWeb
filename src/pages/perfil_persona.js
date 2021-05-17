@@ -13,7 +13,8 @@ import { css } from "@emotion/core";
 import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/functions';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FacebookShareButton } from "react-share";
+import { faEye, faHeart, faShare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { getStatistics, getRequests } from '../api';
 import { useHistory } from 'react-router-dom';
 
@@ -24,7 +25,7 @@ const override = css`
 
 const limit = 3;
 
-const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles, services, editorial }) => {
+const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles, services, qFollowName, followName, editorial }) => {
 
     const { logged } = useContext(AuthContext);
     const history = useHistory();
@@ -274,6 +275,14 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                     </div>
                 </Tabs>
             </main>
+            <FacebookShareButton
+                url={`${process.env.REACT_APP_WEBSITE}/perfil/${qFollowName}`}
+                quote={'¡Pídeme ' + services.map(service => getServiceById(service)?.name).join(services.length > 2 ? ', ' : ' y ').toLowerCase() + ' en Temple Luna! :)'}
+                className='fab'
+                hashtag='#templeluna'>
+                {' '}
+                <FontAwesomeIcon icon={faShareAlt} className='icon' />
+            </FacebookShareButton>
             <Footer />
         </div >
     );

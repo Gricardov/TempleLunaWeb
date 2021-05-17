@@ -282,7 +282,7 @@ const Previsualizacion = ({ location }) => {
                     }
                 </section>
             </main>
-            <div className='bottom-prev-navbar position-relative'>
+            <div className='bottom-prev-navbar'>
                 <div className='speech-container'>
                     <Fade when={hasScrolledToOffset}>
                         <SpeechBubble text={'Comparte aquí el trabajo de este artista'} />
