@@ -7,10 +7,11 @@ import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
+import queryString from 'query-string';
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { requestStatuses, editorialServices } from '../data/data';
-import { getStatistics, getRequests, getRequest, takeRequest, request } from '../api';
+import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
 import { getServiceById } from '../helpers/functions';
 
@@ -22,7 +23,7 @@ const override = css`
 const requestTypeList = editorialServices;
 const limit = 3;
 
-const Admin = () => {
+const Admin = ({ location }) => {
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const [requestType, setRequestType] = useState(requestTypeList[0]);
@@ -148,6 +149,23 @@ const Admin = () => {
     }
 
     useEffect(() => {
+
+        const { viewFeedback } = queryString.parse(location.search);
+
+        if (viewFeedback) {
+            getRequest(viewFeedback).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
+                if (!error) {
+                    openFeedbackModal(data);
+                    window.history.replaceState(null, '', '/admin');
+                } else {
+                    alert('No se encontró el archivo. Intente más tarde');
+                }
+            });
+        }
+
+    }, [location]);
+
+    useEffect(() => {
         requestData();
     }, [activeTabIndex, requestType.id]);
 
@@ -172,6 +190,7 @@ const Admin = () => {
             <FeedbackModal
                 isOpen={isOpenFeedbackModal}
                 close={() => setOpenFeedbackModal(false)}
+                title={registry?.title}
                 message={registry?.feedback?.message}
                 authorName={registry?.name.split(' ')[0]} />
 

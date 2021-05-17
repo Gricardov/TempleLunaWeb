@@ -92,7 +92,7 @@ const Previsualizacion = ({ location }) => {
         }
 
         if (id) {
-            getRequest(id, true).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
+            getRequest(id).then(({ data, error }) => { // El segundo parámetro es para decidir si se solicitan detalles
                 if (!error) {
                     const { type, resultUrl, title, name, link, likes, artist } = data;
                     setLoadingMsg('Obtenido: ' + title);

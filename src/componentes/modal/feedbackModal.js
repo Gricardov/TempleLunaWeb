@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCheck } from '@fortawesome/free-solid-svg-icons';
 import './modals.css';
 
-const Modal = ({ isOpen, close, authorName, message }) => {
+const Modal = ({ isOpen, close, authorName, title, message }) => {
 
     let styles = '';
 
@@ -24,13 +24,13 @@ const Modal = ({ isOpen, close, authorName, message }) => {
                     <div className='modal-container'>
                         <div className='header-container position-relative'>
                             <div className='title-container'>
-                                <h3 className='clamp clamp-1'>{authorName} comentó:</h3>
+                                <h3 className='clamp clamp-2'>Obra: {title}</h3>
                             </div>
                             <FontAwesomeIcon icon={faAngleDown} onClick={close} className='close-icon' />
                         </div>
                         <div className='description-container'>
                             <p>
-                                {message || <i>{authorName + ' dejó un mensaje vacío'}</i>}
+                                {<><b>{authorName} comentó: </b> {message}</> || <i>{authorName + ' dejó un mensaje vacío'}</i>}
                             </p>
                         </div>
                         <div className="footer-card-container">
