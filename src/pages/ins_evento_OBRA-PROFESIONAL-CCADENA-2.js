@@ -189,7 +189,7 @@ const Inscripcion = () => {
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
                     <h2 className='mb-0'>{mainTitle}</h2>
-                    <p className='txt-responsive-form w-60 w-md-75'>con {hostName}</p>
+                    <p className='txt-responsive-form w-60 w-md-75'>Con {hostName}</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
                     <div style={{ backgroundImage: `url(${ImgAutor})` }} alt='img-fondo' className='img-fondo-formulario' />

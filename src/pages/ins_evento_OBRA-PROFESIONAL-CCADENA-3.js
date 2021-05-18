@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgAutor from '../img/link.svg';
+import ImgAutor from '../img/ccadena.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
@@ -27,8 +27,8 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const mainTitle = 'Aprende a ser pagado por escribir';
-const hostName = 'Cristina de Martinez';
+const mainTitle = 'Construye tu novela como un profesional';
+const hostName = 'Carlos Cadena';
 
 const Inscripcion = () => {
 
@@ -113,7 +113,6 @@ const Inscripcion = () => {
     }
 
     const checkErrors = () => {
-
         let error = (isNameInvalid(name) || isAgeInvalid(age) || isPhoneInvalid(phone) || isEmailInvalid(email));
 
         // Custom errors
@@ -144,7 +143,7 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="¿La plataforma de turno no valora lo que escribes? Puedes tener una joya oculta entre manos por la que muchos pagarían." />
+            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="¿Eres escritor? Perfecciona tus habilidades con este curso en vivo y destaca sobre los demás. Es gratuito." />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
@@ -187,28 +186,23 @@ const Inscripcion = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group mb-0'>
-                                                        <h2>¡Bienvenido(a) al taller!</h2>
-                                                        <p>¿La <b>plataforma de turno</b> no valora lo que escribes?<br /><br />
-                                                            <b>A muchos nos sucede</b> cuando empezamos a escribir: La plataforma promociona <b>las historias de siempre</b> y todos terminan leyendo <b> fanfics de Donald Trump </b>
-                                                        o los <b>Jonas Brothers versión pandemia</b>.<br /><br />
-                                                        Pero todos sabemos que hay <b>joyas ocultas</b>. Las plataformas <b>serias</b> también lo saben. <b>Por eso,</b> buscan constantemente a esos artistas y <b>les pagan por escribir</b>.
-                                                        Aquí tienes <b>dos ejemplos</b> de obras publicadas por miembros de nuestra <b>comunidad:</b> <b><a target='_blank' href='https://www.buenovela.com/book_info/31000016987/Romntica/La-Obsesin-de-Jack-Black'>La obsesión de Black Jack</a></b>
-                                                            {' y '}<b><a target='_blank' href='https://www.buenovela.com/book_info/31000018353/Ciencia-Ficcin/El-Juego-(El-Juego-1)'>El juego</a></b>.<br /><br />
-
-                                                            <b>Tú puedes tener una joya oculta entre manos</b>. ¡Inscríbete al taller y aprende a postular!<br /><br />
-
-                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Inscríbete <b>solamente</b> si vas a asistir.<br /><br />
-
-                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otras dinámicas de Temple Luna.</b><br /><br />
-                                                        </p>
+                                                        <h2>¡Hola, escritor!</h2>
+                                                        <p>Hemos creado este gran curso <b>en vivo</b> para enseñarte a crear obras de calidad desde <b>la psicología de los personajes</b> y lograr que estas destaquen sobre cualquier otra.<br /><br />
+                                                            Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Por ahí <b>pasaremos los links de transmisión.</b> Además, podrás interactuar con el instructor y los demás autores.<br /><br />
+                                                            Inscríbete <b>solamente</b> si vas a asistir a las dos sesiones. Cada sesión requerirá que hayas leido <b>un texto que te indicaremos</b>. Este servirá para hacer el correspondiente análisis.<br /><br />
+                                                            El curso es <b>gratuito</b> y dado que algunas obras pueden contener temas <b>sensibles</b>, sugerimos que solo entres si eres <b>mayor de edad. </b><br /><br />
+                                                            <b>*Si te inscribes e incumples, ya no serás tenido en cuenta en otros talleres de Temple Luna. Tú quieres dominar las letras, así que lee bien el horario y requisitos.</b><br /><br />                                                            </p>
                                                     </div>
 
                                                     <div className='form-group'>
                                                         <ul>
                                                             <li><b>Número de sesiones:</b> 1</li>
-                                                            <li><b>Autora:</b> Cristina de Martinez</li>
+                                                            <li><b>Duración de la sesión:</b> 1h 30m</li>
+                                                            <li><b>Instructor:</b> Carlos Cadena</li>
                                                             <li><b>Plataforma:</b> Google Meets</li>
-                                                            <li><b>Horario:</b> Lunes, 17 de mayo a las 5pm (Hora Lima - Colombia)</li>
+                                                            <li><b>Horarios:</b> Jueves, 20 de mayo a las 12 del mediodia (Hora Lima - Colombia)</li>
+                                                            <li><b>Requisito:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
+                                                            <li><b>¿Quieres ver el evento anterior?:</b> Míralo <b><a target="_blank" href="https://www.youtube.com/watch?v=4VQ_MMYBI5Y&ab_channel=TempleLuna">aquí</a></b>.</li>
                                                         </ul>
                                                     </div>
 
@@ -242,33 +236,32 @@ const Inscripcion = () => {
                                                         <input minLength="6" maxLength="100" type="email" value={email} onChange={updEmail} id="txtCorreo" placeholder="Ingresa tu correo" />
                                                     </div>
 
+
                                                 </div>
                                                 <div className='step-3'>
 
                                                     <div className='form-group'>
-
-                                                        <div className='form-group'>
-                                                            <label htmlFor="txtLink">He leído los horarios y confirmo mi asistencia</label>
-                                                            {
-                                                                chkPoints.map(point => {
-                                                                    const included = includesPoint(point.id);
-                                                                    return (
-                                                                        <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
-                                                                            {
-                                                                                included
-                                                                                    ?
-                                                                                    <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
-                                                                                    :
-                                                                                    <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
-                                                                            }
-                                                                            {' '}
-                                                                            {point.name}
-                                                                        </div>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
+                                                        <label htmlFor="txtLink">He leído los horarios, plataformas, requisitos y confirmo mi asistencia.</label>
+                                                        {
+                                                            chkPoints.map(point => {
+                                                                const included = includesPoint(point.id);
+                                                                return (
+                                                                    <div key={point.id} onClick={() => selectPoint(point.id)} className={`chkTag ${included ? 'active' : ''}`}>
+                                                                        {
+                                                                            included
+                                                                                ?
+                                                                                <FontAwesomeIcon color={'white'} icon={faCheck} style={{ fontSize: '1.6rem' }} />
+                                                                                :
+                                                                                <FontAwesomeIcon color={'#adadad'} icon={faDotCircle} style={{ fontSize: '1.6rem' }} />
+                                                                        }
+                                                                        {' '}
+                                                                        {point.name}
+                                                                    </div>
+                                                                )
+                                                            })
+                                                        }
                                                     </div>
+
                                                 </div>
                                             </StepManager>
                                             <div className='form-buttons-container'>
