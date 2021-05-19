@@ -202,6 +202,7 @@ const Inscripcion = () => {
                                                             <li><b>Plataforma:</b> Google Meets</li>
                                                             <li><b>Horarios:</b> Jueves, 20 de mayo a las 12 del mediodia (Hora Lima - Colombia)</li>
                                                             <li><b>Requisito:</b> Leer "Eróstrato". Accede desde <b><a target="_blank" href="https://www.wattpad.com/1040308420-artilugios-del-placer-antolog%C3%ADa-de-candentes">aquí</a></b>.</li>
+                                                            <li><b>Obras llevadas al teatro:</b> Ver <b><a target="_blank" href="https://www.facebook.com/LosDemoniosDetrasDeLaPared/">aquí</a></b>.</li>                                                            
                                                             <li><b>¿Quieres ver el evento anterior?:</b> Míralo <b><a target="_blank" href="https://www.youtube.com/watch?v=4VQ_MMYBI5Y&ab_channel=TempleLuna">aquí</a></b>.</li>
                                                         </ul>
                                                     </div>
