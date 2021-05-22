@@ -215,7 +215,7 @@ const Solicitud = () => {
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
                                                             - No envíes links de <b>Wattpad,</b> recuerda que no se pueden <b>copiar</b> para corregir. Una opción es subir tu texto a Google Drive y compartir el <b>link de acceso</b>.<br />
                                                             - Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
-                                                            - Asimismo, <b>por razones de seguridad, </b> evita envíar escritos inéditos o que aún no pienses publicar.<br />
+                                                            - El link a tu obra quedará <b>público</b> en el perfil del voluntario. No envíes <b>obras inéditas</b> o <b>que aún no pienses publicar</b>.<br />
                                                             - <b>Finalmente</b>, el artista podrá usar la corrección en su <b>portafolio</b>.<br /><br />
 
                                                             <b>4- ¿Cuál es el costo?</b><br /><br />
