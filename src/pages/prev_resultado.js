@@ -8,6 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Fade from 'react-reveal/Fade';
 import MiniProfile from '../componentes/profile/mini-profile';
 import SpeechBubble from '../componentes/speech-bubble/speech-bubble';
+import { useScrollOffset } from '../hooks/useScrollOffset';
 import { extractLink } from '../helpers/functions';
 import { getRequest, likeRequestResult, addAnalitics } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -48,28 +49,7 @@ const Previsualizacion = ({ location }) => {
     const [origin, setOrigin] = useState('OTHER');
 
     const [numPages, setNumPages] = useState(0);
-    const [hasScrolledToOffset, setHasScrolledToOffset] = useState(false);
-
-    const checkScroll = () => {
-        const body = document.body;
-        const html = document.documentElement;
-        const offsetY = window.scrollY; // Scrolled height
-        const vpHeight = window.innerHeight; // Viewport height
-
-        const totalHeight = Math.max(body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight);
-
-        if ((totalHeight - (offsetY + vpHeight)) <= 600) {
-            if (!hasScrolledToOffset) {
-                setHasScrolledToOffset(true);
-            }
-        } else {
-            if (hasScrolledToOffset) {
-                setHasScrolledToOffset(false);
-            }
-
-        }
-    }
+    const { hasScrolledToBottomOffset } = useScrollOffset(800);
 
     useEffect(() => {
 
@@ -131,12 +111,7 @@ const Previsualizacion = ({ location }) => {
             }, 10000);
             return () => clearTimeout(timeout);
         }
-    }, [id, success])
-
-    useEffect(() => {
-        window.addEventListener('scroll', checkScroll);
-        return () => window.removeEventListener('scroll', checkScroll);
-    }, [hasScrolledToOffset]);
+    }, [id, success]);
 
     const onDocumentLoadSuccess = ({ numPages = 0 }) => {
         setIsLoading(false);
@@ -284,7 +259,7 @@ const Previsualizacion = ({ location }) => {
             </main>
             <div className='bottom-prev-navbar'>
                 <div className='speech-container'>
-                    <Fade when={hasScrolledToOffset}>
+                    <Fade when={hasScrolledToBottomOffset}>
                         <SpeechBubble text={'Comparte aquí el trabajo de este artista'} />
                     </Fade>
                 </div>

@@ -8,13 +8,14 @@ import PuffLoader from "react-spinners/PuffLoader";
 import ResultPreviewCard from '../componentes/result-preview-card';
 import Tooltip from '../componentes/tooltip';
 import Avatar from '../componentes/avatar';
+import { useScrollOffset } from '../hooks/useScrollOffset';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { css } from "@emotion/core";
 import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/functions';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FacebookShareButton } from "react-share";
-import { faEye, faHeart, faShare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faEye, faHeart, faShare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { getStatistics, getRequests } from '../api';
 import { useHistory } from 'react-router-dom';
 
@@ -43,6 +44,8 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
     const [requestList, setRequestList] = useState([]);
     const [visibleColumns, setVisibleColumns] = useState(0); // Esto estblaece cuantos datos solicitar * 2 para que se vea en la pantasa
     const [tabList, setTabList] = useState(services.map(service => getServiceById(service)));
+    const [servicesText, setServicesText] = useState('');
+    const { hasScrolledToTopOffset } = useScrollOffset(500);
     const { width } = useWindowSize();
 
     const [roleTooltipOpen, setRoleTooltipOpen] = useState(false);
@@ -112,6 +115,15 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
     }, [width]);
 
     useEffect(() => {
+        if (services.length == 1) {
+            setServicesText(getServiceById(services[0])?.name)
+        } else {
+            const last = getServiceById(services[services.length - 1])?.name;
+            setServicesText((services.slice(0, services.length - 1).map(service => getServiceById(service)?.name).join(', ') + ' y ' + last).toLowerCase());
+        }
+    }, [services]);
+
+    useEffect(() => {
         requestData();
     }, [activeTabIndex, visibleColumns]);
 
@@ -125,7 +137,10 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
 
     return (
         <div>
-            <HelmetMetaData title={`${logged ? fName + ' ' + lName + ' - Temple Luna' : '¡' + fName + ' ' + lName + ' ya está en Temple Luna!'}`} image={imgUrl} />
+            <HelmetMetaData
+                title={`${logged ? fName + ' ' + lName + ' - Temple Luna' : '¡' + fName + ' ' + lName + ' ya está en Temple Luna!'}`}
+                description={'Entra y solicita tus ' + servicesText + ' desde mi perfil. ¡Te van a encantar!'}
+                image={imgUrl} />
             <Navbar />
             <main className='main-body below-navbar'>
                 <section className='profile-header-container' style={{ background: 'white' }}>
@@ -275,14 +290,28 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                     </div>
                 </Tabs>
             </main>
-            <FacebookShareButton
-                url={`${process.env.REACT_APP_WEBSITE}/perfil/${qFollowName}`}
-                quote={'¡Pídeme ' + services.map(service => getServiceById(service)?.name).join(services.length > 2 ? ', ' : ' y ').toLowerCase() + ' en Temple Luna! :)'}
-                className='fab-button fab-button-hide-first'
-                hashtag='#templeluna'>
-                {' '}
-                <FontAwesomeIcon icon={faShareAlt} className='icon' />
-            </FacebookShareButton>
+            <div className='fab-button'>
+                <div className={`fab-button__pill ${!hasScrolledToTopOffset ? 'fab-button__pill-dissappear' : 'fab-button__pill-appear'} `}>
+                    <span className='fab-button__caption'>
+                        {
+                            width >= 768
+                                ?
+                                'Ayúdame a ser conocido '
+                                :
+                                'Hazme conocido '
+                        }
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </span>
+                </div>
+                <FacebookShareButton
+                    url={`${process.env.REACT_APP_WEBSITE}/perfil/${qFollowName}`}
+                    quote={'¡Pide tus ' + servicesText + ' aquí!'}
+                    className='fab-button__circle fab-button__circle-hide-first'
+                    hashtag='#templeluna'>
+                    {' '}
+                    <FontAwesomeIcon icon={faShareAlt} className='icon' />
+                </FacebookShareButton>
+            </div>
             <Footer />
         </div >
     );
