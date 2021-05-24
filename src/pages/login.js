@@ -66,7 +66,7 @@ const Login = () => {
                 <section className='container-xl mt-5'>
                     <div className='login-container position-relative'>
                         <img src={ImgColumpio} alt='img-fondo' className='img-fondo-login d-none d-md-block' />
-                        <div className='floating-form'>
+                        <form onSubmit={loginUser} className='floating-form'>
                             <h2 className='m-0'>Ingresa a Temple Luna</h2>
                             <p className='mb-3'>Si quieres pertenecer a nosotros, escríbenos por el grupo</p>
                             <div className='form-group'>
@@ -84,7 +84,7 @@ const Login = () => {
                                 {' '}
                                 <FontAwesomeIcon icon={faSignInAlt} size='xl' />
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </section>
             </main>

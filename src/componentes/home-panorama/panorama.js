@@ -45,8 +45,7 @@ export const Panorama = () => {
             window.open(href);
         } else if (pushTo) {
             history.push(pushTo);
-        }
-        else if (scrollTo) {
+        } else if (scrollTo) {
             const element = document.getElementById(scrollTo);
             element.scrollIntoView();
         }

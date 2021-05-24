@@ -79,8 +79,8 @@ const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) =>
                                     <p>{data?.daysLeft}</p>
                                 </>
                             }
-                            <h4>¿Qué quiero transmitir?</h4>
-                            <p>{data?.intention || 'No hay intención'}</p>
+                            <h4>¿Qué me gustaría ver?</h4>
+                            <p>{data?.intention || 'No hay especificaciones'}</p>
                             <h4>Boceto de referencia</h4>
                             {
                                 data?.urlImg
@@ -91,7 +91,7 @@ const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) =>
                                         </a>
                                     </div>
                                     :
-                                    <p>'No hay boceto de referencia</p>
+                                    <p>No hay boceto de referencia</p>
                             }
                             <h4>Link de la obra</h4>
                             {

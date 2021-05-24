@@ -8,7 +8,6 @@ import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import HelmetMetaData from "../componentes/helmet";
-import { useScrollOffset } from '../hooks/useScrollOffset';
 import { Link } from 'react-router-dom';
 import { extractLink, toName, toSentence } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid, isTitleInvalid, isAuthorInvalid, isIntentionInvalid } from '../helpers/validators';
@@ -36,7 +35,6 @@ const Solicitud = () => {
     const [loading, setLoading] = useState(false); // Determina si se está enviando el form
     const [success, setSuccess] = useState(true); // Determina si se envío el form sin errores
     const { canGoBackwards, isLast } = useStepObserver(activeIndex, steps.length);
-    const { hasScrolledToTopOffset } = useScrollOffset(500);
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -336,7 +334,7 @@ const Solicitud = () => {
                                                 </div>
                                                 <div className='step-3'>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtTitulo">Resume tu historia a una frase</label>
+                                                        <label htmlFor="txtTitulo">Elige un frase principal</label>
                                                         <input minLength="1" maxLength="100" type="text" value={title} onChange={updTitle} id="txtTitulo" placeholder="Ejemplo: El amor todo lo puede" />
 
                                                     </div>
@@ -345,8 +343,8 @@ const Solicitud = () => {
                                                         <input minLength="1" maxLength="100" type="text" value={author} onChange={updAuthor} id="txtPseudonimo" placeholder="Ejemplo: Atenas" />
                                                     </div>
                                                     <div className='form-group'>
-                                                        <label htmlFor="txtIntencion">¿Qué deseas transmitir con tu diseño?</label>
-                                                        <textarea minLength="1" maxLength="1000" rows="4" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Quiero transmitir la idea de un mundo inestable e idealizado por una típica adolescente..."></textarea>
+                                                        <label htmlFor="txtIntencion">Describe lo que quieres ver en tu diseño</label>
+                                                        <textarea minLength="1" maxLength="1000" rows="5" value={intention} onChange={updIntention} id="txtIntencion" placeholder="Ejemplo: Quiero que aparezcan dos mujeres besándose en frente de una multitud, en representación a la lucha LGTB. Quiero un cielo rojizo..."></textarea>
                                                     </div>
                                                     <div className='form-group'>
                                                         <label htmlFor="flBoceto">¿Tienes algún boceto en mente? Súbelo</label>
@@ -419,13 +417,7 @@ const Solicitud = () => {
                 </section>
             </main>
             <div className='fab-button'>
-                <div className={`fab-button__pill fab-button__pill-color-wsp ${!hasScrolledToTopOffset ? 'fab-button__pill-dissappear' : 'fab-button__pill-appear'} `}>
-                    <span className='fab-button__caption'>
-                        {'¿Alguna consulta? '}
-                        <FontAwesomeIcon icon={faAngleRight} />
-                    </span>
-                </div>
-                <a href='https://web.whatsapp.com/send?phone=+51927153346' target='_blank' className='fab-button__circle fab-button__circle-wsp'>
+                <a href={`https://web.whatsapp.com/send?phone=${process.env.REACT_APP_CONTACT_WSP}`} target='_blank' className='fab-button__circle fab-button__circle-wsp'>
                     {' '}
                     <FontAwesomeIcon icon={faWhatsapp} className='icon' />
                 </a>

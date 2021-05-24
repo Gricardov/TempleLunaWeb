@@ -1,24 +1,31 @@
-import React from 'react'
+import React from 'react';
 import Carrousel from '../componentes/stories-carrousel/carrousel';
 import Tag from '../componentes/tag';
 import Footer from '../componentes/footer/footer';
 import Fade from 'react-reveal/Fade';
 import { Panorama } from '../componentes/home-panorama/panorama';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useScrollOffset } from '../hooks/useScrollOffset';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Img1 from '../img/img-seccion-1.PNG';
 import Img2 from '../img/img-seccion-2.PNG';
 import Img3 from '../img/img-seccion-3.PNG';
 import ImgLentes from '../img/lentes.svg';
 import ImgPincel from '../img/pincel.svg';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const Inicio = () => {
+
+    const { hasScrolledToTopOffset } = useScrollOffset(0, 600);
+
     return (
         <div>
             <Panorama />
             <main className='main-body' id='critique-block'>
 
                 <Fade bottom>
-                    <section className='container-xl section section-body'>                        
+                    <section className='container-xl section section-body'>
                         <div className='main-section'>
                             <div className='img-container img-container-lentes'>
                                 <img src={ImgLentes} className='img-lentes' alt='img-lentes' />
@@ -91,6 +98,20 @@ const Inicio = () => {
                 </Fade>
 
             </main>
+
+            <div className='fab-button'>
+                <div className={`fab-button__pill fab-button__pill-color-wsp ${!hasScrolledToTopOffset ? 'fab-button__pill-dissappear' : 'fab-button__pill-appear'} `}>
+                    <span className='fab-button__caption'>
+                        {'¿Alguna consulta? '}
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </span>
+                </div>
+                <a href={`https://web.whatsapp.com/send?phone=${process.env.REACT_APP_CONTACT_WSP}`} target='_blank' className='fab-button__circle fab-button__circle-wsp'>
+                    {' '}
+                    <FontAwesomeIcon icon={faWhatsapp} className='icon' />
+                </a>
+            </div>
+
             <Footer />
         </div>
     );

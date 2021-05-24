@@ -71,7 +71,6 @@ export const getRequests = async (workerId, type, status, startAfter, limit = 10
             return { list, isLast };
         })
         .catch(error => {
-            console.log(error);
             return { list: [] };
         });;
 }
