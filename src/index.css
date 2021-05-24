@@ -421,58 +421,90 @@ p {
   display: flex;
   align-items: center;
   position: absolute;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   right: 50px;
-  height: 35px;
+  height: 30px;
   min-width: 50px;
   background: #8173ff;
   color: white;
   white-space: nowrap;
-  transition: all 500ms ease-in-out;
+  font-size: 1.4rem;
+  transition: all 500ms ease-in-out;  
+}
+
+@media (min-width: 768px) {
+  .fab-button__pill {
+    font-size: 1.6rem;
+    height: 35px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+.fab-button__pill-color-wsp {
+  background: #09b53e !important;
 }
 
 .fab-button__pill-dissappear {
-  /*width: 0px;*/
-  /*padding: 0px;*/
   transform: scaleX(0);
   right: 10px;
   transform-origin: right;
 }
 
 .fab-button__pill-appear {
-  right: 50px;
+  right: 45px;
   transform-origin: right;
 }
 
 .fab-button__circle {
+  cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 15;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: #9991E3 !important;
   box-shadow: 0px 3px 6px #00000029;
+  font-size: 2.2rem;
+  transition: all 400ms ease-in-out;
 }
 
-/*Una pendejada para que se vea otro ícono diferente*/
-
-.react-share__ShareButton.fab-button__circle-hide-first>svg {
-  display: none;
-  color: white;
+@media (min-width: 768px) {
+  .fab-button__circle {
+    width: 60px;
+    height: 60px;
+  }
 }
 
-/*Una pendejada para que se vea otro ícono diferente*/
+.fab-button__circle:hover {
+  transform: scale(1.1);
+}
 
-.react-share__ShareButton.fab-button__circle-hide-first>svg:last-of-type {
-  display: inline;
+.fab-button__circle>svg {
   color: white;
   font-size: 2.2rem;
+}
+
+/*Una pendejada para que se vea otro ícono diferente*/
+
+.fab-button__circle-hide-first>svg {
+  display: none;
+}
+
+/*Una pendejada para que se vea otro ícono diferente*/
+
+.fab-button__circle-hide-first>svg:last-of-type {
+  display: inline;
+}
+
+.fab-button__circle-wsp {
+  background: #20bf51 !important;
 }
 
 .button {

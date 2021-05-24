@@ -8,6 +8,7 @@ import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
 import ImgTematica from '../img/corr-req.svg';
 import HelmetMetaData from "../componentes/helmet";
+import { useScrollOffset } from '../hooks/useScrollOffset';
 import { Link } from 'react-router-dom';
 import { extractLink, toName, toSentence } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid, isLinkInvalid, isTitleInvalid, isAboutInvalid } from '../helpers/validators';
@@ -17,6 +18,7 @@ import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faCheck, faCheckCircle, faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { contactTypes, correctionPoints } from '../data/data';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const steps = ['¡Hola!', 'Contacto', 'Obra', 'Contenido'];
 const chkPoints = correctionPoints;
@@ -32,6 +34,7 @@ const Solicitud = () => {
     const [loading, setLoading] = useState(false); // Determina si se está enviando el form
     const [success, setSuccess] = useState(true); // Determina si se envío el form sin errores
     const { canGoBackwards, isLast } = useStepObserver(activeIndex, steps.length);
+    const { hasScrolledToTopOffset } = useScrollOffset(500);
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -345,6 +348,18 @@ const Solicitud = () => {
 
                 </section>
             </main>
+            <div className='fab-button'>
+                <div className={`fab-button__pill fab-button__pill-color-wsp ${!hasScrolledToTopOffset ? 'fab-button__pill-dissappear' : 'fab-button__pill-appear'} `}>
+                    <span className='fab-button__caption'>
+                        {'¿Alguna consulta? '}
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </span>
+                </div>
+                <a href='https://web.whatsapp.com/send?phone=+51927153346' target='_blank' className='fab-button__circle fab-button__circle-wsp'>
+                    {' '}
+                    <FontAwesomeIcon icon={faWhatsapp} className='icon' />
+                </a>
+            </div>
             <Footer />
         </div>
     );

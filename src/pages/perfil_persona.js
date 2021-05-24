@@ -15,7 +15,7 @@ import { getServiceById, getUserRoleById, getSnIconByUrl } from '../helpers/func
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FacebookShareButton } from "react-share";
-import { faAngleRight, faEye, faHeart, faShare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faEye, faHeart, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { getStatistics, getRequests } from '../api';
 import { useHistory } from 'react-router-dom';
 
@@ -293,13 +293,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
             <div className='fab-button'>
                 <div className={`fab-button__pill ${!hasScrolledToTopOffset ? 'fab-button__pill-dissappear' : 'fab-button__pill-appear'} `}>
                     <span className='fab-button__caption'>
-                        {
-                            width >= 768
-                                ?
-                                'Ayúdame a ser conocido '
-                                :
-                                'Hazme conocido '
-                        }
+                        {'Ayúdame a ser conocido '}
                         <FontAwesomeIcon icon={faAngleRight} />
                     </span>
                 </div>

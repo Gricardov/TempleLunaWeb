@@ -8,8 +8,11 @@ import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
 import queryString from 'query-string';
+import { useScrollOffset } from '../hooks/useScrollOffset';
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { requestStatuses, editorialServices } from '../data/data';
 import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
@@ -35,6 +38,7 @@ const Admin = ({ location }) => {
     const [isOpenFeedbackModal, setOpenFeedbackModal] = useState(false);
     const [registry, setRegistry] = useState(null);
     const [tabList, setTabList] = useState(requestStatuses);
+    const { hasScrolledToTopOffset } = useScrollOffset(500);
 
     const [takingRequest, setTakingRequest] = useState(false);
     const [succesfulRequestTake, setSuccesfulRequestTake] = useState(false);
@@ -231,6 +235,12 @@ const Admin = ({ location }) => {
                     </Tabs>
                 </section>
             </main>
+            <div className='fab-button'>                
+                <div className='fab-button__circle'>
+                    {' '}
+                    <FontAwesomeIcon icon={faPlus} className='icon' />
+                </div>
+            </div>
             <Footer />
         </div>
     );
