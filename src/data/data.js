@@ -14,12 +14,8 @@ import ImgPrevCorreccion from '../img/pre-correccion.png';
 import ImgPrevServicio from '../img/pre-servicio.png';
 
 export const carrouselData = [
-    //{ text: 'Gran lectura de obras en vivo, con Laydy Czulewyez', buttonText: 'Participar', pushTo: 'ins_evento/LECTURA-VIVO-LACZU-1', bg: 'radial-gradient(at 80% 100%, rgb(164 118 166) 10%, rgb(151 67 148) 50%)', img: ImgLecVivo, style: { bottom: '-50px', right: '-100px' } },
-    //{ text: '¡Prepara la voz! Gran taller de técnicas de narración', buttonText: '¡Me interesa!', pushTo: 'ins_evento/GRAN-TALLER-TECNICAS-NARRACION-LILI-1', bg: 'linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%)', img: ImgComunicacion, style: { bottom: 0 } },
-    //{ text: 'Aprende a construir y estructurar tus novelas como un profesional', buttonText: 'Inscríbirme', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-3', bg: 'linear-gradient(to right, #24243e, #302b63, #0f0c29)', img: ImgMaquinaDeEscribir, style: { bottom: '-50px', right: '-100px' } },
-    { text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } },
-    //{ text: 'Apaga la luz. Llegó la obra ganadora del concurso de terror', buttonText: 'Leer ahora', href: 'https://www.wattpad.com/story/263097960', bg: 'radial-gradient(at 300px 100%, rgb(0 0 0) 10%, rgb(46 46 46) 50%)', img: ImgFoco, orientation: 'right', style: { top: '50px', right: '-120px' } }, //scrollTo: 'critique-block'
-    { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion }
+    { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion },
+    { text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }
 ]
 
 export const critiquePoints = [{ id: 'INTENCION', name: 'Transmisión de mi intención', abrev: '¿Se entiende lo que quiero transmitir?' }, { id: 'ENGANCHE', name: 'Enganche de mi obra', abrev: '¿Qué tanto engancha mi obra?' }, { id: 'ORTOGRAFIA', name: 'Ortografía', abrev: '¿Qué tal fue mi ortografía?' }];

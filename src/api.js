@@ -18,6 +18,10 @@ export const takeRequest = async (requestId, type) => {
     return request('takeRequest', { requestId, type }, 'POST', true);
 }
 
+export const takeRest = async () => {
+    //return request('takeRest', null, 'POST', true);
+}
+
 export const saveRequest = async (object) => {
     return firestore.collection('solicitudes').doc().set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
 }

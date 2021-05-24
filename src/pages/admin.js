@@ -3,18 +3,18 @@ import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DetailRequestModal from '../componentes/modal/detailRequestModal';
 import FeedbackModal from '../componentes/modal/feedbackModal';
+import RestConfirmationModal from '../componentes/modal/confirmationModal';
 import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
 import queryString from 'query-string';
-import { useScrollOffset } from '../hooks/useScrollOffset';
 import { AuthContext } from '../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { requestStatuses, editorialServices } from '../data/data';
-import { getStatistics, getRequests, getRequest, takeRequest } from '../api';
+import { getStatistics, getRequests, getRequest, takeRequest, takeRest } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
 import { getServiceById } from '../helpers/functions';
 
@@ -36,16 +36,31 @@ const Admin = ({ location }) => {
     const [loadingMore, setLoadingMore] = useState(false);
     const [isOpenDetailModal, setDetailOpenModal] = useState(false);
     const [isOpenFeedbackModal, setOpenFeedbackModal] = useState(false);
+    const [isOpenRestModal, setOpenRestModal] = useState(false);
+    const [isOpenFabOptions, setOpenFabOptions] = useState(false);
     const [registry, setRegistry] = useState(null);
     const [tabList, setTabList] = useState(requestStatuses);
-    const { hasScrolledToTopOffset } = useScrollOffset(500);
 
     const [takingRequest, setTakingRequest] = useState(false);
     const [succesfulRequestTake, setSuccesfulRequestTake] = useState(false);
+    const [takingRest, setTakingRest] = useState(false);
+    const [succesfulRestTake, setSuccesfulRestTake] = useState(false);
 
     const { logged } = useContext(AuthContext);
 
     const { services = [] } = getProfileStorage() || {};
+
+    const toggleFabOptions = () => {
+        setOpenFabOptions(!isOpenFabOptions);
+    }
+
+    const openRestModal = () => {
+        setOpenRestModal(true);
+    }
+
+    const closeRestModal = () => {
+        setOpenRestModal(false);
+    }
 
     const openDetailModal = (request) => {
         setRegistry(request);
@@ -67,6 +82,19 @@ const Admin = ({ location }) => {
     const updActiveTabIndex = (val) => {
         setAdminMainTabIndex(val);
         setActiveTabIndex(val);
+    }
+
+    const takeARest = () => {
+        setTakingRest(true);
+        /*takeRest().then(({ error }) => {
+            if (!error) {
+                setTakingRest(false);
+
+            } else {
+                setTakingRest(false);
+
+            }
+        });*/
     }
 
     const getLastElement = (field) => {
@@ -198,6 +226,13 @@ const Admin = ({ location }) => {
                 message={registry?.feedback?.message}
                 authorName={registry?.name.split(' ')[0]} />
 
+            {/*<RestConfirmationModal
+                isOpen={isOpenRestModal}
+                title='¿Deseas tomar un descanso?'
+                message='Hazlo si necesitas tomarte unos días sin atender pedidos. Al continuar, todos tus pedidos tomados se liberarán.'
+                confirm={takeARest}
+                close={closeRestModal} />*/}
+
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
@@ -235,10 +270,15 @@ const Admin = ({ location }) => {
                     </Tabs>
                 </section>
             </main>
-            <div className='fab-button'>                
-                <div className='fab-button__circle'>
+            <div className='fab-button'>
+                <div className={`fab-button__menu-container ${isOpenFabOptions ? 'fab-button__menu-container-appear' : 'fab-button__menu-container-dissappear'}`}>
+                    <div onClick={openRestModal} className='fab-button__menu-item'>
+                        <FontAwesomeIcon icon={faCoffee} />
+                    </div>
+                </div>
+                <div onClick={toggleFabOptions} className='fab-button__circle'>
                     {' '}
-                    <FontAwesomeIcon icon={faPlus} className='icon' />
+                    <FontAwesomeIcon icon={faPlus} className={isOpenFabOptions ? 'rotate-45' : ''} />
                 </div>
             </div>
             <Footer />
