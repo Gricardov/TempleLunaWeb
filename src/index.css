@@ -592,11 +592,11 @@ p {
 }*/
 
 .button-green {
-  background-color: #3DE58D;
+  background-color: #17cd65;
 }
 
 .button-green:hover {
-  background-color: #82e9b4;
+  background-color: #5aee9a;
 }
 
 .button-red {
@@ -613,6 +613,14 @@ p {
 
 .button-blue:hover {
   background-color: #70aaf0;
+}
+
+.button-dark-purple {
+  background-color: #5B6FD9;
+}
+
+.button-dark-purple:hover {
+  background-color: #8c9add;
 }
 
 .button-purple {

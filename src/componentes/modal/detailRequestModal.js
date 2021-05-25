@@ -10,6 +10,7 @@ const maxDaysExp = 7;
 const Modal = (props) => {
 
     const [openConfirmationModal, setOpenConfirmationModal] = useState(false);
+    const [confirmationType, setConfirmationType] = useState('TAKE_REQUEST');
 
     useEffect(() => {
         if (props.isOpen) {
@@ -20,30 +21,58 @@ const Modal = (props) => {
         return () => document.body.style.overflow = 'unset';
     }, [props.isOpen]);
 
+    const openModal = (status, type) => {
+        setOpenConfirmationModal(status);
+        setConfirmationType(type);
+    }
+
     const confirm = () => {
         setOpenConfirmationModal(false);
-        props.takeRequest(props.data?.id);
+        switch (confirmationType) {
+            case 'TAKE_REQUEST':
+                props.takeRequest(props.data?.id);
+                break;
+
+            case 'RESIGN_REQUEST':
+                props.resignRequest(props.data?.id);
+                break;
+        }
     }
 
     const determineModal = (type) => {
         switch (type) {
             case 'CRITICA':
-                return <CritiqueModal {...props} openConfirmationModal={setOpenConfirmationModal} />
+                return <CritiqueModal {...props} openConfirmationModal={openModal} />
             case 'DISENO':
-                return <DesignModal {...props} openConfirmationModal={setOpenConfirmationModal} />
+                return <DesignModal {...props} openConfirmationModal={openModal} />
             case 'CORRECCION':
-                return <CorrectionModal {...props} openConfirmationModal={setOpenConfirmationModal} />
+                return <CorrectionModal {...props} openConfirmationModal={openModal} />
             default:
                 return null;
         }
+    }
+
+    let confTitle;
+    let confMsg;
+
+    switch (confirmationType) {
+        case 'TAKE_REQUEST':
+            confTitle = 'Casi listo';
+            confMsg = 'Al aceptar, tienes hasta ' + maxDaysExp + ' días para entregar la corrección o acordar una fecha con la persona interesada. ¿Continuar?';
+            break;
+
+        case 'RESIGN_REQUEST':
+            confTitle = '¿Seguro(a)?';
+            confMsg = 'Al aceptar, este pedido se liberará y podrá ser tomado por alguien más. ¿Continuar?';
+            break;
     }
 
     return (
         <>
             <ConfirmationModal
                 isOpen={openConfirmationModal}
-                title='Casi listo'
-                message={'Al aceptar, tienes hasta ' + maxDaysExp + ' días para entregar la corrección o acordar una fecha con la persona interesada. ¿Continuar?'}
+                title={confTitle}
+                message={confMsg}
                 confirm={confirm}
                 close={() => setOpenConfirmationModal(false)} />
             {
@@ -54,14 +83,3 @@ const Modal = (props) => {
 }
 
 export default Modal;
-
-/*const profile = getProfileStorage();
-   const artist = {
-       fName: profile?.fName || '',
-       lName: profile?.lName || '',
-       contactEmail: profile?.contactEmail || '',
-       networks: profile?.networks || []
-   };
-   if (data) {
-       data.artist = artist;
-}*/

@@ -14,7 +14,7 @@ import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { requestStatuses, editorialServices } from '../data/data';
-import { getStatistics, getRequests, getRequest, takeRequest, takeRest } from '../api';
+import { getStatistics, getRequests, getRequest, takeRequest, resignRequest, takeRest } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
 import { getServiceById } from '../helpers/functions';
 
@@ -43,6 +43,8 @@ const Admin = ({ location }) => {
 
     const [takingRequest, setTakingRequest] = useState(false);
     const [succesfulRequestTake, setSuccesfulRequestTake] = useState(false);
+    const [resigningRequest, setResigningRequest] = useState(false);
+    const [succesfulRequestResign, setSuccesfulRequestResign] = useState(false);
     const [takingRest, setTakingRest] = useState(false);
     const [succesfulRestTake, setSuccesfulRestTake] = useState(false);
 
@@ -153,6 +155,33 @@ const Admin = ({ location }) => {
             });
     }
 
+    const resignARequest = (requestId) => {
+        if (logged && logged.uid) {
+            setResigningRequest(true);
+            resignRequest(requestId)
+                .then(({ error }) => {
+                    if (!error) {
+                        getRequest(requestId).then(({ data, error }) => {
+                            setResigningRequest(false);
+                            if (!error) {
+                                updateStatistics(5000); // Actualizo las estadísticas
+                                setRegistry(data); // Establezco el nuevo registro actualizado
+                                setRequestList(requestList.filter(req => req.id !== data.id));// Elimino el registro de la lista actual
+                                setSuccesfulRequestResign(true);
+                            } else {
+                                setSuccesfulRequestResign(false);
+                                alert('Hubo un error al obtener el pedido. Recargue e intente otra vez');
+                            }
+                        })
+                    } else {
+                        alert('Hubo un error al renunciar a esta solicitud. Intenta otra vez');
+                        setResigningRequest(false);
+                        setSuccesfulRequestResign(false);
+                    }
+                })
+        }
+    }
+
     const confirmRequest = (requestId) => {
         if (logged && logged.uid) {
             setTakingRequest(true);
@@ -168,13 +197,13 @@ const Admin = ({ location }) => {
                                 setSuccesfulRequestTake(true);
                             } else {
                                 setSuccesfulRequestTake(false);
-                                alert('Hubo un error al actualizar la solicitud. Recargue e intente otra vez');
+                                alert('Hubo un error al obtener el pedido. Recargue e intente otra vez');
                             }
                         })
                     } else {
                         alert('Hubo un error al tomar esta solicitud. Intenta otra vez');
                         setTakingRequest(false);
-                        setSuccesfulRequestTake(true);
+                        setSuccesfulRequestTake(false);
                     }
                 })
         }
@@ -215,8 +244,9 @@ const Admin = ({ location }) => {
                 data={registry}
                 isOpen={isOpenDetailModal}
                 close={() => setDetailOpenModal(false)}
-                takingRequest={takingRequest}
-                succesfulRequestTake={succesfulRequestTake}
+                loading={takingRequest || resigningRequest}
+                success={succesfulRequestTake}
+                resignRequest={resignARequest}
                 takeRequest={confirmRequest} />
 
             <FeedbackModal

@@ -14,12 +14,12 @@ export const saveEvent = async (object) => {
 
 // Solicitudes
 
-export const takeRequest = async (requestId, type) => {
-    return request('takeRequest', { requestId, type }, 'POST', true);
+export const takeRequest = async (requestId) => {
+    return request('takeRequest', { requestId }, 'POST', true);
 }
 
-export const takeRest = async () => {
-    //return request('takeRest', null, 'POST', true);
+export const resignRequest = async (requestId) => {
+    return request('resignRequest', { requestId }, 'POST', true);
 }
 
 export const saveRequest = async (object) => {
@@ -149,6 +149,10 @@ export const getProfileByQueryFollowName = async (followName) => {
         .catch(error => {
             return { error }
         })
+}
+
+export const takeRest = async () => {
+    //return request('takeRest', null, 'POST', true);
 }
 
 // Sesión

@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import ConfirmationModal from './confirmationModal';
+import React, { useContext } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
 import Avatar from '../avatar';
 import Zoom from 'react-reveal/Zoom';
@@ -8,8 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faEdit, faEye, faHandPaper, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { getProfileStorage } from '../../helpers/userStorage';
+import { faAngleDown, faEdit, faExchangeAlt, faEye, faHandPaper, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import './modals.css';
 
@@ -19,7 +17,7 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) => {
+const Modal = ({ isOpen, data, loading, openConfirmationModal, close }) => {
 
     const history = useHistory();
 
@@ -104,7 +102,7 @@ const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) =>
                         <div className="footer-card-container">
                             <div className='button-container'>
                                 {
-                                    takingRequest
+                                    loading
                                         ?
                                         <button onClick={() => { }} className='button button-blue button-option-request'>
                                             Cargando
@@ -117,17 +115,23 @@ const Modal = ({ isOpen, data, takingRequest, openConfirmationModal, close }) =>
                                                 {
                                                     data?.status == 'DISPONIBLE'
                                                         ?
-                                                        <button onClick={() => openConfirmationModal(true)} className='button button-blue button-option-request'>
+                                                        <button onClick={() => openConfirmationModal(true, 'TAKE_REQUEST')} className='button button-blue button-option-request'>
                                                             <FontAwesomeIcon color={'#fff'} icon={faHandPaper} className='icon' />
                                                             Tomar pedido
                                                         </button>
                                                         :
                                                         data?.status == 'TOMADO' && isTakenByMe
                                                             ?
-                                                            <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
-                                                                <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
-                                                            Iniciar corrección
-                                                            </button>
+                                                            <>
+                                                                <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
+                                                                    <FontAwesomeIcon color={'#fff'} icon={faEdit} className='icon' />
+                                                                    Iniciar corrección
+                                                                </button>
+                                                                <button onClick={() => openConfirmationModal(true, 'RESIGN_REQUEST')} className='button button-dark-purple button-option-request'>
+                                                                    <FontAwesomeIcon color={'#fff'} icon={faExchangeAlt} className='icon' />
+                                                                    Devolver pedido
+                                                                </button>
+                                                            </>
                                                             :
                                                             null
                                                 }
