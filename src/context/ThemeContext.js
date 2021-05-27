@@ -1,5 +1,4 @@
-import React, { createContext, useEffect } from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, { createContext, useState, useEffect } from 'react';
 import { getTheme, saveTheme } from '../helpers/userStorage';
 
 export const ThemeContext = createContext();
