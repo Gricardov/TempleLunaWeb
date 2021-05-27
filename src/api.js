@@ -1,6 +1,5 @@
 //import 'babel-polyfill';
 import firebase from './firebase';
-import { setProfileStorage, setAdminRequestType, setAdminMainTabIndex } from './helpers/userStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 const firestore = firebase.firestore();
@@ -196,12 +195,7 @@ export const login = async (email, password) => {
 }
 
 export const logout = async () => {
-    return auth.signOut().then(function () {
-        setProfileStorage(null);
-        setAdminRequestType(null);
-        setAdminMainTabIndex(0);
-        return true;
-    }).catch(function (error) {
+    return auth.signOut().then(() => true).catch(function (error) {
         console.log(error.message);
     });
 }

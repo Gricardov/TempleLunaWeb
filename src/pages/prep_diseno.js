@@ -141,7 +141,7 @@ const Preparation = ({ location }) => {
                                 </Fade>
                                 <p className='txt-responsive-form m0-auto'>Tu experiencia ha aumentado :)</p>
                                 <div className='button-container mt-3'>
-                                    <button onClick={() => window.open(urlResult, '_blank')} className='button button-light-purple button-option-request ml-auto'>
+                                    <button onClick={() => window.open(urlResult, '_blank')} className='button button-purple button-option-request ml-auto'>
                                         <FontAwesomeIcon icon={faEye} size='1x' />
                                         {' '}
                                                 Ver resultado
@@ -169,14 +169,14 @@ const Preparation = ({ location }) => {
                                         {
                                             design
                                                 ?
-                                                <button onClick={startSelectDesign} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
+                                                <button onClick={startSelectDesign} className={`d-flex justify-content-between align-items-center button button-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
                                                     <span className='clamp clamp-1'>
                                                         {design.name}
                                                     </span>
                                                     <span onClick={deleteDesign} className='fa fa-times' style={{ color: 'white' }}></span>
                                                 </button>
                                                 :
-                                                <button onClick={startSelectDesign} className={`button button-light-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
+                                                <button onClick={startSelectDesign} className={`button button-purple button-thin stretch ${design ? 'd-flex' : ''}`}>
                                                     <span>
                                                         Subir diseño
                                         </span>

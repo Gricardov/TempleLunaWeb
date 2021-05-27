@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { useContext, createContext, useState, useEffect } from 'react';
 import firebase from '../firebase';
-import { setProfileStorage } from '../helpers/userStorage';
+import { setProfileStorage, setAdminRequestType, setAdminMainTabIndex } from '../helpers/userStorage';
+import { ThemeContext } from '../context/ThemeContext';
 
 const auth = firebase.auth();
 
@@ -9,14 +10,18 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [logged, setLogged] = useState(false);
     const [loading, setLoading] = useState(true);
+    const { updateTheme } = useContext(ThemeContext);
 
     useEffect(() => {
         return auth.onAuthStateChanged(function (user) {
             if (user) {
                 setLogged(user);
             } else {
-                setProfileStorage(null);
                 setLogged(null);
+                setProfileStorage(null);
+                setAdminRequestType(null);
+                setAdminMainTabIndex(0);
+                updateTheme('default');
             }
             setLoading(false);
         });

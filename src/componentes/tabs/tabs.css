@@ -17,7 +17,7 @@
     padding-bottom: 1.4rem;
     text-transform: uppercase;
     font-size: 1.3rem;
-    color: #8B81EC;
+    color: var(--primary-color);
     text-align: center;
     text-decoration: none;
     transition: all 200ms ease-in-out;
@@ -42,7 +42,7 @@
 }
 
 .material-tabs>a:hover {
-    color: #8B81EC;
+    color: var(--primary-color);
 }
 
 .material-tabs .tab-bar {
@@ -53,7 +53,7 @@
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     width: 50%;
-    background: #8B81EC;
+    background: var(--primary-color);
     display: block;
     left: 0;
     transition: left .2s ease;
@@ -64,9 +64,9 @@
     position: absolute;
     z-index: 9;
     bottom: 0;
-    height: 2px;
+    height: 1px;
     width: 100%;
-    background: #EAE6FF;
+    background: var(--primary-light-color);
     display: block;
     left: 0;
 }
@@ -81,7 +81,7 @@
     align-items: center;
     justify-content: center;
     text-align: left;
-    color: #8B81EC;
+    color: var(--primary-color);
     font-size: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -96,18 +96,17 @@
 }
 
 .tabs-container .btn-switch:hover {
-    color: #ded9ff;
+    color: var(--primary-light-color);
     cursor: pointer;
-}
-
-/*Themed*/
-
-.light-theme .main-tabs-container {
-    background: white;
 }
 
 .main-tabs-container {
     user-select: none;
+    background: var(--background-general-color);
+}
+
+.main-tabs-container.main-tabs-container-loading span span {
+    border: thick solid var(--primary-color);
 }
 
 .main-tabs-container .container-submenu::before {
@@ -120,7 +119,7 @@
     border-style: solid;
     border-width: 12px;
     border-color: transparent;
-    border-bottom-color: white;
+    border-bottom-color: var(--secondary-light-color);
     z-index: 10;
 }
 
@@ -130,7 +129,7 @@
     right: 5px;
     padding: .8rem 1rem;
     border-radius: 5px;
-    background: #fff;
+    background: var(--secondary-light-color);
     box-shadow: 0px 3px 6px #00000029;
     min-width: 150px;
     text-align: right;
@@ -155,12 +154,12 @@
 }
 
 .container-submenu ul li.active {
-    background-color: #a69ef0;
+    background-color: var(--primary-color);
     color: white;
 }
 
 .container-submenu ul li:hover {
-    background-color: #ded9ff;
+    background-color: var(--primary-light-color);
     color: white;
 }
 

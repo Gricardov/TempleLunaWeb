@@ -1,5 +1,5 @@
 .speech-bubble {
-    background: #35A5D4;
+    background: var(--speech-bubble-color);
     border-radius: .4em;
     padding: .8rem 1rem;
     font-size: 1.4rem;
@@ -17,7 +17,7 @@
 }
 
 .speech-bubble:hover {
-    background: #3fbff7;
+    background: var(--speech-bubble-color-hover);
 }
 
 .speech-bubble:after {
@@ -28,7 +28,7 @@
     width: 0;
     height: 0;
     border: 22px solid transparent;
-    border-top-color: #35A5D4;
+    border-top-color: var(--speech-bubble-color);
     border-bottom: 0;
     border-right: 0;
     margin-left: -11px;

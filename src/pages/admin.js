@@ -3,16 +3,16 @@ import DropdownImage from '../componentes/dropdown-image';
 import Navbar from '../componentes/navbar';
 import DetailRequestModal from '../componentes/modal/detailRequestModal';
 import FeedbackModal from '../componentes/modal/feedbackModal';
-import RestConfirmationModal from '../componentes/modal/confirmationModal';
 import RequestCard from '../componentes/request-card';
 import Tabs from '../componentes/tabs';
 import Footer from '../componentes/footer/footer';
 import PuffLoader from "react-spinners/PuffLoader";
 import queryString from 'query-string';
 import { AuthContext } from '../context/AuthContext';
+import { ThemeContext } from '../context/ThemeContext';
 import { css } from "@emotion/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faMoon, faPlus, faSun } from '@fortawesome/free-solid-svg-icons';
 import { requestStatuses, editorialServices } from '../data/data';
 import { getStatistics, getRequests, getRequest, takeRequest, resignRequest, takeRest } from '../api';
 import { setAdminRequestType, getAdminRequestType, setAdminMainTabIndex, getAdminMainTabIndex, getProfileStorage } from '../helpers/userStorage';
@@ -49,6 +49,7 @@ const Admin = ({ location }) => {
     const [succesfulRestTake, setSuccesfulRestTake] = useState(false);
 
     const { logged } = useContext(AuthContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const { services = [] } = getProfileStorage() || {};
 
@@ -263,7 +264,7 @@ const Admin = ({ location }) => {
                 confirm={takeARest}
                 close={closeRestModal} />*/}
 
-            <main className='main-body below-navbar colored-background'>
+            <main className='main-body below-navbar main-body admin-color'>
                 <section className='container-xl section'>
                     <div className='title-admin-container'>
                         <h2 className='m-0'>¿Qué eliges para hoy?</h2>
@@ -282,7 +283,7 @@ const Admin = ({ location }) => {
                         loadingMore={loadingMore}
                         requestMoreData={requestMoreData}
                         hasMore={!isLast}
-                        loader={<PuffLoader color={'#8B81EC'} loading={true} css={override} size={100} />}
+                        loader={<PuffLoader loading={true} css={override} size={100} />}
                         activeIndex={activeTabIndex}
                         select={updActiveTabIndex}
                         tabs={tabList.map(tab => tab.name + ` (${tab.statistics ? tab.statistics : 0})`)}>
@@ -302,6 +303,9 @@ const Admin = ({ location }) => {
             </main>
             <div className='fab-button'>
                 <div className={`fab-button__menu-container ${isOpenFabOptions ? 'fab-button__menu-container-appear' : 'fab-button__menu-container-dissappear'}`}>
+                    <div onClick={toggleTheme} className='fab-button__menu-item'>
+                        <FontAwesomeIcon icon={theme == 'dark' ? faSun : faMoon} />
+                    </div>
                     <div onClick={openRestModal} className='fab-button__menu-item'>
                         <FontAwesomeIcon icon={faCoffee} />
                     </div>

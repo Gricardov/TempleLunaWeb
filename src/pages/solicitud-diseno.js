@@ -351,14 +351,14 @@ const Solicitud = () => {
                                                         {
                                                             imgSample
                                                                 ?
-                                                                <button onClick={startSelectSample} className={`d-flex justify-content-between align-items-center button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
+                                                                <button onClick={startSelectSample} className={`d-flex justify-content-between align-items-center button button-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
                                                                     <span className='clamp clamp-1'>
                                                                         {imgSample.name}
                                                                     </span>
                                                                     <span onClick={deleteSample} className='fa fa-times' style={{ color: 'white' }}></span>
                                                                 </button>
                                                                 :
-                                                                <button onClick={startSelectSample} className={`button button-light-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
+                                                                <button onClick={startSelectSample} className={`button button-purple button-thin stretch ${imgSample ? 'd-flex' : ''}`}>
                                                                     <span>
                                                                         Subir imagen
                                                                     </span>

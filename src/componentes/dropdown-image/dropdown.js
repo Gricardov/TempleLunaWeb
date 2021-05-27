@@ -3,7 +3,6 @@ import { useOutsideListener } from '../../hooks/useOutsideListener';
 import './dropdown.css';
 
 const tamanoIcono = 15;
-const color = '#756F86';
 
 const Dropdown = ({ list, select, stretch, selectedItem }) => {
 
@@ -40,16 +39,16 @@ const Dropdown = ({ list, select, stretch, selectedItem }) => {
             ref={outsideListenerRef}
             className='container-select-image'>
             <button className={`select-image position-relative ${stretch ? 'stretch' : ''}`} onClick={toggleDropdown}>
-                <span className={selectedItem.icon} style={{ color, marginRight: '1rem', fontSize: tamanoIcono + 'px' }}></span>
+                <span className={selectedItem.icon} style={{ marginRight: '1rem', fontSize: tamanoIcono + 'px' }}></span>
                 {
                     stretch
                     &&
-                    <span className='mr-1 position-relative' style={{ color }}>
+                    <span className='mr-1 position-relative'>
                         {selectedItem.name}
                         {tag(selectedItem.tag)}
                     </span>
                 }
-                <span className='fa fa-caret-down' style={{ color }}></span>
+                <span className='fa fa-caret-down'></span>
             </button>
             {
                 open
@@ -58,11 +57,11 @@ const Dropdown = ({ list, select, stretch, selectedItem }) => {
                     {
                         list.map((item, index) => item.displayInDropdown != false && (
                             <div key={index} onClick={(e) => selectItem(e, item)} className='selectable-list-item'>
-                                <span className={item.icon} style={{ color, fontSize: tamanoIcono + 'px' }}></span>
+                                <span className={item.icon} style={{ fontSize: tamanoIcono + 'px' }}></span>
                                 {
                                     stretch
                                     &&
-                                    <span className='ml-1 position-relative' style={{ color }}>
+                                    <span className='ml-1 position-relative'>
                                         {item.name}
                                         {tag(item.tag)}
                                     </span>

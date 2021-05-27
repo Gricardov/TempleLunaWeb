@@ -2,7 +2,7 @@
     position: relative;
     padding-top: 1rem;
     padding-bottom: 1.5rem;
-    background: transparent radial-gradient(closest-side at -9% 325%, #000000 0%, #8B81EC 100%) 0% 0% no-repeat padding-box;
+    background: transparent radial-gradient(closest-side at -9% 325%, #000000 0%, var(--primary-color) 100%) 0% 0% no-repeat padding-box;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     color: white;

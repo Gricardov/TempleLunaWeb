@@ -36,3 +36,16 @@ export const getAdminMainTabIndex = () => {
 export const setAdminMainTabIndex = (index) => {
     return localStorage.setItem('adminMainTabIndex', index);
 }
+
+// Temas
+export const getTheme = () => {
+    try {
+        return JSON.parse(localStorage.getItem('theme'));
+    } catch (error) {
+        return null;
+    }
+}
+
+export const saveTheme = (theme) => {
+    return localStorage.setItem('theme', JSON.stringify(theme));
+}

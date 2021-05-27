@@ -89,7 +89,7 @@ const Tabs = ({ tabs, requestMoreData, hasMore, loader, activeIndex, select, ini
     const childrenNum = childrenArray[0].props.children.length;
 
     return (
-        <div className='main-tabs-container'>
+        <div className='main-tabs-container main-tabs-container-loading'>
             <div className='tabs-container' style={{ background: style.background }}>
                 <div className="material-tabs">
                     {

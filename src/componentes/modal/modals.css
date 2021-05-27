@@ -8,7 +8,7 @@
     left: 0;
     right: 0;
     margin: 3rem auto;
-    background: #fff;
+    background: var(--secondary-color);
     z-index: 16;
     padding: 2.2rem;
     -webkit-box-shadow: -2px 0px 19px -5px rgba(0, 0, 0, 0.75);
@@ -58,7 +58,7 @@
 
 .modal-container .header-container .close-icon {
     position: absolute;
-    color: #646D7B;
+    color: var(--main-text-color);
     top: 0;
     right: 0;
     font-size: 3rem;
@@ -66,7 +66,7 @@
 }
 
 .modal-container .header-container .close-icon:hover {
-    color: #959595;
+    color: var(--main-text-light-color);
 }
 
 .modal-container .header-container h3 {
@@ -85,7 +85,7 @@
     margin: 0;
     font-size: 1.2rem;
     font-family: 'SegoeUI';
-    color: #AEAEAE;
+    color: var(--main-text-light-color);
     margin-top: .5rem;
 }
 
@@ -146,14 +146,14 @@
 
 .modal-container p, .modal-container a, .modal-container ul li {
     margin: 0;
-    color: #646D7B;
+    color: var(--main-text-color);
     font-size: 1.5rem;
     margin-top: 1.2rem;
     margin-bottom: 1.5rem;
 }
 
 .modal-container a {
-    color: #6392DC;
+    color: var(--primary-color);
     word-break: break-all;
 }
 

@@ -67,7 +67,7 @@
 
 .mini-profile__title {
     font-size: 1.6rem;
-    color: rgba(41, 41, 41, 1);
+    color: var(--main-text-color);
 }
 
 .mini-profile__rs-container {
@@ -96,7 +96,7 @@
     font-size: 1.4rem;
     font-weight: 600;
     text-align: center;
-    color: #8f8f8f;
+    color: var(--secondary-text-color);
     margin-bottom: .4rem;
 }
 

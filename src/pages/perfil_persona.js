@@ -143,7 +143,7 @@ const Perfil = ({ id, fName, lName, likes, views, networks, imgUrl, theme, roles
                 image={imgUrl} />
             <Navbar />
             <main className='main-body below-navbar'>
-                <section className='profile-header-container' style={{ background: 'white' }}>
+                <section className='profile-header-container'>
                     <div className='profile-container'>
                         <div>
                             <div className='profile-img'>
