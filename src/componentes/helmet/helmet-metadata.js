@@ -2,20 +2,30 @@ import React from 'react'
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 
-const Metadata = ({ url, quote = "", title = "Temple Luna - Lectores y escritores", image = "https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44", description = "Somos Temple Luna, la gran comunidad literaria de habla hispana que plantea una nueva forma de compartir historias.", hashtag = "#templeluna" }) => {
+const Metadata = ({
+    url,
+    quote = "",
+    title = "Temple Luna - Lectores y escritores",
+    image = "https://drive.google.com/uc?id=1b7NnnYFWl4cW746wfDGw5LRdZ_uwCv44",
+    description = "Somos Temple Luna, la gran comunidad literaria de habla hispana que plantea una nueva forma de compartir historias.",
+    hashtag = "#templeluna"
+}) => {
+
     let location = useLocation();
     let currentUrl = url || process.env.REACT_APP_WEBSITE + location.pathname;
 
     return (
         <Helmet>
             <title>{title}</title>
-            <meta charset="utf-8" />
+            {
+                /*<meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+                <meta name="theme-color" content="#ffffff" />*/
+            }
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="csrf_token" content="" />
             <meta property="type" content="website" />
             <meta property="url" content={currentUrl} />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <meta name="theme-color" content="#ffffff" />
             <meta name="_token" content="" />
             <meta name="robots" content="noodp" />
             <meta property="title" content={title} />
@@ -28,6 +38,8 @@ const Metadata = ({ url, quote = "", title = "Temple Luna - Lectores y escritore
             <meta property="og:quote" content={quote} />
             <meta property="og:hashtag" content={hashtag} />
             <meta property="og:image" content={image} />
+            <meta property="og:image:width" content="300" />
+            <meta property="og:image:height" content="300" />
             <meta content="image/*" property="og:image:type" />
             <meta property="og:url" content={currentUrl} />
             <meta property="og:site_name" content="Temple Luna" />
