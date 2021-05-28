@@ -264,7 +264,8 @@ const Solicitud = () => {
                                                             <b> <a target='_blank' href='https://templeluna.app/prev_resultado?id=qsTf8adrnZTEYercSfWY&t=Cuando%20el%20destino%20es%20imprevisible%20cualquier%20camino%20es%20v%C3%A1lido&test=true'>aquí</a></b>.<br /><br />
 
                                                             <b>3- ¿Hay condiciones?</b><br /><br />
-                                                            - Debes darle <b>crédito</b> al diseñador en tu obra. <b>Ejemplo:</b> Portada hecha por @Alyoh_Mascarita.<br />
+                                                            - Si estás pidiendo un diseño, debes <b>usarlo</b> en tu obra.
+                                                            - Debes darle <b>crédito</b> al diseñador en tu obra. <b>Ejemplo:</b> Portada hecha por @Alyoh_Mascarita (templeluna.app)<br />
                                                             - Tu escrito debe estar <b>completo</b> y no debe incluir algún <b>costo monetario</b> para poder leerlo <b>nosotros</b>. Caso contrario, el pedido será <b>anulado</b>.<br />
                                                             - El link a tu obra quedará <b>público</b> en el perfil del voluntario. No envíes <b>obras inéditas</b> o <b>que aún no pienses publicar</b>.<br />
                                                             - <b>Finalmente,</b> el artista podrá usar el diseño en su <b>portafolio</b>.<br /><br />
