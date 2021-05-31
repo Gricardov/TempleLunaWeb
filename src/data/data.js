@@ -1,19 +1,19 @@
 import ImgColaboracion from '../img/colaboracion.svg';
-import ImgFoco from '../img/bulb.png';
 import ImgLibro from '../img/books.svg';
-import ImgMaquinaDeEscribir from '../img/typewriter.svg';
 import ImgServCritica from '../img/ser-critica.svg';
 import ImgServDiseno from '../img/ser-diseno.svg';
 import ImgServCoreccion from '../img/ser-correccion.svg';
 import ImgServBooktrailer from '../img/ser-bookt.svg';
 import ImgServEntrevista from '../img/ser-entrev.svg';
 import ImgServPromo from '../img/ser-promo.svg';
+import ImgMaquinaDeEscribir from '../img/typewriter.svg';
 import ImgPrevCritica from '../img/pre-critica.png';
 import ImgPrevDiseno from '../img/pre-diseno.png';
 import ImgPrevCorreccion from '../img/pre-correccion.png';
 import ImgPrevServicio from '../img/pre-servicio.png';
 
 export const carrouselData = [
+    { text: 'Gran taller de ortografía: Aprende a escribir obras con excelente calidad', buttonText: 'Inscríbete', pushTo: 'ins_evento/GRAN-TALLER-APRENDE-ORTOGRAFIA-ERENDIRA-1', bg: `linear-gradient( 135deg, #97ABFF 10%, #123597 100%)`, img: ImgMaquinaDeEscribir, style: { bottom: '-20px', right: '-100px' } },
     { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion },
     { text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }
 ]

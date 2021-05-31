@@ -6,7 +6,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-import ImgAutor from '../img/lili.jpg';
+import ImgAutor from '../img/erendira.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
@@ -27,8 +27,8 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const mainTitle = 'Gran taller de técnicas de narración';
-const hostName = 'Liliana Martinez';
+const mainTitle = 'Gran taller de ortografía: Escribe con excelente calidad';
+const hostName = 'Erendira León';
 
 const Inscripcion = () => {
 
@@ -152,7 +152,7 @@ const Inscripcion = () => {
                     <p className='txt-responsive-form w-60 w-md-75'>Con {hostName}</p>
                 </section>
                 <section className='container-xl mt-3 position-relative'>
-                    <div style={{ backgroundImage: `url(${ImgAutor})`, backgroundSize: '80% 90%' }} alt='img-fondo' className='img-fondo-formulario' />
+                    <div style={{ backgroundImage: `url(${ImgAutor})` }} alt='img-fondo' className='img-fondo-formulario' />
                     <div className='floating-form'>
                         {
                             success
@@ -166,7 +166,7 @@ const Inscripcion = () => {
                                     <FontAwesomeIcon icon={faAngleDown} size='2x' />
 
                                     <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/E1xRukxw3GzEZHZHczhiN4" className='button button-green m0-auto'>
+                                        <a href="https://chat.whatsapp.com/GR1iAHbDepsDoCbJicihDh" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
                                             <span>
@@ -188,24 +188,21 @@ const Inscripcion = () => {
 
                                                     <div className='form-group mb-0'>
                                                         <h2>¡Bienvenido(a) al taller!</h2>
-                                                        <p>¿Amas <b>narrar historias</b> o quieres hacer videos con <b> calidad de voz</b> impresionante? Este taller es para ti.<br /><br />
-
-                                                            <b>Modular</b> la voz, <b>articularla</b> y dominar la <b>timidez</b> son algunas de las <b>habilidades</b> que se requieren
-                                                            para <b>sobresalir</b> en este mundo.
-                                                            Aquí te las enseñaremos.<br /><br />
+                                                        <p>Dicen que la buena ortografía es como el <b>buen aliento</b>. Esto también <b>funciona al revés</b>.<br />
+                                                            ¿Amas <b>escribir</b>, pero tienes constantes dudas <b>sobre los signos de puntuación, tildes y más</b>?<br />
+                                                            Entonces, no dejes pasar la <b>oportunidad</b>. Hemos creado este taller teórico-práctico, pensaod para <b>personas como tú</b>.<br /><br />
 
                                                             <b>Temario</b><br />
-                                                            <b>1.</b> Importancia de la voz<br />
-                                                            <b>2.</b> Hablar en público<br />
-                                                            <b>3.</b> Fonación y articulación<br />
-                                                            <b>4.</b> La articulación de los finos<br />
-                                                            <b>5.</b> Trabalenguas<br /><br />
+                                                            <b>1.</b> Uso correcto de oraciones y párrafos.<br />
+                                                            <b>2.</b> Todo sobre los signos de puntuación.<br />
+                                                            <b>3.</b> ¡Acentúa sabiamente! Reglas básicas.<br />
+                                                            <b>4.</b> Aprende reglas básicas de escritura.<br /><br />
 
                                                             <b>Número de sesiones:</b> 1<br />
                                                             <b>Costo:</b> Gratuito<br />
-                                                            <b>Autora:</b> Liliana Martinez<br />
+                                                            <b>Autora:</b> {hostName}<br />
                                                             <b>Plataforma:</b> Google Meets<br />
-                                                            <b>Horario:</b> Viernes, 7 de mayo, de 5pm a 7pm (Hora Lima - Colombia)<br /><br />
+                                                            <b>Horario:</b> Jueves, 3 de junio, a las 12 del mediodia (Hora Lima - Colombia)<br /><br />
 
                                                             Al final de tu inscripción, te aparecerá un botón para ingresar al <b>grupo de Whatsapp</b>. Inscríbete <b>solamente</b> si vas a asistir.<br /><br />
 
