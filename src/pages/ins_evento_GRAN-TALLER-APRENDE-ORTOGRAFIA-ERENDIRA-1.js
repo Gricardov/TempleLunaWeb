@@ -190,7 +190,7 @@ const Inscripcion = () => {
                                                         <h2>¡Bienvenido(a) al taller!</h2>
                                                         <p>Dicen que la buena ortografía es como el <b>buen aliento</b>. Esto también <b>funciona al revés</b>.<br />
                                                             ¿Amas <b>escribir</b>, pero tienes constantes dudas <b>sobre los signos de puntuación, tildes y más</b>?<br />
-                                                            Entonces, no dejes pasar la <b>oportunidad</b>. Hemos creado este taller teórico-práctico, pensadoe en <b>personas como tú</b>.<br /><br />
+                                                            Entonces, no dejes pasar la <b>oportunidad</b>. Hemos creado este taller teórico-práctico, pensado en <b>personas como tú</b>.<br /><br />
 
                                                             <b>Temario</b><br />
                                                             <b>1.</b> Uso correcto de oraciones y párrafos.<br />
