@@ -239,7 +239,8 @@ export const request = async (path, data, method, authorized) => {
             method: method,
             body: data ? JSON.stringify(data) : null,
             headers: {
-                Authorization: authorized ? 'Bearer ' + await auth.currentUser.getIdToken() : null
+                'Content-Type': 'application/json',
+                'Authorization': authorized ? 'Bearer ' + await auth.currentUser.getIdToken() : null
             }
         });
         if (result.status == '200') {
