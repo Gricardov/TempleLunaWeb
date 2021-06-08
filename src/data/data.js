@@ -6,7 +6,6 @@ import ImgServCoreccion from '../img/ser-correccion.svg';
 import ImgServBooktrailer from '../img/ser-bookt.svg';
 import ImgServEntrevista from '../img/ser-entrev.svg';
 import ImgServPromo from '../img/ser-promo.svg';
-import ImgMaquinaDeEscribir from '../img/typewriter.svg';
 import ImgPrevCritica from '../img/pre-critica.png';
 import ImgPrevDiseno from '../img/pre-diseno.png';
 import ImgPrevCorreccion from '../img/pre-correccion.png';
