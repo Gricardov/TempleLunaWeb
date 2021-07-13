@@ -1111,6 +1111,51 @@ textarea::placeholder {
   }
 }
 
+/*Suscripción*/
+.img-fondo-subscribe {
+  position: absolute;
+  width: 700px;
+  height: 800px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.img-fondo-subscribe-left {
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  transform: rotateY(180deg);
+}
+
+.img-fondo-subscribe-right {
+  right: -200px;
+  width: 500px;
+  height: 500px;
+}
+
+.subscribe-container {
+  min-height: 60vh;
+}
+
+.subscribe-container .floating-form h2 {
+  font-weight: 400;
+  text-align: center;
+}
+
+.subscribe-container .floating-form p {
+  margin-top: 3rem !important;
+  margin-bottom: 3.5rem !important;
+}
+
+@media (min-width: 768px) {
+  .subscribe-container .floating-form {
+    width: 65%;
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
 /*Login*/
 
 .img-fondo-login {

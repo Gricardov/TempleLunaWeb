@@ -48,8 +48,7 @@ const Drawer = () => {
 
     return (
         <>
-            <div className={'overlay ' + styles} onClick={close}>
-            </div>
+            <div className={'overlay ' + styles} onClick={close} />
             <div className={'drawer ' + styles}>
                 {
                     logged
@@ -63,7 +62,7 @@ const Drawer = () => {
                             </a>
                             <a onClick={logoutUser} className='btn-drawer'>
                                 Salir
-                        </a>
+                            </a>
                         </>
                         :
                         <>

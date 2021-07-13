@@ -76,6 +76,7 @@ const Previsualizacion = ({ location }) => {
                 if (!error) {
                     const { type, resultUrl, title, name, link, likes, artist } = data;
                     setLoadingMsg('Obtenido: ' + title);
+                    //console.log(resultUrl);
                     setId(id);
                     setLink(link);
                     setType(type);
@@ -301,8 +302,8 @@ const Previsualizacion = ({ location }) => {
                             style={{ width: '100%', height: '100%' }}>
                             <FontAwesomeIcon color={'#fbffba'} icon={faFacebook} className='icon' />
                             {' '}
-                        Compartir
-                    </FacebookShareButton>
+                            Compartir
+                        </FacebookShareButton>
                     </button>
                     <button className='button-purple' onClick={() => window.open(resultUrl)}>
                         <FontAwesomeIcon color={'#fbffba'} icon={faDownload} className='icon' />

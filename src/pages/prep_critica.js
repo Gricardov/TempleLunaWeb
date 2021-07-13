@@ -149,13 +149,13 @@ const Preparation = ({ location }) => {
                                     <button onClick={() => window.open(urlResult, '_blank')} className='button button-light-purple button-option-request ml-auto'>
                                         <FontAwesomeIcon icon={faEye} size='1x' />
                                         {' '}
-                                                Ver resultado
-                                        </button>
+                                        Ver resultado
+                                    </button>
                                     <button onClick={goBackwards} className='button button-blue button-option-request mr-auto'>
                                         <FontAwesomeIcon icon={faHome} size='1x' />
                                         {' '}
-                                                Regresar
-                                        </button>
+                                        Regresar
+                                    </button>
                                 </div>
                             </div>
                             :
@@ -205,7 +205,7 @@ const Preparation = ({ location }) => {
                                             ?
                                             <span className='button button-green justify-self-right'>
                                                 Enviando
-                                {' '}
+                                                {' '}
                                                 <ClipLoader color={'#fff'} loading={true} css={overrideSpinnerInline} size={22} />
                                             </span>
                                             :

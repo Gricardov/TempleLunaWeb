@@ -1,185 +1,185 @@
 .material-tabs {
-    position: relative;
-    display: flex;
-    flex: 1;
-    padding: 0;
+  position: relative;
+  display: flex;
+  flex: 1;
+  padding: 0;
 }
 
 /*.material-tabs~div {
     overflow: auto;
 }*/
 
-.material-tabs>a {
-    flex: 1;
-    display: inline-block;
-    text-decoration: none;
-    padding-top: 1.4rem;
-    padding-bottom: 1.4rem;
-    text-transform: uppercase;
-    font-size: 1.3rem;
-    color: var(--primary-color);
-    text-align: center;
-    text-decoration: none;
-    transition: all 200ms ease-in-out;
-    font-style: normal;
+.material-tabs > a {
+  flex: 1;
+  display: inline-block;
+  text-decoration: none;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  text-align: center;
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+  font-style: normal;
 }
 
-.material-tabs>a {
-    outline: none;
-    text-decoration: none;
+.material-tabs > a {
+  outline: none;
+  text-decoration: none;
 }
 
-.material-tabs>a.active {
-    font-weight: 600;
+.material-tabs > a.active {
+  font-weight: 600;
 }
 
 @media (min-width: 768px) {
-    .material-tabs>a {
-        font-size: 1.4rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
+  .material-tabs > a {
+    font-size: 1.4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 }
 
-.material-tabs>a:hover {
-    color: var(--primary-color);
+.material-tabs > a:hover {
+  color: var(--primary-color);
 }
 
 .material-tabs .tab-bar {
-    position: absolute;
-    z-index: 10;
-    bottom: 0;
-    height: 2px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    width: 50%;
-    background: var(--primary-color);
-    display: block;
-    left: 0;
-    transition: left .2s ease;
-    -webkit-transition: left .2s ease;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  height: 2px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  width: 50%;
+  background: var(--primary-color);
+  display: block;
+  left: 0;
+  transition: left 0.2s ease;
+  -webkit-transition: left 0.2s ease;
 }
 
 .material-tabs .guide-line {
-    position: absolute;
-    z-index: 9;
-    bottom: 0;
-    height: 1px;
-    width: 100%;
-    background: var(--primary-light-color);
-    display: block;
-    left: 0;
+  position: absolute;
+  z-index: 9;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--primary-light-color);
+  display: block;
+  left: 0;
 }
 
 .tabs-container {
-    position: relative;
-    display: flex;
+  position: relative;
+  display: flex;
 }
 
 .tabs-container .btn-switch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    color: var(--primary-color);
-    font-size: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  color: var(--primary-color);
+  font-size: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @media (min-width: 768px) {
-    .tabs-container .btn-switch {
-        display: flex;
-        text-align: center;
-        font-size: 2rem;
-    }
+  .tabs-container .btn-switch {
+    display: flex;
+    text-align: center;
+    font-size: 2rem;
+  }
 }
 
 .tabs-container .btn-switch:hover {
-    color: var(--primary-light-color);
-    cursor: pointer;
+  color: var(--primary-light-color);
+  cursor: pointer;
 }
 
 .main-tabs-container {
-    user-select: none;
-    background: var(--background-general-color);
+  user-select: none;
+  background: var(--background-general-color);
 }
 
 .main-tabs-container.main-tabs-container-loading span span {
-    border: thick solid var(--primary-color);
+  border: thick solid var(--primary-color);
 }
 
 .main-tabs-container .container-submenu::before {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: -24px;
-    right: 3%;
-    border-style: solid;
-    border-width: 12px;
-    border-color: transparent;
-    border-bottom-color: var(--secondary-light-color);
-    z-index: 10;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -24px;
+  right: 3%;
+  border-style: solid;
+  border-width: 12px;
+  border-color: transparent;
+  border-bottom-color: var(--secondary-light-color);
+  z-index: 10;
 }
 
 .main-tabs-container .container-submenu {
-    position: absolute;
-    top: 100%;
-    right: 5px;
-    padding: .8rem 1rem;
-    border-radius: 5px;
-    background: var(--secondary-light-color);
-    box-shadow: 0px 3px 6px #00000029;
-    min-width: 150px;
-    text-align: right;
-    z-index: 10;
+  position: absolute;
+  top: 100%;
+  right: 5px;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  background: var(--secondary-light-color);
+  box-shadow: 0px 3px 6px #00000029;
+  min-width: 150px;
+  text-align: right;
+  z-index: 10;
 }
 
 .main-tabs-container .container-submenu.close {
-    display: none;
+  display: none;
 }
 
 .container-submenu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .container-submenu ul li {
-    padding: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 200ms ease-in-out;
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
 }
 
 .container-submenu ul li.active {
-    background-color: var(--primary-color);
-    color: white;
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .container-submenu ul li:hover {
-    background-color: var(--primary-light-color);
-    color: white;
+  background-color: var(--primary-light-color);
+  color: white;
 }
 
 .container-submenu ul li:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .img-vacio {
-    height: 200px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 2rem;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 
 @media (min-width: 768px) {
-    .img-vacio {
-        height: 300px;
-    }
+  .img-vacio {
+    height: 300px;
+  }
 }
 
 .tab-content {
-    overflow: unset !important;
+  overflow: unset !important;
 }

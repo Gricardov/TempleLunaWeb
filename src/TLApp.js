@@ -1,6 +1,7 @@
 import React from 'react';
 import Inicio from './pages/inicio';
 import Login from './pages/login';
+import Suscripcion from './pages/suscripcion';
 import Perfil from './pages/perfil';
 import Admin from './pages/admin';
 import SolicitudCritica from './pages/solicitud-critica';
@@ -33,6 +34,8 @@ const App = () => {
         <PublicRoute exact path="/sol_diseno" component={SolicitudDiseno} />
         <PublicRoute exact path="/sol_correccion" component={SolicitudCorreccion} />
         <PublicRoute exact path="/login" component={Login} />
+        <PublicRoute exact path="/suscripcion" component={Suscripcion} />
+        <PublicRoute exact path="/suscripcion/:id" component={Suscripcion} />
         <PrivateRoute exact path="/admin" component={Admin} />
         <PrivateRoute exact path="/prep_critica" component={PreparacionCritica} />
         <PrivateRoute exact path="/prep_diseno" component={PreparacionDiseno} />

@@ -12,7 +12,6 @@ export const saveEvent = async (object) => {
 }
 
 // Solicitudes
-
 export const takeRequest = async (requestId) => {
     return request('takeRequest', { requestId }, 'POST', true);
 }
@@ -104,7 +103,6 @@ export const addAnalitics = async (id, object) => {
 }
 
 // Estadísticas
-
 export const getStatistics = async keys => {
     let promises = keys.map(key => {
         return firestore.collection('estadisticas').doc(key).get()
@@ -122,8 +120,16 @@ export const getStatistics = async keys => {
     return Promise.all(promises);
 }
 
-// Perfil
+// Suscripciones
+export const saveSubscription = async (object) => {
+    return firestore.collection('suscripciones').doc().set({ ...object, createdAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+}
 
+export const updatesubscription = async (id, { magazine, courses, novelties }) => {
+    return firestore.collection('suscripciones').doc(id).update({ magazine, courses, novelties, updatedAt: firebase.firestore.FieldValue.serverTimestamp() });
+}
+
+// Perfil
 export const getProfile = async (uid) => {
     return firestore.collection('perfiles').doc(uid).get()
         .then(doc => {

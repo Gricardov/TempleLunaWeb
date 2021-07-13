@@ -252,7 +252,7 @@ const Solicitud = () => {
                                                 <div className='step-0'>
                                                     <div className='form-group mb-0'>
                                                         <p><b>Gracias</b> por elegir a <b>Temple Luna</b>. ¡Estamos seguros de que te va a encantar!<br /><br />
-                                                        Antes de continuar, te pedimos que leas algunas <b>preguntas frecuentes:</b><br /><br />
+                                                            Antes de continuar, te pedimos que leas algunas <b>preguntas frecuentes:</b><br /><br />
 
                                                             <b>1- ¿Qué solicitamos?</b><br /><br />
                                                             Solicitamos tus datos de contacto para poder <b>(1)</b> enviarte el trabajo final y <b>(2)</b> contactarte si es que necesitamos
@@ -378,7 +378,7 @@ const Solicitud = () => {
                                                         {' '}
                                                         <span className='d-none d-md-inline'>
                                                             Anterior
-                                                    </span>
+                                                        </span>
                                                     </button>
                                                 }
                                                 {
