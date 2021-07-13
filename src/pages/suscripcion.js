@@ -85,22 +85,23 @@ const Suscripcion = ({ match }) => {
                 email,
                 name
             }
-            try {
-                if (modifyMode || fromUrl) {
-                    await updatesubscription(id, subscription);
-                    setLoading(false);
-                    setSuccess(true);
-                } else {
-                    await saveSubscription(subscription);
-                    setLoading(false);
-                    setSuccess(true);
-                }
-            } catch (error) {
-                setLoading(false);
-                setSuccess(false);
-                console.log(error);
-                alert('Hubo un error. Vuelve a intentarlo.');
-            }
+            alert('ok')
+            /* try {
+                 if (modifyMode || fromUrl) {
+                     await updatesubscription(id, subscription);
+                     setLoading(false);
+                     setSuccess(true);
+                 } else {
+                     await saveSubscription(subscription);
+                     setLoading(false);
+                     setSuccess(true);
+                 }
+             } catch (error) {
+                 setLoading(false);
+                 setSuccess(false);
+                 console.log(error);
+                 alert('Hubo un error. Vuelve a intentarlo.');
+             }*/
         }
     }
 
