@@ -57,7 +57,6 @@ export const Panorama = () => {
         <div className='panorama'>
             <Navbar startTransparent={true} />
             <TransitionGroup className='panorama-slide-container'>
-
                 <CSSTransition
                     classNames={`panorama-slide-reverse`}
                     timeout={{ enter: 1000, exit: 1000 }}
