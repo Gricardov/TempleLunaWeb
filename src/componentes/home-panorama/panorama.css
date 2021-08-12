@@ -114,6 +114,7 @@
     font-size: 2.5rem;
     margin: 0;
     margin-bottom: 2.5rem;
+    white-space: pre-wrap;
 }
 
 @media (min-width: 768px) {

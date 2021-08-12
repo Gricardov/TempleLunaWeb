@@ -57,7 +57,7 @@ const Suscripcion = ({ match }) => {
                     setId(id);
                     setEmail(email);
                     setName(name);
-                    setModifyMode(modify);
+                    setModifyMode(modify); // Esto es para que se presente el texto: "Modificar suscripción" y lo hagan personas que ya se han suscrito antes
                     setFromUrl(true);
                 } else {
                     throw 'Error de validación';

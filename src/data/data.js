@@ -8,14 +8,16 @@ import ImgServEntrevista from '../img/ser-entrev.svg';
 import ImgServPromo from '../img/ser-promo.svg';
 import ImgPrevCritica from '../img/pre-critica.png';
 import ImgPrevDiseno from '../img/pre-diseno.png';
+import ImgLaczully from '../img/laczita.png';
 import ImgPrevCorreccion from '../img/pre-correccion.png';
 import ImgPrevServicio from '../img/pre-servicio.png';
 import ImgLeyendo from '../img/sitting-reading.svg';
 
 export const carrouselData = [
-    { text: '¿Amas leer? ¡Llegó la comunidad de lectura en vivo!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRUPO-LECTURA-LA-TERTULIA-WMUNIZ-1', bg: `linear-gradient(135deg, rgb(0 0 0) 10%, rgb(44 44 44) 100%)`, img: ImgLeyendo, style: { bottom: '-20px', right: '-100px' } },
+    { text: 'Gran taller:\nYo publiqué mi libro y te enseño a lograrlo', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/YO-PUBLIQUE-Y-TE-ENSENO-A-LOGRARLO-LACZU-1', bg: `linear-gradient(135deg, rgb(0 157 192) 10%, rgb(60 73 166) 100%)`, img: ImgLaczully, style: { width: '200px', height: '300px',transform:'rotate(5deg)', top: '35%', right: '0px' } },
+    { text: '¿Amas leer?\n¡Llegó la comunidad de lectura en vivo!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRUPO-LECTURA-LA-TERTULIA-WMUNIZ-1', bg: `linear-gradient(135deg, rgb(0 0 0) 10%, rgb(44 44 44) 100%)`, img: ImgLeyendo, style: { bottom: '-20px', right: '-100px' } },
     { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion },
-    { text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }
+    //{ text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }
 ]
 
 export const critiquePoints = [{ id: 'INTENCION', name: 'Transmisión de mi intención', abrev: '¿Se entiende lo que quiero transmitir?' }, { id: 'ENGANCHE', name: 'Enganche de mi obra', abrev: '¿Qué tanto engancha mi obra?' }, { id: 'ORTOGRAFIA', name: 'Ortografía', abrev: '¿Qué tal fue mi ortografía?' }];

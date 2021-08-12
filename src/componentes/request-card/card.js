@@ -67,8 +67,8 @@ const Card = React.forwardRef(({ data, select, showFeedback }, ref) => {
                                             ?
                                             <button onClick={() => history.push('prep_correccion', { data })} className='button button-green button-option-request'>
                                                 <FontAwesomeIcon color={'#fff'} icon={faTasks} className='icon' />
-                                    Iniciar corrección
-                                </button>
+                                                Iniciar corrección
+                                            </button>
                                             :
                                             null
                             )
@@ -78,14 +78,14 @@ const Card = React.forwardRef(({ data, select, showFeedback }, ref) => {
                             && (
                                 <button onClick={() => history.push(`prev_resultado?id=${data.id}&origin=tl`)} className='button button-green button-option-request'>
                                     <FontAwesomeIcon color={'#fff'} icon={faEye} className='icon' />
-                                Ir a resultado
+                                    Ir a resultado
                                 </button>
                             )
                         }
                         <button onClick={() => select(data)} className='button button-blue button-option-request'>
                             <FontAwesomeIcon color={'#fff'} icon={faBoxOpen} className='icon' />
-                        Abrir
-                </button>
+                            Abrir
+                        </button>
                     </div>
                 </div>
                 <div className='action-group action-group-absolute action-group-mobile-first'>

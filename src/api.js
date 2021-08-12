@@ -164,7 +164,7 @@ export const takeRest = async () => {
 
 export const login = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password)
-        .then(user => {
+        .then(user => {            
             return getProfile(user.user.uid).then(({ profile, error }) => {
                 if (!error) {
                     return { user, profile };

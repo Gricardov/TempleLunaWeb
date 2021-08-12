@@ -8,7 +8,6 @@ import BuenovelaIcon from '../img/buenovela.png';
 import InkspiredIcon from '../img/inkspired.png';
 import YoutubeIcon from '../img/youtube.svg';
 import LinkIcon from '../img/link.svg';
-
 import "moment/locale/es";
 
 export const getPointNameFromKey = (key) => {
