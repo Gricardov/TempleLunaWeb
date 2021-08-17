@@ -190,15 +190,16 @@ const Inscripcion = () => {
                                                     <div className='form-group mb-0'>
                                                         <h2>¡Bienvenido(a) al taller!</h2>
                                                         <p>Crear arte es genial, pero hacerlo de forma profesional requiere disciplina y constancia.<br /><br />
-                                                            En este taller, Laczully te enseñará el camino que tuvo que pasar desde que inició en la escritura amateur en Wattpad
+                                                            En este taller, la artista Laczully te enseñará el camino que tuvo que pasar desde que inició en la escritura amateur en Wattpad
                                                             hasta lograr contratos con editoriales pagadas.<br />
                                                             No fue fácil, pero es una meta perfectamente alcanzable para todo el que se lo proponga.<br /><br />
                                                             <b>1- ¿A quién va dirigido el taller?</b><br /><br />
                                                             Escritores y lectores que quieran publicar su primer libro y no tengan la guía ni la inspiración para hacerlo.<br /><br />
                                                             <b>2- ¿Cuándo será?</b><br /><br />
-                                                            Este viernes, 20 de abril a las pm (Hora Lima - Colombia - Centro de México).<br /><br />
+                                                            Este viernes, 20 de abril a las 3pm (Hora Lima - Colombia - Centro de México).<br /><br />
                                                             <b>3- ¿Quién es la autora?</b><br /><br />
-                                                            Su nombre es <b>{hostName}</b> y ha tenido una amplia trayectoria como escritora.<br /><br />
+                                                            Su nombre es <b>{hostName}</b> y ha tenido una amplia trayectoria como escritora. Ha publicado en Wattpad, Buenovela y en editorial.
+                                                            Puedes seguirla en Wattpad <a href='https://www.wattpad.com/user/Laczuly0711' target='_blank'>aquí</a>.<br /><br />
                                                             <b>4- ¿Dnde se llevará a cabo?</b><br /><br />
                                                             Usaremos la plataforma <b>Google Meets</b> para la reunión y <b>un grupo de Whatsapp</b> para la interacción.<br /><br />
                                                             <b>5- ¿Qué temas se tocarán?</b><br /><br />
