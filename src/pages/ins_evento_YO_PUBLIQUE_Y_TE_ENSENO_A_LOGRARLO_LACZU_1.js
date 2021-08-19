@@ -196,7 +196,7 @@ const Inscripcion = () => {
                                                             <b>1- ¿A quién va dirigido el taller?</b><br /><br />
                                                             Escritores y lectores que quieran publicar su primer libro y no tengan la guía ni la inspiración para hacerlo.<br /><br />
                                                             <b>2- ¿Cuándo será?</b><br /><br />
-                                                            Este viernes, 20 de abril a las 3pm (Hora Lima - Colombia - Centro de México).<br /><br />
+                                                            Este viernes, 20 de agosto a las 3pm (Hora Lima - Colombia - Centro de México).<br /><br />
                                                             <b>3- ¿Quién es la autora?</b><br /><br />
                                                             Su nombre es <b>{hostName}</b> y ha tenido una amplia trayectoria como escritora. Ha publicado en Wattpad, Buenovela y en editorial.
                                                             Puedes seguirla en Wattpad <a href='https://www.wattpad.com/user/Laczuly0711' target='_blank'>aquí</a>.<br /><br />
