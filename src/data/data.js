@@ -1,5 +1,4 @@
 import ImgColaboracion from '../img/colaboracion.svg';
-import ImgLibro from '../img/books.svg';
 import ImgServCritica from '../img/ser-critica.svg';
 import ImgServDiseno from '../img/ser-diseno.svg';
 import ImgServCoreccion from '../img/ser-correccion.svg';
@@ -8,13 +7,13 @@ import ImgServEntrevista from '../img/ser-entrev.svg';
 import ImgServPromo from '../img/ser-promo.svg';
 import ImgPrevCritica from '../img/pre-critica.png';
 import ImgPrevDiseno from '../img/pre-diseno.png';
-import ImgLaczully from '../img/laczita.png';
 import ImgPrevCorreccion from '../img/pre-correccion.png';
 import ImgPrevServicio from '../img/pre-servicio.png';
 import ImgLeyendo from '../img/sitting-reading.svg';
+import ImgEquipo from '../img/equipo.svg';
 
 export const carrouselData = [
-    { text: '¿Quieres publicar y no sabes como iniciar?\nÚnete al taller', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/YO-PUBLIQUE-Y-TE-ENSENO-A-LOGRARLO-LACZU-1', bg: `linear-gradient(135deg, rgb(0 157 192) 10%, rgb(60 73 166) 100%)`, img: ImgLaczully, style: { width: '200px', height: '300px',transform:'rotate(5deg)', top: '35%', right: '0px' } },
+    { text: '¡Participa en la gran reunión de escritores\ny mejoremos juntos!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRAN-REUNION-ARTISTAS-TEMPLE-LUNA-FFOSTER-1', bg: `linear-gradient(135deg, rgb(41 19 70) 10%, rgb(17 28 102) 100%)`, img: ImgEquipo, style: { transform:'rotate(5deg)', top: '35%', right: '-50px' } },
     { text: '¿Amas leer?\n¡Llegó la comunidad de lectura en vivo!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRUPO-LECTURA-LA-TERTULIA-WMUNIZ-1', bg: `linear-gradient(135deg, rgb(0 0 0) 10%, rgb(44 44 44) 100%)`, img: ImgLeyendo, style: { bottom: '-20px', right: '-100px' } },
     { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion },
     //{ text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }

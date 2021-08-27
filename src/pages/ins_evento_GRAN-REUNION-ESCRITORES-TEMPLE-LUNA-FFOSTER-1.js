@@ -6,7 +6,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Steps from '../componentes/forms/forms-steps';
 import StepManager from '../componentes/forms/step-manager/step-manager';
 import Fade from 'react-reveal/Fade';
-//import ImgAutor from '../img/erendira.jpg';
 import HelmetMetaData from "../componentes/helmet";
 import { toName } from '../helpers/functions';
 import { isNameInvalid, isAgeInvalid, isPhoneInvalid, isEmailInvalid } from '../helpers/validators';
@@ -27,9 +26,9 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const mainTitle = 'Yo publiqué mi libro y te enseño a lograrlo';
-const hostName = 'Laydy Czulewyez';
-const ImgAutor = 'https://img.wattpad.com/useravatar/Laczuly0711.128.546345.jpg';
+const mainTitle = 'Gran reunión de escritores Temple Luna';
+const hostName = 'Fernanda Foster';
+const ImgAutor = 'https://firebasestorage.googleapis.com/v0/b/temple-luna.appspot.com/o/perfil%2Fmorena.jpg?alt=media&token=2c9696d0-697c-428f-b3a3-db53b9fc3d7e';
 
 const Inscripcion = () => {
 
@@ -145,7 +144,7 @@ const Inscripcion = () => {
 
     return (
         <div>
-            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="¿La plataforma de turno no valora lo que escribes? Puedes tener una joya oculta entre manos por la que muchos pagarían." />
+            <HelmetMetaData title={mainTitle + " - Temple Luna"} description="Únete a la gran reunión de escritores y haz escuchar tu voz" />
             <Navbar />
             <main className='main-body below-navbar colored-background'>
                 <section className='container-xl section position-relative z-3'>
@@ -167,7 +166,7 @@ const Inscripcion = () => {
                                     <FontAwesomeIcon icon={faAngleDown} size='2x' />
 
                                     <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/GTz5pY0vBSLFnehpZue3c8" className='button button-green m0-auto'>
+                                        <a href="https://chat.whatsapp.com/L6ezIN5dfkr3CkTeVzB3j1" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
                                             <span>
@@ -189,35 +188,37 @@ const Inscripcion = () => {
 
                                                     <div className='form-group mb-0'>
                                                         <h2>¡Bienvenido(a) al taller!</h2>
-                                                        <p>Crear arte es genial, pero hacerlo de forma profesional requiere disciplina y constancia.<br /><br />
-                                                            En este taller, la artista Laczully te enseñará el camino que tuvo que pasar desde que inició en la escritura amateur en Wattpad
-                                                            hasta lograr contratos con editoriales pagadas.<br />
-                                                            No fue fácil, pero es una meta perfectamente alcanzable para todo el que se lo proponga.<br /><br />
+                                                        <p>Muchos soñamos con escribir, pero <b>pocos</b> sabemos como <b>crecer</b> siendo escritores.<br />
+                                                            ¿Y si hubiera un espacio donde podamos <b>intercambiar experiencias</b> con otros escritores? <b>Tu momento ha llegado</b>.<br />
+                                                            En este conversatorio debatiremos cuestiones relacionadas a como crecer en este arte, qué funciona al momento de publicitar, organizarse y mucho más.<br /><br />
+                                                            Es importante que te unas <b>solamente</b> si estás dispuesto(a) a <b>participar con tus opiniones</b> durante
+                                                            la reunión.<br />
+                                                            Esto es una reunión entre artistas, no una clase, así que <b>¡A prender los micrófonos!</b><br /><br />
                                                             <b>1- ¿A quién va dirigido el taller?</b><br /><br />
-                                                            Escritores y lectores que quieran publicar su primer libro y no tengan la guía ni la inspiración para hacerlo.<br /><br />
+                                                            Escritores o personas que se quieran dedicar a ello.<br /><br />
                                                             <b>2- ¿Cuándo será?</b><br /><br />
-                                                            Este viernes, 20 de agosto a las 3pm (Hora Lima - Colombia - Centro de México).<br /><br />
-                                                            <b>3- ¿Quién es la autora?</b><br /><br />
-                                                            Su nombre es <b>{hostName}</b> y ha tenido una amplia trayectoria como escritora. Ha publicado en Wattpad, Buenovela y en editorial.
-                                                            Puedes seguirla en Wattpad <a href='https://www.wattpad.com/user/Laczuly0711' target='_blank'>aquí</a>.<br /><br />
-                                                            <b>4- ¿Dnde se llevará a cabo?</b><br /><br />
+                                                            Este viernes, 27 de agosto a las 8pm (Hora Lima - Colombia - Centro de México).<br /><br />
+                                                            <b>3- ¿Quién es la facilitadora?</b><br /><br />
+                                                            Su nombre es <b>{hostName}</b> y ha escrito obras que han llegado hasta los 220K en Wattpad. Ama la mercadotecnia y la administración de empresas.
+                                                            Puedes ver una de sus obras más leídas <a href='https://www.wattpad.com/story/266028279' target='_blank'>aquí</a>.<br /><br />
+                                                            <b>4- ¿Dónde se llevará a cabo?</b><br /><br />
                                                             Usaremos la plataforma <b>Google Meets</b> para la reunión y <b>un grupo de Whatsapp</b> para la interacción.<br /><br />
-                                                            <b>5- ¿Qué temas se tocarán?</b><br /><br />
+                                                            <b>5- En general, ¿Qué temas debatiremos?</b><br /><br />
                                                             <ul>
                                                                 <li>
-                                                                    Mi camino a través de las plataformas
+                                                                    Quiero escribir, ¿Qué hacer?
                                                                 </li>
                                                                 <li>
-                                                                    Frustraciones y hojas vacías
+                                                                    ¿Cómo me organizo mejor?
                                                                 </li>
                                                                 <li>
-                                                                    ¿Cómo me logré organizar?
+                                                                    ¿Cómo crezco con mi obras?
                                                                 </li>
                                                                 <li>
-                                                                    ¿Cómo logré el contrato?
+                                                                    ¿Cómo me doy a conocer?
                                                                 </li>
                                                                 <li>
-                                                                    Demostración de mi obra en vivo
+                                                                    ¿Qué funciona para hacer publicidad?
                                                                 </li>
                                                             </ul><br /><br />
                                                             <b>6- ¡Acepto! ¿Cómo me uno?</b><br /><br />
