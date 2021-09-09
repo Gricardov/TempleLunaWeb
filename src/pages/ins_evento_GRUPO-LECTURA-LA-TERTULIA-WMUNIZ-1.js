@@ -209,7 +209,7 @@ const Inscripcion = () => {
                                                             Siempre vamos a estar para entenderte, solo debes avisar al facilitador, porque eliminamos a las personas que después de un tiempo no presentan actividad.
                                                             Otros motivos que pueden ser motivo de eliminacion son faltas de respeto hacia otros miembros, aunque esto no ha sucedido aún.<br /><br />
                                                             <b>7- ¿Cuáles son los horarios?</b><br /><br />
-                                                            Todos los miércoles, de 9pm a 11pm (Hora Lima - Colombia - Centro de México).<br /><br />
+                                                            Todos los sábados, de 9pm a 11pm (Hora Lima - Colombia - Centro de México).<br /><br />
                                                             <b>8- ¿Quién es el facilitador?</b><br /><br />
                                                             Su nombre es <b>{hostName}</b> y ha tenido una amplia trayectoria como periodista y poeta.<br /><br />
                                                             <b>9- Por dónde se llevarán a cabo las reuniones</b><br /><br />
