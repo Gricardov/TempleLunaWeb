@@ -26,9 +26,9 @@ const overrideSpinnerInline = css`
   vertical-align: middle;
 `;
 
-const mainTitle = 'Gran reunión de escritores Temple Luna';
-const hostName = 'Fernanda Foster';
-const ImgAutor = 'https://firebasestorage.googleapis.com/v0/b/temple-luna.appspot.com/o/perfil%2Fmorena.jpg?alt=media&token=2c9696d0-697c-428f-b3a3-db53b9fc3d7e';
+const mainTitle = 'Gran inauguración de la plataforma Temple Luna';
+const hostName = 'Temple Luna';
+const ImgAutor = 'https://firebasestorage.googleapis.com/v0/b/temple-luna.appspot.com/o/perfil%2FTemple%20Luna.svg?alt=media&token=4671454d-487c-4cde-b074-51b4388f7f69';
 
 const Inscripcion = () => {
 
@@ -166,7 +166,7 @@ const Inscripcion = () => {
                                     <FontAwesomeIcon icon={faAngleDown} size='2x' />
 
                                     <div className='form-buttons-container mt-3'>
-                                        <a href="https://chat.whatsapp.com/L6ezIN5dfkr3CkTeVzB3j1" className='button button-green m0-auto'>
+                                        <a href="https://chat.whatsapp.com/Gxm48ky5Ein9qwkK7FkAC7" className='button button-green m0-auto'>
                                             <FontAwesomeIcon icon={faWhatsapp} size='1x' />
                                             {' '}
                                             <span>
@@ -187,43 +187,23 @@ const Inscripcion = () => {
                                                 <div className='step-1'>
 
                                                     <div className='form-group mb-0'>
-                                                        <h2>¡Bienvenido(a) al taller!</h2>
-                                                        <p>Muchos soñamos con escribir, pero <b>pocos</b> sabemos como <b>crecer</b> siendo escritores.<br />
-                                                            ¿Y si hubiera un espacio donde podamos <b>intercambiar experiencias</b> con otros escritores? <b>Tu momento ha llegado</b>.<br />
-                                                            En este conversatorio debatiremos cuestiones relacionadas a como crecer en este arte, qué funciona al momento de publicitar, organizarse y mucho más.<br /><br />
-                                                            Es importante que te unas <b>solamente</b> si estás dispuesto(a) a <b>participar con tus opiniones</b> durante
-                                                            la reunión.<br />
-                                                            Esto es una reunión entre artistas, no una clase, así que <b>¡A prender los micrófonos!</b><br /><br />
-                                                            <b>1- ¿A quién va dirigido el taller?</b><br /><br />
-                                                            Escritores o personas que se quieran dedicar a ello.<br /><br />
-                                                            <b>2- ¿Cuándo será?</b><br /><br />
-                                                            Este viernes, 27 de agosto a las 8pm (Hora Lima - Colombia - Centro de México).<br /><br />
-                                                            <b>3- ¿Quién es la facilitadora?</b><br /><br />
-                                                            Su nombre es <b>{hostName}</b> y ha escrito obras que han llegado hasta los 220K en Wattpad. Ama la mercadotecnia y la administración de empresas.
-                                                            Puedes ver una de sus obras más leídas <a href='https://www.wattpad.com/story/266028279' target='_blank'>aquí</a>.<br /><br />
-                                                            <b>4- ¿Dónde se llevará a cabo?</b><br /><br />
+                                                        <h2>¡Bienvenido(a) a Temple Luna!</h2>
+                                                        <p>Muchos sueñan con triunfar en plataformas de lectura por internet, pero son muy pocos los que lo logran.
+                                                            Las razones son muchas: <b>Bloqueo de escritor, tener pocos lectores, no saber como promocionar, no tener buenos diseños,
+                                                            </b> y en general, <b>poco apoyo.</b><br /><br />
+                                                            ¿Sabías que en realidad hay <b>muchas personas dispuestas a ayudarte</b>, pero no tienen las <b>herramientas necesarias? </b>
+                                                            Las editoriales se desintegran porque tienen que <b>usar lo que les da Wattpad</b>, nadie obtiene <b>feedback para que su historia progrese </b>
+                                                            y los grupos de lectura <b>mutan más que el coronavirus.</b><br /><br />
+                                                            Por eso, creamos Temple Luna. Somos una plataforma nueva y especializada para <b>pedir críticas, diseños, ser escuchado por alguien, unirte a talleres,
+                                                            revistas e incluso crear tu propia editorial:</b> ¡De artistas para artistas!<br /><br />
+                                                            Llena el formulario y conoce la plataforma que viene a cambiar todo lo que habías conocido :)<br /><br />
+
+                                                            <b>1- ¿Cuándo será la inauguración?</b><br /><br />
+                                                            Este viernes, 1 de octubre a las 8pm (Hora Lima - Colombia - Centro de México).<br /><br />
+                                                            <b>2- ¿Por dónde se llevará a cabo?</b><br /><br />
                                                             Usaremos la plataforma <b>Google Meets</b> para la reunión y <b>un grupo de Whatsapp</b> para la interacción.<br /><br />
-                                                            <b>5- En general, ¿Qué temas debatiremos?</b><br /><br />
-                                                            <ul>
-                                                                <li>
-                                                                    Quiero escribir, ¿Qué hacer?
-                                                                </li>
-                                                                <li>
-                                                                    ¿Cómo me organizo mejor?
-                                                                </li>
-                                                                <li>
-                                                                    ¿Cómo crezco con mi obras?
-                                                                </li>
-                                                                <li>
-                                                                    ¿Cómo me doy a conocer?
-                                                                </li>
-                                                                <li>
-                                                                    ¿Qué funciona para hacer publicidad?
-                                                                </li>
-                                                            </ul><br /><br />
                                                             <b>6- ¡Acepto! ¿Cómo me uno?</b><br /><br />
                                                             Inscríbete en el formulario. <b>Al finalizar</b>, te aparecera un <b>botón</b> para <b>entrar al grupo de Whatsapp</b>. ¡No olvides unirte!<br /><br />
-
                                                         </p>
                                                     </div>
 

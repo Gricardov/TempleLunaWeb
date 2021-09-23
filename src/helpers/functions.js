@@ -108,6 +108,7 @@ export const getFormattedPhone = (rawPhone) => {
     return null;
 }
 
+// Si el texto es un link, lo devuelve. Caso contrario, devuelve algo vacío
 export const extractLink = (rawLink) => {
     if (rawLink) {
         const matchedArray = rawLink.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+/g);
