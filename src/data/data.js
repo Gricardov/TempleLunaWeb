@@ -13,7 +13,7 @@ import ImgLeyendo from '../img/sitting-reading.svg';
 import ImgEquipo from '../img/equipo.svg';
 
 export const carrouselData = [
-    //{ text: '¡Participa en la gran reunión de escritores\ny mejoremos juntos!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRAN-REUNION-ARTISTAS-TEMPLE-LUNA-FFOSTER-1', bg: `linear-gradient(135deg, rgb(41 19 70) 10%, rgb(17 28 102) 100%)`, img: ImgEquipo, style: { transform:'rotate(5deg)', top: '35%', right: '-50px' } },
+    { text: '¡El momento ha llegado!\nGran inauguración de Temple Luna', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRAN-INAUGURACION-TL', bg: `linear-gradient(135deg, rgb(41 19 70) 10%, rgb(17 28 102) 100%)`, img: ImgEquipo, style: { transform:'rotate(5deg)', top: '35%', right: '-50px' } },
     { text: '¿Amas leer?\n¡Llegó la comunidad de lectura en vivo!', buttonText: 'Inscríbete aquí', pushTo: 'ins_evento/GRUPO-LECTURA-LA-TERTULIA-WMUNIZ-1', bg: `linear-gradient(135deg, rgb(0 0 0) 10%, rgb(44 44 44) 100%)`, img: ImgLeyendo, style: { bottom: '-20px', right: '-100px' } },
     { text: 'La editorial comunitaria que siempre habías esperado', buttonText: 'Únete al grupo', href: 'https://www.facebook.com/groups/1004324056570387', bg: 'radial-gradient(farthest-corner at 0px 100%, rgb(82 70 198) 10%, rgba(139, 129, 236, 1) 50%)', img: ImgColaboracion },
     //{ text: 'Gran curso de guión, texto y novela: Crea historias de calidad superior', buttonText: '¡Me interesa!', pushTo: 'ins_evento/OBRA-PROFESIONAL-CCADENA-2', bg: 'linear-gradient(to right, #000000, #434343)', img: ImgLibro, style: { bottom: '-50px', right: '-100px' } }
