@@ -70,13 +70,13 @@ export const Panorama = () => {
                                 </Fade>
                                 <Fade left>
                                     {
+                                        slide.buttonText &&
                                         <a target='_blank' rel="noreferrer" onClick={() => goTo(slide)} style={slide.buttonStyles} className='button button-green'>
                                             {slide.buttonText}
                                             {' '}
                                             <FontAwesomeIcon icon={faAngleRight} size='lg' />
                                         </a>
                                     }
-
                                 </Fade>
                             </div>
                             <div className='img-container' style={slide.style}>
